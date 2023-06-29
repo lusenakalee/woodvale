@@ -13,8 +13,6 @@ const navigation = [
   { name: "Dashboard", to: "/", current: true },
   { name: "Team", to: "/Team", current: false },
   { name: "Residents", to: "/Residents", current: false },
-  { name: "Calendar", to: "/", current: false },
-  { name: "Reports", to: "/", current: false },
 ];
 const userNavigation = [
   { name: "Your Profile", to: "#" },

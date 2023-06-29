@@ -1,6 +1,6 @@
 "use client";
 
-import { InformationCircleIcon } from "@heroicons/react/24/outline";
+import { InformationCircleIcon , PrinterIcon} from "@heroicons/react/24/outline";
 import {
   Icon,
   Table,
@@ -24,6 +24,9 @@ export type SalesPerson = {
   name: string;
   age: number;
   sales: string;
+  hr: number,
+  weight: string,
+  temp: string,
   quota: string;
   condition: string;
   group: string;
@@ -36,6 +39,9 @@ export const salesPeople: SalesPerson[] = [
     age: 45,
     sales: "1,000,000",
     quota: "1,200,000",
+    hr: 45,
+    weight: "100",
+    temp: "36",
     condition: "Diabetic",
     group: "group A",
     status: "senior",
@@ -45,6 +51,9 @@ export const salesPeople: SalesPerson[] = [
     age: 35,
     sales: "900,000",
     quota: "1,000,000",
+    hr: 45,
+    weight: "100",
+    temp: "36",
     condition: "asmatic",
     group: "group B",
     status: "Stable",
@@ -54,6 +63,9 @@ export const salesPeople: SalesPerson[] = [
     age: 52,
     sales: "930,000",
     quota: "1,000,000",
+    hr: 45,
+    weight: "100",
+    temp: "36",
     condition: "None",
     group: "group C",
     status: "critical",
@@ -63,6 +75,9 @@ export const salesPeople: SalesPerson[] = [
     age: 22,
     sales: "390,000",
     quota: "250,000",
+    hr: 45,
+    weight: "100",
+    temp: "36",
     condition: "Diabetic",
     group: "group A",
     status: "senior",
@@ -73,6 +88,9 @@ export const salesPeople: SalesPerson[] = [
     sales: "860,000",
     quota: "750,000",
     condition: "None",
+    hr: 45,
+    weight: "100",
+    temp: "36",
     group: "group B",
     status: "senior",
   },
@@ -126,12 +144,22 @@ export default function ResidentList() {
           <SelectItem value="Stable">Stable</SelectItem>
           <SelectItem value="critical">critical</SelectItem>
         </Select>
+        <button
+            type="button"
+            className="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+          >
+            <PrinterIcon className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400" aria-hidden="true" />
+            Export
+          </button>
       </div>
       <Table className="mt-6">
         <TableHead>
           <TableRow>
             <TableHeaderCell>Name</TableHeaderCell>
             <TableHeaderCell className="text-right">age</TableHeaderCell>
+            <TableHeaderCell className="text-right">H R</TableHeaderCell>
+            <TableHeaderCell className="text-right">Weight (Kg)</TableHeaderCell>
+            <TableHeaderCell className="text-right">Temp (c)</TableHeaderCell>
             <TableHeaderCell className="text-right">condition</TableHeaderCell>
             <TableHeaderCell className="text-right">group</TableHeaderCell>
             <TableHeaderCell className="text-right">Status</TableHeaderCell>
@@ -147,6 +175,9 @@ export default function ResidentList() {
                 <TableCell>{item.name}</TableCell>
               </Link>
                 <TableCell className="text-right">{item.age}</TableCell>
+                <TableCell className="text-right">{item.hr}</TableCell>
+                <TableCell className="text-right">{item.weight}</TableCell>
+                <TableCell className="text-right">{item.temp}</TableCell>
                 <TableCell className="text-right">{item.condition}</TableCell>
                 <TableCell className="text-right">{item.group}</TableCell>
                 <TableCell className="text-right">

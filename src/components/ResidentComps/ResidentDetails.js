@@ -1,5 +1,7 @@
 import { PaperClipIcon } from "@heroicons/react/24/outline";
 import Nav from "../Nav";
+import { Link } from "react-router-dom";
+import ResidentLog from "./ResidentLog";
 
 export default function ResidentDetail() {
   return (
@@ -11,7 +13,7 @@ export default function ResidentDetail() {
           <h1 className="text-3xl font-bold tracking-tight text-gray-900">Residents</h1>
         </div>
       </header>
-      <div className="lg:inline-flex  lg:justify-between   lg:px-8 ">
+      <div className="lg:inline-flex  lg:justify-between py-8  lg:px-8 ">
         <div className="px-4 sm:px-0 lg:pr-20">
           <h3 className="text-base font-semibold leading-7 text-gray-900">
             Resident Information
@@ -26,9 +28,12 @@ export default function ResidentDetail() {
               Edit
             </button>
 
+
+            <Link to="/ResidentLog">
+
             <button className="inline-block px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:relative">
               View Health Logs
-            </button>
+            </button></Link>
 
             <button className="inline-block px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:relative">
               Remove
@@ -70,18 +75,7 @@ export default function ResidentDetail() {
               +1 234 234 242
             </dd>
           </div>
-          <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-            <dt className="text-sm font-medium leading-6 text-gray-900">
-              About
-            </dt>
-            <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-              Fugiat ipsum ipsum deserunt culpa aute sint do nostrud anim
-              incididunt cillum culpa consequat. Excepteur qui ipsum aliquip
-              consequat sint. Sit id mollit nulla mollit nostrud in ea officia
-              proident. Irure nostrud pariatur mollit ad adipisicing
-              reprehenderit deserunt qui eu.
-            </dd>
-          </div>
+          
           <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
             <dt className="text-sm font-medium leading-6 text-gray-900">
               Attachments
