@@ -19,7 +19,7 @@ import {
 } from "@tremor/react";
 import { InformationCircleIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
-import Nav from "../Nav";
+import Nav from "../RootComps/Nav";
 
 
 

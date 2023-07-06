@@ -1,5 +1,5 @@
 import React from 'react'
-import Nav from '../components/Nav'
+import Nav from '../components/RootComps/Nav'
 import ResidentList from '../components/ResidentComps/ResidentList'
 
 function Residents() {

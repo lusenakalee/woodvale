@@ -1,5 +1,5 @@
 import React from 'react'
-import Nav from '../components/Nav'
+import Nav from '../components/RootComps/Nav'
 import TeamList from '../components/TeamComps/TeamList'
 
 function Team() {

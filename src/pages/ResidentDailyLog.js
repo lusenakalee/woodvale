@@ -1,6 +1,6 @@
 import React from 'react'
 import ResidentDailyLogComps from '../components/ResidentComps/ResidentDailyLogComps'
-import Nav from '../components/Nav'
+import Nav from '../components/RootComps/Nav'
 
 function ResidentDailyLog() {
   return (
