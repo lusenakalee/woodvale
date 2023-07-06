@@ -11,6 +11,8 @@ import SignIn from "./components/SignupComps/SignIn";
 import AddResident from "./components/ResidentComps/AddResident";
 import ResidentLog from "./components/ResidentComps/ResidentLog";
 import AllResidentsLogs from "./components/ResidentComps/AllResidentsLogs";
+import NewLog from "./components/ResidentComps/NewLog";
+import ResidentDailyLog from "./pages/ResidentDailyLog";
 
 function App() {
   return (
@@ -26,6 +28,10 @@ function App() {
         <Route path="/AddResident" element={<AddResident />} />
         <Route path="/ResidentLog" element={<ResidentLog />} />
         <Route path="/AllResidentsLog" element={<AllResidentsLogs />} />
+        <Route path="/NewLog" element={<NewLog/>} />
+        <Route path="/ResidentDailyLog" element={<ResidentDailyLog/>} />
+
+
 
 
 

@@ -160,7 +160,7 @@ function ResidentLog() {
         <TableBody>
           {salesPeople
             .filter((item) => isSalesPersonSelected(item))
-            .map((item) => (
+            .map((item) => ( 
               <TableRow key={item.date}>
                 <TableCell>{item.date}</TableCell>
                 <TableCell className="text-right">{item.hr}</TableCell>

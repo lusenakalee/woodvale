@@ -27,9 +27,7 @@ function QuickLinks() {
       <TabGroup>
         <TabList className="mt-8 flex items-right ">
           <Tab onClick={() => setOpen(true)}>Add resident</Tab>
-          <Link to="/Residents">
-            <Tab>Resident Logs</Tab>
-          </Link>
+          <Tab>Resident Logs</Tab>
           <Tab>Forms</Tab>
         </TabList>
         <TabPanels>
@@ -104,7 +102,22 @@ function QuickLinks() {
               </Dialog>
             </Transition.Root>
           </TabPanel>
-          <TabPanel></TabPanel>
+          <TabPanel>
+            <List>
+              <Link to="/NewLog">
+                <ListItem>
+                  <span>Add</span>
+                  <span> Add A new Log</span>
+                </ListItem>
+              </Link>
+              <Link to="/Residents">
+                <ListItem>
+                  <span>View</span>
+                  <span>Check taken results for all residents</span>
+                </ListItem>
+              </Link>
+            </List>
+          </TabPanel>
           <TabPanel>
             <List>
               <ListItem>
