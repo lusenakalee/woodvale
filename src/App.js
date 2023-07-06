@@ -28,13 +28,8 @@ function App() {
         <Route path="/AddResident" element={<AddResident />} />
         <Route path="/ResidentLog" element={<ResidentLog />} />
         <Route path="/AllResidentsLog" element={<AllResidentsLogs />} />
-        <Route path="/NewLog" element={<NewLog/>} />
-        <Route path="/ResidentDailyLog" element={<ResidentDailyLog/>} />
-
-
-
-
-
+        <Route path="/NewLog" element={<NewLog />} />
+        <Route path="/ResidentDailyLog" element={<ResidentDailyLog />} />
       </Routes>
     </BrowserRouter>
   );
