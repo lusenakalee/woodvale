@@ -1,6 +1,6 @@
 import React from 'react'
 import ResidentDetailsList from './ResidentDetailsList'
-import Nav from '../Nav';
+import Nav from '../RootComps/Nav';
 import { Link } from 'react-router-dom';
 import {  PrinterIcon, PlusCircleIcon } from "@heroicons/react/24/outline";
 
