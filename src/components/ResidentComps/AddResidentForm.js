@@ -3,18 +3,7 @@ import { PhotoIcon, UserCircleIcon } from "@heroicons/react/24/solid";
 
 export default function MultiStepForm() {
   const [step, setStep] = useState(1);
-  const [formData, setFormData] = useState({
-    firstName: "",
-    middleName: "",
-    lastName: "",
-    gender: "",
-    age: "",
-    email: "",
-    phone: "",
-    streetAddress: "",
-    city: "",
-    region: "",
-  });
+  const [formData, setFormData] = useState({});
 
   const handleNext = () => {
     setStep(step + 1);
@@ -24,24 +13,24 @@ export default function MultiStepForm() {
     setStep(step - 1);
   };
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // Handle form submission
+    // You can access the form data from the `formData` state object
+    console.log(formData);
+  };
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
+  const handleChange = (event) => {
+    const { name, value } = event.target;
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
     }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle form submission logic here
-    console.log(formData);
-  };
-
   const renderStep1 = () => {
     return (
-      <div className="space-y-12"  data-step="1">
+      <div className="space-y-12" data-step="1">
         <div className="border-b border-gray-900/10 pb-12">
           <p className="mt-1 text-sm leading-6 text-gray-600">
             Kindly fill in correct details
@@ -61,7 +50,8 @@ export default function MultiStepForm() {
                   name="first-name"
                   id="first-name"
                   autoComplete="given-name"
-                  onChange={handleInputChange}
+                  onChange={handleChange}
+                value={formData["first-name"] || ""}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -80,7 +70,8 @@ export default function MultiStepForm() {
                   name="MiddleName"
                   id="MiddleName"
                   autoComplete="family-name"
-                  onChange={handleInputChange}  
+                  onChange={handleChange}
+                value={formData["MiddleName"] || ""}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -98,7 +89,8 @@ export default function MultiStepForm() {
                   type="text"
                   name="last-name"
                   id="last-name"
-                  autoComplete="family-name"
+                  onChange={handleChange}
+                  value={formData["last-name"] || ""}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -116,6 +108,8 @@ export default function MultiStepForm() {
                   id="gender"
                   name="gender"
                   autoComplete="gender-name"
+                  onChange={handleChange}
+                  value={formData["gender"] || ""}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
                 >
                   <option>Male</option>
@@ -137,6 +131,8 @@ export default function MultiStepForm() {
                   type="number"
                   name="Age"
                   id="Age"
+                  onChange={handleChange}
+                  value={formData["Age"] || ""}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -160,7 +156,7 @@ export default function MultiStepForm() {
 
   const renderStep2 = () => {
     return (
-      <div className="space-y-12"  data-step="2">
+      <div className="space-y-12" data-step="2">
         {/* Step 2 form fields */}
         {/* ... */}
         <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
@@ -177,6 +173,8 @@ export default function MultiStepForm() {
                 name="email"
                 type="email"
                 autoComplete="email"
+                onChange={handleChange}
+                  value={formData["email"] || ""}
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               />
             </div>
@@ -195,6 +193,8 @@ export default function MultiStepForm() {
                 name="phone"
                 type="number"
                 autoComplete="phone"
+                onChange={handleChange}
+                value={formData["phone"] || ""}
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               />
             </div>
@@ -213,6 +213,8 @@ export default function MultiStepForm() {
                 name="street-address"
                 id="street-address"
                 autoComplete="street-address"
+                onChange={handleChange}
+                value={formData["street-address"] || ""}
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               />
             </div>
@@ -231,6 +233,8 @@ export default function MultiStepForm() {
                 name="city"
                 id="city"
                 autoComplete="address-level2"
+                onChange={handleChange}
+                value={formData["city"] || ""}
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               />
             </div>
@@ -249,6 +253,8 @@ export default function MultiStepForm() {
                 name="region"
                 id="region"
                 autoComplete="address-level1"
+                onChange={handleChange}
+                value={formData["region"] || ""}
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               />
             </div>
@@ -267,6 +273,8 @@ export default function MultiStepForm() {
                 name="postal-code"
                 id="postal-code"
                 autoComplete="postal-code"
+                onChange={handleChange}
+                value={formData["postal-code"] || ""}
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               />
             </div>
@@ -329,7 +337,7 @@ export default function MultiStepForm() {
 
   const renderStep3 = () => {
     return (
-      <div className="space-y-12"   data-step="3">
+      <div className="space-y-12" data-step="3">
         {/* Step 3 form fields */}
         {/* ... */}
         <p className="mt-1 text-sm leading-6 text-gray-600">
@@ -339,17 +347,18 @@ export default function MultiStepForm() {
         <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
           <div className="sm:col-span-3">
             <label
-              htmlFor="contact-first-name"
+              htmlFor="contact-name"
               className="block text-sm font-medium leading-6 text-gray-900"
             >
-              Contact First name
+              Contact  name
             </label>
             <div className="mt-2">
               <input
                 type="text"
-                name="contact-first-name"
-                id="contact-first-name"
-                autoComplete="given-name"
+                name="contac-name"
+                id="contact-name"
+                onChange={handleChange}
+                value={formData["contact-name"] || ""}
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               />
             </div>
@@ -364,10 +373,12 @@ export default function MultiStepForm() {
             </label>
             <div className="mt-2">
               <input
-                id="phone"
-                name="phone"
+                id="contact-phone"
+                name="contact-phone"
                 type="number"
                 autoComplete="phone"
+                onChange={handleChange}
+                value={formData["contact-phone"] || ""}
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               />
             </div>
@@ -386,6 +397,8 @@ export default function MultiStepForm() {
               id="phone"
               name="phone"
               autoComplete="phone"
+              onChange={handleChange}
+              value={formData["contact-phone"] || ""}
               className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
             />
           </div>
@@ -412,7 +425,7 @@ export default function MultiStepForm() {
 
   const renderStep4 = () => {
     return (
-      <div className="space-y-12"   data-step="4">
+      <div className="space-y-12" data-step="4">
         {/* Step 4 form fields */}
         {/* ... */}
         <div>
@@ -428,6 +441,8 @@ export default function MultiStepForm() {
                 id="feeding_method"
                 name="feeding_method"
                 autoComplete="feeding_method"
+                onChange={handleChange}
+                value={formData["feeding_method"] || ""}
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
               >
                 <option>Dependent</option>
@@ -447,6 +462,8 @@ export default function MultiStepForm() {
               <textarea
                 id="immunization_records"
                 name="immunization_records"
+                onChange={handleChange}
+                value={formData["immunization_records"] || ""}
                 rows={3}
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 defaultValue={""}
@@ -468,6 +485,8 @@ export default function MultiStepForm() {
               <textarea
                 id="medications"
                 name="medications"
+                onChange={handleChange}
+                value={formData["medications"] || ""}
                 rows={3}
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 defaultValue={""}
@@ -489,6 +508,8 @@ export default function MultiStepForm() {
               <textarea
                 id="condition"
                 name="condition"
+                onChange={handleChange}
+                value={formData["condition"] || ""}
                 rows={3}
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 defaultValue={""}
@@ -532,12 +553,11 @@ export default function MultiStepForm() {
         </div>
       </div>
 
-     {/* Render different steps based on the current step */}
-{step === 1 && <div>{renderStep1()}</div>}
-{step === 2 && <div>{renderStep2()}</div>}
-{step === 3 && <div>{renderStep3()}</div>}
-{step === 4 && <div>{renderStep4()}</div>}
-
+      {/* Render different steps based on the current step */}
+      {step === 1 && <div>{renderStep1()}</div>}
+      {step === 2 && <div>{renderStep2()}</div>}
+      {step === 3 && <div>{renderStep3()}</div>}
+      {step === 4 && <div>{renderStep4()}</div>}
     </form>
   );
 }
