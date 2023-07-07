@@ -11,7 +11,7 @@ import {
 import Team from "./pages/Team";
 import Residents from "./pages/Residents";
 import IncidentForm from "./components/IncidentForm";
-import ResidentDetail from "./components/ResidentComps/ResidentDetails";
+import ResidentDetails from "./components/ResidentComps/ResidentDetails";
 import SignUp, { signUpAction } from "./components/SignupComps/SignUp";
 import SignIn, { loginAction } from "./components/SignupComps/SignIn";
 import AddResident from "./components/ResidentComps/AddResident";
@@ -51,7 +51,6 @@ const router = createBrowserRouter([
         path: "home",
         element:<Dashboard/>
       },
-      
      
       {
         path: "logout",
