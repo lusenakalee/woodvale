@@ -14,6 +14,14 @@ const AllResidentsPage = lazy(() =>
   import("./pages/ResidentPages/AllResidentsPage")
 );
 
+const NewResidentPage = lazy(() =>
+  import("./pages/ResidentPages/NewResidentPage")
+);
+
+const ResidentDetailPage = lazy(() =>
+  import("./pages/ResidentPages/ResidentDetailPage")
+);
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -65,6 +73,46 @@ const router = createBrowserRouter([
           },
           {
             path: "new",
+            element: (
+              <Suspense fallback={<p>Loading...</p>}>
+                <NewResidentPage />
+              </Suspense>
+            ),
+            action: (meta) =>
+              import("./components/ResidentComps/AddResidentForm").then(
+                (module) => module.residentAction(meta)
+              ),
+          },
+          {
+            path: ":id",
+            id: "resident-detail",
+            loader: (meta) =>
+              import("./pages/ResidentPages/ResidentDetailPage").then(
+                (module) => module.loader(meta)
+              ),
+            children: [
+              {
+                index: true,
+                element: (
+                  <Suspense fallback={<p>Loading...</p>}>
+                    <ResidentDetailPage />
+                  </Suspense>
+                ),
+                action: (meta) => import("./pages/ResidentPages/ResidentDetailPage").then((module)=>module.action(meta))
+              },
+              {
+                path: "edit",
+                element:(
+                  <Suspense fallback={<p>Loading...</p>}>
+                    <NewResidentPage />
+                  </Suspense>
+                ),
+                action: (meta) =>
+                import("./components/ResidentComps/AddResidentForm").then(
+                  (module) => module.residentAction(meta)
+                )
+              }
+            ],
           },
         ],
       },

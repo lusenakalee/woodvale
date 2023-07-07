@@ -97,7 +97,7 @@ export default function ResidentList({ residentsList }) {
         <TableBody>
           {residentsList.map((item) => (
             <TableRow key={item.id}>
-              <Link to="/ResidentDetail">
+              <Link to={`./${item.id}`}>
                 <TableCell>{item.first_name}</TableCell>
               </Link>
               <TableCell className="text-right">{item.last_name}</TableCell>
