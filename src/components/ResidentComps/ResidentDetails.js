@@ -1,7 +1,7 @@
 import React from "react";
 import ResidentDetailsList from "./ResidentDetailsList";
 import Nav from "../RootComps/Nav";
-import { Link } from "react-router-dom";
+import { Link, useRouteLoaderData, useSubmit } from "react-router-dom";
 import {
   PrinterIcon,
   PlusCircleIcon,
@@ -10,63 +10,33 @@ import {
 import { HashLink } from "react-router-hash-link";
 import CarePlan from "./CarePlan";
 
-function ResidentDetails() {
+function ResidentDetails({ resident }) {
+  const token = useRouteLoaderData("root");
+  const submit = useSubmit();
+
+  function startDeleteHandler() {
+    const proceed = window.confirm("Are you sure?");
+
+    if (proceed) {
+      submit(null, { method: "delete" });
+    }
+  }
   return (
     <>
-      <div className="min-h-full">
-        <header className="bg-white shadow">
-          <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-            {/* Insert selected Resident's name instead of resident details */}
-            <h1 className="text-3xl font-bold space-x-6  tracking-tight text-gray-900">
-              <text className="pr-16">Resident Details</text>
-              <button
-                type="button"
-                className="inline-flex items-center  rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-              >
-                <PrinterIcon
-                  className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"
-                  aria-hidden="true"
-                />
-                Export
-              </button>
-              <Link to="/NewLog">
-                <button
-                  type="button"
-                  className="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                >
-                  <PlusCircleIcon
-                    className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"
-                    aria-hidden="true"
-                  />
-                  New Log
-                </button>
-              </Link>
-              <HashLink smooth to="#CarePlanSection">
-              <button
-                type="button"
-                className="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-              >
-                <ClipboardDocumentListIcon
-                  className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"
-                  aria-hidden="true"
-                />
-                Care Plan
-              </button>
-              </HashLink>
-            </h1>
+      <React.Fragment>
+        <p>Resident detail page</p>
+        {resident.first_name}
+        {token && (
+          <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+            <dt className="text-sm font-medium text-gray-500">
+              <button onClick={startDeleteHandler}>Delete</button>
+            </dt>
+            <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+              <Link to="edit">Edit</Link>
+            </dd>
           </div>
-        </header>
-        <main>
-          <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8 border-b border-gray-900/10 pb-10">
-            <div className="border-b border-gray-900/10 pb-5">
-            <ResidentDetailsList />
-            </div>
-            <div id="CarePlanSection" className="py-10">
-              <CarePlan/>
-            </div>
-          </div>
-        </main>
-      </div>
+        )}  
+      </React.Fragment>
     </>
   );
 }
