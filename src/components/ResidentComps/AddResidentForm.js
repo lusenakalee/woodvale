@@ -1,6 +1,12 @@
 import { useState } from "react";
 import { PhotoIcon, UserCircleIcon } from "@heroicons/react/24/solid";
-import { Form, json, redirect, useNavigate, useNavigation } from "react-router-dom";
+import {
+  Form,
+  json,
+  redirect,
+  useNavigate,
+  useNavigation,
+} from "react-router-dom";
 import { getAuthToken } from "../../util/Auth";
 import React from "react";
 
@@ -12,9 +18,6 @@ export default function ResidentForm({ resident, title, method }) {
   function cancelHandler() {
     navigate("..");
   }
-
-  
-
 
   return (
     <React.Fragment>
@@ -40,6 +43,7 @@ export default function ResidentForm({ resident, title, method }) {
                     name="first-name"
                     id="first-name"
                     autoComplete="given-name"
+                    defaultValue={resident ? resident.first_name : " "}
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
                 </div>
@@ -58,6 +62,7 @@ export default function ResidentForm({ resident, title, method }) {
                     name="middle-name"
                     id="middle-name"
                     autoComplete="family-name"
+                    defaultValue={resident ? resident.middle_name : " "}
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
                 </div>
@@ -75,6 +80,7 @@ export default function ResidentForm({ resident, title, method }) {
                     type="text"
                     name="last-name"
                     id="last-name"
+                    defaultValue={resident ? resident.last_name : " "}
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
                 </div>
@@ -92,6 +98,7 @@ export default function ResidentForm({ resident, title, method }) {
                     id="gender"
                     name="gender"
                     autoComplete="gender-name"
+                    defaultValue={resident ? resident.gender : " "}
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
                   >
                     <option>Male</option>
@@ -113,6 +120,7 @@ export default function ResidentForm({ resident, title, method }) {
                     type="number"
                     name="age"
                     id="age"
+                    defaultValue={resident ? resident.age : " "}
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
                 </div>
@@ -131,6 +139,7 @@ export default function ResidentForm({ resident, title, method }) {
                     name="email"
                     type="email"
                     autoComplete="email"
+                    defaultValue={resident ? resident.contact_email : " "}
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
                 </div>
@@ -149,6 +158,7 @@ export default function ResidentForm({ resident, title, method }) {
                     name="phone-no"
                     type="number"
                     autoComplete="phone-no"
+                    defaultValue={resident ? resident.contact_phone_no : " "}
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
                 </div>
@@ -167,6 +177,7 @@ export default function ResidentForm({ resident, title, method }) {
                     name="address"
                     id="address"
                     autoComplete="address"
+                    defaultValue={resident ? resident.address : " "}
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
                 </div>
@@ -185,6 +196,7 @@ export default function ResidentForm({ resident, title, method }) {
                     name="city"
                     id="city"
                     autoComplete="address-level2"
+                    defaultValue={resident ? resident.city : " "}
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
                 </div>
@@ -203,6 +215,7 @@ export default function ResidentForm({ resident, title, method }) {
                     name="state"
                     id="state"
                     autoComplete="address-level1"
+                    defaultValue={resident ? resident.state : " "}
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
                 </div>
@@ -221,6 +234,7 @@ export default function ResidentForm({ resident, title, method }) {
                     name="zip"
                     id="zip"
                     autoComplete="zip"
+                    defaultValue={resident ? resident.zip : " "}
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
                 </div>
@@ -246,6 +260,7 @@ export default function ResidentForm({ resident, title, method }) {
                   name="contact"
                   id="contact"
                   autoComplete="given-name"
+                  defaultValue={resident ? resident.emergency_contact_name : " "}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -265,16 +280,17 @@ export default function ResidentForm({ resident, title, method }) {
                   type="number"
                   required
                   autoComplete="contact-number"
+                  defaultValue={resident ? resident.emergency_contact_number : " "}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
             </div>
 
-            <div
-              className="flex justify-between sm:col-span-4">
-           
-             
-              <button onClick={cancelHandler} className="px-4 py-2 text-sm font-medium text-gray-900 bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <div className="flex justify-between sm:col-span-4">
+              <button
+                onClick={cancelHandler}
+                className="px-4 py-2 text-sm font-medium text-gray-900 bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
                 Back
               </button>
               <button
@@ -282,7 +298,7 @@ export default function ResidentForm({ resident, title, method }) {
                 disabled={isSubmitting}
                 className="px-4 py-2 text-sm font-medium text-gray-900 bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
-                 {isSubmitting ? "Submitting..." : "Save"}
+                {isSubmitting ? "Submitting..." : "Save"}
               </button>
             </div>
           </div>
