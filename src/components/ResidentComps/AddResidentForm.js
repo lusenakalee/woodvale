@@ -69,12 +69,6 @@ export default function ResidentForm({ resident, title, method }) {
                 </div>
               </div>
 
-<<<<<<< HEAD
-  const renderStep1 = () => {
-    return (
-      <div className="space-y-12" data-step="1">
-        <div className="border-b border-gray-900/10 pb-12">
-=======
               <div className="sm:col-span-3">
                 <label
                   htmlFor="gender"
@@ -223,7 +217,6 @@ export default function ResidentForm({ resident, title, method }) {
             </div>
           </div>
 
->>>>>>> db42f24630767581589b19c37cb165eda8d1393f
           <p className="mt-1 text-sm leading-6 text-gray-600">
             Kindly fill Next of Kin Details/ Emergency Contact
           </p>
