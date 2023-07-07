@@ -252,6 +252,7 @@ export default function ResidentForm({ resident, title, method }) {
                   id="contact-number"
                   name="contact-number"
                   type="number"
+                  required
                   autoComplete="contact-number"
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
@@ -290,7 +291,6 @@ export async function residentAction({ request, params }) {
     middle_name: data.get("middle-name"),
     age: data.get("age"),
     gender: data.get("gender"),
-    file: data.get("file-upload"),
     emergency_contact_name: data.get("contact"),
     emergency_contact_number: data.get("contact-number"),
     emergency_contact_name_2: data.get("contact-2"),
