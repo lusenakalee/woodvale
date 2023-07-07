@@ -7,7 +7,7 @@ function Residents() {
     <>
       
     <div className="min-h-full">
-      <Nav/>
+     
     
 
       <header className="bg-white shadow">

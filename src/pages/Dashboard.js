@@ -4,7 +4,6 @@ import Nav from "../components/RootComps/Nav";
 import DashReports from "../components/DashboardComps/DashReports";
 import Updates from "../components/DashboardComps/Updates";
 import SummaryTable from "../components/DashboardComps/SummaryTable";
-import AddResidentAccordion from "../components/DashboardComps/AddResidentAccordion";
 import AddResidentForm from "../components/ResidentComps/AddResidentForm";
 import { PlusCircleIcon } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
