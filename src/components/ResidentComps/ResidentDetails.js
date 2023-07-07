@@ -132,7 +132,6 @@ function ResidentDetails({ resident }) {
                   </dd>
                 </div>
 
-                  {/* {resident.registered_by.map((registra)  => ( */}
                 <div className="px-4 py-3 sm:grid sm:grid-cols-3 hover:bg-white sm:gap-4 sm:px-0">
                   <dt className="text-sm font-medium leading-6 text-gray-900">
                     Resident registered by{" "}
@@ -143,7 +142,6 @@ function ResidentDetails({ resident }) {
                     {resident.registered_by.first_name} {" "}  {resident.registered_by.last_name}
                   </dd>
                 </div>
-                {/* ))} */}
 
                 <div className="px-4 py-3 sm:grid sm:grid-cols-3 hover:bg-white sm:gap-4 sm:px-0">
                   <dt className="text-sm font-medium leading-6 text-gray-900">
