@@ -17,14 +17,15 @@ function SignIn() {
 
           <main className="flex items-center justify-center px-8 py-8 sm:px-12 lg:col-span-7 lg:px-16 lg:py-12 xl:col-span-6">
             <div className="max-w-xl lg:max-w-3xl">
-              
-
               <h1 className="mt-6 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl">
                 Welcome Back.
               </h1>
 
               <p className="mt-4 leading-relaxed text-gray-500">
-              Our innovative CRM (Caregiver Relationship Management) system is designed to streamline and enhance every aspect of care delivery, allowing you to focus on what truly matters - enriching the lives of your clients.
+                Our innovative CRM (Caregiver Relationship Management) system is
+                designed to streamline and enhance every aspect of care
+                delivery, allowing you to focus on what truly matters -
+                enriching the lives of your clients.
               </p>
               {data && data.errors && (
                 <ul>
@@ -35,7 +36,7 @@ function SignIn() {
               )}
               {data && data.message && <p>{data.message}</p>}
               <Form method="post" className="mt-8 grid grid-cols-6 gap-6">
-                <div className="col-span-6">
+                <div className="col-span-6 sm:col-span-3">
                   <label
                     htmlFor="Email"
                     className="block text-sm font-medium text-gray-700"
