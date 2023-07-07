@@ -1,30 +1,47 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { NavLink } from "react-router-dom";
+import { PlusCircleIcon, HomeIcon } from "@heroicons/react/24/outline";
+
 
 function ResidentNav() {
   return (
     <React.Fragment>
-      <div className="flex space-x-11 py-5 px-5">
-          <NavLink to="." className="opacity-60">
-            <div className="flex">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-4 w-4"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-              >
-                <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
-              </svg>
 
-              <span> All Residents</span>
+      <header className="bg-white shadow">
+          <div className="mx-auto max-w-7xl flex space-x-6 px-4 py-6 sm:px-6 lg:px-8">
+            <h1 className="text-3xl font-bold  pr-10 tracking-tight text-gray-900">Residents</h1>
+            <div className="flex space-x-6">
+              <NavLink to=".">
+                <button
+                  type="button"
+                  
+                  className="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                >
+                  <HomeIcon
+                    className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"
+                    aria-hidden="true"
+                  />
+                  All Residents
+                </button>
+              </NavLink>
+              <NavLink to="./new">
+                <button
+                  type="button"
+                  className="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                >
+                  <PlusCircleIcon
+                    className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"
+                    aria-hidden="true"
+                  />
+                  New Resident
+                </button>
+              </NavLink>
             </div>
-          </NavLink>
-
-
-          <div className="flex justify">
-            <NavLink to="./new">New Resident</NavLink>
+          
           </div>
-      </div>
+        </header>
+     
     </React.Fragment>
   );
 }

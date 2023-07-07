@@ -32,7 +32,7 @@ export default function Dashboard() {
         <main>
           <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
             <div className="flex space-x-6">
-              <Link>
+              <Link to="/login/residents/new">
                 <button
                   type="button"
                   onClick={toggleFormVisibility}

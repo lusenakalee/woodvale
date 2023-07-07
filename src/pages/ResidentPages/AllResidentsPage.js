@@ -7,6 +7,8 @@ function AllResidentsPage() {
   const { residentsList } = useRouteLoaderData("all-residents");
   return (
     <React.Fragment>
+       <main>
+          <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
       <Suspense fallback={<p style={{ textAlign: "center" }}>Loading....</p>}>
         <Await resolve={residentsList}>
           {(loadedResidents) => (
@@ -14,6 +16,8 @@ function AllResidentsPage() {
           )}
         </Await>
       </Suspense>
+      </div>
+        </main>
     </React.Fragment>
   );
 }

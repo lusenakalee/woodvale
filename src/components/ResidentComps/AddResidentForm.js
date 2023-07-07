@@ -1,10 +1,21 @@
 import { useState } from "react";
 import { PhotoIcon, UserCircleIcon } from "@heroicons/react/24/solid";
-import { Form, json, redirect } from "react-router-dom";
+import { Form, json, redirect, useNavigate, useNavigation } from "react-router-dom";
 import { getAuthToken } from "../../util/Auth";
 import React from "react";
 
 export default function ResidentForm({ resident, title, method }) {
+  const navigate = useNavigate();
+  const navigation = useNavigation();
+
+  const isSubmitting = navigation.state === "submitting";
+  function cancelHandler() {
+    navigate("..");
+  }
+
+  
+
+
   return (
     <React.Fragment>
       {title}
@@ -263,14 +274,15 @@ export default function ResidentForm({ resident, title, method }) {
               className="flex justify-between sm:col-span-4">
            
              
-              <button className="px-4 py-2 text-sm font-medium text-gray-900 bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+              <button onClick={cancelHandler} className="px-4 py-2 text-sm font-medium text-gray-900 bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
                 Back
               </button>
               <button
                 type="submit"
+                disabled={isSubmitting}
                 className="px-4 py-2 text-sm font-medium text-gray-900 bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
-                Submit
+                 {isSubmitting ? "Submitting..." : "Save"}
               </button>
             </div>
           </div>
