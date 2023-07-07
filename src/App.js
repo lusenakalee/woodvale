@@ -51,6 +51,8 @@ const router = createBrowserRouter([
         path: "home",
         element:<Dashboard/>
       },
+      
+     
       {
         path: "logout",
         action: loginAction,
