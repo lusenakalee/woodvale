@@ -290,7 +290,6 @@ export async function residentAction({ request, params }) {
     middle_name: data.get("middle-name"),
     age: data.get("age"),
     gender: data.get("gender"),
-    file: data.get("file-upload"),
     emergency_contact_name: data.get("contact"),
     emergency_contact_number: data.get("contact-number"),
     emergency_contact_name_2: data.get("contact-2"),
