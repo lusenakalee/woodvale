@@ -4,10 +4,6 @@ import { Form, json, redirect } from "react-router-dom";
 import { getAuthToken } from "../../util/Auth";
 import React from "react";
 
-
-
-
-
 export default function ResidentForm({ resident, title, method }) {
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({});
@@ -27,13 +23,6 @@ export default function ResidentForm({ resident, title, method }) {
       [name]: value,
     }));
   };
-
-  
-
-
-
-  
-
 
   const renderStep1 = () => {
     return (
@@ -440,7 +429,6 @@ export default function ResidentForm({ resident, title, method }) {
 }
 
 export async function residentAction({ request, params }) {
-  
   const method = request.method;
   const data = await request.formData();
   const token = getAuthToken();
