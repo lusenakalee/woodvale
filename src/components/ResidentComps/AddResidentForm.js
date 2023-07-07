@@ -19,9 +19,8 @@ export default function AddResidentForm() {
     <form>
       <div className="space-y-12">
         <div className="border-b border-gray-900/10 pb-12">
-         
           <p className="mt-1 text-sm leading-6 text-gray-600">
-            Kindly fill in correct  details
+            Kindly fill in correct details
           </p>
 
           <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
@@ -100,8 +99,6 @@ export default function AddResidentForm() {
               </div>
             </div>
 
-
-
             <div className="sm:col-span-3">
               <label
                 htmlFor="AGE"
@@ -118,7 +115,6 @@ export default function AddResidentForm() {
                 />
               </div>
             </div>
-
 
             <div className="sm:col-span-4">
               <label
@@ -265,151 +261,148 @@ export default function AddResidentForm() {
           </div>
         </div>
 
-        
         <p className="mt-1 text-sm leading-6 text-gray-600">
-            Kindly fill Next of Kin Details/ Emergency Contact
+          Kindly fill Next of Kin Details/ Emergency Contact
+        </p>
+
+        <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+          <div className="sm:col-span-3">
+            <label
+              htmlFor="contact-first-name"
+              className="block text-sm font-medium leading-6 text-gray-900"
+            >
+              Contact First name
+            </label>
+            <div className="mt-2">
+              <input
+                type="text"
+                name="contact-first-name"
+                id="contact-first-name"
+                autoComplete="given-name"
+                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              />
+            </div>
+          </div>
+
+          <div className="sm:col-span-4">
+            <label
+              htmlFor="phone"
+              className="block text-sm font-medium leading-6 text-gray-900"
+            >
+              Contact Phone Number
+            </label>
+            <div className="mt-2">
+              <input
+                id="phone"
+                name="phone"
+                type="number"
+                autoComplete="phone"
+                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className="sm:col-span-4">
+          <label
+            htmlFor="phone"
+            className="block text-sm font-medium leading-6 text-gray-900"
+          >
+            Physician contact
+          </label>
+          <div className="mt-2">
+            <input
+              id="phone"
+              name="phone"
+              autoComplete="phone"
+              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            />
+          </div>
+        </div>
+
+        <div className="sm:col-span-3">
+          <label
+            htmlFor="feeding_method"
+            className="block text-sm font-medium leading-6 text-gray-900"
+          >
+            Feeding Method
+          </label>
+          <div className="mt-2">
+            <select
+              id="feeding_method"
+              name="feeding_method"
+              autoComplete="feeding_method"
+              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
+            >
+              <option>Dependent</option>
+              <option>Independent</option>
+            </select>
+          </div>
+        </div>
+
+        <div className="col-span-full">
+          <label
+            htmlFor="immunization_records"
+            className="block text-sm font-medium leading-6 text-gray-900"
+          >
+            Immunization records
+          </label>
+          <div className="mt-2">
+            <textarea
+              id="immunization_records"
+              name="immunization_records"
+              rows={3}
+              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              defaultValue={""}
+            />
+          </div>
+          <p className="mt-3 text-sm leading-6 text-gray-600">
+            Write a few sentences.
           </p>
+        </div>
 
+        <div className="col-span-full">
+          <label
+            htmlFor="medications"
+            className="block text-sm font-medium leading-6 text-gray-900"
+          >
+            Medications
+          </label>
+          <div className="mt-2">
+            <textarea
+              id="medications"
+              name="medications"
+              rows={3}
+              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              defaultValue={""}
+            />
+          </div>
+          <p className="mt-3 text-sm leading-6 text-gray-600">
+            Write a few sentences.
+          </p>
+        </div>
 
-
-          <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-            <div className="sm:col-span-3">
-              <label
-                htmlFor="contact-first-name"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
-                Contact First name
-              </label>
-              <div className="mt-2">
-                <input
-                  type="text"
-                  name="contact-first-name"
-                  id="contact-first-name"
-                  autoComplete="given-name"
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-              </div>
-            </div>
-
-          
-
-
-
-          
-
-            <div className="sm:col-span-4">
-              <label
-                htmlFor="phone"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
-                Contact Phone Number
-              </label>
-              <div className="mt-2">
-                <input
-                  id="phone"
-                  name="phone"
-                  type="number"
-                  autoComplete="phone"
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-              </div>
-            </div>
-            </div>
-
-
-            
-           
-
-            <div className="sm:col-span-4">
-              <label
-                htmlFor="phone"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
-                Physician contact
-              </label>
-              <div className="mt-2">
-                <input
-                  id="phone"
-                  name="phone"
-                  autoComplete="phone"
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-              </div>
-            </div>
-
-
-            <div className="sm:col-span-3">
-              <label
-                htmlFor="feeding_method"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
-               Feeding Method
-              </label>
-              <div className="mt-2">
-                <select
-                  id="feeding_method"
-                  name="feeding_method"
-                  autoComplete="feeding_method"
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
-                >
-                  <option>Dependent</option>
-                  <option>Independent</option>
-                </select>
-              </div>
-            </div>
-
-            <div className="col-span-full">
-              <label htmlFor="immunization_records" className="block text-sm font-medium leading-6 text-gray-900">
-                Immunization records
-              </label>
-              <div className="mt-2">
-                <textarea
-                  id="immunization_records"
-                  name="immunization_records"
-                  rows={3}
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  defaultValue={''}
-                />
-              </div>
-              <p className="mt-3 text-sm leading-6 text-gray-600">Write a few sentences.</p>
-            </div>
-
-            <div className="col-span-full">
-              <label htmlFor="medications" className="block text-sm font-medium leading-6 text-gray-900">
-                Medications
-              </label>
-              <div className="mt-2">
-                <textarea
-                  id="medications"
-                  name="medications"
-                  rows={3}
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  defaultValue={''}
-                />
-              </div>
-              <p className="mt-3 text-sm leading-6 text-gray-600">Write a few sentences.</p>
-            </div>
-
-            <div className="col-span-full">
-              <label htmlFor="condition" className="block text-sm font-medium leading-6 text-gray-900">
-              Condition
-              </label>
-              <div className="mt-2">
-                <textarea
-                  id="condition"
-                  name="condition"
-                  rows={3}
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  defaultValue={''}
-                />
-              </div>
-              <p className="mt-3 text-sm leading-6 text-gray-600">Write a few sentences.</p>
-            </div>
-
-        
+        <div className="col-span-full">
+          <label
+            htmlFor="condition"
+            className="block text-sm font-medium leading-6 text-gray-900"
+          >
+            Condition
+          </label>
+          <div className="mt-2">
+            <textarea
+              id="condition"
+              name="condition"
+              rows={3}
+              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              defaultValue={""}
+            />
+          </div>
+          <p className="mt-3 text-sm leading-6 text-gray-600">
+            Write a few sentences.
+          </p>
+        </div>
       </div>
-
-     
     </form>
   );
 }

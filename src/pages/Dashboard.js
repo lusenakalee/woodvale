@@ -5,6 +5,7 @@ import DashReports from "../components/DashboardComps/DashReports";
 import Updates from "../components/DashboardComps/Updates";
 import QuickLinks from "../components/DashboardComps/QuickLinks";
 import SummaryTable from "../components/DashboardComps/SummaryTable";
+import AddResidentAccordion from "../components/DashboardComps/AddResidentAccordion";
 
 
 function classNames(...classes) {
@@ -20,7 +21,9 @@ export default function Dashboard() {
         <header className="bg-white shadow">
           <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
             <h1 className="text-3xl font-bold tracking-tight text-gray-900">
+
               Dashboard
+              <AddResidentAccordion/>
             </h1>
           </div>
         </header>
