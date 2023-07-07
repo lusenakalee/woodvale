@@ -7,6 +7,9 @@ import {
   PlusCircleIcon,
   ClipboardDocumentListIcon,
   PaperClipIcon,
+  HomeIcon,
+  PlusIcon,
+  ClipboardDocumentIcon
 } from "@heroicons/react/24/outline";
 import { HashLink } from "react-router-hash-link";
 import CarePlan from "./CarePlan";
@@ -27,13 +30,50 @@ function ResidentDetails({ resident }) {
       <React.Fragment>
         <main>
           <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
-            <div className="px-4 sm:px-0">
+            <div className="px-4 sm:px-0 flex  justify-between">
+              <div className="">
               <h3 className="text-base font-semibold leading-7 text-gray-900">
                 Resident Information
               </h3>
               <p className="mt-1 max-w-2xl text-sm leading-6 text-gray-500">
               {resident.first_name} details and Information.
               </p>
+              </div>
+              <div className="space-x-6">
+              <button
+                  type="button"
+                  
+                  className="inline-flex opacity-80 items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                >
+                  <ClipboardDocumentIcon
+                    className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"
+                    aria-hidden="true"
+                  />
+                  View Logs
+                </button>
+                <button
+                  type="button"
+                  
+                  className="inline-flex  opacity-80 items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                >
+                  <PlusIcon
+                    className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"
+                    aria-hidden="true"
+                  />
+                  Add Logs
+                </button>
+                <button
+                  type="button"
+                  
+                  className="inline-flex  opacity-80 items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                >
+                  <ClipboardDocumentListIcon
+                    className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"
+                    aria-hidden="true"
+                  />
+                 Care Plan
+                </button>
+              </div>
             </div>
             <div className="mt-6 border-t border-gray-100">
               <dl className="divide-y divide-gray-100">

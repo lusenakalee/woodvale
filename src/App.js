@@ -42,6 +42,10 @@ const ActivitiesPage = lazy(() =>
   import("./pages/ActivityPages/ActivityMainPages/ActivitiesPage")
 );
 
+const EditResidentPage = lazy(() =>
+  import("./pages/ResidentPages/EditResidentPage")
+);
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -195,7 +199,7 @@ const router = createBrowserRouter([
                 path: "edit",
                 element: (
                   <Suspense fallback={<p>Loading...</p>}>
-                    <NewResidentPage />
+                    <EditResidentPage />
                   </Suspense>
                 ),
                 action: (meta) =>
