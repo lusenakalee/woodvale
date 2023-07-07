@@ -11,8 +11,9 @@ const user = {
 };
 const navigation = [
   { name: "Dashboard", to: "/login/home", current: true },
-  { name: "Team", to: "/Team", current: false },
+  { name: "Team", to: "./team", current: false },
   { name: "Residents", to: "./residents", current: false },
+  { name: "Activities", to: "./activity", current: false },
 ];
 const userNavigation = [
   { name: "Your Profile", to: "#" },
@@ -33,7 +34,6 @@ export default function Nav() {
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
               <div className="flex h-16 items-center justify-between">
                 <div className="flex items-center">
-                  
                   <div className="hidden md:block">
                     <div className="ml-10 flex items-baseline space-x-4">
                       {navigation.map((item) => (

@@ -9,6 +9,22 @@ import RootLayout from "./pages/RootPages/RootLayout";
 import HomePage from "./pages/RootPages/HomePage";
 import { Suspense, lazy } from "react";
 import ResidentsRoot from "./pages/ResidentPages/ResidentsRoot";
+import { logoutAction } from "./pages/RootPages/Logout";
+import { activitiesLoader } from "./pages/ActivityPages/ActivityMainPages/ActivitiesPage";
+
+const ActivityRoot = lazy(() =>
+  import("./pages/ActivityPages/ActivityMainPages/MainActivityRoot")
+);
+
+const UserCreationPage = lazy(() => import("./pages/UserPages/NewUserPage"));
+
+const UsersPage = lazy(() => import("./pages/UserPages/AllUsers"));
+
+const UserRoot = lazy(() => import("./pages/UserPages/UserRoot"));
+
+const NewActivityPage = lazy(() =>
+  import("./pages/ActivityPages/ActivityMainPages/NewActivityPage")
+);
 
 const AllResidentsPage = lazy(() =>
   import("./pages/ResidentPages/AllResidentsPage")
@@ -22,9 +38,14 @@ const ResidentDetailPage = lazy(() =>
   import("./pages/ResidentPages/ResidentDetailPage")
 );
 
+const ActivitiesPage = lazy(() =>
+  import("./pages/ActivityPages/ActivityMainPages/ActivitiesPage")
+);
+
 const router = createBrowserRouter([
   {
     path: "/",
+    errorElement: <ErrorPage />,
     element: <HomePage />,
   },
   {
@@ -52,7 +73,74 @@ const router = createBrowserRouter([
 
       {
         path: "logout",
-        action: loginAction,
+        action: logoutAction,
+      },
+      {
+        path: "team",
+        id: "users",
+        element: (
+          <Suspense fallback={<p>Loading...</p>}>
+            <UserRoot />
+          </Suspense>
+        ),
+        loader: () =>
+          import("./pages/UserPages/AllUsers").then((module) =>
+            module.loader()
+          ),
+        children: [
+          {
+            index: true,
+            element: (
+              <Suspense fallback={<p>Loading...</p>}>
+                <UsersPage />
+              </Suspense>
+            ),
+          },
+          {
+            path: "new",
+            element: (
+              <Suspense fallback={<p>Loading...</p>}>
+                <UserCreationPage />
+              </Suspense>
+            ),
+            action: (meta) =>
+              import("./components/UserComps/UserForm").then((module) =>
+                module.action(meta)
+              ),
+          },
+        ],
+      },
+      {
+        path: "activity",
+        element: (
+          <Suspense fallback={<p>Loading...</p>}>
+            <ActivityRoot />
+          </Suspense>
+        ),
+        id: "activities",
+        loader: activitiesLoader,
+        children: [
+          {
+            index: true,
+            element: (
+              <Suspense fallback={<p>Loading...</p>}>
+                <ActivitiesPage />
+              </Suspense>
+            ),
+          },
+          {
+            path: "new",
+            element: (
+              <Suspense fallback={<p>Loading...</p>}>
+                <NewActivityPage />
+              </Suspense>
+            ),
+            action: (meta) =>
+              import("./components/ActivityComps/ActivityForm").then((module) =>
+                module.action(meta)
+              ),
+          },
+        ],
       },
       {
         path: "residents",
@@ -98,20 +186,23 @@ const router = createBrowserRouter([
                     <ResidentDetailPage />
                   </Suspense>
                 ),
-                action: (meta) => import("./pages/ResidentPages/ResidentDetailPage").then((module)=>module.action(meta))
+                action: (meta) =>
+                  import("./pages/ResidentPages/ResidentDetailPage").then(
+                    (module) => module.action(meta)
+                  ),
               },
               {
                 path: "edit",
-                element:(
+                element: (
                   <Suspense fallback={<p>Loading...</p>}>
                     <NewResidentPage />
                   </Suspense>
                 ),
                 action: (meta) =>
-                import("./components/ResidentComps/AddResidentForm").then(
-                  (module) => module.residentAction(meta)
-                )
-              }
+                  import("./components/ResidentComps/AddResidentForm").then(
+                    (module) => module.residentAction(meta)
+                  ),
+              },
             ],
           },
         ],
