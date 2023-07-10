@@ -23,7 +23,39 @@ function UserItem({ user }) {
           ))}
         </ul>
       )}
-      {user.username}
+      <div className="">
+        <h3 className="text-base font-semibold leading-7 text-gray-900">
+          User Information
+        </h3>
+        <p className="mt-1 max-w-2xl text-sm leading-6 text-gray-500">
+          {user.first_name} details and Information.
+        </p>
+      </div>
+
+      <div className="px-4 py-3 sm:grid sm:grid-cols-3 hover:bg-white sm:gap-4 sm:px-0">
+        <dt className="text-sm font-medium leading-6 text-gray-900">
+          Full name
+        </dt>
+        <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+          {user.first_name} {user.last_name}
+        </dd>
+      </div>
+      <div className="px-4 py-3 sm:grid sm:grid-cols-3 hover:bg-white sm:gap-4 sm:px-0">
+        <dt className="text-sm font-medium leading-6 text-gray-900">
+          Username
+        </dt>
+        <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+          {user.username} 
+        </dd>
+      </div>
+      <div className="px-4 py-3 sm:grid sm:grid-cols-3 hover:bg-white sm:gap-4 sm:px-0">
+        <dt className="text-sm font-medium leading-6 text-gray-900">
+          User type
+        </dt>
+        <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+          {user.user_type} 
+        </dd>
+      </div>
       {token && (
         <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
           <dt className="text-sm font-medium text-gray-500">
