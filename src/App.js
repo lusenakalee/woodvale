@@ -286,6 +286,12 @@ const router = createBrowserRouter([
                   ),
               },
               {
+                path: "incident",
+              },
+              {
+                path: "leaves",
+              },
+              {
                 path: "med-recs",
                 id: "med-recs",
                 element: (
@@ -407,8 +413,8 @@ const router = createBrowserRouter([
                   </Suspense>
                 ),
                 action: (meta) =>
-                  import("./components/LogsComps/NewLogsForm").then(
-                    (module) => module.action(meta)
+                  import("./components/LogsComps/NewLogsForm").then((module) =>
+                    module.action(meta)
                   ),
               },
             ],

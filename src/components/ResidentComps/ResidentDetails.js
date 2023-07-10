@@ -98,7 +98,7 @@ function ResidentDetails({ resident }) {
                   </Link>
                 </div>
                 <div>
-                  <Link to="">
+                  <Link to="./incident">
                     <button
                       type="button"
                       className="inline-flex  opacity-80 items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
@@ -112,7 +112,7 @@ function ResidentDetails({ resident }) {
                   </Link>
                 </div>
                 <div>
-                  <Link to="">
+                  <Link to="./leaves">
                     <button
                       type="button"
                       className="inline-flex  opacity-80 items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
@@ -235,17 +235,6 @@ function ResidentDetails({ resident }) {
                     {resident.registered_by.last_name}
                   </dd>
                 </div>
-
-                <div className="px-4 py-3 sm:grid sm:grid-cols-3 hover:bg-white sm:gap-4 sm:px-0">
-                  <dt className="text-sm font-medium leading-6 text-gray-900">
-                    Physician Contact{" "}
-                  </dt>
-                  {/* MAYBE A LINK TO GO TO CARE GIVER DETAILS PAGE */}
-                  <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                    PhysicianAnn@gmail.com
-                  </dd>
-                </div>
-
                 <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                   <dt className="text-sm font-medium leading-6 text-gray-900">
                     Attachments
