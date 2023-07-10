@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Form,
   json,
@@ -6,10 +6,16 @@ import {
   useNavigate,
   useNavigation,
 } from "react-router-dom";
+import { getAuthToken } from "../../util/Auth";
 
 function UserForm({ method, user, title }) {
   const navigate = useNavigate();
   const navigation = useNavigation();
+  const [selectedOption, setSelectedOption] = useState(null);
+
+  const handleOptionChange = (e) => {
+    setSelectedOption(e.target.value);
+  };
 
   const isSubmitting = navigation.state === "submitting";
   function cancelHandler() {
@@ -36,9 +42,10 @@ function UserForm({ method, user, title }) {
                 <div className="mt-2">
                   <input
                     type="text"
-                    name="first-name"
+                    name="first_name"
                     id="first-name"
                     autoComplete="given-name"
+                    required
                     defaultValue={user ? user.first_name : " "}
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
@@ -58,6 +65,7 @@ function UserForm({ method, user, title }) {
                     name="last_name"
                     id="last_name"
                     autoComplete="family-name"
+                    required
                     defaultValue={user ? user.last_name : " "}
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
@@ -73,9 +81,10 @@ function UserForm({ method, user, title }) {
                 </label>
                 <div className="mt-2">
                   <input
-                    type="text"
+                    type="email"
                     name="username"
                     id="username"
+                    required
                     autoComplete="family-name"
                     defaultValue={user ? user.username : " "}
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -93,9 +102,9 @@ function UserForm({ method, user, title }) {
                 <div className="mt-2">
                   <input
                     type="text"
+                    required
                     name="password1"
                     id="password1"
-                    defaultValue={user ? user.password1 : " "}
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
                 </div>
@@ -112,8 +121,8 @@ function UserForm({ method, user, title }) {
                   <input
                     type="text"
                     name="password2"
+                    required
                     id="password2"
-                    defaultValue={user ? user.password2 : " "}
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
                 </div>
@@ -124,23 +133,26 @@ function UserForm({ method, user, title }) {
                 <legend className="text-sm font-semibold leading-6 text-gray-900">
                   Is the user you are adding an Admin?
                 </legend>
-                <div className="mt-6 space-y-6">
-                  <div className="relative flex gap-x-3">
-                    <div className="flex h-6 items-center">
-                      <input
-                        id="comments"
-                        name="comments"
-                        type="checkbox"
-                        className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
-                      />
-                    </div>
-                    <div className="text-sm leading-6">
-                      <p className="text-gray-500">
-                        Check the box if the user is an admin.
-                      </p>
-                    </div>
-                  </div>
-                </div>
+                <label>
+                  <input
+                    type="radio"
+                    name="is-admin"
+                    value="true"
+                    checked={selectedOption === "true"}
+                    onChange={handleOptionChange}
+                  />
+                  True
+                </label>
+                <label>
+                  <input
+                    type="radio"
+                    name="is-admin"
+                    value="false"
+                    checked={selectedOption === "false"}
+                    onChange={handleOptionChange}
+                  />
+                  False
+                </label>
               </fieldset>
             </div>
           </div>
@@ -170,6 +182,7 @@ export default UserForm;
 export async function action({ request, params }) {
   const data = await request.formData();
   const method = request.method;
+  const token = getAuthToken();
   const signupData = {
     username: data.get("username"),
     password1: data.get("password1"),
@@ -183,6 +196,7 @@ export async function action({ request, params }) {
     headers: {
       "Content-Type": "application/json",
       "Access-Control-Allow-Origin": "*",
+      Authorization: "Bearer " + token,
     },
     body: JSON.stringify(signupData),
   });

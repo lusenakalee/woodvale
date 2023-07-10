@@ -61,6 +61,12 @@ const ResidentDetailPage = lazy(() =>
   import("./pages/ResidentPages/ResidentDetailPage")
 );
 
+const AllLogsPage = lazy(() => import("./pages/LogsPages/AllLogsPage"));
+
+const NewLogsPage = lazy(() => import("./pages/LogsPages/NewLogsPage"));
+
+const EditLogsPage = lazy(() => import("./pages/LogsPages/EditLogsPage"));
+
 const ActivitiesPage = lazy(() =>
   import("./pages/ActivityPages/ActivityMainPages/ActivitiesPage")
 );
@@ -380,6 +386,30 @@ const router = createBrowserRouter([
                       ),
                   },
                 ],
+              },
+              {
+                path: "logs",
+                element: (
+                  <Suspense fallback={<p>Loading..</p>}>
+                    <AllLogsPage />
+                  </Suspense>
+                ),
+                loader: (meta) =>
+                  import("./pages/LogsPages/AllLogsPage").then((module) =>
+                    module.loader(meta)
+                  ),
+              },
+              {
+                path: "new-log",
+                element: (
+                  <Suspense fallback={<p>Loading..</p>}>
+                    <NewLogsPage />
+                  </Suspense>
+                ),
+                action: (meta) =>
+                  import("./components/LogsComps/NewLogsForm").then(
+                    (module) => module.action(meta)
+                  ),
               },
             ],
           },
