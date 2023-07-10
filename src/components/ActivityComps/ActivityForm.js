@@ -83,6 +83,8 @@ function ActivityForm({ activity, method, title }) {
             </div>
           </div>
 
+          
+
           <div className="flex justify-between sm:col-span-4">
               <button
                 onClick={cancelHandler}

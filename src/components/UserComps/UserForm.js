@@ -128,8 +128,8 @@ function UserForm({ method, user, title }) {
                 </div>
               </div>
             </div>
-            <div className="mt-10 space-y-10">
-              <fieldset>
+            <div className="mt-10 space-y-10 space-x-5">
+              <fieldset  className="mt-10 space-y-10 space-x-5">
                 <legend className="text-sm font-semibold leading-6 text-gray-900">
                   Is the user you are adding an Admin?
                 </legend>
