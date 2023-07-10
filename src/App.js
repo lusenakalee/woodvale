@@ -8,19 +8,26 @@ import ErrorPage from "./pages/RootPages/ErrorPage";
 import RootLayout from "./pages/RootPages/RootLayout";
 import HomePage from "./pages/RootPages/HomePage";
 import { Suspense, lazy } from "react";
-import ResidentsRoot from "./pages/ResidentPages/ResidentsRoot";
 import { logoutAction } from "./pages/RootPages/Logout";
 import { activitiesLoader } from "./pages/ActivityPages/ActivityMainPages/ActivitiesPage";
+
+const ResidentRoot = lazy(() => import("./pages/ResidentPages/ResidentsRoot"));
 
 const ActivityRoot = lazy(() =>
   import("./pages/ActivityPages/ActivityMainPages/MainActivityRoot")
 );
+
+const UserDetailPage = lazy(() => import("./pages/UserPages/UserDetailPage"));
+
+const UserEditPage = lazy(() => import("./pages/UserPages/UserEditPage"));
 
 const UserCreationPage = lazy(() => import("./pages/UserPages/NewUserPage"));
 
 const UsersPage = lazy(() => import("./pages/UserPages/AllUsers"));
 
 const UserRoot = lazy(() => import("./pages/UserPages/UserRoot"));
+
+const CarePlanRoot = lazy(() => import("./pages/CarePlanPages/CarePlanRoot"));
 
 const NewActivityPage = lazy(() =>
   import("./pages/ActivityPages/ActivityMainPages/NewActivityPage")
@@ -46,13 +53,14 @@ const EditResidentPage = lazy(() =>
   import("./pages/ResidentPages/EditResidentPage")
 );
 
-<<<<<<< HEAD
-const UserDetailPage = lazy(() => import("./pages/UserPages/UserDetailPage"));
+const ViewCarePlan = lazy(() =>
+  import("./pages/CarePlanPages/ViewCarePlanPage")
+);
 
-const UserEditPage = lazy(() => import("./pages/UserPages/UserEditPage"));
+const NewCarePlanPage = lazy(() =>
+  import("./pages/CarePlanPages/NewCarePlanPage")
+);
 
-=======
->>>>>>> 10a292dd41d576531e24463cb5d88f6e216e5726
 const router = createBrowserRouter([
   {
     path: "/",
@@ -190,7 +198,11 @@ const router = createBrowserRouter([
       {
         path: "residents",
         id: "all-residents",
-        element: <ResidentsRoot />,
+        element: (
+          <Suspense fallback={<p>Loading...</p>}>
+            <ResidentRoot />
+          </Suspense>
+        ),
         loader: () =>
           import("./pages/ResidentPages/AllResidentsPage").then((module) =>
             module.loader()
@@ -247,6 +259,48 @@ const router = createBrowserRouter([
                   import("./components/ResidentComps/AddResidentForm").then(
                     (module) => module.residentAction(meta)
                   ),
+              },
+              {
+                path: "care-plan",
+                element: (
+                  <Suspense fallback={<p>Loading...</p>}>
+                    <CarePlanRoot />
+                  </Suspense>
+                ),
+                id: "care-plan",
+                loader: (meta) =>
+                  import("./pages/CarePlanPages/ViewCarePlanPage").then(
+                    (module) => module.loader(meta)
+                  ),
+                children: [
+                  {
+                    index: true,
+                    element: (
+                      <Suspense fallback={<p>Loading...</p>}>
+                        <ViewCarePlan />
+                      </Suspense>
+                    ),
+                    action: (meta) =>
+                      import("./pages/CarePlanPages/ViewCarePlanPage").then(
+                        (module) => module.action(meta)
+                      ),
+                  },
+                  {
+                    path: "new",
+                    element: (
+                      <Suspense fallback={<p>Loading...</p>}>
+                        <NewCarePlanPage />
+                      </Suspense>
+                    ),
+                    action: (meta) =>
+                      import("./components/CarePlanComps/CarePlanForm").then(
+                        (module) => module.action(meta)
+                      ),
+                  },
+                  {
+                    path: ":id",
+                  },
+                ],
               },
             ],
           },

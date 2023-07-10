@@ -1,11 +1,11 @@
 import React from 'react'
-import NewResidentPage from './NewResidentPage'
 import { useRouteLoaderData } from 'react-router-dom'
+import ResidentForm from '../../components/ResidentComps/AddResidentForm'
 
 function EditResidentPage() {
-    const resident = useRouteLoaderData("resident-detail")
+  const resident = useRouteLoaderData("resident-detail")
   return (
-    <NewResidentPage resident={resident} method="patch"/>
+    <ResidentForm resident={resident} method="patch"/>
   )
 }
 

@@ -7,7 +7,6 @@ import ResidentDetailsList from "../../components/ResidentComps/ResidentDetailsL
 function ResidentDetailPage() {
   const resident = useRouteLoaderData("resident-detail");
 
-  
   return <ResidentDetails resident={resident} />;
 }
 
