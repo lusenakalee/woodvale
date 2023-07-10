@@ -53,7 +53,7 @@ function UserItem({ user }) {
           User type
         </dt>
         <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-          {user.user_type} 
+          {user.is_admin=== true ? "Admin": "Care Giver"} 
         </dd>
       </div>
       {token && (
