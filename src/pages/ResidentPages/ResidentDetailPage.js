@@ -2,7 +2,6 @@ import React from "react";
 import ResidentDetails from "../../components/ResidentComps/ResidentDetails";
 import { json, redirect, useRouteLoaderData } from "react-router-dom";
 import { getAuthToken } from "../../util/Auth";
-import ResidentDetailsList from "../../components/ResidentComps/ResidentDetailsList";
 
 function ResidentDetailPage() {
   const resident = useRouteLoaderData("resident-detail");
