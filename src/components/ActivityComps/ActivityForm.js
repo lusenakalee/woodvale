@@ -148,7 +148,7 @@ export async function action({ request, params }) {
     });
     if (!response.ok) {
       window.alert("failed update");
-      throw json({ message: "Failed to update the resident" }, { status: 500 });
+      throw json({ message: "Failed to update the activity" }, { status: 500 });
     }
 
     return redirect("/login/activity");
