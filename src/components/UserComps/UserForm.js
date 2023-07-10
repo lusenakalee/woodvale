@@ -12,8 +12,9 @@ function UserForm({method, user, title}) {
 }
 
 export default UserForm
-export async function action({request}){
+export async function action({request, params}){
     const data = await request.formData()
+    const method = request.method
     const signupData = {
       username: data.get("username"),
       password1: data.get("password1"),

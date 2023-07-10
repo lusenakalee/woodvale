@@ -5,7 +5,7 @@ import { useRouteLoaderData } from 'react-router-dom'
 function EditResidentPage() {
     const resident = useRouteLoaderData("resident-detail")
   return (
-    <NewResidentPage resident={resident}/>
+    <NewResidentPage resident={resident} method="patch"/>
   )
 }
 

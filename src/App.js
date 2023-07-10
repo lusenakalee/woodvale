@@ -42,6 +42,14 @@ const ActivitiesPage = lazy(() =>
   import("./pages/ActivityPages/ActivityMainPages/ActivitiesPage")
 );
 
+const EditResidentPage = lazy(() =>
+  import("./pages/ResidentPages/EditResidentPage")
+);
+
+const UserDetailPage = lazy(() => import("./pages/UserPages/UserDetailPage"));
+
+const UserEditPage = lazy(() => import("./pages/UserPages/UserEditPage"));
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -107,6 +115,40 @@ const router = createBrowserRouter([
               import("./components/UserComps/UserForm").then((module) =>
                 module.action(meta)
               ),
+          },
+          {
+            path: ":id",
+            loader: (meta) =>
+              import("./pages/UserPages/UserDetailPage").then((module) =>
+                module.loader(meta)
+              ),
+            id: "user-detail",
+            children: [
+              {
+                index: true,
+                element: (
+                  <Suspense fallback={<p>Loading...</p>}>
+                    <UserDetailPage />
+                  </Suspense>
+                ),
+                action: (meta) =>
+                  import("./pages/UserPages/UserDetailPage").then((module) =>
+                    module.action(meta)
+                  ),
+              },
+              {
+                path: "edit",
+                action: (meta) =>
+                  import("./components/UserComps/UserForm").then((module) =>
+                    module.action(meta)
+                  ),
+                element: (
+                  <Suspense fallback={<p>Loading...</p>}>
+                    <UserEditPage />
+                  </Suspense>
+                ),
+              },
+            ],
           },
         ],
       },
@@ -195,7 +237,7 @@ const router = createBrowserRouter([
                 path: "edit",
                 element: (
                   <Suspense fallback={<p>Loading...</p>}>
-                    <NewResidentPage />
+                    <EditResidentPage />
                   </Suspense>
                 ),
                 action: (meta) =>
