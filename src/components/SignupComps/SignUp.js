@@ -1,7 +1,8 @@
 import React from "react";
-import { Form, json, redirect } from "react-router-dom";
+import { Form, json, redirect, useActionData } from "react-router-dom";
 
 function SignUp() {
+  const data = useActionData();
   return (
     <div>
       <section className="bg-white">
@@ -32,13 +33,20 @@ function SignUp() {
               </a>
 
               <h1 className="mt-6 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl">
-                Resident registration
+                User registration
               </h1>
 
               <p className="mt-4 leading-relaxed text-gray-500">
                 Lorem, ipsum dolor sit amet consectetur adipisicing elit.
                 Eligendi nam dolorum aliquam, quibusdam aperiam voluptatum.
               </p>
+              {data && data.errors && (
+                <ul>
+                  {Object.values(data.errors).map((err) => (
+                    <li key={err}>{err}</li>
+                  ))}
+                </ul>
+              )}
 
               <Form method="POST" className="mt-8 grid grid-cols-6 gap-6">
                 <div className="col-span-6 sm:col-span-3">
@@ -140,16 +148,16 @@ function SignUp() {
 
 export default SignUp;
 
-export async function signUpAction({request}){
-  const data = await request.formData()
+export async function signUpAction({ request }) {
+  const data = await request.formData();
   const signupData = {
     username: data.get("username"),
     password1: data.get("password1"),
     password2: data.get("password2"),
     first_name: data.get("first_name"),
     last_name: data.get("last_name"),
-    is_admin: true
-  }
+    is_admin: true,
+  };
   const response = await fetch("/register", {
     method: "POST",
     headers: {

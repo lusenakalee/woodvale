@@ -1,12 +1,13 @@
 import React from 'react'
 import Nav from '../../components/RootComps/Nav'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useRouteLoaderData } from 'react-router-dom'
 
 
 function RootLayout() {
+  const token = useRouteLoaderData('root')
   return (
     <React.Fragment>
-        <Nav/>
+      {token && <Nav/>}
         <Outlet/>
     </React.Fragment>
   )
