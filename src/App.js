@@ -261,6 +261,9 @@ const router = createBrowserRouter([
                   ),
               },
               {
+                path: "med-recs",
+              },
+              {
                 path: "care-plan",
                 element: (
                   <Suspense fallback={<p>Loading...</p>}>
