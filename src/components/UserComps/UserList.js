@@ -82,7 +82,7 @@ function UserList({ users }) {
             <TableHeaderCell className="text-right">Last Name</TableHeaderCell>
             <TableHeaderCell className="text-right">Username</TableHeaderCell>
             <TableHeaderCell className="text-right">
-              Admin
+              User Type
             </TableHeaderCell>
           </TableRow>
         </TableHead>
@@ -95,7 +95,7 @@ function UserList({ users }) {
               </Link>
               <TableCell className="text-right">{item.last_name}</TableCell>
               <TableCell className="text-right">{item.username}</TableCell>
-              <TableCell className="text-right">{item.is_admin}</TableCell>
+              <TableCell className="text-right">{item.is_admin === true? "Admin": "User"}</TableCell>
             </TableRow>
           ))}
         </TableBody>

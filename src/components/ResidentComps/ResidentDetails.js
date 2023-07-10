@@ -11,7 +11,7 @@ import {
   PlusIcon,
   ClipboardDocumentIcon,
   ArrowRightOnRectangleIcon,
-  LifebuoyIcon
+  LifebuoyIcon,
 } from "@heroicons/react/24/outline";
 import { HashLink } from "react-router-hash-link";
 
@@ -41,29 +41,33 @@ function ResidentDetails({ resident }) {
                 </p>
               </div>
               <div class="grid grid-cols-4 gap-4 ">
+                <Link to="./logs">
+                  <div>
+                    <button
+                      type="button"
+                      className="inline-flex opacity-80 items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                    >
+                      <ClipboardDocumentIcon
+                        className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"
+                        aria-hidden="true"
+                      />
+                      View Logs
+                    </button>
+                  </div>
+                </Link>
                 <div>
-                  <button
-                    type="button"
-                    className="inline-flex opacity-80 items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                  >
-                    <ClipboardDocumentIcon
-                      className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"
-                      aria-hidden="true"
-                    />
-                    View Logs
-                  </button>
-                </div>
-                <div>
-                  <button
-                    type="button"
-                    className="inline-flex  opacity-80 items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                  >
-                    <PlusIcon
-                      className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"
-                      aria-hidden="true"
-                    />
-                    Add Logs
-                  </button>
+                  <Link to="./new-log">
+                    <button
+                      type="button"
+                      className="inline-flex  opacity-80 items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                    >
+                      <PlusIcon
+                        className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"
+                        aria-hidden="true"
+                      />
+                      Add Logs
+                    </button>
+                  </Link>
                 </div>
                 <div>
                   <Link to="./care-plan">
@@ -117,7 +121,7 @@ function ResidentDetails({ resident }) {
                         className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"
                         aria-hidden="true"
                       />
-                     Leave application
+                      Leave application
                     </button>
                   </Link>
                 </div>
@@ -242,7 +246,6 @@ function ResidentDetails({ resident }) {
                   </dd>
                 </div>
 
-                
                 <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                   <dt className="text-sm font-medium leading-6 text-gray-900">
                     Attachments
