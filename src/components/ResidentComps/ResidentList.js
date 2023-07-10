@@ -54,8 +54,8 @@ export default function ResidentList({ residentsList }) {
         </MultiSelect>
         <Select className="max-w-full sm:max-w-xs" defaultValue="all">
           <SelectItem value="all">All </SelectItem>
-          <SelectItem value="first_name">first_name</SelectItem>
-          <SelectItem value="last_name">last_name</SelectItem>
+          <SelectItem value="first_name">first name</SelectItem>
+          <SelectItem value="last_name">last name</SelectItem>
           <SelectItem value="age">age</SelectItem>
         </Select>
         <button
