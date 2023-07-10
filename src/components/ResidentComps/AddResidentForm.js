@@ -259,8 +259,11 @@ export default function ResidentForm({ resident, title, method }) {
                   type="text"
                   name="contact"
                   id="contact"
+                  required
                   autoComplete="given-name"
-                  defaultValue={resident ? resident.emergency_contact_name : " "}
+                  defaultValue={
+                    resident ? resident.emergency_contact_name : " "
+                  }
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -280,7 +283,51 @@ export default function ResidentForm({ resident, title, method }) {
                   type="number"
                   required
                   autoComplete="contact-number"
-                  defaultValue={resident ? resident.emergency_contact_number : " "}
+                  defaultValue={
+                    resident ? resident.emergency_contact_number : " "
+                  }
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+
+            <div className="sm:col-span-3">
+              <label
+                htmlFor="contact"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
+                Other Emergency Contact Name
+              </label>
+              <div className="mt-2">
+                <input
+                  type="text"
+                  name="contact-2"
+                  id="contact"
+                  autoComplete="given-name"
+                  defaultValue={
+                    resident ? resident.emergency_contact_name_2 : " "
+                  }
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+
+            <div className="sm:col-span-4">
+              <label
+                htmlFor="phone"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
+                Other Emergency Contact Number
+              </label>
+              <div className="mt-2">
+                <input
+                  id="contact-number"
+                  name="contact-number-2"
+                  type="number"
+                  autoComplete="contact-number"
+                  defaultValue={
+                    resident ? resident.emergency_contact_number_2 : " "
+                  }
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
