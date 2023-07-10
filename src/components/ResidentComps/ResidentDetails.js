@@ -9,10 +9,11 @@ import {
   PaperClipIcon,
   HomeIcon,
   PlusIcon,
-  ClipboardDocumentIcon
+  ClipboardDocumentIcon,
+  ArrowRightOnRectangleIcon,
+  LifebuoyIcon
 } from "@heroicons/react/24/outline";
 import { HashLink } from "react-router-hash-link";
-import CarePlan from "./CarePlan";
 
 function ResidentDetails({ resident }) {
   const token = useRouteLoaderData("root");
@@ -32,48 +33,94 @@ function ResidentDetails({ resident }) {
           <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
             <div className="px-4 sm:px-0 flex  justify-between">
               <div className="">
-              <h3 className="text-base font-semibold leading-7 text-gray-900">
-                Resident Information
-              </h3>
-              <p className="mt-1 max-w-2xl text-sm leading-6 text-gray-500">
-              {resident.first_name} details and Information.
-              </p>
+                <h3 className="text-base font-semibold leading-7 text-gray-900">
+                  Resident Information
+                </h3>
+                <p className="mt-1 max-w-2xl text-sm leading-6 text-gray-500">
+                  {resident.first_name} details and Information.
+                </p>
               </div>
-              <div className="space-x-6">
-              <button
-                  type="button"
-                  
-                  className="inline-flex opacity-80 items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                >
-                  <ClipboardDocumentIcon
-                    className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"
-                    aria-hidden="true"
-                  />
-                  View Logs
-                </button>
-                <button
-                  type="button"
-                  
-                  className="inline-flex  opacity-80 items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                >
-                  <PlusIcon
-                    className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"
-                    aria-hidden="true"
-                  />
-                  Add Logs
-                </button>
-                <button
-                  type="button"
-                  
-                  className="inline-flex  opacity-80 items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                >
-                  <ClipboardDocumentListIcon
-                    className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"
-                    aria-hidden="true"
-                  /><Link to="./care-plan">
-                  Care Plan
+              <div class="grid grid-cols-4 gap-4 ">
+                <div>
+                  <button
+                    type="button"
+                    className="inline-flex opacity-80 items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                  >
+                    <ClipboardDocumentIcon
+                      className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"
+                      aria-hidden="true"
+                    />
+                    View Logs
+                  </button>
+                </div>
+                <div>
+                  <button
+                    type="button"
+                    className="inline-flex  opacity-80 items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                  >
+                    <PlusIcon
+                      className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"
+                      aria-hidden="true"
+                    />
+                    Add Logs
+                  </button>
+                </div>
+                <div>
+                  <Link to="./care-plan">
+                    <button
+                      type="button"
+                      className="inline-flex  opacity-80 items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                    >
+                      <ClipboardDocumentListIcon
+                        className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"
+                        aria-hidden="true"
+                      />
+                      Care Plan
+                    </button>
                   </Link>
-                </button>
+                </div>
+                <div>
+                  <Link to="">
+                    <button
+                      type="button"
+                      className="inline-flex  opacity-80 items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                    >
+                      <ClipboardDocumentListIcon
+                        className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"
+                        aria-hidden="true"
+                      />
+                      Medical Records
+                    </button>
+                  </Link>
+                </div>
+                <div>
+                  <Link to="">
+                    <button
+                      type="button"
+                      className="inline-flex  opacity-80 items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                    >
+                      <LifebuoyIcon
+                        className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"
+                        aria-hidden="true"
+                      />
+                      Incident Report
+                    </button>
+                  </Link>
+                </div>
+                <div>
+                  <Link to="">
+                    <button
+                      type="button"
+                      className="inline-flex  opacity-80 items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                    >
+                      <ArrowRightOnRectangleIcon
+                        className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"
+                        aria-hidden="true"
+                      />
+                     Leave application
+                    </button>
+                  </Link>
+                </div>
               </div>
             </div>
             <div className="mt-6 border-t border-gray-100">
@@ -83,8 +130,8 @@ function ResidentDetails({ resident }) {
                     Full name
                   </dt>
                   <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                  
-                    {resident.first_name} {" "} {resident.middle_name}  {" "} {resident.last_name}
+                    {resident.first_name} {resident.middle_name}{" "}
+                    {resident.last_name}
                   </dd>
                 </div>
                 <div className="px-4 py-3 sm:grid sm:grid-cols-3 hover:bg-white sm:gap-4 sm:px-0">
@@ -178,9 +225,10 @@ function ResidentDetails({ resident }) {
                     Resident registered by{" "}
                   </dt>
                   {/* MAYBE A LINK TO GO TO CARE GIVER DETAILS PAGE */}
-                  
+
                   <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                    {resident.registered_by.first_name} {" "}  {resident.registered_by.last_name}
+                    {resident.registered_by.first_name}{" "}
+                    {resident.registered_by.last_name}
                   </dd>
                 </div>
 
@@ -194,38 +242,7 @@ function ResidentDetails({ resident }) {
                   </dd>
                 </div>
 
-                <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                  <dt className="text-sm font-medium leading-6 text-gray-900">
-                    condition
-                  </dt>
-                  <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                    Fugiat ipsum ipsum deserunt culpa aute sint do nostrud anim
-                    incididunt cillum culpa consequat. Excepteur qui ipsum
-                    aliquip consequat sint. Sit id mollit nulla mollit nostrud
-                    in ea officia proident. Irure nostrud pariatur mollit ad
-                    adipisicing reprehenderit deserunt qui eu.
-                  </dd>
-                </div>
-                <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                  <dt className="text-sm font-medium leading-6 text-gray-900">
-                    Allergies
-                  </dt>
-                  <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                    qui ipsum aliquip consequat sint. Sit id mollit nulla mollit
-                    nostrud in ea officia proident. Irure nostrud pariatur
-                    mollit ad adipisicing reprehenderit deserunt qui eu.
-                  </dd>
-                </div>
-                <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                  <dt className="text-sm font-medium leading-6 text-gray-900">
-                    Medications
-                  </dt>
-                  <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                    qui ipsum aliquip consequat sint. Sit id mollit nulla mollit
-                    nostrud in ea officia proident. Irure nostrud pariatur
-                    mollit ad adipisicing reprehenderit deserunt qui eu.
-                  </dd>
-                </div>
+                
                 <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                   <dt className="text-sm font-medium leading-6 text-gray-900">
                     Attachments

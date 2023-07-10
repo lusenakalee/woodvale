@@ -1,9 +1,180 @@
 import React from "react";
 import { getAuthToken } from "../../util/Auth";
-import { json, redirect, Form } from "react-router-dom";
+import {
+  Form,
+  json,
+  redirect,
+  useNavigate,
+  useNavigation,
+} from "react-router-dom";
 
-function CarePlanForm({ method, title }) {
-  return <Form method={method}></Form>;
+function CarePlanForm({ resident, method, title }) {
+  const navigate = useNavigate();
+  const navigation = useNavigation();
+
+  const isSubmitting = navigation.state === "submitting";
+  function cancelHandler() {
+    navigate("..");
+  }
+
+  return (
+    <Form method={method}>
+      <div className="space-y-12">
+        <div className="border-b border-gray-900/10 pb-12">
+          <p className="mt-1 text-sm leading-6 text-gray-600">
+            Kindly fill in correct details
+          </p>
+
+          <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+            <div className="col-span-full">
+              <label
+                htmlFor="diet"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
+                Dietary requirements
+              </label>
+              <div className="mt-2">
+                <textarea
+                  id="diet"
+                  name="diet"
+                  rows={3}
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  defaultValue={""}
+                />
+              </div>
+              <p className="mt-3 text-sm leading-6 text-gray-600">
+                Write a few sentences about the Dietary requirements.
+              </p>
+            </div>
+
+            <div className="col-span-full">
+              <label
+                htmlFor="mobility"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
+                Mobility assistance
+              </label>
+              <div className="mt-2">
+                <textarea
+                  id="mobility"
+                  name="mobility"
+                  rows={3}
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  defaultValue={""}
+                />
+              </div>
+              <p className="mt-3 text-sm leading-6 text-gray-600">
+                Write a few sentences about the resident's mobility.
+              </p>
+            </div>
+
+            <div className="col-span-full">
+              <label
+                htmlFor="medication"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
+                Medication administration
+              </label>
+              <div className="mt-2">
+                <textarea
+                  id="medication"
+                  name="medication"
+                  rows={3}
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  defaultValue={""}
+                />
+              </div>
+              <p className="mt-3 text-sm leading-6 text-gray-600">
+                Write a few sentences about the medication.
+              </p>
+            </div>
+
+            <div className="col-span-full">
+              <label
+                htmlFor="hygiene"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
+                Personal hygiene
+              </label>
+              <div className="mt-2">
+                <textarea
+                  id="hygiene"
+                  name="hygiene"
+                  rows={3}
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  defaultValue={""}
+                />
+              </div>
+              <p className="mt-3 text-sm leading-6 text-gray-600">
+                Describe the personal hygiene.
+              </p>
+            </div>
+
+            <div className="col-span-full">
+              <label
+                htmlFor="activity"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
+                Activity schedule
+              </label>
+              <div className="mt-2">
+                <textarea
+                  id="activity"
+                  name="activity"
+                  rows={3}
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  defaultValue={""}
+                />
+              </div>
+              <p className="mt-3 text-sm leading-6 text-gray-600">
+                Write a few sentences about resident's activity schedule.
+              </p>
+            </div>
+
+            <div className="col-span-full">
+              <label
+                htmlFor="instructions"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
+                Instructions
+              </label>
+              
+              <div className="mt-2">
+                <textarea
+                  id="instructions"
+                  name="instructions"
+                  rows={3}
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  defaultValue={""}
+                />
+              </div>
+              <p className="mt-3 text-sm leading-6 text-gray-600">
+                Write a few sentences about the instructons.
+              </p>
+            </div>
+
+            <div className="flex justify-between sm:col-span-4">
+              <button
+                onClick={cancelHandler}
+                className="px-4 py-2 text-sm font-medium text-gray-900 bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                Back
+              </button>
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="px-4 py-2 text-sm font-medium text-gray-900 bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                {isSubmitting ? "Submitting..." : "Save"}
+              </button>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+    </Form>
+  );
 }
 
 export default CarePlanForm;
@@ -39,7 +210,7 @@ export async function action({ request, params }) {
     if (!response.ok) {
       throw json({ message: "Failed to save the care plan" }, { status: 500 });
     }
-    const new_url = '/login/resident' + id
+    const new_url = "/login/resident/" + id;
     return redirect(new_url);
-  } 
+  }
 }
