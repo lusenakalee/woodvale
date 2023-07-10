@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useSubmit } from "react-router-dom";
 
-function ViewCarePlan({ carePlan }) {
+function MedicalRecord({ record }) {
   const submit = useSubmit();
   function startDeleteHandler() {
     const proceed = window.confirm("Are you sure?");
@@ -14,43 +14,43 @@ function ViewCarePlan({ carePlan }) {
   return (
     <React.Fragment>
       <div className="pt-10">
-        {!carePlan ? (
-          <p>This resident has no care plan.</p>
-        ) : carePlan.length < 1 ? (
+        {!record ? (
+          <p>This resident has no medical record.</p>
+        ) : record.length < 1 ? (
           <p>Nothing</p>
         ) : (
           <div>
             <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
               <dt className="text-sm font-medium leading-6 text-gray-900">
-                Dietary requirements
+                Condition
               </dt>
               <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                {carePlan.dietary_requirements}
+                {record.condition}
               </dd>
             </div>
             <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
               <dt className="text-sm font-medium leading-6 text-gray-900">
-                Mobility assistance
+                Allergies
               </dt>
               <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                {carePlan.mobility_assistance}
+                {record.allergies}
               </dd>
             </div>
             <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
               <dt className="text-sm font-medium leading-6 text-gray-900">
-                Medication administration
+                Medications
               </dt>
               <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                {carePlan.medication_administration}
+                {record.medications}
               </dd>
             </div>
 
             <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
               <dt className="text-sm font-medium leading-6 text-gray-900">
-                Personal hygiene
+                Immunization Records
               </dt>
               <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                {carePlan.personal_hygiene}
+                {record.immunization_records}
               </dd>
             </div>
 
@@ -59,16 +59,25 @@ function ViewCarePlan({ carePlan }) {
                 Activity schedule
               </dt>
               <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                {carePlan.activity_schedule}
+                {record.activity_schedule}
               </dd>
             </div>
 
             <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
               <dt className="text-sm font-medium leading-6 text-gray-900">
-                Instructions
+                Physician Contact
               </dt>
               <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                {carePlan.instructions}
+                {record.physician_contact}
+              </dd>
+            </div>
+
+            <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+              <dt className="text-sm font-medium leading-6 text-gray-900">
+                Feeding Method
+              </dt>
+              <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+                {record.feeding_method}
               </dd>
             </div>
 
@@ -79,11 +88,9 @@ function ViewCarePlan({ carePlan }) {
               Delete
             </button>
             <Link to={`./edit`}>
-            <button 
-              className="px-4 py-2 text-sm font-medium text-gray-900 bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
-              Edit
-            </button>
+              <button className="px-4 py-2 text-sm font-medium text-gray-900 bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                Edit
+              </button>
             </Link>
           </div>
         )}
@@ -92,4 +99,4 @@ function ViewCarePlan({ carePlan }) {
   );
 }
 
-export default ViewCarePlan;
+export default MedicalRecord;

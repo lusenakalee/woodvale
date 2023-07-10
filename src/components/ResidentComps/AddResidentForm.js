@@ -4,6 +4,7 @@ import {
   Form,
   json,
   redirect,
+  useActionData,
   useNavigate,
   useNavigation,
 } from "react-router-dom";
@@ -13,7 +14,7 @@ import React from "react";
 export default function ResidentForm({ resident, title, method }) {
   const navigate = useNavigate();
   const navigation = useNavigation();
-
+  const data = useActionData();
   const isSubmitting = navigation.state === "submitting";
   function cancelHandler() {
     navigate("..");
@@ -28,6 +29,13 @@ export default function ResidentForm({ resident, title, method }) {
             <p className="mt-1 text-sm leading-6 text-gray-600">
               Kindly fill in correct details
             </p>
+            {data && data.errors && (
+              <ul>
+                {Object.values(data.errors).map((err) => (
+                  <li key={err}>{err}</li>
+                ))}
+              </ul>
+            )}
 
             <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
               <div className="sm:col-span-3">

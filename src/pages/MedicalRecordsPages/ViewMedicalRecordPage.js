@@ -1,20 +1,20 @@
 import React from 'react'
-import ViewCarePLan from '../../components/CarePlanComps/ViewCarePLan'
 import { getAuthToken } from '../../util/Auth';
-import { json, redirect, useLoaderData, useRouteLoaderData } from 'react-router-dom';
+import { json, redirect, useRouteLoaderData } from 'react-router-dom';
+import MedicalRecord from '../../components/MedicalRecordsComs/ViewMedicalRecord';
 
-function ViewCarePlanPage() {
-    const carePlan = useRouteLoaderData('care-plan')
+function ViewMedicalRecordPage() {
+    const record = useRouteLoaderData('med-recs')
   return (
-    <ViewCarePLan carePlan={carePlan}/>
+    <MedicalRecord record={record}/>
   )
 }
 
-export default ViewCarePlanPage
+export default ViewMedicalRecordPage
 
 export async function loader({ request, params }) {
     const id = params.id;
-    let url = "/care-plan/" + id + "/plan";
+    let url = "/medical-records/" + id;
     const token = getAuthToken();
 
     const response = await fetch(url, {
@@ -43,7 +43,7 @@ export async function loader({ request, params }) {
     const token = getAuthToken();
   
     const id = params.id;
-    const response = await fetch("/care-plan/" + id, {
+    const response = await fetch("/medical-records/" + id,{
       method: request.method,
       headers: {
         Authorization: "Bearer " + token,
@@ -54,11 +54,11 @@ export async function loader({ request, params }) {
     }
     if (!response.ok) {
       throw json(
-        { message: "Could not delete care plan." },
+        { message: "Could not delete medical record." },
         {
           status: 500,
         }
       );
     }
-    return redirect(`/login/residents/${id}/care-plan`);
+    return redirect(`/login/residents/${id}/med-recs`);
   }

@@ -17,6 +17,22 @@ const ActivityRoot = lazy(() =>
   import("./pages/ActivityPages/ActivityMainPages/MainActivityRoot")
 );
 
+const MedRecordRoot = lazy(() =>
+  import("./pages/MedicalRecordsPages/MedicalRecordsRoot")
+);
+
+const NewMedRecordPage = lazy(() =>
+  import("./pages/MedicalRecordsPages/NewMedicalRecordPage")
+);
+
+const EditMedRecordPage = lazy(() =>
+  import("./pages/MedicalRecordsPages/EditMedicalRecordPage")
+);
+
+const ViewMedicalRecordPage = lazy(() =>
+  import("./pages/MedicalRecordsPages/ViewMedicalRecordPage")
+);
+
 const UserDetailPage = lazy(() => import("./pages/UserPages/UserDetailPage"));
 
 const UserEditPage = lazy(() => import("./pages/UserPages/UserEditPage"));
@@ -59,6 +75,9 @@ const ViewCarePlan = lazy(() =>
 
 const NewCarePlanPage = lazy(() =>
   import("./pages/CarePlanPages/NewCarePlanPage")
+);
+const EditCarePlanPage = lazy(() =>
+  import("./pages/CarePlanPages/EditCarePlanPage")
 );
 
 const router = createBrowserRouter([
@@ -262,6 +281,54 @@ const router = createBrowserRouter([
               },
               {
                 path: "med-recs",
+                id: "med-recs",
+                element: (
+                  <Suspense fallback={<p>Loading...</p>}>
+                    <MedRecordRoot />
+                  </Suspense>
+                ),
+                loader: (meta) =>
+                  import(
+                    "./pages/MedicalRecordsPages/ViewMedicalRecordPage"
+                  ).then((module) => module.loader(meta)),
+                children: [
+                  {
+                    index: true,
+                    element: (
+                      <Suspense fallback={<p>Loading...</p>}>
+                        <ViewMedicalRecordPage />
+                      </Suspense>
+                    ),
+                    action: (meta) =>
+                      import(
+                        "./pages/MedicalRecordsPages/ViewMedicalRecordPage"
+                      ).then((module) => module.action(meta)),
+                  },
+                  {
+                    path: "new",
+                    element: (
+                      <Suspense fallback={<p>Loading...</p>}>
+                        <NewMedRecordPage />
+                      </Suspense>
+                    ),
+                    action: (meta) =>
+                      import(
+                        "./components/MedicalRecordsComs/MedRecordsForm"
+                      ).then((module) => module.action(meta)),
+                  },
+                  {
+                    path: "edit",
+                    element: (
+                      <Suspense fallback={<p>Loading...</p>}>
+                        <EditMedRecordPage />
+                      </Suspense>
+                    ),
+                    action: (meta) =>
+                      import(
+                        "./pages/MedicalRecordsPages/EditMedicalRecordPage"
+                      ).then((module) => module.action(meta)),
+                  },
+                ],
               },
               {
                 path: "care-plan",
@@ -301,7 +368,16 @@ const router = createBrowserRouter([
                       ),
                   },
                   {
-                    path: ":id",
+                    path: "edit",
+                    element: (
+                      <Suspense fallback={<p>Loading...</p>}>
+                        <EditCarePlanPage />
+                      </Suspense>
+                    ),
+                    action: (meta) =>
+                      import("./pages/CarePlanPages/EditCarePlanPage").then(
+                        (module) => module.action(meta)
+                      ),
                   },
                 ],
               },
