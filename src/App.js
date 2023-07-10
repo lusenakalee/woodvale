@@ -46,10 +46,13 @@ const EditResidentPage = lazy(() =>
   import("./pages/ResidentPages/EditResidentPage")
 );
 
+<<<<<<< HEAD
 const UserDetailPage = lazy(() => import("./pages/UserPages/UserDetailPage"));
 
 const UserEditPage = lazy(() => import("./pages/UserPages/UserEditPage"));
 
+=======
+>>>>>>> 10a292dd41d576531e24463cb5d88f6e216e5726
 const router = createBrowserRouter([
   {
     path: "/",

@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
-import { Link } from "react-router-dom";
+import { Form, Link } from "react-router-dom";
 
 const user = {
   name: "Tom Cook",
@@ -18,7 +18,7 @@ const navigation = [
 const userNavigation = [
   { name: "Your Profile", to: "#" },
   { name: "Settings", to: "#" },
-  { name: "Sign out", to: "#" },
+  { name: "Sign out", to: "logout" },
 ];
 
 function classNames(...classes) {
@@ -86,21 +86,29 @@ export default function Nav() {
                         leaveTo="transform opacity-0 scale-95"
                       >
                         <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                          {userNavigation.map((item) => (
-                            <Menu.Item key={item.name}>
-                              {({ active }) => (
-                                <Link
-                                  to={item.to}
-                                  className={classNames(
-                                    active ? "bg-gray-100" : "",
-                                    "block px-4 py-2 text-sm text-gray-700"
-                                  )}
-                                >
-                                  {item.name}
-                                </Link>
-                              )}
-                            </Menu.Item>
-                          ))}
+                          <Menu.Item>
+                            <Link
+                              to=""
+                              className="block px-4 py-2 text-sm text-gray-700"
+                            >
+                              Your profile
+                            </Link>
+                          </Menu.Item>
+                          <Menu.Item>
+                            <Link
+                              to=""
+                              className="block px-4 py-2 text-sm text-gray-700"
+                            >
+                             Settings
+                            </Link>
+                          </Menu.Item>
+                          <Menu.Item>
+                          <Form action="logout" method="post">
+                              <button  className="block px-4 py-2 text-sm text-gray-700">
+                            
+                              Sign Out</button>
+                              </Form>
+                          </Menu.Item>
                         </Menu.Items>
                       </Transition>
                     </Menu>
