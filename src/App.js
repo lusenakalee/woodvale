@@ -21,6 +21,28 @@ const MedRecordRoot = lazy(() =>
   import("./pages/MedicalRecordsPages/MedicalRecordsRoot")
 );
 
+const LeavesRoot = lazy(() => import("./pages/LeavePages/LeavesRoot"));
+
+const IncidentRoot = lazy(() => import("./pages/IncidentPages/IncidentsRoot"));
+
+const NewIncidentPage = lazy(() =>
+  import("./pages/IncidentPages/NewIncidentsPage")
+);
+
+const ViewIncidentsPage = lazy(() =>
+  import("./pages/IncidentPages/ViewIncidentsPage")
+);
+
+const EditIncidentPage = lazy(() =>
+  import("./pages/IncidentPages/EditIncidents")
+);
+
+const NewLeavesPage = lazy(() => import("./pages/LeavePages/NewLeavesPage"));
+
+const EditLeavesPage = lazy(() => import("./pages/LeavePages/EditLeave"));
+
+const ViewLeavesPage = lazy(() => import("./pages/LeavePages/ViewLeavesPage"));
+
 const NewMedRecordPage = lazy(() =>
   import("./pages/MedicalRecordsPages/NewMedicalRecordPage")
 );
@@ -287,9 +309,89 @@ const router = createBrowserRouter([
               },
               {
                 path: "incident",
+                element: (
+                  <Suspense fallback={<p>Loading...</p>}>
+                    <IncidentRoot />
+                  </Suspense>
+                ),
+                id: "incidents",
+                loader: (meta) =>
+                  import("./pages/IncidentPages/ViewIncidentsPage").then(
+                    (module) => module.loader(meta)
+                  ),
+                children: [
+                  {
+                    index: true,
+                    element: (
+                      <Suspense fallback={<p>Loading</p>}>
+                        <ViewIncidentsPage />
+                      </Suspense>
+                    ),
+                  },
+                  {
+                    path: "new",
+                    element: (
+                      <Suspense fallback={<p>Loading</p>}>
+                        <NewIncidentPage />
+                      </Suspense>
+                    ),
+                    action: (meta) =>
+                      import("./components/IncidentComps/NewIncidentForm").then(
+                        (module) => module.action(meta)
+                      ),
+                  },
+                  {
+                    path: "edit",
+                    element: (
+                      <Suspense fallback={<p>Loading...</p>}>
+                        <EditIncidentPage />
+                      </Suspense>
+                    ),
+                  },
+                ],
               },
               {
                 path: "leaves",
+                element: (
+                  <Suspense fallback={<p>Loading...</p>}>
+                    <LeavesRoot />
+                  </Suspense>
+                ),
+                id: "leaves",
+                loader: (meta) =>
+                  import("./pages/LeavePages/ViewLeavesPage").then((module) =>
+                    module.loader(meta)
+                  ),
+                children: [
+                  {
+                    index: true,
+                    element: (
+                      <Suspense fallback={<p>Loading</p>}>
+                        <ViewLeavesPage />
+                      </Suspense>
+                    ),
+                  },
+                  {
+                    path: "new",
+                    action: (meta) =>
+                      import("./components/LeaveComps/NewLeaveForm").then(
+                        (module) => module.action(meta)
+                      ),
+                    element: (
+                      <Suspense fallback={<p>Loading...</p>}>
+                        <NewLeavesPage />
+                      </Suspense>
+                    ),
+                  },
+                  {
+                    path: "edit",
+                    element: (
+                      <Suspense fallback={<p>Loading..</p>}>
+                        <EditLeavesPage />
+                      </Suspense>
+                    ),
+                  },
+                ],
               },
               {
                 path: "med-recs",

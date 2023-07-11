@@ -29,6 +29,10 @@ function NewLogsForm({ method, title, log }) {
     setSelectedOption(e.target.value);
   };
 
+  const handleWalkChange = (e) => {
+    setSelectedOption(e.target.value);
+  };
+
   return (
     <React.Fragment>
       <Form method={method}>
@@ -56,14 +60,12 @@ function NewLogsForm({ method, title, log }) {
                 </div>
               </div>
               <div className="sm:col-span-2">
-                <label
-                  className="block text-sm font-medium leading-6 text-gray-900"
-                >
-                  Weight
+                <label className="block text-sm font-medium leading-6 text-gray-900">
+                  Weight(Kgs)
                 </label>
                 <div className="mt-2">
                   <input
-                    type="text"
+                    type="number"
                     name="weight"
                     id="weight"
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -75,12 +77,12 @@ function NewLogsForm({ method, title, log }) {
                   htmlFor="Height"
                   className="block text-sm font-medium leading-6 text-gray-900"
                 >
-                  Height
+                  Blood Pressure
                 </label>
                 <div className="mt-2">
                   <input
-                    type="text"
-                    name="Height"
+                    type="number"
+                    name="blood_pressure"
                     id="Height"
                     autoComplete="Height"
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -114,7 +116,7 @@ function NewLogsForm({ method, title, log }) {
                 <div className="mt-2">
                   <select
                     id="Voiding"
-                    name="Voiding"
+                    name="voiding"
                     autoComplete="Voiding"
                     value={selectedOption}
                     onChange={handleSelectionChange}
@@ -131,7 +133,7 @@ function NewLogsForm({ method, title, log }) {
                   <div className="mt-2">
                     <select
                       id="ContinentOptions"
-                      name="ContinentOptions"
+                      name="continent"
                       autoComplete="ContinentOptions"
                       className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
                     >
@@ -146,7 +148,7 @@ function NewLogsForm({ method, title, log }) {
                   <div className="mt-2">
                     <select
                       id="IncontinentOptions"
-                      name="IncontinentOptions"
+                      name="incontinent"
                       autoComplete="IncontinentOptions"
                       className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
                     >
@@ -159,47 +161,46 @@ function NewLogsForm({ method, title, log }) {
 
                 {selectedOption === "Catheter" && (
                   <div className="mt-2">
-                     <label className="block text-sm  leading-6 text-gray-900">
-                  Type in the catheter output in cc
-                </label>
+                    <label className="block text-sm  leading-6 text-gray-900">
+                      Type in the catheter output in cc
+                    </label>
                     <input
                       type="number"
                       id="CatheterInput"
-                      name="CatheterInput"
+                      name="catheter"
                       autoComplete="CatheterInput"
                       className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
                     />
                   </div>
                 )}
               </div>
-            
-              
+
               <div className="sm:col-span-2">
-              <fieldset  className="mt-10 space-y-10 space-x-5">
-                <legend className="text-sm font-semibold leading-6 text-gray-900">
-                  Did resident take a shower?
-                </legend>
-                <label>
-                  <input
-                    type="radio"
-                    name="shower"
-                    value="true"
-                    checked={selectedOption === "true"}
-                    onChange={handleOptionChange}
-                  />
-                  True
-                </label>
-                <label>
-                  <input
-                    type="radio"
-                    name="is-admin"
-                    value="false"
-                    checked={selectedOption === "false"}
-                    onChange={handleOptionChange}
-                  />
-                  False
-                </label>
-              </fieldset>
+                <fieldset className="mt-10 space-y-10 space-x-5">
+                  <legend className="text-sm font-semibold leading-6 text-gray-900">
+                    Did resident take a shower?
+                  </legend>
+                  <label>
+                    <input
+                      type="radio"
+                      name="shower"
+                      value="true"
+                      checked={selectedOption === "true"}
+                      onChange={handleOptionChange}
+                    />
+                    True
+                  </label>
+                  <label>
+                    <input
+                      type="radio"
+                      name="shower"
+                      value="false"
+                      checked={selectedOption === "false"}
+                      onChange={handleOptionChange}
+                    />
+                    False
+                  </label>
+                </fieldset>
               </div>
             </div>
           </div>
@@ -207,7 +208,7 @@ function NewLogsForm({ method, title, log }) {
           <div className="border-b border-gray-900/10 pb-12">
             <h2 className="text-base font-semibold leading-7 text-gray-900"></h2>
             <p className="mt-1 text-sm leading-6 text-gray-600">
-              Kindly fill in brief desccriptions in the fields below.
+              Kindly fill in brief descriptions in the fields below.
             </p>
 
             <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
@@ -231,9 +232,6 @@ function NewLogsForm({ method, title, log }) {
                   Write a few sentences to describe behavior.
                 </p>
               </div>
-
-              {/* No need for different fields for locomotion in room and outside */}
-
               <div className="col-span-full">
                 <label
                   htmlFor="Locomotion"
@@ -244,7 +242,7 @@ function NewLogsForm({ method, title, log }) {
                 <div className="mt-2">
                   <textarea
                     id="Locomotion"
-                    name="Locomotion"
+                    name="locomotion"
                     rows={3}
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     defaultValue={""}
@@ -283,8 +281,9 @@ function NewLogsForm({ method, title, log }) {
                       <div className="flex h-6 items-center">
                         <input
                           id="Pain_noted"
-                          name="Pain_noted"
+                          name="pain_noted"
                           type="checkbox"
+                          value={isChecked ? "true" : "false"}
                           className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
                           checked={isChecked}
                           onChange={(e) => setIsChecked(e.target.checked)}
@@ -359,23 +358,21 @@ export async function action({ request, params }) {
   const data = await request.formData();
   const token = getAuthToken();
   const id = params.id;
-  const carePlanData = {
+  const logData = {
     bowel_movement: data.get("bowel_movement"),
     behavior: data.get("behavior"),
     voiding: data.get("voiding"),
-    continence_type: data.get("continence_type"),
-    incontinence_type: data.get("incontinence_type"),
-    catheter_output: data.get("catheter_output"),
+    continence_type: data.get("continent"),
+    incontinence_type: data.get("incontinent"),
+    catheter_output: data.get("catheter"),
     heart_rate: data.get("heart_rate"),
     blood_pressure: data.get("blood_pressure"),
     locomotion: data.get("locomotion"),
     pain_description: data.get("pain_description"),
     weight: data.get("weight"),
-    height: data.get("height"),
     pain_noted: data.get("pain_noted"),
     mood: data.get("mood"),
-    walking_outside: data.get("walking_outside"),
-    walking_in_room: data.get("walking_in_room"),
+    walk_location: data.get("walk"),
     shower: data.get("shower"),
     resident_id: id,
   };
@@ -388,7 +385,7 @@ export async function action({ request, params }) {
         Authorization: "Bearer " + token,
         "Access-Control-Allow-Origin": "*",
       },
-      body: JSON.stringify(carePlanData),
+      body: JSON.stringify(logData),
     });
     if (response.status === 400) {
       return response;

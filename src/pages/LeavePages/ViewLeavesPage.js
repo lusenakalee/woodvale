@@ -1,24 +1,22 @@
 import React from 'react'
 import { getAuthToken } from '../../util/Auth';
-import { json, useLoaderData } from 'react-router-dom';
-import AllLogs from '../../components/LogsComps/AllLogs';
+import { json, useRouteLoaderData } from 'react-router-dom';
+import ViewLeavesForm from '../../components/LeaveComps/ViewLeavesForm';
 
-function AllLogsPage() {
-    const logs = useLoaderData()
+function ViewLeavesPage() {
+    const leaves = useRouteLoaderData("leaves")
   return (
-    <React.Fragment>
-        <AllLogs logs={logs}/>
-    </React.Fragment>
+    <ViewLeavesForm leaves={leaves}/>
   )
 }
 
-export default AllLogsPage
+export default ViewLeavesPage
 
 export async function loader({ request, params }) {
     const id = params.id;
-    let url = "/daily-records/" + id ;
+    let url = "/leave-records/" + id ;
     const token = getAuthToken();
-  
+
     const response = await fetch(url, {
       method: "get",
       headers: {
@@ -30,8 +28,8 @@ export async function loader({ request, params }) {
       return response;
     }
     if (response.status === 400) {
-      return response;
-    }
+        return response;
+      }
     if (!response.ok) {
       throw json({ message: "Wrong Url" }, { status: 500 });
     }
