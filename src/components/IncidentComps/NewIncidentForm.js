@@ -1,11 +1,189 @@
 import React from "react";
 import { getAuthToken } from "../../util/Auth";
-import { Form, json, redirect } from "react-router-dom";
+import {
+  Form,
+  json,
+  redirect,
+  useActionData,
+  useNavigate,
+  useNavigation,
+} from "react-router-dom";
 
 function NewIncidentForm({ method, incident }) {
+  const navigate = useNavigate();
+  const navigation = useNavigation();
+  const data = useActionData();
+  const isSubmitting = navigation.state === "submitting";
+  function cancelHandler() {
+    navigate("..");
+  }
+
   return (
     <React.Fragment>
-      <Form method={method}></Form>
+      <Form method={method}>
+        <div className="sm:col-span-3">
+          <label className="block text-sm font-medium leading-6 text-gray-900">
+            Incident Date
+          </label>
+          <div className="mt-2">
+            <input
+              id="incident_date"
+              name="incident_date"
+              type="date"
+              required
+              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
+            />
+          </div>
+        </div>
+
+        <div className="col-span-full">
+          <label
+            htmlFor="about"
+            className="block text-sm font-medium leading-6 text-gray-900"
+          >
+            Incident description
+          </label>
+          <div className="mt-2">
+            <textarea
+              id="about"
+              name="description"
+              required
+              rows={3}
+              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              defaultValue={""}
+            />
+          </div>
+          <p className="mt-3 text-sm leading-6 text-gray-600">
+            Write a few sentences about the Incident.
+          </p>
+        </div>
+
+        <div className="col-span-full">
+          <label
+            htmlFor="actions_taken"
+            className="block text-sm font-medium leading-6 text-gray-900"
+          >
+            Actions Taken
+          </label>
+          <div className="mt-2">
+            <textarea
+              id="actions_taken"
+              name="actions_taken"
+              required
+              rows={3}
+              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              defaultValue={""}
+            />
+          </div>
+          <p className="mt-3 text-sm leading-6 text-gray-600">
+            Write a few sentences about the Incident.
+          </p>
+        </div>
+
+        <div className="sm:col-span-3">
+          <label
+            htmlFor="location"
+            className="block text-sm font-medium leading-6 text-gray-900"
+          >
+            Location of Incident
+          </label>
+          <div className="mt-2">
+            <input
+              type="text"
+              name="location"
+              id="location"
+              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            />
+          </div>
+        </div>
+
+        <div className="sm:col-span-3">
+          <label
+            htmlFor="person_reporting"
+            className="block text-sm font-medium leading-6 text-gray-900"
+          >
+            Person reporting
+          </label>
+          <div className="mt-2">
+            <input
+              type="text"
+              name="person_reporting"
+              id="person_reporting"
+              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            />
+          </div>
+        </div>
+
+        <div className="sm:col-span-3">
+          <label
+            htmlFor="person_notified"
+            className="block text-sm font-medium leading-6 text-gray-900"
+          >
+            Person notified
+          </label>
+          <div className="mt-2">
+            <input
+              type="text"
+              name="person_notified"
+              id="person_notified"
+              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            />
+          </div>
+        </div>
+
+        <div className="col-span-full">
+          <label
+            htmlFor="witnesses"
+            className="block text-sm font-medium leading-6 text-gray-900"
+          >
+            Witnesses
+          </label>
+          <div className="mt-2">
+            <textarea
+              id="witnesses"
+              name="witnesses"
+              required
+              rows={3}
+              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              defaultValue={""}
+            />
+          </div>
+        </div>
+
+        <div className="col-span-full">
+          <label
+            className="block text-sm font-medium leading-6 text-gray-900"
+          >
+           Antecedent
+          </label>
+          <div className="mt-2">
+            <textarea
+              id="antecedent"
+              name="antecedent"
+              required
+              rows={3}
+              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              defaultValue={""}
+            />
+          </div>
+        </div>
+
+        <div className="flex justify-between sm:col-span-4">
+          <button
+            onClick={cancelHandler}
+            className="px-4 py-2 text-sm font-medium text-gray-900 bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            Back
+          </button>
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="px-4 py-2 text-sm font-medium text-gray-900 bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            {isSubmitting ? "Submitting..." : "Save"}
+          </button>
+        </div>
+      </Form>
     </React.Fragment>
   );
 }

@@ -60,7 +60,7 @@ function ActivityForm({ activity, method, title }) {
               />
             </div>
             <p className="mt-3 text-sm leading-6 text-gray-600">
-              Write a few sentences about yourself.
+              Write a few sentences about the activity.
             </p>
           </div>
 
