@@ -1,7 +1,8 @@
-import { Fragment } from "react";
+import { Fragment,useEffect,useState } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Form, Link } from "react-router-dom";
+import { getAuthToken } from "../../util/Auth";
 
 const user = {
   name: "Tom Cook",
@@ -14,11 +15,6 @@ const navigation = [
   { name: "Team", to: "./team", current: false },
   { name: "Residents", to: "./residents", current: false },
   { name: "Activities", to: "./activity", current: false },
-];
-const userNavigation = [
-  { name: "Your Profile", to: "#" },
-  { name: "Settings", to: "#" },
-  { name: "Sign out", to: "logout" },
 ];
 
 function classNames(...classes) {
@@ -88,26 +84,18 @@ export default function Nav() {
                         <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                           <Menu.Item>
                             <Link
-                              to=""
+                              to="./profile"
                               className="block px-4 py-2 text-sm text-gray-700"
                             >
-                              Your profile
+                              Your Profile
                             </Link>
                           </Menu.Item>
                           <Menu.Item>
-                            <Link
-                              to=""
-                              className="block px-4 py-2 text-sm text-gray-700"
-                            >
-                             Settings
-                            </Link>
-                          </Menu.Item>
-                          <Menu.Item>
-                          <Form action="logout" method="post">
-                              <button  className="block px-4 py-2 text-sm text-gray-700">
-                            
-                              Sign Out</button>
-                              </Form>
+                            <Form action="logout" method="post">
+                              <button className="block px-4 py-2 text-sm text-gray-700">
+                                Sign Out
+                              </button>
+                            </Form>
                           </Menu.Item>
                         </Menu.Items>
                       </Transition>
@@ -150,18 +138,14 @@ export default function Nav() {
               <div className="border-t border-gray-700 pb-3 pt-4">
                 <div className="flex items-center px-5">
                   <div className="flex-shrink-0">
-                    <img
-                      className="h-10 w-10 rounded-full"
-                      src={user.imageUrl}
-                      alt=""
-                    />
+
                   </div>
                   <div className="ml-3">
-                    <div className="text-base font-medium leading-none text-white">
-                      {user.name}
+                    <div className="text-base font-medium leading-none text-red">
+                      {user.email}
                     </div>
                     <div className="text-sm font-medium leading-none text-gray-400">
-                      {user.email}
+                      {user.name}
                     </div>
                   </div>
                   <button
@@ -171,18 +155,6 @@ export default function Nav() {
                     <span className="sr-only">View notifications</span>
                     <BellIcon className="h-6 w-6" aria-hidden="true" />
                   </button>
-                </div>
-                <div className="mt-3 space-y-1 px-2">
-                  {userNavigation.map((item) => (
-                    <Disclosure.Button
-                      key={item.name}
-                      as="Link"
-                      to={item.to}
-                      className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
-                    >
-                      {item.name}
-                    </Disclosure.Button>
-                  ))}
                 </div>
               </div>
             </Disclosure.Panel>

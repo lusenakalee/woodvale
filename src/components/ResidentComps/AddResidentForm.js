@@ -121,12 +121,12 @@ export default function ResidentForm({ resident, title, method }) {
                   htmlFor="AGE"
                   className="block text-sm font-medium leading-6 text-gray-900"
                 >
-                  Age
+                  Date Of Birth
                 </label>
                 <div className="mt-2">
                   <input
-                    type="number"
-                    name="age"
+                    type="date"
+                    name="birthdate"
                     id="age"
                     defaultValue={resident ? resident.age : " "}
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -374,7 +374,7 @@ export async function residentAction({ request, params }) {
     first_name: data.get("first-name"),
     last_name: data.get("last-name"),
     middle_name: data.get("middle-name"),
-    age: data.get("age"),
+    date_of_birth: data.get("birthdate"),
     gender: data.get("gender"),
     emergency_contact_name: data.get("contact"),
     emergency_contact_number: data.get("contact-number"),

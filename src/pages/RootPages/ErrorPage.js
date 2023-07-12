@@ -1,6 +1,6 @@
 import React from "react";
 import { useRouteError, isRouteErrorResponse, Link } from "react-router-dom";
-import { Outlet, useRouteLoaderData } from "react-router-dom";
+import {  useRouteLoaderData } from "react-router-dom";
 import Nav from "../../components/RootComps/Nav";
 
 
@@ -25,12 +25,12 @@ function ErrorPage() {
     status = 401;
   }
   if (isRouteErrorResponse(error) && error.status === 400) {
-    title = "Server error";
+    title = "System Error!!";
     message = error.data.message;
     status = 400;
   }
 
-  const token = useRouteLoaderData("root");
+  const  token = useRouteLoaderData("root");
 
 
   return (

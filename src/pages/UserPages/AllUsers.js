@@ -24,6 +24,9 @@ export async function loader() {
       "Access-Control-Allow-Origin": "*",
     },
   });
+  if (response.status===400){
+    throw json({ message: "Only the admin can view users" }, { status: 400 });
+  }
   if (!response.ok) {
     throw json({ message: "Cant get users" }, { status: 500 });
   } else {

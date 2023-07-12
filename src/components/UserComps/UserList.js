@@ -26,13 +26,10 @@ import {
   DeltaType,
 } from "@tremor/react";
 
-
 function UserList({ users }) {
   return (
     <React.Fragment>
-
-
-<div>
+      <div>
         <Flex
           className="space-x-0.5"
           justifyContent="start"
@@ -73,7 +70,6 @@ function UserList({ users }) {
           />
           Export
         </button>
-        
       </div>
       <Table className="mt-6">
         <TableHead>
@@ -81,9 +77,7 @@ function UserList({ users }) {
             <TableHeaderCell>First Name</TableHeaderCell>
             <TableHeaderCell className="text-right">Last Name</TableHeaderCell>
             <TableHeaderCell className="text-right">Username</TableHeaderCell>
-            <TableHeaderCell className="text-right">
-              User Type
-            </TableHeaderCell>
+            <TableHeaderCell className="text-right">User Type</TableHeaderCell>
           </TableRow>
         </TableHead>
 
@@ -95,16 +89,13 @@ function UserList({ users }) {
               </Link>
               <TableCell className="text-right">{item.last_name}</TableCell>
               <TableCell className="text-right">{item.username}</TableCell>
-              <TableCell className="text-right">{item.is_admin === true? "Admin": "User"}</TableCell>
+              <TableCell className="text-right">
+                {item.is_admin === true ? "Admin" : "User"}
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
-
-
-
-
-      
     </React.Fragment>
   );
 }

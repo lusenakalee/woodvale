@@ -89,6 +89,10 @@ const NewLogsPage = lazy(() => import("./pages/LogsPages/NewLogsPage"));
 
 const EditLogsPage = lazy(() => import("./pages/LogsPages/EditLogsPage"));
 
+const ProfilePage = lazy(() => import("./pages/UserPages/ProfilePage"));
+
+const ProfileEditPage = lazy(() => import("./pages/UserPages/EditProfilePage"));
+
 const ActivitiesPage = lazy(() =>
   import("./pages/ActivityPages/ActivityMainPages/ActivitiesPage")
 );
@@ -131,6 +135,36 @@ const router = createBrowserRouter([
         index: true,
         element: <SignIn />,
         action: loginAction,
+      },
+      {
+        path: "profile",
+        id: "profile",
+        loader: (meta) =>
+          import("./pages/UserPages/ProfilePage").then((module) =>
+            module.loader(meta)
+          ),
+        children: [
+          {
+            index: true,
+            element: (
+              <Suspense fallback={<p>Loading...</p>}>
+                <ProfilePage />
+              </Suspense>
+            ),
+          },
+          {
+            path: "edit",
+            element: (
+              <Suspense fallback={<p>Loading...</p>}>
+                <ProfileEditPage />
+              </Suspense>
+            ),
+            action: (meta) =>
+              import("./components/UserComps/EditProfile").then((module) =>
+                module.action(meta)
+              ),
+          },
+        ],
       },
       {
         path: "home",
