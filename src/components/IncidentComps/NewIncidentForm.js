@@ -106,6 +106,7 @@ function NewIncidentForm({ method, incident }) {
           </label>
           <div className="mt-2">
             <input
+              required
               type="text"
               name="person_reporting"
               id="person_reporting"
@@ -115,19 +116,21 @@ function NewIncidentForm({ method, incident }) {
         </div>
 
         <div className="sm:col-span-3">
-          <label
-            htmlFor="person_notified"
-            className="block text-sm font-medium leading-6 text-gray-900"
-          >
+          <label className="block text-sm font-medium leading-6 text-gray-900">
             Person notified
           </label>
           <div className="mt-2">
-            <input
-              type="text"
-              name="person_notified"
+            <select
               id="person_notified"
-              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-            />
+              name="person_notified"
+              autoComplete="person_notified"
+              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
+            >
+              <option>911</option>
+              <option>Case Manager</option>
+              <option>MD</option>
+              <option>Family</option>
+            </select>
           </div>
         </div>
 
@@ -151,16 +154,13 @@ function NewIncidentForm({ method, incident }) {
         </div>
 
         <div className="col-span-full">
-          <label
-            className="block text-sm font-medium leading-6 text-gray-900"
-          >
-           Antecedent
+          <label className="block text-sm font-medium leading-6 text-gray-900">
+            Antecedent
           </label>
           <div className="mt-2">
             <textarea
               id="antecedent"
               name="antecedent"
-              required
               rows={3}
               className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               defaultValue={""}
@@ -222,6 +222,6 @@ export async function action({ request, params }) {
     if (!response.ok) {
       throw json({ message: "Failed to save the incident" }, { status: 500 });
     }
-    return redirect(`/login/residents/${id}/incidents`);
+    return redirect(`/login/residents/${id}/incident`);
   }
 }

@@ -29,9 +29,7 @@ function NewLogsForm({ method, title, log }) {
     setSelectedOption(e.target.value);
   };
 
-  const handleWalkChange = (e) => {
-    setSelectedOption(e.target.value);
-  };
+
 
   return (
     <React.Fragment>
@@ -52,7 +50,7 @@ function NewLogsForm({ method, title, log }) {
                 </label>
                 <div className="mt-2">
                   <input
-                    type="text"
+                    type="number"
                     name="heart_rate"
                     id="heart_rate"
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -83,8 +81,6 @@ function NewLogsForm({ method, title, log }) {
                   <input
                     type="number"
                     name="blood_pressure"
-                    id="Height"
-                    autoComplete="Height"
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
                 </div>
@@ -115,17 +111,16 @@ function NewLogsForm({ method, title, log }) {
                 </label>
                 <div className="mt-2">
                   <select
-                    id="Voiding"
+                    id="voiding"
                     name="voiding"
-                    autoComplete="Voiding"
                     value={selectedOption}
                     onChange={handleSelectionChange}
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
                   >
                     <option value="">Select an option</option>
-                    <option value="Continent">Continent</option>
-                    <option value="Incontinent">Incontinent</option>
-                    <option value="Catheter">Catheter</option>
+                    <option value="continent">Continent</option>
+                    <option value="incontinent">Incontinent</option>
+                    <option value="catheter">Catheter</option>
                   </select>
                 </div>
 
@@ -149,7 +144,6 @@ function NewLogsForm({ method, title, log }) {
                     <select
                       id="IncontinentOptions"
                       name="incontinent"
-                      autoComplete="IncontinentOptions"
                       className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
                     >
                       <option>Brief</option>
@@ -168,7 +162,6 @@ function NewLogsForm({ method, title, log }) {
                       type="number"
                       id="CatheterInput"
                       name="catheter"
-                      autoComplete="CatheterInput"
                       className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
                     />
                   </div>
@@ -280,7 +273,7 @@ function NewLogsForm({ method, title, log }) {
                     <div className="relative flex gap-x-3">
                       <div className="flex h-6 items-center">
                         <input
-                          id="Pain_noted"
+                          id="pain_noted"
                           name="pain_noted"
                           type="checkbox"
                           value={isChecked ? "true" : "false"}
@@ -306,7 +299,6 @@ function NewLogsForm({ method, title, log }) {
                   {isChecked && (
                     <div className="col-span-full">
                       <label
-                        htmlFor="PainDescription"
                         className="block text-sm font-medium leading-6 text-gray-900"
                       >
                         Pain Description (Optional)
