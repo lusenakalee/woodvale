@@ -1,4 +1,4 @@
-import React, { useEffect, useState ,  useRef} from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { getAuthToken } from "../../util/Auth";
 import Nav from "../RootComps/Nav";
 import {
@@ -7,7 +7,6 @@ import {
   useNavigation,
   useRouteLoaderData,
   useSubmit,
-
 } from "react-router-dom";
 import {
   PrinterIcon,
@@ -25,12 +24,19 @@ import {
 import { HashLink } from "react-router-hash-link";
 
 function ResidentDetails({ resident }) {
+  const [open, setOpen] = useState(true);
 
-  const [open, setOpen] = useState(true)
+  // modal
+  const [isOpen, setIsOpen] = useState(false);
+  const handleOpenModal = () => {
+    setIsOpen(true);
+  };
 
-  const cancelButtonRef = useRef(null)
+  const handleCloseModal = () => {
+    setIsOpen(false);
+  };
 
-
+  const cancelButtonRef = useRef(null);
 
   const token = useRouteLoaderData("root");
   const submit = useSubmit();
@@ -44,6 +50,7 @@ function ResidentDetails({ resident }) {
   };
   const handleSubmit = async (event) => {
     event.preventDefault();
+    handleCloseModal();
     const bearerToken = getAuthToken();
 
     const formData = new FormData();
@@ -216,9 +223,9 @@ function ResidentDetails({ resident }) {
                 </div>
                 <div>
                   <button
-
-                    type="button"onClick={() => setOpen(true)}
-                    className="inline-flex  opacity-80 items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                    type="button"
+                    onClick={handleOpenModal}
+                    className="inline-flex opacity-80 items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
                   >
                     <UserCircleIcon
                       className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"
@@ -227,67 +234,51 @@ function ResidentDetails({ resident }) {
                     Upload Patient Picture
                   </button>
                 </div>
-                <div
-                  className="modal fade"
-                  id="exampleModal"
-                  tabIndex="-1"
-                  aria-labelledby="exampleModalLabel"
-                  aria-hidden="true">
 
-                    
-                
-                  <form onSubmit={handleSubmit}>
-                    <div className="modal-dialog">
-                      <div className="modal-content">
-                        <div className="modal-header">
-                          <h1
-                            className="modal-title fs-5"
-                            id="exampleModalLabel"
-                          >
+                {isOpen && (
+                  <div className="fixed inset-0 flex items-center justify-center z-50">
+                    <div className="fixed inset-0 bg-black opacity-50"></div>
+                    <div className="relative z-10 bg-white rounded-md w-96">
+                      <form onSubmit={handleSubmit}>
+                        <div className="p-6">
+                          <h1 className="text-lg font-bold">
                             Profile Pic Upload
                           </h1>
-                          <button
-                            type="button"
-                            className="btn-close"
-                            data-bs-dismiss="modal"
-                            aria-label="Close"
-                          ></button>
-                        </div>
-                        <div className="modal-body">
-                          {" "}
-                          <label htmlFor="formFileSm" className="form-label">
-                            Upload Patient Image
-                          </label>
-                          <input
-                            className="form-control form-control-sm"
-                            id="formFileSm"
-                            type="file"
-                            name="file"
-                            onChange={handleFileChange}
-                          />
-                        </div>
-                        <div className="modal-footer">
-                          <div className="mt-6 flex items-center justify-end gap-x-6">
-                            <button
-                              type="button"
-                              className="text-sm font-semibold leading-6 text-gray-900"
-                              data-bs-dismiss="modal"
+                          <div className="mt-4">
+                            <label
+                              htmlFor="formFileSm"
+                              className="block font-semibold"
                             >
-                              Close
-                            </button>
-                            <button
-                              type="submit"
-                              disabled={isSubmitting}
-                              className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                            >
-                              Save changes
-                            </button>
+                              Upload Patient Image
+                            </label>
+                            <input
+                              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
+                              id="formFileSm"
+                              type="file"
+                              name="file"
+                              onChange={handleFileChange}
+                            />
                           </div>
                         </div>
-                      </div>
+                        <div className="px-6 py-4 bg-gray-100 flex items-center justify-end gap-x-4">
+                          <button
+                            type="button"
+                            onClick={handleCloseModal}
+                            className="text-sm font-semibold text-gray-900"
+                          >
+                            Close
+                          </button>
+                          <button
+                            type="submit"
+                            className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600"
+                          >
+                            Save changes
+                          </button>
+                        </div>
+                      </form>
                     </div>
-                  </form>
-                </div>
+                  </div>
+                )}
               </div>
             </div>
             <div className="mt-6 border-t border-gray-100">

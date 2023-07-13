@@ -19,6 +19,8 @@ import {
   List,
   ListItem,
   Title,
+  Text,
+  Metric,
 } from "@tremor/react";
 import { getAuthToken } from "../util/Auth";
 
@@ -147,23 +149,25 @@ export default function Dashboard() {
     fetchApprovedLeaves();
   }, []);
 
-
-
   useEffect(() => {
     const filteredData = filterByRegion(selectedRegion, [
-      { name: "Total Residents", value: totalResidents },
       { name: "Total Incidents", value: totalIncidents },
       { name: "Pending Approval Leaves", value: pendingLeaves },
       { name: "Pending Return Leaves", value: pendingReturn },
       { name: "Approved Leaves", value: approvedLeaves },
     ]);
     setFilteredData(filteredData);
-  }, [selectedRegion, totalResidents, totalIncidents, pendingLeaves, pendingReturn, approvedLeaves]);
+  }, [
+    selectedRegion,
+    totalResidents,
+    totalIncidents,
+    pendingLeaves,
+    pendingReturn,
+    approvedLeaves,
+  ]);
 
   const filterByRegion = (region, data) =>
     region === "all" ? data : data.filter((item) => item.region === region);
-
- 
 
   return (
     <>
@@ -208,43 +212,77 @@ export default function Dashboard() {
               <p>Pending Return Leaves: {pendingReturn}</p>
               <p>Approved Leaves: {approvedLeaves}</p>
             </div>
-            <div>
-              <Card className="max-w-md mx-auto">
-                <Flex
-                  className="space-x-8"
-                  justifyContent="start"
-                  alignItems="center"
-                >
-                  <Title>Overview</Title>
-                  <Select
-                    onValueChange={setSelectedRegion}
-                    placeholder="Region Selection"
+            <div className="flex pt-5">
+              <div>
+                <Card className="max-w-md mx-auto">
+                  <Flex
+                    className="space-x-8"
+                    justifyContent="start"
+                    alignItems="center"
                   >
-                    {regions.map((region) => (
-                      <SelectItem key={region.key} value={region.key}>
-                        {region.name}
-                      </SelectItem>
+                    <Title>Overview</Title>
+                    <Select
+                      onValueChange={setSelectedRegion}
+                      placeholder="Region Selection"
+                    >
+                      {regions.map((region) => (
+                        <SelectItem key={region.key} value={region.key}>
+                          {region.name}
+                        </SelectItem>
+                      ))}
+                    </Select>
+                  </Flex>
+                  <Legend
+                    categories={filteredData.map((item) => item.name)}
+                    className="mt-6"
+                  />
+                  <DonutChart
+                    data={filteredData}
+                    category="value"
+                    index="name"
+                    className="mt-6"
+                  />
+                  <List className="mt-6">
+                    {filteredData.map((item) => (
+                      <ListItem key={item.name}>
+                        {item.name}: {item.value}
+                      </ListItem>
                     ))}
-                  </Select>
-                </Flex>
-                <Legend
-                  categories={filteredData.map((item) => item.name)}
-                  className="mt-6"
-                />
-                <DonutChart
-                  data={filteredData}
-                  category="value"
-                  index="name"
-                  className="mt-6"
-                />
-                <List className="mt-6">
-                  {filteredData.map((item) => (
-                    <ListItem key={item.name}>
-                      {item.name}: {item.value}
-                    </ListItem>
-                  ))}
-                </List>
-              </Card>
+                  </List>
+                </Card>
+              </div>
+              <div className=" px-5 grid-cols-4 grid  gap-4">
+                <div>
+                  <Card
+                    className="max-w-xs mx-auto"
+                    decoration="top"
+                    decorationColor="indigo"
+                  >
+                    <Text>Total residents</Text>
+                    <Metric>{totalResidents}</Metric>
+                  </Card>
+                </div>
+                <div>
+                  <Card
+                    className="max-w-xs mx-auto"
+                    decoration="top"
+                    decorationColor="indigo"
+                  >
+                    <Text>Total incidents</Text>
+                    <Metric>{totalIncidents}</Metric>
+                  </Card>
+                </div>
+                <div>
+                  <Card
+                    className="max-w-xs mx-auto"
+                    decoration="top"
+                    decorationColor="indigo"
+                  >
+                    <Text>Total incidents</Text>
+                    <Metric>{totalIncidents}</Metric>
+                  </Card>
+                </div>
+              </div>
             </div>
             <Updates />
           </div>

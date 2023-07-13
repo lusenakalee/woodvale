@@ -19,6 +19,16 @@ function EditProfile({ method, user, title }) {
   const [imageUrl, setImageUrl] = useState("");
   const imgToken = getAuthToken();
 
+  //modal
+  const [isOpen, setIsOpen] = useState(false);
+  const handleOpenModal = () => {
+    setIsOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsOpen(false);
+  };
+
   id = user.id;
   const isSubmitting = navigation.state === "submitting";
   function cancelHandler() {
@@ -78,212 +88,202 @@ function EditProfile({ method, user, title }) {
     };
 
     fetchImage();
-  },[]);
+  }, []);
 
   return (
     <React.Fragment>
       <main>
         <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
-      <div>
-        <button
-          data-bs-toggle="modal"
-          data-bs-target="#exampleModal"
-          type="button"
-          className="inline-flex  opacity-80 items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-        >
-          <UserCircleIcon
-            className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"
-            aria-hidden="true"
-          />
-          Upload Patient Picture
-        </button>
-      </div>
-      <div
-        className="modal fade"
-        id="exampleModal"
-        tabIndex="-1"
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
-      >
-        <form onSubmit={handleSubmit}>
-          <div className="modal-dialog">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h1 className="modal-title fs-5" id="exampleModalLabel">
-                  Profile Pic Upload
-                </h1>
+          
+          <Form method={method}>
+            <div className="space-y-12">
+              <div className="border-b border-gray-900/10 pb-12">
+                <p className="mt-1 text-sm leading-6 text-gray-600">
+                  Kindly fill in correct details
+                  {data && data.errors && (
+                    <ul>
+                      {Object.values(data.errors).map((err) => (
+                        <li key={err}>{err}</li>
+                      ))}
+                    </ul>
+                  )}
+                </p>
+                  {imageUrl && <img src={imageUrl} alt="Profile"  className="h-24 rounded-lg" />}
+                <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                  <div className="sm:col-span-3">
+                    <label
+                      htmlFor="first-name"
+                      className="block text-sm font-medium leading-6 text-gray-900"
+                    >
+                      First name
+                    </label>
+                    <div className="mt-2">
+                      <input
+                        type="text"
+                        name="first_name"
+                        id="first-name"
+                        autoComplete="given-name"
+                        required
+                        defaultValue={user ? user.first_name : " "}
+                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="sm:col-span-3">
+                    <label
+                      htmlFor="last_name"
+                      className="block text-sm font-medium leading-6 text-gray-900"
+                    >
+                      Last name
+                    </label>
+                    <div className="mt-2">
+                      <input
+                        type="text"
+                        name="last_name"
+                        id="last_name"
+                        autoComplete="family-name"
+                        required
+                        defaultValue={user ? user.last_name : " "}
+                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="sm:col-span-3">
+                    <label
+                      htmlFor="username"
+                      className="block text-sm font-medium leading-6 text-gray-900"
+                    >
+                      Set user name
+                    </label>
+                    <div className="mt-2">
+                      <input
+                        type="email"
+                        name="username"
+                        id="username"
+                        required
+                        autoComplete="family-name"
+                        defaultValue={user ? user.username : " "}
+                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="sm:col-span-3">
+                    <label
+                      htmlFor="password1"
+                      className="block text-sm font-medium leading-6 text-gray-900"
+                    >
+                      Set password
+                    </label>
+                    <div className="mt-2">
+                      <input
+                        type="text"
+                        required
+                        name="password1"
+                        id="password1"
+                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="sm:col-span-3">
+                    <label
+                      htmlFor="password2"
+                      className="block text-sm font-medium leading-6 text-gray-900"
+                    >
+                      Confirm password
+                    </label>
+                    <div className="mt-2">
+                      <input
+                        type="text"
+                        name="password2"
+                        required
+                        id="password2"
+                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+            <button
+              type="button"
+              onClick={handleOpenModal}
+              className="inline-flex opacity-80 items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+            >
+              <UserCircleIcon
+                className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"
+                aria-hidden="true"
+              />
+              Upload Patient Picture
+            </button>
+          </div>
+
+          {isOpen && (
+            <div className="fixed inset-0 flex items-center justify-center z-50">
+              <div className="fixed inset-0 bg-black opacity-50"></div>
+              <div className="relative z-10 bg-white rounded-md w-96">
+                <form onSubmit={handleSubmit}>
+                  <div className="p-6">
+                    <h1 className="text-lg font-bold">Profile Pic Upload</h1>
+                    <div className="mt-4">
+                      <label
+                        htmlFor="formFileSm"
+                        className="block font-semibold"
+                      >
+                        Upload Patient Image
+                      </label>
+                      <input
+                        className="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
+                        id="formFileSm"
+                        type="file"
+                        name="file"
+                        onChange={handleFileChange}
+                      />
+                    </div>
+                  </div>
+                  <div className="px-6 py-4 bg-gray-100 flex items-center justify-end gap-x-4">
+                    <button
+                      type="button"
+                      onClick={handleCloseModal}
+                      className="text-sm font-semibold text-gray-900"
+                    >
+                      Close
+                    </button>
+                    <button
+                      type="submit"
+                      className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600"
+                    >
+                      Save changes
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          )}
+                </div>
+              </div>
+
+              <div className="flex justify-between sm:col-span-4">
                 <button
-                  type="button"
-                  className="btn-close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                ></button>
-              </div>
-              <div className="modal-body">
-                {" "}
-                <label htmlFor="formFileSm" className="form-label">
-                  Upload Your Image
-                </label>
-                <input
-                  className="form-control form-control-sm"
-                  id="formFileSm"
-                  type="file"
-                  name="file"
-                  onChange={handleFileChange}
-                />
-              </div>
-              <div className="mt-6 flex items-center p-5 justify-end gap-x-6">
-                          <button
-                            type="button"
-                            className="text-sm font-semibold leading-6 text-gray-900"
-                            data-bs-dismiss="modal"
-                          >
-                            Close
-                          </button>
-                          <button
-                            type="submit"
-                            disabled={isSubmitting}
-                            className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                          >
-                            Save changes
-                          </button>
-                          </div>
-            </div>
-          </div>
-        </form>
-      </div>
-      <Form method={method}>
-        <div className="space-y-12">
-          <div className="border-b border-gray-900/10 pb-12">
-            <p className="mt-1 text-sm leading-6 text-gray-600">
-              Kindly fill in correct details
-              {data && data.errors && (
-                <ul>
-                  {Object.values(data.errors).map((err) => (
-                    <li key={err}>{err}</li>
-                  ))}
-                </ul>
-              )}
-            </p>
-            <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-              {imageUrl && <img src={imageUrl} alt="Profile" />}
-              <div className="sm:col-span-3">
-                <label
-                  htmlFor="first-name"
-                  className="block text-sm font-medium leading-6 text-gray-900"
+                  onClick={cancelHandler}
+                  className="px-4 py-2 text-sm font-medium text-gray-900 bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 >
-                  First name
-                </label>
-                <div className="mt-2">
-                  <input
-                    type="text"
-                    name="first_name"
-                    id="first-name"
-                    autoComplete="given-name"
-                    required
-                    defaultValue={user ? user.first_name : " "}
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  />
-                </div>
-              </div>
-
-              <div className="sm:col-span-3">
-                <label
-                  htmlFor="last_name"
-                  className="block text-sm font-medium leading-6 text-gray-900"
+                  Back
+                </button>
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="px-4 py-2 text-sm font-medium text-gray-900 bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 >
-                  Last name
-                </label>
-                <div className="mt-2">
-                  <input
-                    type="text"
-                    name="last_name"
-                    id="last_name"
-                    autoComplete="family-name"
-                    required
-                    defaultValue={user ? user.last_name : " "}
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  />
-                </div>
-              </div>
-
-              <div className="sm:col-span-3">
-                <label
-                  htmlFor="username"
-                  className="block text-sm font-medium leading-6 text-gray-900"
-                >
-                  Set user name
-                </label>
-                <div className="mt-2">
-                  <input
-                    type="email"
-                    name="username"
-                    id="username"
-                    required
-                    autoComplete="family-name"
-                    defaultValue={user ? user.username : " "}
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  />
-                </div>
-              </div>
-
-              <div className="sm:col-span-3">
-                <label
-                  htmlFor="password1"
-                  className="block text-sm font-medium leading-6 text-gray-900"
-                >
-                  Set password
-                </label>
-                <div className="mt-2">
-                  <input
-                    type="text"
-                    required
-                    name="password1"
-                    id="password1"
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  />
-                </div>
-              </div>
-
-              <div className="sm:col-span-3">
-                <label
-                  htmlFor="password2"
-                  className="block text-sm font-medium leading-6 text-gray-900"
-                >
-                  Confirm password
-                </label>
-                <div className="mt-2">
-                  <input
-                    type="text"
-                    name="password2"
-                    required
-                    id="password2"
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  />
-                </div>
+                  {isSubmitting ? "Submitting..." : "Save"}
+                </button>
               </div>
             </div>
-          </div>
-
-          <div className="flex justify-between sm:col-span-4">
-            <button
-              onClick={cancelHandler}
-              className="px-4 py-2 text-sm font-medium text-gray-900 bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
-              Back
-            </button>
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className="px-4 py-2 text-sm font-medium text-gray-900 bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
-              {isSubmitting ? "Submitting..." : "Save"}
-            </button>
-          </div>
+          </Form>
         </div>
-      </Form>
-        </div>
-        </main>
+      </main>
     </React.Fragment>
   );
 }
