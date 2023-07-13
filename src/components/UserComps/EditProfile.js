@@ -46,12 +46,9 @@ function EditProfile({ method, user, title }) {
         window.alert("Only Image attachment are allowed!!");
       }
       if (response.ok) {
-        const confirmed = window.confirm(
+        window.alert(
           "File uploaded successfully! Do you want to go to the user page?"
         );
-        if (confirmed) {
-          navigate("..");
-        }
       } else {
         window.alert("failed to upload");
       }
@@ -81,7 +78,7 @@ function EditProfile({ method, user, title }) {
     };
 
     fetchImage();
-  }, []);
+  },[]);
 
   return (
     <React.Fragment>
@@ -138,7 +135,7 @@ function EditProfile({ method, user, title }) {
               <div className="modal-footer">
                 <button
                   type="button"
-                  className="btn btn-secondary"
+                  className="btn btn-secondary btn-btn-outline secondary"
                   data-bs-dismiss="modal"
                 >
                   Close
