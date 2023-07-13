@@ -1,5 +1,5 @@
-import React from "react";
-import { useRouteError, isRouteErrorResponse, Link } from "react-router-dom";
+import React, { Suspense } from "react";
+import { useRouteError, isRouteErrorResponse, Link, Await } from "react-router-dom";
 import {  useRouteLoaderData } from "react-router-dom";
 import Nav from "../../components/RootComps/Nav";
 
@@ -31,12 +31,16 @@ function ErrorPage() {
   }
 
   const  token = useRouteLoaderData("root");
-
+  const { user } = useRouteLoaderData("root");
 
   return (
     <React.Fragment>
       <div>
-      {token && <Nav/>}
+      <Suspense fallback={<p style={{ textAlign: "center" }}>Loading....</p>}>
+        <Await resolve={user}>
+          {(loadedUser) => token && <Nav userData={loadedUser} />}
+        </Await>
+      </Suspense>
 
         <main className="grid min-h-full place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8">
           <div className="text-center">

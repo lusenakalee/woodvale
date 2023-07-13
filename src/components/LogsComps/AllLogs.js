@@ -1,8 +1,5 @@
 import React from "react";
-import { json } from "react-router-dom";
-import { getAuthToken } from "../../util/Auth";
 import { Link } from "react-router-dom";
-import { useState } from "react";
 import {
   ChevronLeftIcon,
   InformationCircleIcon,
@@ -94,8 +91,7 @@ function AllLogs({ logs }) {
             <TableHeaderCell className="text-right">Weight</TableHeaderCell>
             <TableHeaderCell className="text-right">Voiding</TableHeaderCell>
           </TableRow>
-        </TableHead>
-
+        </TableHead>  
         <TableBody>
           {logs.map((log) => (
             <TableRow key={log.id}>

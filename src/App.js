@@ -120,6 +120,8 @@ const ActivityEditPage = lazy(() =>
   import("./pages/ActivityPages/ActivityMainPages/ActivityEditPage")
 );
 
+const LogDetailPage = lazy(() => import("./pages/LogsPages/LogDetailsPage"));
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -573,15 +575,47 @@ const router = createBrowserRouter([
               },
               {
                 path: "logs",
-                element: (
-                  <Suspense fallback={<p>Loading..</p>}>
-                    <AllLogsPage />
-                  </Suspense>
-                ),
                 loader: (meta) =>
                   import("./pages/LogsPages/AllLogsPage").then((module) =>
                     module.loader(meta)
                   ),
+                id: "logs",
+                children: [
+                  {
+                    index: true,
+                    element: (
+                      <Suspense fallback={<p>Loading..</p>}>
+                        <AllLogsPage />
+                      </Suspense>
+                    ),
+                  },
+                  {
+                    path: ":logID",
+                    id: "log-detail",
+                    loader: (meta) =>
+                    import("./pages/LogsPages/LogDetailsPage").then((module) =>
+                      module.loader(meta)
+                    ),  
+                    children: [
+                      {
+                        index: true,
+                        element: (
+                          <Suspense fallback={<p>Loading...</p>}>
+                            <LogDetailPage />
+                          </Suspense>
+                        ),
+                      },
+                      {
+                        path: "edit",
+                        element: (
+                          <Suspense fallback={<p>Loading...</p>}>
+                            <EditLogsPage />
+                          </Suspense>
+                        ),
+                      },
+                    ],
+                  },
+                ],
               },
               {
                 path: "new-log",
