@@ -1,4 +1,4 @@
-import { ChevronLeftIcon, PlusCircleIcon } from "@heroicons/react/24/outline";
+import { ArrowRightOnRectangleIcon, ChevronLeftIcon, PlusCircleIcon } from "@heroicons/react/24/outline";
 import React from "react";
 import { NavLink } from "react-router-dom";
 
@@ -11,12 +11,24 @@ function LeavesNav() {
             Leaves
           </h1>
           <div className="flex space-x-6">
-            <NavLink to=".">
+            <NavLink to="..">
               <button
                 type="button"
                 className="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
               >
                 <ChevronLeftIcon
+                  className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"
+                  aria-hidden="true"
+                />
+                Back to Resident
+              </button>
+            </NavLink>
+            <NavLink to=".">
+              <button
+                type="button"
+                className="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+              >
+                <ArrowRightOnRectangleIcon
                   className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"
                   aria-hidden="true"
                 />

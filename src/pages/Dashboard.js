@@ -16,6 +16,7 @@ function classNames(...classes) {
 export default function Dashboard() {
   const [isFormVisible, setIsFormVisible] = useState(false);
   const [totalResidents, setTotalResidents] = useState(0);
+  const [totalIncidents, setTotalIncidents] = useState(0);
   const [pendingLeaves, setPendingLeaves] = useState(0);
   const [pendingReturn, setPendingReturn] = useState(0);
   const [approvedLeaves, setApprovedLeaves] = useState(0);
@@ -34,6 +35,25 @@ export default function Dashboard() {
         if (response.ok) {
           const data = await response.json();
           setTotalResidents(data.count);
+        } else {
+          throw new Error("Failed to fetch total residents");
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    const fetchTotalIncidents = async () => {
+      try {
+        const response = await fetch("/dashboard/incidents", {
+          headers: {
+            Authorization: "Bearer " + getAuthToken(),
+            "Access-Control-Allow-Origin": "*",
+          },
+        });
+        if (response.ok) {
+          const data = await response.json();
+          setTotalIncidents(data.count);
         } else {
           throw new Error("Failed to fetch total residents");
         }
@@ -99,6 +119,7 @@ export default function Dashboard() {
     };
 
     fetchTotalResidents();
+    fetchTotalIncidents();
     fetchPendingLeaves();
     fetchPendingReturn();
     fetchApprovedLeaves();
@@ -144,6 +165,7 @@ export default function Dashboard() {
                 </button>
               </Link>
               <p>Total Residents: {totalResidents}</p>
+              <p>Total Incidents: {totalIncidents}</p>
               <p>Pending Approval Leaves: {pendingLeaves}</p>
               <p  >Pending Return Leaves: {pendingReturn}</p>
               <p  >Approved Leaves: {approvedLeaves}</p>

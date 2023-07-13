@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState ,  useRef} from "react";
 import { getAuthToken } from "../../util/Auth";
 import Nav from "../RootComps/Nav";
 import {
@@ -7,6 +7,7 @@ import {
   useNavigation,
   useRouteLoaderData,
   useSubmit,
+
 } from "react-router-dom";
 import {
   PrinterIcon,
@@ -24,6 +25,13 @@ import {
 import { HashLink } from "react-router-hash-link";
 
 function ResidentDetails({ resident }) {
+
+  const [open, setOpen] = useState(true)
+
+  const cancelButtonRef = useRef(null)
+
+
+
   const token = useRouteLoaderData("root");
   const submit = useSubmit();
   const [file, setFile] = useState(null);
@@ -208,9 +216,8 @@ function ResidentDetails({ resident }) {
                 </div>
                 <div>
                   <button
-                    data-bs-toggle="modal"
-                    data-bs-target="#exampleModal"
-                    type="button"
+
+                    type="button"onClick={() => setOpen(true)}
                     className="inline-flex  opacity-80 items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
                   >
                     <UserCircleIcon
@@ -226,6 +233,8 @@ function ResidentDetails({ resident }) {
                   tabIndex="-1"
                   aria-labelledby="exampleModalLabel"
                   aria-hidden="true">
+
+                    
                 
                   <form onSubmit={handleSubmit}>
                     <div className="modal-dialog">

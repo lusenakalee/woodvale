@@ -167,6 +167,36 @@ async function approvedLeavesLoader() {
 
 
 
+async function totalIncidentsLoader() {
+  let url = "/dashboard/incidents";
+  const token = getAuthToken();
+  const response = await fetch(url, {
+    method: "get",
+    headers: {
+      Authorization: "Bearer " + token,
+      "Access-Control-Allow-Origin": "*",
+    },
+  });
+  if (response.status === 401) {
+    return;
+  }
+  if (response.status === 400) {
+    return response;
+  }
+  if (response.status === 404) {
+    return response;
+  }
+  if (!response.ok) {
+    throw json({ message: "Server Error" }, { status: 500 });
+  }
+
+  const resData = await response.json();
+  console.log(resData);
+  return resData;
+}
+
+
+
 
 
 
@@ -190,5 +220,6 @@ export async function tokenLoader() {
     pendingLeaves: await pendingLeavesLoader(),
     pendingReturn: await pendingReturnLeavesLoader(),
     approvedLeaves: await approvedLeavesLoader(),
+    totalIncidents: await totalIncidentsLoader(),
   });
 }
