@@ -94,7 +94,6 @@ function EditProfile({ method, user, title }) {
     <React.Fragment>
       <main>
         <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
-          
           <Form method={method}>
             <div className="space-y-12">
               <div className="border-b border-gray-900/10 pb-12">
@@ -108,7 +107,13 @@ function EditProfile({ method, user, title }) {
                     </ul>
                   )}
                 </p>
-                  {imageUrl && <img src={imageUrl} alt="Profile"  className="h-24 rounded-lg" />}
+                {imageUrl && (
+                  <img
+                    src={imageUrl}
+                    alt="Profile"
+                    className="h-24 rounded-lg"
+                  />
+                )}
                 <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                   <div className="sm:col-span-3">
                     <label
@@ -207,61 +212,63 @@ function EditProfile({ method, user, title }) {
                   </div>
 
                   <div>
-            <button
-              type="button"
-              onClick={handleOpenModal}
-              className="inline-flex opacity-80 items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-            >
-              <UserCircleIcon
-                className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"
-                aria-hidden="true"
-              />
-              Upload Patient Picture
-            </button>
-          </div>
-
-          {isOpen && (
-            <div className="fixed inset-0 flex items-center justify-center z-50">
-              <div className="fixed inset-0 bg-black opacity-50"></div>
-              <div className="relative z-10 bg-white rounded-md w-96">
-                <form onSubmit={handleSubmit}>
-                  <div className="p-6">
-                    <h1 className="text-lg font-bold">Profile Pic Upload</h1>
-                    <div className="mt-4">
-                      <label
-                        htmlFor="formFileSm"
-                        className="block font-semibold"
-                      >
-                        Upload Patient Image
-                      </label>
-                      <input
-                        className="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
-                        id="formFileSm"
-                        type="file"
-                        name="file"
-                        onChange={handleFileChange}
-                      />
-                    </div>
-                  </div>
-                  <div className="px-6 py-4 bg-gray-100 flex items-center justify-end gap-x-4">
                     <button
                       type="button"
-                      onClick={handleCloseModal}
-                      className="text-sm font-semibold text-gray-900"
+                      onClick={handleOpenModal}
+                      className="inline-flex opacity-80 items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
                     >
-                      Close
-                    </button>
-                    <button
-                      type="submit"
-                      className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600"
-                    >
-                      Save changes
+                      <UserCircleIcon
+                        className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"
+                        aria-hidden="true"
+                      />
+                      Upload Patient Picture
                     </button>
                   </div>
-                </form>
-              </div>
-            </div>
-          )}
+
+                  {isOpen && (
+                    <div className="fixed inset-0 flex items-center justify-center z-50">
+                      <div className="fixed inset-0 bg-black opacity-50"></div>
+                      <div className="relative z-10 bg-white rounded-md w-96">
+                        <form onSubmit={handleSubmit}>
+                          <div className="p-6">
+                            <h1 className="text-lg font-bold">
+                              Profile Pic Upload
+                            </h1>
+                            <div className="mt-4">
+                              <label
+                                htmlFor="formFileSm"
+                                className="block font-semibold"
+                              >
+                                Upload Patient Image
+                              </label>
+                              <input
+                                className="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
+                                id="formFileSm"
+                                type="file"
+                                name="file"
+                                onChange={handleFileChange}
+                              />
+                            </div>
+                          </div>
+                          <div className="px-6 py-4 bg-gray-100 flex items-center justify-end gap-x-4">
+                            <button
+                              type="button"
+                              onClick={handleCloseModal}
+                              className="text-sm font-semibold text-gray-900"
+                            >
+                              Close
+                            </button>
+                            <button
+                              type="submit"
+                              className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600"
+                            >
+                              Save changes
+                            </button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
 
