@@ -1,9 +1,10 @@
 import React from "react";
 import { getAuthToken } from "../../util/Auth";
-import { json, redirect, useActionData, useSubmit } from "react-router-dom";
+import { json, redirect, useActionData, useRouteLoaderData, useSubmit } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 function ActivityDetail({ activity }) {
+  const token = useRouteLoaderData("root");
   const submit = useSubmit();
   function startDeleteHandler() {
     const proceed = window.confirm("Are you sure?");
@@ -12,7 +13,7 @@ function ActivityDetail({ activity }) {
       submit(null, { method: "delete" });
     }
   }
-  const data = useActionData()
+  const data = useActionData();
   return (
     <React.Fragment>
       {data && data.errors && (
@@ -22,16 +23,54 @@ function ActivityDetail({ activity }) {
           ))}
         </ul>
       )}
-      {activity.name}
-      <Link to={`./edit`}>
-        <button>Edit</button>
-      </Link>
-      <button
-        onClick={startDeleteHandler}
-        className="px-4 py-2 text-sm font-medium text-gray-900 bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-      >
-        Delete
-      </button>
+
+      <div className="px-4 py-3 sm:grid sm:grid-cols-3 hover:bg-white sm:gap-4 sm:px-0">
+        <dt className="text-sm font-medium leading-6 text-gray-900">
+          Event name
+        </dt>
+        <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+          {activity.name}
+        </dd>
+      </div>
+      <div className="px-4 py-3 sm:grid sm:grid-cols-3 hover:bg-white sm:gap-4 sm:px-0">
+        <dt className="text-sm font-medium leading-6 text-gray-900">
+          Event Date
+        </dt>
+        <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+          {activity.event_date}
+        </dd>
+      </div>
+      <div className="px-4 py-3 sm:grid sm:grid-cols-3 hover:bg-white sm:gap-4 sm:px-0">
+        <dt className="text-sm font-medium leading-6 text-gray-900">
+          Event Description
+        </dt>
+        <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+          {activity.description}
+        </dd>
+      </div>
+
+      {token && (
+              <div className=" px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt className="text-sm font-medium text-gray-500">
+                  <button
+                    onClick={startDeleteHandler}
+                    className="px-4 py-2 text-sm font-medium text-gray-900 bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  >
+                    Delete
+                  </button>
+                </dt>
+                <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                  <Link to="edit">
+                    <button
+                      type="submit"
+                      className="px-4 py-2 text-sm font-medium text-gray-900 bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    >
+                      Edit
+                    </button>
+                  </Link>
+                </dd>
+              </div>
+            )}
     </React.Fragment>
   );
 }

@@ -19,6 +19,7 @@ import {
   ArrowRightOnRectangleIcon,
   LifebuoyIcon,
   UserCircleIcon,
+  PencilSquareIcon,
 } from "@heroicons/react/24/outline";
 import { HashLink } from "react-router-hash-link";
 
@@ -94,7 +95,7 @@ function ResidentDetails({ resident }) {
     };
 
     fetchImage();
-  },[]);
+  }, []);
   return (
     <>
       <React.Fragment>
@@ -257,9 +258,10 @@ function ResidentDetails({ resident }) {
                           />
                         </div>
                         <div className="modal-footer">
+                        <div className="mt-6 flex items-center justify-end gap-x-6">
                           <button
                             type="button"
-                            className="btn btn-secondary"
+                            className="text-sm font-semibold leading-6 text-gray-900"
                             data-bs-dismiss="modal"
                           >
                             Close
@@ -267,10 +269,11 @@ function ResidentDetails({ resident }) {
                           <button
                             type="submit"
                             disabled={isSubmitting}
-                            className="btn btn-primary"
+                            className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                           >
                             Save changes
                           </button>
+                          </div>
                         </div>
                       </div>
                     </div>
