@@ -151,7 +151,6 @@ export default function Dashboard() {
 
   useEffect(() => {
     const filteredData = filterByRegion(selectedRegion, [
-      { name: "Total Incidents", value: totalIncidents },
       { name: "Pending Approval Leaves", value: pendingLeaves },
       { name: "Pending Return Leaves", value: pendingReturn },
       { name: "Approved Leaves", value: approvedLeaves },
@@ -220,17 +219,7 @@ export default function Dashboard() {
                     justifyContent="start"
                     alignItems="center"
                   >
-                    <Title>Overview</Title>
-                    <Select
-                      onValueChange={setSelectedRegion}
-                      placeholder="Region Selection"
-                    >
-                      {regions.map((region) => (
-                        <SelectItem key={region.key} value={region.key}>
-                          {region.name}
-                        </SelectItem>
-                      ))}
-                    </Select>
+                    <Title>Leaves Overview</Title>
                   </Flex>
                   <Legend
                     categories={filteredData.map((item) => item.name)}
