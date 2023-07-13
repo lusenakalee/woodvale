@@ -77,7 +77,7 @@ function ViewIncidents({ incidents }) {
         </TableBody>
       </Table>
 
-      {incidents.map((item) => item.description)}
+      
     </React.Fragment>
   );
 }

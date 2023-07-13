@@ -7,13 +7,35 @@ import SummaryTable from "../components/DashboardComps/SummaryTable";
 import AddResidentForm from "../components/ResidentComps/AddResidentForm";
 import { PlusCircleIcon } from "@heroicons/react/24/outline";
 import { Link, useLoaderData, useRouteLoaderData } from "react-router-dom";
+import {
+  BadgeDelta,
+  Card,
+  DeltaType,
+  DonutChart,
+  Select,
+  SelectItem,
+  Flex,
+  Legend,
+  List,
+  ListItem,
+  Title,
+} from "@tremor/react";
 import { getAuthToken } from "../util/Auth";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
+const regions = [
+  { key: "all", name: "All Regions" },
+  { key: "us", name: "United States" },
+  { key: "europe", name: "Europe" },
+  { key: "asia", name: "Asia" },
+];
+
 export default function Dashboard() {
+  const [selectedRegion, setSelectedRegion] = useState("all");
+  const [filteredData, setFilteredData] = useState([]);
   const [isFormVisible, setIsFormVisible] = useState(false);
   const [totalResidents, setTotalResidents] = useState(0);
   const [totalIncidents, setTotalIncidents] = useState(0);
@@ -127,6 +149,22 @@ export default function Dashboard() {
 
 
 
+  useEffect(() => {
+    const filteredData = filterByRegion(selectedRegion, [
+      { name: "Total Residents", value: totalResidents },
+      { name: "Total Incidents", value: totalIncidents },
+      { name: "Pending Approval Leaves", value: pendingLeaves },
+      { name: "Pending Return Leaves", value: pendingReturn },
+      { name: "Approved Leaves", value: approvedLeaves },
+    ]);
+    setFilteredData(filteredData);
+  }, [selectedRegion, totalResidents, totalIncidents, pendingLeaves, pendingReturn, approvedLeaves]);
+
+  const filterByRegion = (region, data) =>
+    region === "all" ? data : data.filter((item) => item.region === region);
+
+ 
+
   return (
     <>
       <div className="min-h-full">
@@ -167,8 +205,46 @@ export default function Dashboard() {
               <p>Total Residents: {totalResidents}</p>
               <p>Total Incidents: {totalIncidents}</p>
               <p>Pending Approval Leaves: {pendingLeaves}</p>
-              <p  >Pending Return Leaves: {pendingReturn}</p>
-              <p  >Approved Leaves: {approvedLeaves}</p>
+              <p>Pending Return Leaves: {pendingReturn}</p>
+              <p>Approved Leaves: {approvedLeaves}</p>
+            </div>
+            <div>
+              <Card className="max-w-md mx-auto">
+                <Flex
+                  className="space-x-8"
+                  justifyContent="start"
+                  alignItems="center"
+                >
+                  <Title>Overview</Title>
+                  <Select
+                    onValueChange={setSelectedRegion}
+                    placeholder="Region Selection"
+                  >
+                    {regions.map((region) => (
+                      <SelectItem key={region.key} value={region.key}>
+                        {region.name}
+                      </SelectItem>
+                    ))}
+                  </Select>
+                </Flex>
+                <Legend
+                  categories={filteredData.map((item) => item.name)}
+                  className="mt-6"
+                />
+                <DonutChart
+                  data={filteredData}
+                  category="value"
+                  index="name"
+                  className="mt-6"
+                />
+                <List className="mt-6">
+                  {filteredData.map((item) => (
+                    <ListItem key={item.name}>
+                      {item.name}: {item.value}
+                    </ListItem>
+                  ))}
+                </List>
+              </Card>
             </div>
             <Updates />
           </div>
