@@ -18,7 +18,7 @@ import {
   ClipboardDocumentIcon,
   ArrowRightOnRectangleIcon,
   LifebuoyIcon,
-  UserCircleIcon
+  UserCircleIcon,
 } from "@heroicons/react/24/outline";
 import { HashLink } from "react-router-hash-link";
 
@@ -52,12 +52,9 @@ function ResidentDetails({ resident }) {
         window.alert("Only Image attachment are allowed!!");
       }
       if (response.ok) {
-        const confirmed = window.confirm(
+        window.confirm(
           "File uploaded successfully! Do you want to go to the resident page?"
         );
-        if (confirmed) {
-          navigate("..");
-        }
       } else {
         window.alert("failed to upload");
       }
@@ -97,7 +94,7 @@ function ResidentDetails({ resident }) {
     };
 
     fetchImage();
-  }, []);
+  },[]);
   return (
     <>
       <React.Fragment>

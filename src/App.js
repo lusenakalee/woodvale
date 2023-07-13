@@ -112,6 +112,14 @@ const EditCarePlanPage = lazy(() =>
   import("./pages/CarePlanPages/EditCarePlanPage")
 );
 
+const ActivityDetailPage = lazy(() =>
+  import("./pages/ActivityPages/ActivityMainPages/ActivityDetailPage")
+);
+
+const ActivityEditPage = lazy(() =>
+  import("./pages/ActivityPages/ActivityMainPages/ActivityEditPage")
+);
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -273,6 +281,40 @@ const router = createBrowserRouter([
               import("./components/ActivityComps/ActivityForm").then((module) =>
                 module.action(meta)
               ),
+          },
+          {
+            path: ":id",
+            loader: (meta) =>
+              import(
+                "./pages/ActivityPages/ActivityMainPages/ActivityDetailPage"
+              ).then((module) => module.loader(meta)),
+            id: "activity-detail",
+            children: [
+              {
+                index: true,
+                element: (
+                  <Suspense fallback={<p>Loading...</p>}>
+                    <ActivityDetailPage />
+                  </Suspense>
+                ),
+                action: (meta) =>
+                import("./components/ActivityComps/ActivityDetail").then(
+                  (module) => module.action(meta)
+                ),
+              },
+              {
+                path: "edit",
+                element: (
+                  <Suspense fallback={<p>Loading...</p>}>
+                    <ActivityEditPage />
+                  </Suspense>
+                ),
+                action: (meta) =>
+                  import("./components/ActivityComps/ActivityForm").then(
+                    (module) => module.action(meta)
+                  ),
+              },
+            ],
           },
         ],
       },

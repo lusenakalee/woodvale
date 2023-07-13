@@ -72,6 +72,8 @@ function ActivitiesList({ activities }) {
             <TableHeaderCell className="text-right">Event Name</TableHeaderCell>
             <TableHeaderCell className="text-right">Approval status</TableHeaderCell>
             <TableHeaderCell className="text-right">Description</TableHeaderCell>
+            <TableHeaderCell className="text-right">Approve</TableHeaderCell>
+            <TableHeaderCell className="text-right">Reject</TableHeaderCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -85,6 +87,8 @@ function ActivitiesList({ activities }) {
                 {item.approved === true ? "Approved" : "Not Approved"}
               </TableCell>
               <TableCell className="text-right">{item.description}</TableCell>
+              <TableCell className="text-right"><button className="btn btn-success">Approve Event</button></TableCell>
+              <TableCell className="text-right"><button className="btn btn-danger">Reject Event</button></TableCell>
             </TableRow>
           ))}
         </TableBody>
