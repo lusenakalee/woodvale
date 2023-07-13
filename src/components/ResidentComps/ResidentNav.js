@@ -37,6 +37,7 @@ function ResidentNav() {
                   New Resident
                 </button>
               </NavLink>
+             
             </div>
           
           </div>

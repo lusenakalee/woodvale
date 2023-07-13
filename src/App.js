@@ -298,9 +298,9 @@ const router = createBrowserRouter([
                   </Suspense>
                 ),
                 action: (meta) =>
-                import("./components/ActivityComps/ActivityDetail").then(
-                  (module) => module.action(meta)
-                ),
+                  import("./components/ActivityComps/ActivityDetail").then(
+                    (module) => module.action(meta)
+                  ),
               },
               {
                 path: "edit",

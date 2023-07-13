@@ -225,8 +225,8 @@ function ResidentDetails({ resident }) {
                   id="exampleModal"
                   tabIndex="-1"
                   aria-labelledby="exampleModalLabel"
-                  aria-hidden="true"
-                >
+                  aria-hidden="true">
+                
                   <form onSubmit={handleSubmit}>
                     <div className="modal-dialog">
                       <div className="modal-content">
@@ -258,21 +258,21 @@ function ResidentDetails({ resident }) {
                           />
                         </div>
                         <div className="modal-footer">
-                        <div className="mt-6 flex items-center justify-end gap-x-6">
-                          <button
-                            type="button"
-                            className="text-sm font-semibold leading-6 text-gray-900"
-                            data-bs-dismiss="modal"
-                          >
-                            Close
-                          </button>
-                          <button
-                            type="submit"
-                            disabled={isSubmitting}
-                            className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                          >
-                            Save changes
-                          </button>
+                          <div className="mt-6 flex items-center justify-end gap-x-6">
+                            <button
+                              type="button"
+                              className="text-sm font-semibold leading-6 text-gray-900"
+                              data-bs-dismiss="modal"
+                            >
+                              Close
+                            </button>
+                            <button
+                              type="submit"
+                              disabled={isSubmitting}
+                              className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                            >
+                              Save changes
+                            </button>
                           </div>
                         </div>
                       </div>

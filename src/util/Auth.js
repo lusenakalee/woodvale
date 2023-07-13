@@ -1,4 +1,4 @@
-import {  defer, json, redirect } from "react-router-dom";
+import { defer, json, redirect } from "react-router-dom";
 
 export function getTokenDuration() {
   const storedExpiration = localStorage.getItem("expiration");
@@ -24,18 +24,18 @@ export function userTokenLoader() {
   return getAuthToken();
 }
 
-async function currentUserLoader(){
+async function currentUserLoader() {
   let url = "/current_user";
   const token = getAuthToken();
   const response = await fetch(url, {
-    method: "get",  
+    method: "get",
     headers: {
       Authorization: "Bearer " + token,
       "Access-Control-Allow-Origin": "*",
     },
   });
   if (response.status === 401) {
-    return 
+    return;
   }
   if (response.status === 400) {
     return response;
@@ -51,7 +51,131 @@ async function currentUserLoader(){
   return resData;
 }
 
-export  function checkToken() {
+async function totalResidentsLoader() {
+  let url = "/dashboard/residents";
+  const token = getAuthToken();
+  const response = await fetch(url, {
+    method: "get",
+    headers: {
+      Authorization: "Bearer " + token,
+      "Access-Control-Allow-Origin": "*",
+    },
+  });
+  if (response.status === 401) {
+    return;
+  }
+  if (response.status === 400) {
+    return response;
+  }
+  if (response.status === 404) {
+    return response;
+  }
+  if (!response.ok) {
+    throw json({ message: "Server Error" }, { status: 500 });
+  }
+
+  const resData = await response.json();
+  console.log(resData);
+  return resData;
+}
+
+
+async function pendingLeavesLoader() {
+  let url = "/dashboard/leaves";
+  const token = getAuthToken();
+  const response = await fetch(url, {
+    method: "get",
+    headers: {
+      Authorization: "Bearer " + token,
+      "Access-Control-Allow-Origin": "*",
+    },
+  });
+  if (response.status === 401) {
+    return;
+  }
+  if (response.status === 400) {
+    return response;
+  }
+  if (response.status === 404) {
+    return response;
+  }
+  if (!response.ok) {
+    throw json({ message: "Server Error" }, { status: 500 });
+  }
+
+  const resData = await response.json();
+  console.log(resData);
+  return resData.pending_approval_leaves;
+}
+
+async function pendingReturnLeavesLoader() {
+  let url = "/dashboard/leaves";
+  const token = getAuthToken();
+  const response = await fetch(url, {
+    method: "get",
+    headers: {
+      Authorization: "Bearer " + token,
+      "Access-Control-Allow-Origin": "*",
+    },
+  });
+  if (response.status === 401) {
+    return;
+  }
+  if (response.status === 400) {
+    return response;
+  }
+  if (response.status === 404) {
+    return response;
+  }
+  if (!response.ok) {
+    throw json({ message: "Server Error" }, { status: 500 });
+  }
+
+  const resData = await response.json();
+  console.log(resData);
+  return resData.pending_return_leaves;
+}
+
+
+async function approvedLeavesLoader() {
+  let url = "/dashboard/leaves";
+  const token = getAuthToken();
+  const response = await fetch(url, {
+    method: "get",
+    headers: {
+      Authorization: "Bearer " + token,
+      "Access-Control-Allow-Origin": "*",
+    },
+  });
+  if (response.status === 401) {
+    return;
+  }
+  if (response.status === 400) {
+    return response;
+  }
+  if (response.status === 404) {
+    return response;
+  }
+  if (!response.ok) {
+    throw json({ message: "Server Error" }, { status: 500 });
+  }
+
+  const resData = await response.json();
+  console.log(resData);
+  return resData.approved_leaves_count;
+}
+
+
+
+
+
+
+
+
+
+
+
+export function checkToken() {
   const token = getAuthToken();
   if (!token) {
     return redirect("/login");
@@ -61,6 +185,10 @@ export  function checkToken() {
 export async function tokenLoader() {
   return defer({
     root: userTokenLoader(),
-    user: await currentUserLoader()
+    user: await currentUserLoader(),
+    totalResidents: await totalResidentsLoader(),
+    pendingLeaves: await pendingLeavesLoader(),
+    pendingReturn: await pendingReturnLeavesLoader(),
+    approvedLeaves: await approvedLeavesLoader(),
   });
 }
