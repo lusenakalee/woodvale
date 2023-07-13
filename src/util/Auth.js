@@ -1,4 +1,4 @@
-import {  redirect } from "react-router-dom";
+import {  defer, json, redirect } from "react-router-dom";
 
 export function getTokenDuration() {
   const storedExpiration = localStorage.getItem("expiration");
@@ -20,8 +20,35 @@ export function getAuthToken() {
   return token;
 }
 
-export function tokenLoader() {
+export function userTokenLoader() {
   return getAuthToken();
+}
+
+async function currentUserLoader(){
+  let url = "/current_user";
+  const token = getAuthToken();
+  const response = await fetch(url, {
+    method: "get",  
+    headers: {
+      Authorization: "Bearer " + token,
+      "Access-Control-Allow-Origin": "*",
+    },
+  });
+  if (response.status === 401) {
+    return 
+  }
+  if (response.status === 400) {
+    return response;
+  }
+  if (response.status === 404) {
+    return response;
+  }
+  if (!response.ok) {
+    throw json({ message: "Server Error" }, { status: 500 });
+  }
+
+  const resData = await response.json();
+  return resData;
 }
 
 export  function checkToken() {
@@ -31,3 +58,9 @@ export  function checkToken() {
   }
 }
 
+export async function tokenLoader() {
+  return defer({
+    root: userTokenLoader(),
+    user: await currentUserLoader()
+  });
+}

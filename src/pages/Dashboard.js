@@ -6,7 +6,7 @@ import Updates from "../components/DashboardComps/Updates";
 import SummaryTable from "../components/DashboardComps/SummaryTable";
 import AddResidentForm from "../components/ResidentComps/AddResidentForm";
 import { PlusCircleIcon } from "@heroicons/react/24/outline";
-import { Link } from "react-router-dom";
+import { Link, useRouteLoaderData } from "react-router-dom";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -14,7 +14,7 @@ function classNames(...classes) {
 
 export default function Dashboard() {
   const [isFormVisible, setIsFormVisible] = useState(false);
-
+  const {user} = useRouteLoaderData("root")
   const toggleFormVisibility = () => {
     setIsFormVisible(!isFormVisible);
   };
@@ -25,7 +25,7 @@ export default function Dashboard() {
         <header className="bg-white shadow">
           <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
             <h1 className="text-3xl font-bold tracking-tight text-gray-900">
-              Dashboard
+              Welcome {user.first_name} {user.last_name}
             </h1>
           </div>
         </header>

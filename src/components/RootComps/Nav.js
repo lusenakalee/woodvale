@@ -1,4 +1,4 @@
-import { Fragment,useEffect,useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Form, Link } from "react-router-dom";
@@ -21,7 +21,32 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function Nav() {
+export default function Nav({userData}) {
+  const [imageUrl, setImageUrl] = useState("");
+  const imgToken = getAuthToken()
+  useEffect(() => {
+    const fetchImage = async () => {
+      try {
+        const response = await fetch(`/upload/${userData.id}`, {
+          headers: {
+            Authorization: "Bearer " + imgToken,
+          },
+        });
+
+        if (response.ok) {
+          const blob = await response.blob();
+          const url = URL.createObjectURL(blob);
+          setImageUrl(url);
+        } else {
+          console.error("Error fetching image:", response.status);
+        }
+      } catch (error) {
+        console.error("Error fetching image:", error);
+      }
+    };
+
+    fetchImage();
+  }, [userData]);
   return (
     <>
       <Disclosure as="nav" className="bg-gray-800">
@@ -67,8 +92,8 @@ export default function Nav() {
                           <span className="sr-only">Open user menu</span>
                           <img
                             className="h-8 w-8 rounded-full"
-                            src={user.imageUrl}
-                            alt=""
+                            src={imageUrl}
+                            alt={user.imageUrl}
                           />
                         </Menu.Button>
                       </div>
