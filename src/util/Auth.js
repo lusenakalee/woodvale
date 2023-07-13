@@ -79,7 +79,6 @@ async function totalResidentsLoader() {
   return resData;
 }
 
-
 async function pendingLeavesLoader() {
   let url = "/dashboard/leaves";
   const token = getAuthToken();
@@ -136,7 +135,6 @@ async function pendingReturnLeavesLoader() {
   return resData.pending_return_leaves;
 }
 
-
 async function approvedLeavesLoader() {
   let url = "/dashboard/leaves";
   const token = getAuthToken();
@@ -165,8 +163,6 @@ async function approvedLeavesLoader() {
   return resData.approved_leaves_count;
 }
 
-
-
 async function totalIncidentsLoader() {
   let url = "/dashboard/incidents";
   const token = getAuthToken();
@@ -194,16 +190,6 @@ async function totalIncidentsLoader() {
   console.log(resData);
   return resData;
 }
-
-
-
-
-
-
-
-
-
-
 
 export function checkToken() {
   const token = getAuthToken();

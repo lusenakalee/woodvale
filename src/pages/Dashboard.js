@@ -45,7 +45,7 @@ export default function Dashboard() {
   const [pendingReturn, setPendingReturn] = useState(0);
   const [approvedLeaves, setApprovedLeaves] = useState(0);
 
-  const { user } = useRouteLoaderData("root");
+  const { user,} = useRouteLoaderData("root");
 
   useEffect(() => {
     const fetchTotalResidents = async () => {
