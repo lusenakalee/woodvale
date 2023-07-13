@@ -168,7 +168,7 @@ function NewIncidentForm({ method, incident }) {
           </div>
         </div>
 
-        <div className="flex justify-between sm:col-span-4">
+        <div className="flex justify-between py-5 sm:col-span-4">
           <button
             onClick={cancelHandler}
             className="px-4 py-2 text-sm font-medium text-gray-900 bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
