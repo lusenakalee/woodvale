@@ -59,7 +59,7 @@ function NewLeaveForm({ method, leave }) {
 
         <div className="sm:col-span-3">
           <label className="block text-sm font-medium leading-6 text-gray-900">
-            Person Responsible
+            Name of Person Responsible
           </label>
           <div className="mt-2">
             <input
@@ -74,7 +74,7 @@ function NewLeaveForm({ method, leave }) {
 
         <div className="sm:col-span-3">
           <label className="block text-sm font-medium leading-6 text-gray-900">
-            Relationship
+            Relationship to Resident
           </label>
           <div className="mt-2">
             <input
@@ -89,13 +89,14 @@ function NewLeaveForm({ method, leave }) {
 
         <div className="sm:col-span-3">
           <label className="block text-sm font-medium leading-6 text-gray-900">
-            Contact of the person
+            Contact of the Person Responsible
           </label>
           <div className="mt-2">
             <input
               name="contact"
               id="contact"
               defaultValue={" "}
+              required
               className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
             />
           </div>
@@ -103,7 +104,7 @@ function NewLeaveForm({ method, leave }) {
 
         <div className="col-span-full">
           <label className="block text-sm font-medium leading-6 text-gray-900">
-            Reason
+            Reason for the Leave.
           </label>
           <div className="mt-2">
             <textarea

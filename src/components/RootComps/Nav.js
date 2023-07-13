@@ -92,7 +92,7 @@ export default function Nav({ userData }) {
                           <span className="sr-only">Open user menu</span>
                           <img
                             className="h-8 w-8 rounded-full"
-                            src={user.imageUrl}
+                            src={imageUrl}
                             alt="profile"
                           />
                         </Menu.Button>
