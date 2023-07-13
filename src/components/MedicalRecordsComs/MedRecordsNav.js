@@ -24,7 +24,7 @@ function MedRecordsNav() {
                   className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"
                   aria-hidden="true"
                 />
-                View Medical Records
+                Back
               </button>
             </NavLink>
 

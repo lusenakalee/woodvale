@@ -7,7 +7,11 @@ function ProfilePage() {
   const user = useRouteLoaderData("profile");
   return (
     <React.Fragment>
+      <main>
+        <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
       <ShowUserProfile user={user} />
+      </div>
+      </main>
     </React.Fragment>
   );
 }

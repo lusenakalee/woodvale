@@ -85,6 +85,8 @@ function EditProfile({ method, user, title }) {
 
   return (
     <React.Fragment>
+      <main>
+        <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
       <div>
         <button
           data-bs-toggle="modal"
@@ -283,6 +285,8 @@ function EditProfile({ method, user, title }) {
           </div>
         </div>
       </Form>
+        </div>
+        </main>
     </React.Fragment>
   );
 }
