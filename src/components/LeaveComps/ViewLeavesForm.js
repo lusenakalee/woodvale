@@ -1,5 +1,25 @@
-import React from "react";
 import { useSubmit } from "react-router-dom";
+import React, { useState } from "react";
+import {
+  InformationCircleIcon,
+  PrinterIcon,
+} from "@heroicons/react/24/outline";
+import { Link } from "react-router-dom";
+import {
+  Icon,
+  Table,
+  TableRow,
+  TableCell,
+  TableHead,
+  TableHeaderCell,
+  TableBody,
+  Title,
+  Flex,
+  Select,
+  SelectItem,
+  MultiSelect,
+  MultiSelectItem,
+} from "@tremor/react";
 
 function ViewLeavesForm({ leaves }) {
   const submit = useSubmit();
@@ -10,8 +30,56 @@ function ViewLeavesForm({ leaves }) {
       submit(null, { method: "delete" });
     }
   }
+
+
+
+
   return (
-    <React.Fragment>{leaves.map((item) => item.leave_date)}</React.Fragment>
+    <React.Fragment>
+      <div>
+        <Flex
+          className="space-x-0.5"
+          justifyContent="start"
+          alignItems="center"
+        >
+          <Title>Leave Applications</Title>
+          <Icon
+            icon={InformationCircleIcon}
+            variant="simple"
+            tooltip="Shows applied leaves"
+          />
+        </Flex>
+      </div>
+
+
+      <Table className="mt-6">
+        <TableHead>
+          <TableRow>
+            <TableHeaderCell>Leave Date</TableHeaderCell>
+            <TableHeaderCell className="text-right">Duration(Days)</TableHeaderCell>
+            <TableHeaderCell className="text-right">Approval Status</TableHeaderCell>
+            <TableHeaderCell className="text-right">Person responsible</TableHeaderCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {leaves.map((item) => (
+            <TableRow key={item.id}>
+              <Link to={`./${item.id}`}>
+                <TableCell>{item.leave_date}</TableCell>
+              </Link>
+              <TableCell className="text-right">{item.duration}</TableCell>
+              <TableCell className="text-right">
+                {item.approved === true ? "Approved" : "Not Approved"}
+              </TableCell>
+              <TableCell className="text-right">{item.person_responsible}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    
+
+      
+    </React.Fragment>
   );
 }
 
