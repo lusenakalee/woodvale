@@ -1,10 +1,10 @@
 import React from 'react'
 import { getAuthToken } from '../../util/Auth';
-import { json, useLoaderData } from 'react-router-dom';
+import { json, useLoaderData, useRouteLoaderData } from 'react-router-dom';
 import AllLogs from '../../components/LogsComps/AllLogs';
 
 function AllLogsPage() {
-    const logs = useLoaderData()
+    const logs = useRouteLoaderData("logs")
   return (
     <React.Fragment>
         <AllLogs logs={logs}/>

@@ -48,11 +48,6 @@ function NewLogsForm({ method, title, log }) {
     setSelectedCatheterOption(e.target.value);
   };
 
-
-
-
-
-
   return (
     <React.Fragment>
       <Form method={method}>
@@ -72,6 +67,7 @@ function NewLogsForm({ method, title, log }) {
                 </label>
                 <div className="mt-2">
                   <input
+                  defaultValue={log ? log.heart_rate:""}
                     type="number"
                     name="heart_rate"
                     id="heart_rate"
@@ -85,6 +81,7 @@ function NewLogsForm({ method, title, log }) {
                 </label>
                 <div className="mt-2">
                   <input
+                  defaultValue={log ? log.weight:""}
                     type="number"
                     name="weight"
                     id="weight"
@@ -101,6 +98,7 @@ function NewLogsForm({ method, title, log }) {
                 </label>
                 <div className="mt-2">
                   <input
+                  defaultValue={log ? log.blood_pressure:""}
                     type="number"
                     name="blood_pressure"
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -113,6 +111,7 @@ function NewLogsForm({ method, title, log }) {
                 </label>
                 <div className="mt-2">
                   <select
+                  defaultValue={log ? log.bowel_movement:""}
                     id="bowel_movement"
                     name="bowel_movement"
                     autoComplete="bowel_movement"
@@ -135,6 +134,7 @@ function NewLogsForm({ method, title, log }) {
                   <select
                     id="voiding"
                     name="voiding"
+                    defaultValue={log ? log.voiding:""}
                     value={selectedOption}
                     onChange={handleSelectionChange}
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
@@ -151,6 +151,7 @@ function NewLogsForm({ method, title, log }) {
                     <select
                       id="ContinentOptions"
                       name="continent"
+                      defaultValue={log ? log.continence_type:""}
                       autoComplete="ContinentOptions"
                       value={selectedContinentOption}
                       onChange={handleContinentOptionChange}
@@ -169,6 +170,7 @@ function NewLogsForm({ method, title, log }) {
                     <select
                       id="IncontinentOptions"
                       name="incontinent"
+                      defaultValue={log ? log.incontinence_type:""}
                       autoComplete="IncontinentOptions"
                       value={selectedIncontinentOption}
                       onChange={handleIncontinentOptionChange}
@@ -182,19 +184,20 @@ function NewLogsForm({ method, title, log }) {
                   </div>
                 )}
 
-{selectedOption === "catheter" && (
-            <div className="mt-2">
-              <label className="block text-sm  leading-6 text-gray-900">
-                Type in the catheter output in cc
-              </label>
-              <input
-                type="number"
-                id="CatheterInput"
-                name="catheter"
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
-              />
-            </div>
-          )}
+                {selectedOption === "catheter" && (
+                  <div className="mt-2">
+                    <label className="block text-sm  leading-6 text-gray-900">
+                      Type in the catheter output in cc
+                    </label>
+                    <input
+                      type="number"
+                      id="CatheterInput"
+                      name="catheter"
+                      defaultValue={log ? log.catheter_output:""}
+                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
+                    />
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -216,10 +219,10 @@ function NewLogsForm({ method, title, log }) {
                 <div className="mt-2">
                   <textarea
                     id="behavior"
+                    defaultValue={log ? log.behavior:""}
                     name="behavior"
                     rows={3}
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                    defaultValue={""}
                   />
                 </div>
                 <p className="mt-3 text-sm leading-6 text-gray-600">
@@ -237,9 +240,9 @@ function NewLogsForm({ method, title, log }) {
                   <textarea
                     id="Locomotion"
                     name="locomotion"
+                    defaultValue={log ? log.locomotion:""}
                     rows={3}
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                    defaultValue={""}
                   />
                 </div>
                 <p className="mt-3 text-sm leading-6 text-gray-600">
@@ -260,7 +263,7 @@ function NewLogsForm({ method, title, log }) {
                     name="mood"
                     rows={3}
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                    defaultValue={""}
+                    defaultValue={log ? log.mood:""}
                   />
                 </div>
                 <p className="mt-3 text-sm leading-6 text-gray-600">
@@ -281,6 +284,7 @@ function NewLogsForm({ method, title, log }) {
                           className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
                           checked={isChecked}
                           onChange={(e) => setIsChecked(e.target.checked)}
+                          defaultValue={log ? log.pain_noted:""}
                         />
                       </div>
                       <div className="text-sm leading-6">
@@ -308,7 +312,7 @@ function NewLogsForm({ method, title, log }) {
                           name="pain_description"
                           rows={3}
                           className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                          defaultValue={""}
+                          defaultValue={log ? log.pain_description:""}
                         />
                       </div>
                       <p className="mt-3 text-sm leading-6 text-gray-600">
@@ -385,5 +389,4 @@ export async function action({ request, params }) {
       throw json({ message: "Failed to save the daily log." }, { status: 500 });
     }
     return redirect(`/login/residents/${id}/logs`);
-  }
-}
+  } }
