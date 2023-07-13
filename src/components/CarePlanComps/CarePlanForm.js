@@ -161,6 +161,8 @@ function CarePlanForm({ carePlan, method, title }) {
                 </p>
               </div>
 
+            </div>
+          </div>
               <div className="flex justify-between sm:col-span-4">
                 <button
                   onClick={cancelHandler}
@@ -176,8 +178,6 @@ function CarePlanForm({ carePlan, method, title }) {
                   {isSubmitting ? "Submitting..." : "Save"}
                 </button>
               </div>
-            </div>
-          </div>
         </div>
       </Form>
     </React.Fragment>

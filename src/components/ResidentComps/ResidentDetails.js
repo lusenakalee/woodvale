@@ -18,6 +18,7 @@ import {
   ClipboardDocumentIcon,
   ArrowRightOnRectangleIcon,
   LifebuoyIcon,
+  UserCircleIcon
 } from "@heroicons/react/24/outline";
 import { HashLink } from "react-router-hash-link";
 
@@ -103,15 +104,25 @@ function ResidentDetails({ resident }) {
         <main>
           <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
             <div className="px-4 sm:px-0 flex  justify-between">
-              <div className="">
-                <h3 className="text-base font-semibold leading-7 text-gray-900">
-                  Resident Information
-                </h3>
-                {imageUrl && <img src={imageUrl} alt="Profile" />}
-                <p className="mt-1 max-w-2xl text-sm leading-6 text-gray-500">
-                  {resident.first_name} details and Information.
-                </p>
+              <div className="flex gap-x-4">
+                {imageUrl && (
+                  <img
+                    className="h-12 w-12 flex-none rounded-full bg-gray-50"
+                    src={imageUrl}
+                    alt="Profile"
+                  />
+                )}
+                <div className="min-w-0 flex-auto">
+                  <p className="text-sm font-semibold leading-6 text-gray-900">
+                    {resident.first_name}'s Information
+                  </p>
+                  <p className="mt-1 truncate text-xs leading-5 text-gray-500">
+                    {" "}
+                    General details and Information.
+                  </p>
+                </div>
               </div>
+
               <div className="grid grid-cols-4 gap-4 ">
                 <Link to="./logs">
                   <div>
@@ -204,7 +215,7 @@ function ResidentDetails({ resident }) {
                     type="button"
                     className="inline-flex  opacity-80 items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
                   >
-                    <LifebuoyIcon
+                    <UserCircleIcon
                       className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"
                       aria-hidden="true"
                     />
@@ -441,7 +452,7 @@ function ResidentDetails({ resident }) {
               </dl>
             </div>
             {token && (
-              <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+              <div className=" px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                 <dt className="text-sm font-medium text-gray-500">
                   <button
                     onClick={startDeleteHandler}

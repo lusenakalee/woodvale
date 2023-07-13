@@ -20,14 +20,36 @@ function NewLogsForm({ method, title, log }) {
   const [isChecked, setIsChecked] = useState(false);
   // voiding options
   const [selectedOption, setSelectedOption] = useState("");
+  const [selectedContinentOption, setSelectedContinentOption] = useState("");
+  const [selectedIncontinentOption, setSelectedIncontinentOption] =
+    useState("");
+  const [selectedCatheterOption, setSelectedCatheterOption] = useState("");
 
   const handleSelectionChange = (event) => {
     setSelectedOption(event.target.value);
+    setSelectedContinentOption("");
+    setSelectedIncontinentOption("");
+    setSelectedCatheterOption("");
   };
 
   const handleOptionChange = (e) => {
     setSelectedOption(e.target.value);
   };
+
+  const handleContinentOptionChange = (e) => {
+    setSelectedContinentOption(e.target.value);
+  };
+
+  const handleIncontinentOptionChange = (e) => {
+    setSelectedIncontinentOption(e.target.value);
+  };
+
+  const handleCatheterOptionChange = (e) => {
+    setSelectedCatheterOption(e.target.value);
+  };
+
+
+
 
 
 
@@ -124,76 +146,55 @@ function NewLogsForm({ method, title, log }) {
                   </select>
                 </div>
 
-                {selectedOption === "Continent" && (
+                {selectedOption === "continent" && (
                   <div className="mt-2">
                     <select
                       id="ContinentOptions"
                       name="continent"
                       autoComplete="ContinentOptions"
+                      value={selectedContinentOption}
+                      onChange={handleContinentOptionChange}
                       className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
                     >
-                      <option>Toilet</option>
-                      <option>Bedside</option>
-                      <option>Commode</option>
+                      <option value="">Select a continent option</option>
+                      <option value="Toilet">Toilet</option>
+                      <option value="Bedside">Bedside</option>
+                      <option value="Commode">Commode</option>
                     </select>
                   </div>
                 )}
 
-                {selectedOption === "Incontinent" && (
+                {selectedOption === "incontinent" && (
                   <div className="mt-2">
                     <select
                       id="IncontinentOptions"
                       name="incontinent"
+                      autoComplete="IncontinentOptions"
+                      value={selectedIncontinentOption}
+                      onChange={handleIncontinentOptionChange}
                       className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
                     >
-                      <option>Brief</option>
-                      <option>Pull up</option>
-                      <option>Pericare</option>
+                      <option value="">Select an incontinent option</option>
+                      <option value="Brief">Brief</option>
+                      <option value="PullUp">Pull Up</option>
+                      <option value="Pericare">Pericare</option>
                     </select>
                   </div>
                 )}
 
-                {selectedOption === "Catheter" && (
-                  <div className="mt-2">
-                    <label className="block text-sm  leading-6 text-gray-900">
-                      Type in the catheter output in cc
-                    </label>
-                    <input
-                      type="number"
-                      id="CatheterInput"
-                      name="catheter"
-                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
-                    />
-                  </div>
-                )}
-              </div>
-
-              <div className="sm:col-span-2">
-                <fieldset className="mt-10 space-y-10 space-x-5">
-                  <legend className="text-sm font-semibold leading-6 text-gray-900">
-                    Did resident take a shower?
-                  </legend>
-                  <label>
-                    <input
-                      type="radio"
-                      name="shower"
-                      value="true"
-                      checked={selectedOption === "true"}
-                      onChange={handleOptionChange}
-                    />
-                    True
-                  </label>
-                  <label>
-                    <input
-                      type="radio"
-                      name="shower"
-                      value="false"
-                      checked={selectedOption === "false"}
-                      onChange={handleOptionChange}
-                    />
-                    False
-                  </label>
-                </fieldset>
+{selectedOption === "catheter" && (
+            <div className="mt-2">
+              <label className="block text-sm  leading-6 text-gray-900">
+                Type in the catheter output in cc
+              </label>
+              <input
+                type="number"
+                id="CatheterInput"
+                name="catheter"
+                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
+              />
+            </div>
+          )}
               </div>
             </div>
           </div>
@@ -298,9 +299,7 @@ function NewLogsForm({ method, title, log }) {
 
                   {isChecked && (
                     <div className="col-span-full">
-                      <label
-                        className="block text-sm font-medium leading-6 text-gray-900"
-                      >
+                      <label className="block text-sm font-medium leading-6 text-gray-900">
                         Pain Description (Optional)
                       </label>
                       <div className="mt-2">
