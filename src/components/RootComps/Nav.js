@@ -21,9 +21,9 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function Nav({userData}) {
+export default function Nav({ userData }) {
   const [imageUrl, setImageUrl] = useState("");
-  const imgToken = getAuthToken()
+  const imgToken = getAuthToken();
   useEffect(() => {
     const fetchImage = async () => {
       try {
@@ -92,8 +92,8 @@ export default function Nav({userData}) {
                           <span className="sr-only">Open user menu</span>
                           <img
                             className="h-8 w-8 rounded-full"
-                            src={imageUrl}
-                            alt={user.imageUrl}
+                            src={user.imageUrl}
+                            alt="profile"
                           />
                         </Menu.Button>
                       </div>
@@ -162,9 +162,8 @@ export default function Nav({userData}) {
               </div>
               <div className="border-t border-gray-700 pb-3 pt-4">
                 <div className="flex items-center px-5">
-                  <div className="flex-shrink-0">
-
-                  </div>
+                  <div className="flex-shrink-0"></div>
+                
                   <div className="ml-3">
                     <div className="text-base font-medium leading-none text-red">
                       {user.email}
@@ -172,6 +171,7 @@ export default function Nav({userData}) {
                     <div className="text-sm font-medium leading-none text-gray-400">
                       {user.name}
                     </div>
+              
                   </div>
                   <button
                     type="button"
