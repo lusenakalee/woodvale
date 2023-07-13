@@ -57,22 +57,6 @@ function NewLeaveForm({ method, leave }) {
           </div>
         </div>
 
-        <div className="col-span-full">
-          <label className="block text-sm font-medium leading-6 text-gray-900">
-            Actions Taken
-          </label>
-          <div className="mt-2">
-            <textarea
-              id="actions_taken"
-              name="actions_taken"
-              required
-              rows={3}
-              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-              defaultValue={""}
-            />
-          </div>
-        </div>
-
         <div className="sm:col-span-3">
           <label className="block text-sm font-medium leading-6 text-gray-900">
             Person Responsible
@@ -82,20 +66,6 @@ function NewLeaveForm({ method, leave }) {
               type="text"
               name="person_responsible"
               id="person_responsible"
-              defaultValue={" "}
-              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-            />
-          </div>
-        </div>
-        <div className="sm:col-span-3">
-          <label className="block text-sm font-medium leading-6 text-gray-900">
-            Person Reporting
-          </label>
-          <div className="mt-2">
-            <input
-              type="text"
-              name="person_reporting"
-              id="person_reporting"
               defaultValue={" "}
               className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
             />
@@ -119,7 +89,7 @@ function NewLeaveForm({ method, leave }) {
 
         <div className="sm:col-span-3">
           <label className="block text-sm font-medium leading-6 text-gray-900">
-            contact
+            Contact of the person
           </label>
           <div className="mt-2">
             <input
@@ -180,9 +150,7 @@ export async function action({ request, params }) {
   const incidentData = {
     leave_date: data.get("leave_date"),
     return_date: data.get("return_date"),
-    actions_taken: data.get("actions_taken"),
     person_responsible: data.get("person_responsible"),
-    person_reporting: data.get("person_reporting"),
     relationship: data.get("relationship"),
     contact: data.get("contact"),
     reason: data.get("reason"),
@@ -205,6 +173,6 @@ export async function action({ request, params }) {
     if (!response.ok) {
       throw json({ message: "Failed to save the incident" }, { status: 500 });
     }
-    return redirect(`/login/residents/${id}/incidents`);
+    return redirect(`/login/residents/${id}/leaves`);
   }
 }
