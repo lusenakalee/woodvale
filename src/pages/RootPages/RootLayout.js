@@ -1,12 +1,17 @@
-import React from "react";
+import React, { Suspense } from "react";
 import Nav from "../../components/RootComps/Nav";
-import { Outlet, useRouteLoaderData } from "react-router-dom";
+import { Await, Outlet, useRouteLoaderData } from "react-router-dom";
 
 function RootLayout() {
   const token = useRouteLoaderData("root");
+  const { user } = useRouteLoaderData("root");
   return (
     <React.Fragment>
-      {token && <Nav />}
+      <Suspense fallback={<p style={{ textAlign: "center" }}>Loading....</p>}>
+        <Await resolve={user}>
+          {(loadedUser) => token && <Nav userData={loadedUser} />}
+        </Await>
+      </Suspense>
       <Outlet />
     </React.Fragment>
   );
