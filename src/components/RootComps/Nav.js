@@ -3,6 +3,7 @@ import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Form, Link } from "react-router-dom";
 import { getAuthToken } from "../../util/Auth";
+import abstractUser from "../../components/assets/images/abstractUser.png"
 
 const user = {
   name: "Tom Cook",
@@ -95,7 +96,7 @@ export default function Nav({ userData }) {
                           <img
                             className="h-8 w-8 rounded-full"
                             src={imageUrl}
-                            alt="profile"
+                            alt={abstractUser}
                           />
                         </Menu.Button>
                       </div>

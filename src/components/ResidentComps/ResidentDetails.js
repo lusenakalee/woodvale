@@ -120,7 +120,7 @@ function ResidentDetails({ resident }) {
               <div className="flex gap-x-4">
                 {imageUrl && (
                   <img
-                    className="h-12 w-12 flex-none rounded-full bg-gray-50"
+                  className="h-24 rounded-lg"
                     src={imageUrl}
                     alt="Profile"
                   />

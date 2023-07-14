@@ -9,6 +9,7 @@ import {
 } from "react-router-dom";
 import { getAuthToken } from "../../util/Auth";
 import { UserCircleIcon } from "@heroicons/react/24/outline";
+import abstractUser from "../../components/assets/images/abstractUser.png";
 
 let id;
 function EditProfile({ method, user, title }) {
@@ -98,7 +99,7 @@ function EditProfile({ method, user, title }) {
     <React.Fragment>
       <main>
         <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
-        <div>
+          <div>
             <button
               type="button"
               onClick={handleOpenModal}
@@ -108,7 +109,7 @@ function EditProfile({ method, user, title }) {
                 className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"
                 aria-hidden="true"
               />
-              Upload Patient Picture
+              Upload Picture
             </button>
           </div>
           {isOpen && (
@@ -146,7 +147,7 @@ function EditProfile({ method, user, title }) {
                       type="submit"
                       className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600"
                     >
-                      Save changes
+                      Upload
                     </button>
                   </div>
                 </form>
@@ -169,7 +170,7 @@ function EditProfile({ method, user, title }) {
                 {imageUrl && (
                   <img
                     src={imageUrl}
-                    alt="Profile"
+                    alt={abstractUser}
                     className="h-24 rounded-lg"
                   />
                 )}

@@ -80,7 +80,6 @@ export default function Dashboard() {
                   Add Resident
                 </button>
               </Link>
-              
             </div>
 
             <div class="grid grid-cols-2 gap-2 py-4">
