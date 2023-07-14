@@ -110,7 +110,7 @@ function ResidentDetails({ resident }) {
     };
 
     fetchImage();
-  }, []);
+  }, [resident]);
   return (
     <>
       <React.Fragment>
