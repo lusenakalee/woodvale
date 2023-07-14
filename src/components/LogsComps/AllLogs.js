@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useRouteLoaderData } from "react-router-dom";
 import {
   ChevronLeftIcon,
   InformationCircleIcon,
@@ -21,11 +21,38 @@ import {
   MultiSelect,
   MultiSelectItem,
   DeltaType,
+  Card,
+  LineChart,
 } from "@tremor/react";
 
 function AllLogs({ logs }) {
+  const routeLoaderData = useRouteLoaderData("root");
+  const { healthData } = routeLoaderData;
+
+  // Prepare the chart data
+  const chartData = logs.map((log) => ({
+    date: log.creation_date,
+    "Heart Rate": log.heart_rate,
+    "Blood Pressure": log.blood_pressure,
+    Weight: log.weight,
+  }));
+
   return (
     <React.Fragment>
+
+  <div className="py-4">
+          <Card>
+            <Title>Blood pressure, Heart Rate, and Weight Comparison</Title>
+            <LineChart
+              className="mt-6"
+              data={chartData}
+              index="date"
+              categories={["Heart Rate", "Blood Pressure", "Weight"]}
+              colors={["emerald", "gray", "indigo"]}
+              yAxisWidth={40}
+            />
+          </Card>
+        </div>
       <div>
         <Flex
           className="space-x-0.5"
@@ -59,16 +86,16 @@ function AllLogs({ logs }) {
           <SelectItem value="creation_date">creation date</SelectItem>
         </Select>
         <Link to="..">
-        <button
-          type="button"
-          className="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-        >
-          <ChevronLeftIcon
-            className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"
-            aria-hidden="true"
-          />
-         Back to Resident
-        </button>
+          <button
+            type="button"
+            className="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+          >
+            <ChevronLeftIcon
+              className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"
+              aria-hidden="true"
+            />
+            Back to Resident
+          </button>
         </Link>
         <button
           type="button"
@@ -91,7 +118,7 @@ function AllLogs({ logs }) {
             <TableHeaderCell className="text-right">Weight</TableHeaderCell>
             <TableHeaderCell className="text-right">Voiding</TableHeaderCell>
           </TableRow>
-        </TableHead>  
+        </TableHead>
         <TableBody>
           {logs.map((log) => (
             <TableRow key={log.id}>
@@ -105,7 +132,6 @@ function AllLogs({ logs }) {
             </TableRow>
           ))}
         </TableBody>
-       
       </Table>
     </React.Fragment>
   );

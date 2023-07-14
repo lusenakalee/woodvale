@@ -31,7 +31,6 @@ export async function loader() {
     throw json({ message: "Cant get users" }, { status: 500 });
   } else {
     const resData = await response.json();
-    console.log(resData);
     return resData;
   }
 }

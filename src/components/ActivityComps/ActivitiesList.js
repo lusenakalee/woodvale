@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import {
   InformationCircleIcon,
   PrinterIcon,
+  CheckCircleIcon,
+  XCircleIcon,
 } from "@heroicons/react/24/outline";
-import { Link, json, useActionData } from "react-router-dom";
+import { Link, json, useActionData, useSubmit } from "react-router-dom";
 import {
   Icon,
   Table,
@@ -18,10 +20,31 @@ import {
   SelectItem,
   MultiSelect,
   MultiSelectItem,
+  Button,
 } from "@tremor/react";
 import { getAuthToken } from "../../util/Auth";
+import { StopCircleIcon } from "@heroicons/react/24/outline";
 
 function ActivitiesList({ activities }) {
+  const submit = useSubmit();
+
+  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen1, setIsOpen1] = useState(false);
+  const handleOpenModal = () => {
+    setIsOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsOpen(false);
+  };
+  const handleOpenModal1 = () => {
+    setIsOpen(true);
+  };
+
+  const handleCloseModal1 = () => {
+    setIsOpen(false);
+  };
+
   const [selectedDates, setSelectedDates] = useState([]);
   const data = useActionData();
   const isActivitySelected = (activity) =>
@@ -144,116 +167,102 @@ function ActivitiesList({ activities }) {
               </TableCell>
               <TableCell className="text-right">{item.description}</TableCell>
               <TableCell className="text-right">
-                <button
+                <Button
                   type="button"
                   onClick={() => handleApprove({ id: item.id })}
-                  className="btn btn-primary"
-                  data-bs-toggle="modal"
-                  data-bs-target="#exampleModal1"
+                  onClick={handleOpenModal1}
+                  variant="secondary"
+                  icon={CheckCircleIcon}
                 >
-                  Approve Event
-                </button>
-                <div
-                  className="modal fade"
-                  id="exampleModal1"
-                  tabindex="-1"
-                  aria-labelledby="exampleModalLabel"
-                  aria-hidden="true"
-                >
-                  <div className="modal-dialog">
-                    <div className="modal-content">
-                      <div className="modal-header">
-                        <h1 className="modal-title fs-5" id="exampleModalLabel">
-                          Event Approval
-                        </h1>
-                        <button
-                          type="button"
-                          className="btn-close"
-                          data-bs-dismiss="modal"
-                          aria-label="Close"
-                        ></button>
-                      </div>
-                      <div className="modal-body">
-                        Are you sure you want to approve this event:{item.name}?
-                        {data && data.errors && (
-                          <ul>
-                            {Object.values(data.errors).map((err) => (
-                              <li key={err}>{err}</li>
-                            ))}
-                          </ul>
-                        )}
-                      </div>
-                      <div className="modal-footer">
-                        <button
-                          type="button"
-                          className="btn btn-secondary"
-                          data-bs-dismiss="modal"
-                        >
-                          Close
-                        </button>
-                        <button type="button" className="btn btn-primary">
-                          Save changes
-                        </button>
-                      </div>
+                  Approve
+                </Button>
+                {isOpen1 && (
+                  <div className="fixed inset-0 flex items-center justify-center z-50">
+                    <div className="fixed inset-0 bg-black opacity-50"></div>
+                    <div className="relative z-10 bg-white rounded-md w-96">
+                      <form>
+                        <div className="p-6">
+                          <h1 className="text-lg font-bold">Event Approval</h1>
+                          <p>
+                            Are you sure you want to reject this event :
+                            {item.name}?
+                            {data && data.errors && (
+                              <ul>
+                                {Object.values(data.errors).map((err) => (
+                                  <li key={err}>{err}</li>
+                                ))}
+                              </ul>
+                            )}{" "}
+                          </p>
+                        </div>
+                        <div className="px-6 py-4 bg-gray-100 flex items-center justify-end gap-x-4">
+                          <button
+                            type="button"
+                            onClick={handleCloseModal1}
+                            className="text-sm font-semibold text-gray-900"
+                          >
+                            Close
+                          </button>
+                          <button
+                            type="submit"
+                            className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600"
+                          >
+                            Save changes
+                          </button>
+                        </div>
+                      </form>
                     </div>
                   </div>
-                </div>
+                )}
               </TableCell>
               <TableCell className="text-right">
-                <button
+                <Button
                   type="button"
                   onClick={() => handleReject({ id: item.id })}
+                  onClick={handleOpenModal}
                   className="btn btn-primary"
-                  data-bs-toggle="modal"
-                  data-bs-target="#exampleModal"
-                >
-                  Reject Event
-                </button>
-                <div
-                  className="modal fade"
-                  id="exampleModal"
-                  tabindex="-1"
-                  aria-labelledby="exampleModalLabel"
-                  aria-hidden="true"
-                >
-                  <div className="modal-dialog">
-                    <div className="modal-content">
-                      <div className="modal-header">
-                        <h1 className="modal-title fs-5" id="exampleModalLabel">
-                          Event Rejection
-                        </h1>
-                        <button
-                          type="button"
-                          className="btn-close"
-                          data-bs-dismiss="modal"
-                          aria-label="Close"
-                        ></button>
-                      </div>
-                      <div className="modal-body">
-                        Are you sure you want to reject this event:{item.name}?
-                        {data && data.errors && (
-                          <ul>
-                            {Object.values(data.errors).map((err) => (
-                              <li key={err}>{err}</li>
-                            ))}
-                          </ul>
-                        )}
-                      </div>
-                      <div className="modal-footer">
-                        <button
-                          type="button"
-                          className="btn btn-secondary"
-                          data-bs-dismiss="modal"
-                        >
-                          Close
-                        </button>
-                        <button type="button" className="btn btn-primary">
-                          Save changes
-                        </button>
-                      </div>
+                  variant="secondary"
+                  icon={XCircleIcon}>
+                  Reject
+                </Button>
+                {isOpen && (
+                  <div className="fixed inset-0 flex items-center justify-center z-50">
+                    <div className="fixed inset-0 bg-black opacity-50"></div>
+                    <div className="relative z-10 bg-white rounded-md w-96">
+                      <form>
+                        <div className="p-6">
+                          <h1 className="text-lg font-bold">Event Rejection</h1>
+                          <p>
+                            Are you sure you want to reject this event :
+                            {item.name}?
+                            {data && data.errors && (
+                              <ul>
+                                {Object.values(data.errors).map((err) => (
+                                  <li key={err}>{err}</li>
+                                ))}
+                              </ul>
+                            )}{" "}
+                          </p>
+                        </div>
+                        <div className="px-6 py-4 bg-gray-100 flex items-center justify-end gap-x-4">
+                          <button
+                            type="button"
+                            onClick={handleCloseModal}
+                            className="text-sm font-semibold text-gray-900"
+                          >
+                            Close
+                          </button>
+                          <button
+                            type="submit"
+                            className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600"
+                          >
+                            Save changes
+                          </button>
+                        </div>
+                      </form>
                     </div>
                   </div>
-                </div>
+                )}
               </TableCell>
             </TableRow>
           ))}
