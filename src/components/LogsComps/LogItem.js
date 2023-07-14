@@ -15,6 +15,14 @@ function LogItem({ log }) {
     <React.Fragment>
       <div className="px-4 py-3 sm:grid sm:grid-cols-3 hover:bg-white sm:gap-4 sm:px-0">
         <dt className="text-sm font-medium leading-6 text-gray-900">
+          Weight
+        </dt>
+        <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+          {log.weight}
+        </dd>
+      </div>
+      <div className="px-4 py-3 sm:grid sm:grid-cols-3 hover:bg-white sm:gap-4 sm:px-0">
+        <dt className="text-sm font-medium leading-6 text-gray-900">
           Blood Pressure
         </dt>
         <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
