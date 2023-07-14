@@ -34,7 +34,6 @@ async function AllActivitiesLoader() {
     throw json({ message: "Cant get activities" }, { status: 500 });
   } else {
     const resData = await response.json();
-    console.log(resData);
     return resData;
   }
 }
