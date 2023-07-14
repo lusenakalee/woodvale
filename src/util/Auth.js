@@ -75,7 +75,6 @@ async function totalResidentsLoader() {
   }
 
   const resData = await response.json();
-  console.log(resData);
   return resData;
 }
 
@@ -103,7 +102,6 @@ async function leavesLoader() {
   }
 
   const resData = await response.json();
-  console.log(resData);
   return resData;
 }
 
@@ -131,7 +129,6 @@ async function totalIncidentsLoader() {
   }
 
   const resData = await response.json();
-  console.log(resData);
   return resData;
 }
 
@@ -159,13 +156,69 @@ async function activitiesLoader() {
   }
 
   const resData = await response.json();
-  console.log(resData);
   return resData;
 }
 
 
 async function dailyRecordsLoader() {
   let url = "/dashboard/daily-records";
+  const token = getAuthToken();
+  const response = await fetch(url, {
+    method: "get",
+    headers: {
+      Authorization: "Bearer " + token,
+      "Access-Control-Allow-Origin": "*",
+    },
+  });
+  if (response.status === 401) {
+    return;
+  }
+  if (response.status === 400) {
+    return response;
+  }
+  if (response.status === 404) {
+    return response;
+  }
+  if (!response.ok) {
+    throw json({ message: "Server Error" }, { status: 500 });
+  }
+
+  const resData = await response.json();
+  return resData;
+}
+
+
+async function lastLoginLoader() {
+  let url = "/dashboard/last-login";
+  const token = getAuthToken();
+  const response = await fetch(url, {
+    method: "get",
+    headers: {
+      Authorization: "Bearer " + token,
+      "Access-Control-Allow-Origin": "*",
+    },
+  });
+  if (response.status === 401) {
+    return;
+  }
+  if (response.status === 400) {
+    return response;
+  }
+  if (response.status === 404) {
+    return response;
+  }
+  if (!response.ok) {
+    throw json({ message: "Server Error" }, { status: 500 });
+  }
+
+  const resData = await response.json();
+  console.log(resData);
+  return resData;
+}
+
+
+async function healthDataLoader() {
+  let url = "/dashboard/residents/health_data";
   const token = getAuthToken();
   const response = await fetch(url, {
     method: "get",
@@ -215,7 +268,8 @@ export async function tokenLoader() {
     leaves: await leavesLoader(),
     activities: await activitiesLoader(),
     dailyRecords: await dailyRecordsLoader(),
-
+    lastLogin: await lastLoginLoader(),
     totalIncidents: await totalIncidentsLoader(),
+    healthData : await healthDataLoader(),
   });
 }

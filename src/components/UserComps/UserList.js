@@ -38,6 +38,7 @@ function UserList({ users }) {
             variant="simple"
             tooltip="Shows general employee information"
           />
+          <Title></Title>
         </Flex>
       </div>
       <div className="flex space-x-2">
