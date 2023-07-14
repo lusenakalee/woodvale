@@ -1,29 +1,26 @@
-import React from 'react'
-import Nav from '../components/RootComps/Nav'
-import ResidentList from '../components/ResidentComps/ResidentList'
+import React from "react";
+import Nav from "../components/RootComps/Nav";
+import ResidentList from "../components/ResidentComps/ResidentList";
 
 function Residents() {
   return (
     <>
-      
-    <div className="min-h-full">
-     
-    
-
-      <header className="bg-white shadow">
-        <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-          <h1 className="text-3xl font-bold tracking-tight text-gray-900">Residents</h1>
-        </div>
-      </header>
-      <main>
-        <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
-        
-          <ResidentList/>
+      <div className="min-h-full">
+        <header className="bg-white shadow">
+          <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+            <h1 className="text-3xl font-bold tracking-tight text-gray-900">
+              Residents
+            </h1>
           </div>
-      </main>
-    </div>
-  </>
-  )
+        </header>
+        <main>
+          <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+            <ResidentList />
+          </div>
+        </main>
+      </div>
+    </>
+  );
 }
 
-export default Residents
+export default Residents;

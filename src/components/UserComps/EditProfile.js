@@ -21,6 +21,7 @@ function EditProfile({ method, user, title }) {
 
   //modal
   const [isOpen, setIsOpen] = useState(false);
+
   const handleOpenModal = () => {
     setIsOpen(true);
   };
@@ -31,14 +32,18 @@ function EditProfile({ method, user, title }) {
 
   id = user.id;
   const isSubmitting = navigation.state === "submitting";
+
   function cancelHandler() {
     navigate("..");
   }
+
   const handleFileChange = (event) => {
     setFile(event.target.files[0]);
   };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
+    handleCloseModal();
     const bearerToken = getAuthToken();
 
     const formData = new FormData();
@@ -56,9 +61,7 @@ function EditProfile({ method, user, title }) {
         window.alert("Only Image attachment are allowed!!");
       }
       if (response.ok) {
-        window.alert(
-          "File uploaded successfully! Do you want to go to the user page?"
-        );
+        window.confirm("File uploaded successfully");
       } else {
         window.alert("failed to upload");
       }
@@ -66,6 +69,7 @@ function EditProfile({ method, user, title }) {
       window.alert("Network error", error);
     }
   };
+
   useEffect(() => {
     const fetchImage = async () => {
       try {
@@ -94,6 +98,61 @@ function EditProfile({ method, user, title }) {
     <React.Fragment>
       <main>
         <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+        <div>
+            <button
+              type="button"
+              onClick={handleOpenModal}
+              className="inline-flex opacity-80 items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+            >
+              <UserCircleIcon
+                className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"
+                aria-hidden="true"
+              />
+              Upload Patient Picture
+            </button>
+          </div>
+          {isOpen && (
+            <div className="fixed inset-0 flex items-center justify-center z-50">
+              <div className="fixed inset-0 bg-black opacity-50"></div>
+              <div className="relative z-10 bg-white rounded-md w-96">
+                <form onSubmit={handleSubmit}>
+                  <div className="p-6">
+                    <h1 className="text-lg font-bold">Profile Pic Upload</h1>
+                    <div className="mt-4">
+                      <label
+                        htmlFor="formFileSm"
+                        className="block font-semibold"
+                      >
+                        Upload Your Image
+                      </label>
+                      <input
+                        className="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
+                        id="formFileSm"
+                        type="file"
+                        name="file"
+                        onChange={handleFileChange}
+                      />
+                    </div>
+                  </div>
+                  <div className="px-6 py-4 bg-gray-100 flex items-center justify-end gap-x-4">
+                    <button
+                      type="button"
+                      onClick={handleCloseModal}
+                      className="text-sm font-semibold text-gray-900"
+                    >
+                      Close
+                    </button>
+                    <button
+                      type="submit"
+                      className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600"
+                    >
+                      Save changes
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          )}
           <Form method={method}>
             <div className="space-y-12">
               <div className="border-b border-gray-900/10 pb-12">
@@ -210,65 +269,6 @@ function EditProfile({ method, user, title }) {
                       />
                     </div>
                   </div>
-
-                  <div>
-                    <button
-                      type="button"
-                      onClick={handleOpenModal}
-                      className="inline-flex opacity-80 items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                    >
-                      <UserCircleIcon
-                        className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"
-                        aria-hidden="true"
-                      />
-                      Upload Patient Picture
-                    </button>
-                  </div>
-
-                  {isOpen && (
-                    <div className="fixed inset-0 flex items-center justify-center z-50">
-                      <div className="fixed inset-0 bg-black opacity-50"></div>
-                      <div className="relative z-10 bg-white rounded-md w-96">
-                        <form onSubmit={handleSubmit}>
-                          <div className="p-6">
-                            <h1 className="text-lg font-bold">
-                              Profile Pic Upload
-                            </h1>
-                            <div className="mt-4">
-                              <label
-                                htmlFor="formFileSm"
-                                className="block font-semibold"
-                              >
-                                Upload Patient Image
-                              </label>
-                              <input
-                                className="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
-                                id="formFileSm"
-                                type="file"
-                                name="file"
-                                onChange={handleFileChange}
-                              />
-                            </div>
-                          </div>
-                          <div className="px-6 py-4 bg-gray-100 flex items-center justify-end gap-x-4">
-                            <button
-                              type="button"
-                              onClick={handleCloseModal}
-                              className="text-sm font-semibold text-gray-900"
-                            >
-                              Close
-                            </button>
-                            <button
-                              type="submit"
-                              className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600"
-                            >
-                              Save changes
-                            </button>
-                          </div>
-                        </form>
-                      </div>
-                    </div>
-                  )}
                 </div>
               </div>
 

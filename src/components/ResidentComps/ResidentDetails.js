@@ -69,7 +69,7 @@ function ResidentDetails({ resident }) {
       }
       if (response.ok) {
         window.confirm(
-          "File uploaded successfully! Do you want to go to the resident page?"
+          "File uploaded successfully!"
         );
       } else {
         window.alert("failed to upload");

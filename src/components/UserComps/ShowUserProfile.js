@@ -25,7 +25,7 @@ function ShowUserProfile({user}) {
   useEffect(() => {
     const fetchImage = async () => {
       try {
-        const response = await fetch(`/users/img/${user.id}`, {
+        const response = await fetch(`/upload/${user.id}`, {
           headers: {
             Authorization: "Bearer " + imgToken,
           },

@@ -3,9 +3,7 @@ import Dashboard from "./pages/Dashboard";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import SignUp, { signUpAction } from "./components/SignupComps/SignUp";
 import SignIn, { loginAction } from "./components/SignupComps/SignIn";
-import { tokenLoader } from "./util/Auth";
 import ErrorPage from "./pages/RootPages/ErrorPage";
-import RootLayout from "./pages/RootPages/RootLayout";
 import HomePage from "./pages/RootPages/HomePage";
 import { Suspense, lazy } from "react";
 import { logoutAction } from "./pages/RootPages/Logout";
@@ -83,6 +81,8 @@ const ResidentDetailPage = lazy(() =>
   import("./pages/ResidentPages/ResidentDetailPage")
 );
 
+const RootLayout = lazy(() => import("./pages/RootPages/RootLayout"));
+
 const AllLogsPage = lazy(() => import("./pages/LogsPages/AllLogsPage"));
 
 const NewLogsPage = lazy(() => import("./pages/LogsPages/NewLogsPage"));
@@ -137,9 +137,14 @@ const router = createBrowserRouter([
   {
     path: "/login",
     id: "root",
-    loader: tokenLoader,
+    loader: (meta) =>
+      import("./util/Auth").then((module) => module.tokenLoader(meta)),
     errorElement: <ErrorPage />,
-    element: <RootLayout />,
+    element: (
+      <Suspense fallback={<p>Loading...</p>}>
+        <RootLayout />
+      </Suspense>
+    ),
     children: [
       {
         index: true,
@@ -593,9 +598,9 @@ const router = createBrowserRouter([
                     path: ":logID",
                     id: "log-detail",
                     loader: (meta) =>
-                    import("./pages/LogsPages/LogDetailsPage").then((module) =>
-                      module.loader(meta)
-                    ),  
+                      import("./pages/LogsPages/LogDetailsPage").then(
+                        (module) => module.loader(meta)
+                      ),
                     children: [
                       {
                         index: true,
