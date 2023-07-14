@@ -40,12 +40,7 @@ export default function Dashboard() {
     dailyRecords,
   } = routeLoaderData;
 
-  interface leavesChartData {
-    name: string;
-    value: number;
-  }
-
-  const leavesChart: leavesChartData[] = [
+  const leavesChart = [
     {
       name: "Pending Approval",
       value: leaves.pending_approval_leaves,
@@ -66,7 +61,7 @@ export default function Dashboard() {
         <header className="bg-white shadow">
           <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
             <h1 className="text-3xl font-bold tracking-tight text-gray-900">
-              Welcome {user ? user.first_name: ""} {user ? user.last_name: ""}
+              Welcome {user ? user.first_name : ""} {user ? user.last_name : ""}
             </h1>
           </div>
         </header>
