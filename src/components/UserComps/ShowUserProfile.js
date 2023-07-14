@@ -1,23 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Link, useActionData } from "react-router-dom";
-import { useRouteLoaderData, useSubmit } from "react-router-dom";
 import { getAuthToken } from "../../util/Auth";
 
-
-
-function ShowUserProfile({user}) {
-
-  const token = useRouteLoaderData("root");
-  const submit = useSubmit();
+function ShowUserProfile({ user }) {
   const imgToken = getAuthToken();
 
-  function startDeleteHandler() {
-    const proceed = window.confirm("Are you sure?");
-
-    if (proceed) {
-      submit(null, { method: "delete" });
-    }
-  }
   const data = useActionData();
 
   const [imageUrl, setImageUrl] = useState("");
@@ -25,7 +12,7 @@ function ShowUserProfile({user}) {
   useEffect(() => {
     const fetchImage = async () => {
       try {
-        const response = await fetch(`/users/img/${user.id}`, {
+        const response = await fetch(`/upload/${user.id}`, {
           headers: {
             Authorization: "Bearer " + imgToken,
           },
@@ -46,10 +33,9 @@ function ShowUserProfile({user}) {
     fetchImage();
   }, []);
 
-  
   return (
     <React.Fragment>
-        {data && data.errors && (
+      {data && data.errors && (
         <ul>
           {Object.values(data.errors).map((err) => (
             <li key={err}>{err}</li>
@@ -57,23 +43,23 @@ function ShowUserProfile({user}) {
         </ul>
       )}
       <div className="flex gap-x-4">
-                {imageUrl && (
-                  <img
-                    className="h-12 w-12 flex-none rounded-full bg-gray-50"
-                    src={imageUrl}
-                    alt="Profile"
-                  />
-                )}
-                <div className="min-w-0 flex-auto">
-                  <p className="text-sm font-semibold leading-6 text-gray-900">
-                    {user.first_name}'s Information
-                  </p>
-                  <p className="mt-1 truncate text-xs leading-5 text-gray-500">
-                    {" "}
-                    General details and Information.
-                  </p>
-                </div>
-              </div>
+        {imageUrl && (
+          <img
+            className="h-12 w-12 flex-none rounded-full bg-gray-50"
+            src={imageUrl}
+            alt="Profile"
+          />
+        )}
+        <div className="min-w-0 flex-auto">
+          <p className="text-sm font-semibold leading-6 text-gray-900">
+            {user.first_name}'s Information
+          </p>
+          <p className="mt-1 truncate text-xs leading-5 text-gray-500">
+            {" "}
+            General details and Information.
+          </p>
+        </div>
+      </div>
 
       <div className="px-4 py-3 sm:grid sm:grid-cols-3 hover:bg-white sm:gap-4 sm:px-0">
         <dt className="text-sm font-medium leading-6 text-gray-900">
@@ -88,7 +74,7 @@ function ShowUserProfile({user}) {
           Username
         </dt>
         <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-          {user.username} 
+          {user.username}
         </dd>
       </div>
       <div className="px-4 py-3 sm:grid sm:grid-cols-3 hover:bg-white sm:gap-4 sm:px-0">
@@ -96,12 +82,11 @@ function ShowUserProfile({user}) {
           User type
         </dt>
         <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-          {user.is_admin=== true ? "Admin": "Care Giver"} 
+          {user.is_admin === true ? "Admin" : "Care Giver"}
         </dd>
       </div>
-    
-        <div className=" px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-   
+
+      <div className=" px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
         <dd>
           <Link to={`./edit`}>
             <button className="px-4 py-2 text-sm font-medium text-gray-900 bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
@@ -110,9 +95,8 @@ function ShowUserProfile({user}) {
           </Link>
         </dd>
       </div>
-    
     </React.Fragment>
-  )
+  );
 }
 
-export default ShowUserProfile
+export default ShowUserProfile;

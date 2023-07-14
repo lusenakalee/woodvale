@@ -3,9 +3,7 @@ import Dashboard from "./pages/Dashboard";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import SignUp, { signUpAction } from "./components/SignupComps/SignUp";
 import SignIn, { loginAction } from "./components/SignupComps/SignIn";
-import { tokenLoader } from "./util/Auth";
 import ErrorPage from "./pages/RootPages/ErrorPage";
-import RootLayout from "./pages/RootPages/RootLayout";
 import HomePage from "./pages/RootPages/HomePage";
 import { Suspense, lazy } from "react";
 import { logoutAction } from "./pages/RootPages/Logout";
@@ -37,9 +35,17 @@ const EditIncidentPage = lazy(() =>
   import("./pages/IncidentPages/EditIncidents")
 );
 
+const IncidentDetailPage = lazy(() =>
+  import("./pages/IncidentPages/IncidentDetailPage")
+);
+
 const NewLeavesPage = lazy(() => import("./pages/LeavePages/NewLeavesPage"));
 
 const EditLeavesPage = lazy(() => import("./pages/LeavePages/EditLeave"));
+
+const LeavesDetailPage = lazy(() =>
+  import("./pages/LeavePages/LeaveDetailPage")
+);
 
 const ViewLeavesPage = lazy(() => import("./pages/LeavePages/ViewLeavesPage"));
 
@@ -82,6 +88,8 @@ const NewResidentPage = lazy(() =>
 const ResidentDetailPage = lazy(() =>
   import("./pages/ResidentPages/ResidentDetailPage")
 );
+
+const RootLayout = lazy(() => import("./pages/RootPages/RootLayout"));
 
 const AllLogsPage = lazy(() => import("./pages/LogsPages/AllLogsPage"));
 
@@ -137,9 +145,14 @@ const router = createBrowserRouter([
   {
     path: "/login",
     id: "root",
-    loader: tokenLoader,
+    loader: (meta) =>
+      import("./util/Auth").then((module) => module.tokenLoader(meta)),
     errorElement: <ErrorPage />,
-    element: <RootLayout />,
+    element: (
+      <Suspense fallback={<p>Loading...</p>}>
+        <RootLayout />
+      </Suspense>
+    ),
     children: [
       {
         index: true,
@@ -419,12 +432,38 @@ const router = createBrowserRouter([
                       ),
                   },
                   {
-                    path: "edit",
-                    element: (
-                      <Suspense fallback={<p>Loading...</p>}>
-                        <EditIncidentPage />
-                      </Suspense>
-                    ),
+                    path: ":incidentId",
+                    id: "incident",
+                    loader: (meta) =>
+                      import("./pages/IncidentPages/IncidentDetailPage").then(
+                        (module) => module.loader(meta)
+                      ),
+                    children: [
+                      {
+                        index: true,
+                        element: (
+                          <Suspense fallback={<p>Loading...</p>}>
+                            <IncidentDetailPage />
+                          </Suspense>
+                        ),
+                        action: (meta) =>
+                          import(
+                            "./pages/IncidentPages/IncidentDetailPage"
+                          ).then((module) => module.action(meta)),
+                      },
+                      {
+                        path: "edit",
+                        element: (
+                          <Suspense fallback={<p>Loading...</p>}>
+                            <EditIncidentPage />
+                          </Suspense>
+                        ),
+                        action: (meta) =>
+                          import(
+                            "./components/IncidentComps/NewIncidentForm"
+                          ).then((module) => module.action(meta)),
+                      },
+                    ],
                   },
                 ],
               },
@@ -462,13 +501,40 @@ const router = createBrowserRouter([
                     ),
                   },
                   {
-                    path: "edit",
-                    element: (
-                      <Suspense fallback={<p>Loading..</p>}>
-                        <EditLeavesPage />
-                      </Suspense>
-                    ),
+                    path: ":leaveId",
+                    id: "leave",
+                    loader: (meta) =>
+                      import("./pages/LeavePages/LeaveDetailPage").then(
+                        (module) => module.loader(meta)
+                      ),
+                    children: [
+                      {
+                        index: true,
+                        element: (
+                          <Suspense fallback={<p>Loading...</p>}>
+                            <LeavesDetailPage />
+                          </Suspense>
+                        ),
+                        action: (meta) =>
+                        import("./pages/LeavePages/LeaveDetailPage").then(
+                          (module) => module.action(meta)
+                        )
+                      },
+                      {
+                        path: "edit",
+                        element: (
+                          <Suspense fallback={<p>Loading..</p>}>
+                            <EditLeavesPage />
+                          </Suspense>
+                        ),
+                        action: (meta) =>
+                        import("./components/LeaveComps/NewLeaveForm").then(
+                          (module) => module.action(meta)
+                        )
+                      },
+                    ],
                   },
+                  ,
                 ],
               },
               {
@@ -593,9 +659,9 @@ const router = createBrowserRouter([
                     path: ":logID",
                     id: "log-detail",
                     loader: (meta) =>
-                    import("./pages/LogsPages/LogDetailsPage").then((module) =>
-                      module.loader(meta)
-                    ),  
+                      import("./pages/LogsPages/LogDetailsPage").then(
+                        (module) => module.loader(meta)
+                      ),
                     children: [
                       {
                         index: true,

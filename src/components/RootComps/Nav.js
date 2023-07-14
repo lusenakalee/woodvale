@@ -46,7 +46,7 @@ export default function Nav({ userData }) {
     };
 
     fetchImage();
-  }, [userData]);
+  }, []);
   return (
     <>
       <Disclosure as="nav" className="bg-gray-800">
@@ -57,21 +57,23 @@ export default function Nav({ userData }) {
                 <div className="flex items-center">
                   <div className="hidden md:block">
                     <div className="ml-10 flex items-baseline space-x-4">
-                      {navigation.map((item) => (
-                        <Link
-                          key={item.name}
-                          to={item.to}
-                          className={classNames(
-                            item.current
-                              ? "bg-gray-900 text-white"
-                              : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                            "rounded-md px-3 py-2 text-sm font-medium"
-                          )}
-                          aria-current={item.current ? "page" : undefined}
-                        >
-                          {item.name}
-                        </Link>
-                      ))}
+                      {navigation.map((item) =>
+                        item.name === "Team" && userData &&!userData.is_admin ? null : (
+                          <Link
+                            key={item.name}
+                            to={item.to}
+                            className={classNames(
+                              item.current
+                                ? "bg-gray-900 text-white"
+                                : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                              "rounded-md px-3 py-2 text-sm font-medium"
+                            )}
+                            aria-current={item.current ? "page" : undefined}
+                          >
+                            {item.name}
+                          </Link>
+                        )
+                      )}
                     </div>
                   </div>
                 </div>
@@ -163,15 +165,14 @@ export default function Nav({ userData }) {
               <div className="border-t border-gray-700 pb-3 pt-4">
                 <div className="flex items-center px-5">
                   <div className="flex-shrink-0"></div>
-                
+
                   <div className="ml-3">
                     <div className="text-base font-medium leading-none text-red">
-                      {user.email}
+                      {userData && userData.username ? userData.username : ""}
                     </div>
                     <div className="text-sm font-medium leading-none text-gray-400">
-                      {user.name}
+                    {userData && userData.first_name ? userData.first_name: ""}
                     </div>
-              
                   </div>
                   <button
                     type="button"
