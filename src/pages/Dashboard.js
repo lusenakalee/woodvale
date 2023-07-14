@@ -31,7 +31,13 @@ function classNames(...classes) {
 
 export default function Dashboard() {
   const [isFormVisible, setIsFormVisible] = useState(false);
- 
+  const [totalResidents, setTotalResidents] = useState(0);
+  const [totalIncidents, setTotalIncidents] = useState(0);
+  const [pendingLeaves, setPendingLeaves] = useState(0);
+  const [pendingReturn, setPendingReturn] = useState(0);
+  const [approvedLeaves, setApprovedLeaves] = useState(0);
+
+  const { user,} = useRouteLoaderData("root");
 
   const { user, pendingLeaves, pendingReturn, approvedLeaves, totalIncidents ,  totalResidents  } = useRouteLoaderData("root");
 

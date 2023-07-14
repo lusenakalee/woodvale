@@ -63,7 +63,7 @@ function NewLogsForm({ method, title, log }) {
             <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
               <div className="sm:col-span-2 sm:col-start-1">
                 <label className="block text-sm font-medium leading-6 text-gray-900">
-                  Heart Rate
+                  Heart Rate(B.P.M)
                 </label>
                 <div className="mt-2">
                   <input
@@ -94,7 +94,7 @@ function NewLogsForm({ method, title, log }) {
                   htmlFor="Height"
                   className="block text-sm font-medium leading-6 text-gray-900"
                 >
-                  Blood Pressure
+                  Blood Pressure(mmHg)
                 </label>
                 <div className="mt-2">
                   <input
