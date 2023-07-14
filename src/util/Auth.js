@@ -79,7 +79,7 @@ async function totalResidentsLoader() {
   return resData;
 }
 
-async function pendingLeavesLoader() {
+async function leavesLoader() {
   let url = "/dashboard/leaves";
   const token = getAuthToken();
   const response = await fetch(url, {
@@ -104,63 +104,7 @@ async function pendingLeavesLoader() {
 
   const resData = await response.json();
   console.log(resData);
-  return resData.pending_approval_leaves;
-}
-
-async function pendingReturnLeavesLoader() {
-  let url = "/dashboard/leaves";
-  const token = getAuthToken();
-  const response = await fetch(url, {
-    method: "get",
-    headers: {
-      Authorization: "Bearer " + token,
-      "Access-Control-Allow-Origin": "*",
-    },
-  });
-  if (response.status === 401) {
-    return;
-  }
-  if (response.status === 400) {
-    return response;
-  }
-  if (response.status === 404) {
-    return response;
-  }
-  if (!response.ok) {
-    throw json({ message: "Server Error" }, { status: 500 });
-  }
-
-  const resData = await response.json();
-  console.log(resData);
-  return resData.pending_return_leaves;
-}
-
-async function approvedLeavesLoader() {
-  let url = "/dashboard/leaves";
-  const token = getAuthToken();
-  const response = await fetch(url, {
-    method: "get",
-    headers: {
-      Authorization: "Bearer " + token,
-      "Access-Control-Allow-Origin": "*",
-    },
-  });
-  if (response.status === 401) {
-    return;
-  }
-  if (response.status === 400) {
-    return response;
-  }
-  if (response.status === 404) {
-    return response;
-  }
-  if (!response.ok) {
-    throw json({ message: "Server Error" }, { status: 500 });
-  }
-
-  const resData = await response.json();
-  console.log(resData);
-  return resData.approved_leaves_count;
+  return resData;
 }
 
 async function totalIncidentsLoader() {
@@ -191,6 +135,71 @@ async function totalIncidentsLoader() {
   return resData;
 }
 
+async function activitiesLoader() {
+  let url = "/dashboard/activities";
+  const token = getAuthToken();
+  const response = await fetch(url, {
+    method: "get",
+    headers: {
+      Authorization: "Bearer " + token,
+      "Access-Control-Allow-Origin": "*",
+    },
+  });
+  if (response.status === 401) {
+    return;
+  }
+  if (response.status === 400) {
+    return response;
+  }
+  if (response.status === 404) {
+    return response;
+  }
+  if (!response.ok) {
+    throw json({ message: "Server Error" }, { status: 500 });
+  }
+
+  const resData = await response.json();
+  console.log(resData);
+  return resData;
+}
+
+
+async function dailyRecordsLoader() {
+  let url = "/dashboard/daily-records";
+  const token = getAuthToken();
+  const response = await fetch(url, {
+    method: "get",
+    headers: {
+      Authorization: "Bearer " + token,
+      "Access-Control-Allow-Origin": "*",
+    },
+  });
+  if (response.status === 401) {
+    return;
+  }
+  if (response.status === 400) {
+    return response;
+  }
+  if (response.status === 404) {
+    return response;
+  }
+  if (!response.ok) {
+    throw json({ message: "Server Error" }, { status: 500 });
+  }
+
+  const resData = await response.json();
+  console.log(resData);
+  return resData;
+}
+
+
+
+
+
+
+
+
+
 export function checkToken() {
   const token = getAuthToken();
   if (!token) {
@@ -203,9 +212,10 @@ export async function tokenLoader() {
     root: userTokenLoader(),
     user: await currentUserLoader(),
     totalResidents: await totalResidentsLoader(),
-    pendingLeaves: await pendingLeavesLoader(),
-    pendingReturn: await pendingReturnLeavesLoader(),
-    approvedLeaves: await approvedLeavesLoader(),
+    leaves: await leavesLoader(),
+    activities: await activitiesLoader(),
+    dailyRecords: await dailyRecordsLoader(),
+
     totalIncidents: await totalIncidentsLoader(),
   });
 }
