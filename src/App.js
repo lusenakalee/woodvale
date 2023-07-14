@@ -35,9 +35,17 @@ const EditIncidentPage = lazy(() =>
   import("./pages/IncidentPages/EditIncidents")
 );
 
+const IncidentDetailPage = lazy(() =>
+  import("./pages/IncidentPages/IncidentDetailPage")
+);
+
 const NewLeavesPage = lazy(() => import("./pages/LeavePages/NewLeavesPage"));
 
 const EditLeavesPage = lazy(() => import("./pages/LeavePages/EditLeave"));
+
+const LeavesDetailPage = lazy(() =>
+  import("./pages/LeavePages/LeaveDetailPage")
+);
 
 const ViewLeavesPage = lazy(() => import("./pages/LeavePages/ViewLeavesPage"));
 
@@ -424,12 +432,38 @@ const router = createBrowserRouter([
                       ),
                   },
                   {
-                    path: "edit",
-                    element: (
-                      <Suspense fallback={<p>Loading...</p>}>
-                        <EditIncidentPage />
-                      </Suspense>
-                    ),
+                    path: ":incidentId",
+                    id: "incident",
+                    loader: (meta) =>
+                      import("./pages/IncidentPages/IncidentDetailPage").then(
+                        (module) => module.loader(meta)
+                      ),
+                    children: [
+                      {
+                        index: true,
+                        element: (
+                          <Suspense fallback={<p>Loading...</p>}>
+                            <IncidentDetailPage />
+                          </Suspense>
+                        ),
+                        action: (meta) =>
+                          import(
+                            "./pages/IncidentPages/IncidentDetailPage"
+                          ).then((module) => module.action(meta)),
+                      },
+                      {
+                        path: "edit",
+                        element: (
+                          <Suspense fallback={<p>Loading...</p>}>
+                            <EditIncidentPage />
+                          </Suspense>
+                        ),
+                        action: (meta) =>
+                          import(
+                            "./components/IncidentComps/NewIncidentForm"
+                          ).then((module) => module.action(meta)),
+                      },
+                    ],
                   },
                 ],
               },
@@ -467,13 +501,40 @@ const router = createBrowserRouter([
                     ),
                   },
                   {
-                    path: "edit",
-                    element: (
-                      <Suspense fallback={<p>Loading..</p>}>
-                        <EditLeavesPage />
-                      </Suspense>
-                    ),
+                    path: ":leaveId",
+                    id: "leave",
+                    loader: (meta) =>
+                      import("./pages/LeavePages/LeaveDetailPage").then(
+                        (module) => module.loader(meta)
+                      ),
+                    children: [
+                      {
+                        index: true,
+                        element: (
+                          <Suspense fallback={<p>Loading...</p>}>
+                            <LeavesDetailPage />
+                          </Suspense>
+                        ),
+                        action: (meta) =>
+                        import("./pages/LeavePages/LeaveDetailPage").then(
+                          (module) => module.action(meta)
+                        )
+                      },
+                      {
+                        path: "edit",
+                        element: (
+                          <Suspense fallback={<p>Loading..</p>}>
+                            <EditLeavesPage />
+                          </Suspense>
+                        ),
+                        action: (meta) =>
+                        import("./components/LeaveComps/NewLeaveForm").then(
+                          (module) => module.action(meta)
+                        )
+                      },
+                    ],
                   },
+                  ,
                 ],
               },
               {

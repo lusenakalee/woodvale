@@ -31,9 +31,6 @@ function ViewLeavesForm({ leaves }) {
     }
   }
 
-
-
-
   return (
     <React.Fragment>
       <div>
@@ -51,14 +48,19 @@ function ViewLeavesForm({ leaves }) {
         </Flex>
       </div>
 
-
       <Table className="mt-6">
         <TableHead>
           <TableRow>
             <TableHeaderCell>Leave Date</TableHeaderCell>
-            <TableHeaderCell className="text-right">Duration(Days)</TableHeaderCell>
-            <TableHeaderCell className="text-right">Approval Status</TableHeaderCell>
-            <TableHeaderCell className="text-right">Person responsible</TableHeaderCell>
+            <TableHeaderCell className="text-right">
+              Duration(Days)
+            </TableHeaderCell>
+            <TableHeaderCell className="text-right">
+              Approval Status
+            </TableHeaderCell>
+            <TableHeaderCell className="text-right">
+              Person responsible
+            </TableHeaderCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -71,14 +73,13 @@ function ViewLeavesForm({ leaves }) {
               <TableCell className="text-right">
                 {item.approved === true ? "Approved" : "Not Approved"}
               </TableCell>
-              <TableCell className="text-right">{item.person_responsible}</TableCell>
+              <TableCell className="text-right">
+                {item.person_responsible}
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
-    
-
-      
     </React.Fragment>
   );
 }

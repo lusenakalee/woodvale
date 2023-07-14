@@ -30,6 +30,7 @@ function NewIncidentForm({ method, incident }) {
               id="incident_date"
               name="incident_date"
               type="date"
+              defaultValue={incident ? incident.incident_date : ""}
               required
               className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
             />
@@ -50,7 +51,7 @@ function NewIncidentForm({ method, incident }) {
               required
               rows={3}
               className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-              defaultValue={""}
+              defaultValue={incident ? incident.description : ""}
             />
           </div>
           <p className="mt-3 text-sm leading-6 text-gray-600">
@@ -72,7 +73,7 @@ function NewIncidentForm({ method, incident }) {
               required
               rows={3}
               className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-              defaultValue={""}
+              defaultValue={incident ? incident.actions_taken : ""}
             />
           </div>
           <p className="mt-3 text-sm leading-6 text-gray-600">
@@ -91,6 +92,7 @@ function NewIncidentForm({ method, incident }) {
             <input
               type="text"
               name="location"
+              defaultValue={incident ? incident.location : ""}
               id="location"
               className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
             />
@@ -109,6 +111,7 @@ function NewIncidentForm({ method, incident }) {
               required
               type="text"
               name="person_reporting"
+              defaultValue={incident ? incident.person_reporting : ""}
               id="person_reporting"
               className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
             />
@@ -122,6 +125,7 @@ function NewIncidentForm({ method, incident }) {
           <div className="mt-2">
             <select
               id="person_notified"
+              defaultValue={incident ? incident.person_notified : ""}
               name="person_notified"
               autoComplete="person_notified"
               className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
@@ -148,7 +152,7 @@ function NewIncidentForm({ method, incident }) {
               required
               rows={3}
               className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-              defaultValue={""}
+              defaultValue={incident ? incident.witnesses : ""}
             />
           </div>
         </div>
@@ -163,7 +167,7 @@ function NewIncidentForm({ method, incident }) {
               name="antecedent"
               rows={3}
               className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-              defaultValue={""}
+              defaultValue={incident ? incident.antecedent : ""}
             />
           </div>
         </div>
