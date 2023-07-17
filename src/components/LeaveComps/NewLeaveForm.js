@@ -157,7 +157,7 @@ export async function action({ request, params }) {
     reason: data.get("reason"),
     resident_id: id,
   };
-  let url = "/leave-records";
+  let url = "https://homes-test.onrender.com/leave-records";
   if (method === "POST") {
     const response = await fetch(url, {
       method: method,

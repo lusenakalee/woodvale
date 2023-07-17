@@ -11,7 +11,7 @@ function ResidentDetailPage() {
 
 export default ResidentDetailPage;
 export async function loader({ request, params }) {
-  let url = "/residents/";
+  let url = "https://homes-test.onrender.com/residents/";
   const token = getAuthToken();
   const id = params.id;
   const response = await fetch(url + id, {
@@ -36,7 +36,7 @@ export async function action({ request, params }) {
   const token = getAuthToken();
 
   const id = params.id;
-  const response = await fetch("/residents/" + id, {
+  const response = await fetch("https://homes-test.onrender.com/residents/" + id, {
     method: request.method,
     headers: {
       Authorization: "Bearer " + token,

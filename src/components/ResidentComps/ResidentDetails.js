@@ -57,7 +57,7 @@ function ResidentDetails({ resident }) {
     formData.append("file", file);
 
     try {
-      const response = await fetch(`/residents/${resident.id}/upload`, {
+      const response = await fetch(`https://homes-test.onrender.com/residents/${resident.id}/upload`, {
         method: "POST",
         headers: {
           Authorization: "Bearer " + bearerToken,
@@ -91,7 +91,7 @@ function ResidentDetails({ resident }) {
   useEffect(() => {
     const fetchImage = async () => {
       try {
-        const response = await fetch(`/residents/img/${resident.id}`, {
+        const response = await fetch(`https://homes-test.onrender.com/residents/img/${resident.id}`, {
           headers: {
             Authorization: "Bearer " + imgToken,
           },
