@@ -14,7 +14,7 @@ export default ViewCarePlanPage
 
 export async function loader({ request, params }) {
     const id = params.id;
-    let url = "https://homes-test.onrender.com/care-plan/" + id + "https://homes-test.onrender.com/plan";
+    let url = "https://homes-test.onrender.com/care-plan/" + id + "/plan";
     const token = getAuthToken();
 
     const response = await fetch(url, {
