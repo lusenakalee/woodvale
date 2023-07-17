@@ -385,7 +385,7 @@ export async function residentAction({ request, params }) {
     contact_email: data.get("email"),
     contact_phone_no: data.get("phone-no"),
   };
-  let url = "/residents";
+  let url = "https://homes-test.onrender.com/residents";
   if (method === "POST") {
     const response = await fetch(url, {
       method: method,
@@ -412,7 +412,7 @@ export async function residentAction({ request, params }) {
     return redirect("/login/residents");
   } else {
     const id = params.id;
-    url = "/residents/" + id;
+    url = "https://homes-test.onrender.com/residents/" + id;
     const response = await fetch(url, {
       method: method,
       headers: {

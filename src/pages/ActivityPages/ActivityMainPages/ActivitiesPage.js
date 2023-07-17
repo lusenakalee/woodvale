@@ -23,7 +23,7 @@ export default ActivitiesPage;
 async function AllActivitiesLoader() {
   const token = getAuthToken();
 
-  const response = await fetch("/activity", {
+  const response = await fetch("https://homes-test.onrender.com/activity", {
     method: "GET",
     headers: {
       Authorization: "Bearer " + token,

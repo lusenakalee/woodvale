@@ -21,7 +21,7 @@ export default AllResidentsPage;
 async function AllResidentsLoader() {
   const token = getAuthToken();
 
-  const response = await fetch("/residents", {
+  const response = await fetch("https://homes-test.onrender.com/residents", {
     method: "GET",
     headers: {
       Authorization: "Bearer " + token,

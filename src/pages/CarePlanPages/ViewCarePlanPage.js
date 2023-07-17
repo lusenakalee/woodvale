@@ -14,7 +14,7 @@ export default ViewCarePlanPage
 
 export async function loader({ request, params }) {
     const id = params.id;
-    let url = "/care-plan/" + id + "/plan";
+    let url = "https://homes-test.onrender.com/care-plan/" + id + "https://homes-test.onrender.com/plan";
     const token = getAuthToken();
 
     const response = await fetch(url, {
@@ -42,7 +42,7 @@ export async function loader({ request, params }) {
     const token = getAuthToken();
   
     const id = params.id;
-    const response = await fetch("/care-plan/" + id, {
+    const response = await fetch("https://homes-test.onrender.com/care-plan/" + id, {
       method: request.method,
       headers: {
         Authorization: "Bearer " + token,
