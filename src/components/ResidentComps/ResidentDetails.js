@@ -314,8 +314,8 @@ function ResidentDetails({ resident }) {
                   </dt>
                   <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
                     {" "}
-                    Age:{resident.age}years {"  "}D.O.B:{" "}
-                    {resident.date_of_birth}{" "}
+                    Age: {" "} {" "} {" "} {" "}{resident.age}years {" "} {" "}<br/>  {" "} {" "} {" "} {" "} {" "}{"  "}D.O.B:{" "}
+                    {" "} {" "}{resident.date_of_birth}{" "}
                   </dd>
                 </div>
                 <div className="px-4 py-3 sm:grid sm:grid-cols-3 hover:bg-white sm:gap-4 sm:px-0">
@@ -414,12 +414,11 @@ function ResidentDetails({ resident }) {
                           </div>
                         </div>
                         <div className="ml-4 flex-shrink-0">
-                          <a
-                            href="#"
+                          <Link to="#"
                             className="font-medium text-indigo-600 hover:text-indigo-500"
                           >
                             Download
-                          </a>
+                          </Link>
                         </div>
                       </li>
                       <li className="flex items-center justify-between py-4 pl-4 pr-5 text-sm leading-6">
@@ -438,12 +437,11 @@ function ResidentDetails({ resident }) {
                           </div>
                         </div>
                         <div className="ml-4 flex-shrink-0">
-                          <a
-                            href="#"
+                          <Link to="#"
                             className="font-medium text-indigo-600 hover:text-indigo-500"
                           >
                             Download
-                          </a>
+                          </Link>
                         </div>
                       </li>
                     </ul>

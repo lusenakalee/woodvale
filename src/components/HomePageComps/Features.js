@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function Features() {
   return (
@@ -15,9 +16,9 @@ function Features() {
     </div>
 
     <div className="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-      <a
+      <Link
         className="block rounded-xl border border-gray-800 p-8 shadow-xl transition hover:border-pink-500/10 hover:shadow-pink-500/10"
-        href="/services/digital-campaigns"
+        to="/services/digital-campaigns"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -43,11 +44,11 @@ function Features() {
         <p className="mt-1 text-sm text-gray-300">
         Easily store and access comprehensive resident profiles, including personal details, medical history, allergies, and preferences.
         </p>
-      </a>
+      </Link>
 
-      <a
+      <Link
         className="block rounded-xl border border-gray-800 p-8 shadow-xl transition hover:border-pink-500/10 hover:shadow-pink-500/10"
-        href="/services/digital-campaigns"
+        to="/services/digital-campaigns"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -73,11 +74,11 @@ function Features() {
         <p className="mt-1 text-sm text-gray-300">
         Streamline medication administration with automated reminders, dosage tracking, and alerts for missed doses or potential interactions.
         </p>
-      </a>
+      </Link>
 
-      <a
+      <Link
         className="block rounded-xl border border-gray-800 p-8 shadow-xl transition hover:border-pink-500/10 hover:shadow-pink-500/10"
-        href="/services/digital-campaigns"
+        to="/"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -103,11 +104,11 @@ function Features() {
         <p className="mt-1 text-sm text-gray-300">
         Create individualized care plans, conduct assessments, and track progress to ensure personalized care and monitor resident well-being.
         </p>
-      </a>
+      </Link>
 
-      <a
+      <Link
         className="block rounded-xl border border-gray-800 p-8 shadow-xl transition hover:border-pink-500/10 hover:shadow-pink-500/10"
-        href="/services/digital-campaigns"
+        to="/services/digital-campaigns"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -133,11 +134,11 @@ function Features() {
         <p className="mt-1 text-sm text-gray-300">
         Foster seamless communication and collaboration among staff members, residents, and families through secure messaging, updates, and shared care notes.
         </p>
-      </a>
+      </Link>
 
-      <a
+      <Link
         className="block rounded-xl border border-gray-800 p-8 shadow-xl transition hover:border-pink-500/10 hover:shadow-pink-500/10"
-        href="/services/digital-campaigns"
+        to="/services/digital-campaigns"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -163,11 +164,11 @@ function Features() {
         <p className="mt-1 text-sm text-gray-300">
         Implement robust security measures to protect sensitive resident information and ensure compliance with data protection regulations.
         </p>
-      </a>
+      </Link>
 
-      <a
+      <Link
         className="block rounded-xl border border-gray-800 p-8 shadow-xl transition hover:border-pink-500/10 hover:shadow-pink-500/10"
-        href="/services/digital-campaigns"
+        to="/services/digital-campaigns"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -193,16 +194,15 @@ function Features() {
         <p className="mt-1 text-sm text-gray-300">
         Assign and track tasks for caregivers, nurses, and other staff members, ensuring accountability and efficient task completion.
         </p>
-      </a>
+      </Link>
     </div>
 
     <div className="mt-12 text-center">
-      <a
-        href="#"
+      <Link to="#"
         className="inline-block rounded bg-pink-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-pink-700 focus:outline-none focus:ring focus:ring-yellow-400"
       >
         Get Started Today
-      </a>
+      </Link>
     </div>
   </div>
 </section>

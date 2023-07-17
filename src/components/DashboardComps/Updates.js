@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function Updates() {
   return (
@@ -21,7 +22,7 @@ function Updates() {
                   A new department will be opened to help fasten the care giving
                   process
                 </p>
-                <a className="text-indigo-500 inline-flex items-center mt-4">
+                <Link className="text-indigo-500 inline-flex items-center mt-4">
                   See More
                   <svg
                     className="w-4 h-4 ml-2"
@@ -35,7 +36,7 @@ function Updates() {
                     <path d="M5 12h14"></path>
                     <path d="M12 5l7 7-7 7"></path>
                   </svg>
-                </a>
+                </Link>
               </div>
             </div>
             <div className="py-8 flex flex-wrap md:flex-nowrap">
@@ -53,7 +54,7 @@ function Updates() {
                 <p className="leading-relaxed">
                   Incident report by CG Mercy................
                 </p>
-                <a className="text-indigo-500 inline-flex items-center mt-4">
+                <Link className="text-indigo-500 inline-flex items-center mt-4">
                   See More
                   <svg
                     className="w-4 h-4 ml-2"
@@ -67,7 +68,7 @@ function Updates() {
                     <path d="M5 12h14"></path>
                     <path d="M12 5l7 7-7 7"></path>
                   </svg>
-                </a>
+                </Link>
               </div>
             </div>
             <div className="py-8 flex flex-wrap md:flex-nowrap">
@@ -84,7 +85,7 @@ function Updates() {
                 <p className="leading-relaxed">
                   New resident has just been added ....
                 </p>
-                <a className="text-indigo-500 inline-flex items-center mt-4">
+                <Link className="text-indigo-500 inline-flex items-center mt-4">
                   See More
                   <svg
                     className="w-4 h-4 ml-2"
@@ -98,7 +99,7 @@ function Updates() {
                     <path d="M5 12h14"></path>
                     <path d="M12 5l7 7-7 7"></path>
                   </svg>
-                </a>
+                </Link>
               </div>
             </div>
           </div>
