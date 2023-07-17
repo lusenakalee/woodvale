@@ -4,7 +4,7 @@ import { getAuthToken } from "../../util/Auth";
 import { Await, defer, json, useRouteLoaderData } from "react-router-dom";
 
 function AllResidentsPage() {
-  const { residentsList } = useRouteLoaderData("all-residents");
+  const residentsList = useRouteLoaderData("all-residents");
   return (
     <React.Fragment>
       <main>
@@ -18,7 +18,7 @@ function AllResidentsPage() {
 
 export default AllResidentsPage;
 
-async function AllResidentsLoader() {
+export async function loader() {
   const token = getAuthToken();
 
   const response = await fetch("/residents", {
@@ -34,10 +34,4 @@ async function AllResidentsLoader() {
     const resData = await response.json();
     return resData;
   }
-}
-
-export async function loader() {
-  return defer({
-    residentsList: await AllResidentsLoader(),
-  });
 }
