@@ -15,7 +15,6 @@ const navigation = [
   { name: "Dashboard", to: "/login/home", current: true },
   { name: "Team", to: "./team", current: false },
   { name: "Residents", to: "./residents", current: false },
-  { name: "Activities", to: "./activity", current: false },
 ];
 
 function classNames(...classes) {
@@ -96,7 +95,7 @@ export default function Nav({ userData }) {
                           <img
                             className="h-8 w-8 rounded-full"
                             src={imageUrl}
-                            alt={abstractUser}
+                            alt="../../components/assets/images/abstractUser.png"
                           />
                         </Menu.Button>
                       </div>
@@ -147,9 +146,8 @@ export default function Nav({ userData }) {
             <Disclosure.Panel className="md:hidden">
               <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3">
                 {navigation.map((item) => (
-                  <Disclosure.Button
+                    <Link
                     key={item.name}
-                    as="Link"
                     to={item.to}
                     className={classNames(
                       item.current
@@ -160,7 +158,7 @@ export default function Nav({ userData }) {
                     aria-current={item.current ? "page" : undefined}
                   >
                     {item.name}
-                  </Disclosure.Button>
+                  </Link>
                 ))}
               </div>
               <div className="border-t border-gray-700 pb-3 pt-4">
