@@ -209,7 +209,7 @@ export async function action({ request, params }) {
     antecedent: data.get("antecedent"),
     resident_id: id,
   };
-  let url = "https://homes-test.onrender.com/incident-reports";
+  let url = "/incident-reports";
   if (method === "POST") {
     const response = await fetch(url, {
       method: method,

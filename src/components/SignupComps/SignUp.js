@@ -157,7 +157,7 @@ export async function signUpAction({ request }) {
     last_name: data.get("last_name"),
     is_admin: true,
   };
-  const response = await fetch("https://homes-test.onrender.com/register", {
+  const response = await fetch("/register", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

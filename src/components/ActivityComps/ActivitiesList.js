@@ -54,7 +54,7 @@ function ActivitiesList({ activities }) {
   const token = getAuthToken();
 
   async function handleApprove({ id }) {
-    const response = await fetch("https://homes-test.onrender.com/activity/approve/" + id, {
+    const response = await fetch("/activity/approve/" + id, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -75,7 +75,7 @@ function ActivitiesList({ activities }) {
     }
   }
   async function handleReject({ id }) {
-    const response = await fetch("https://homes-test.onrender.com/activity/disapprove/" + id, {
+    const response = await fetch("/activity/disapprove/" + id, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -191,7 +191,7 @@ export async function action({ request, params }) {
     last_name: data.get("last_name"),
     is_admin: data.get("is-admin"), //boolean field should be a dropdown of true or false
   };
-  const response = await fetch("https://homes-test.onrender.com/user", {
+  const response = await fetch("/user", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
