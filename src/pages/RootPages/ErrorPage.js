@@ -56,12 +56,12 @@ function ErrorPage() {
               >
                 Go back home
               </Link>
-              <a
-                href="mailto:kindredsolutions254@gmail.com"
+              <Link
+                to="mailto:kindredsolutions254@gmail.com"
                 className="text-sm font-semibold text-gray-900"
               >
                 Contact support <span aria-hidden="true">&rarr;</span>
-              </a>
+              </Link>
             </div>
           </div>
         </main>
