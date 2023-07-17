@@ -412,7 +412,7 @@ export async function residentAction({ request, params }) {
     return redirect("/login/residents");
   } else {
     const id = params.id;
-    url = "/residents/" + id;
+    url = "https://homes-test.onrender.com/residents/" + id;
     const response = await fetch(url, {
       method: method,
       headers: {
