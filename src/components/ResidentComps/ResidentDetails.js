@@ -68,9 +68,7 @@ function ResidentDetails({ resident }) {
         window.alert("Only Image attachment are allowed!!");
       }
       if (response.ok) {
-        window.confirm(
-          "File uploaded successfully!"
-        );
+        window.confirm("File uploaded successfully!");
       } else {
         window.alert("failed to upload");
       }
@@ -385,8 +383,12 @@ function ResidentDetails({ resident }) {
                   {/* MAYBE A LINK TO GO TO CARE GIVER DETAILS PAGE */}
 
                   <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                    {resident.registered_by ? resident.registered_by.first_name: "N/A"}{" "}
-                    {resident.registered_by ? resident.registered_by.last_name: "N/A"}
+                    {resident.registered_by
+                      ? resident.registered_by.first_name
+                      : "N/A"}{" "}
+                    {resident.registered_by
+                      ? resident.registered_by.last_name
+                      : "N/A"}
                   </dd>
                 </div>
                 <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ResidentDetails from "../../components/ResidentComps/ResidentDetails";
 import { json, redirect, useRouteLoaderData } from "react-router-dom";
 import { getAuthToken } from "../../util/Auth";
@@ -30,6 +30,29 @@ export async function loader({ request, params }) {
 
   const resData = await response.json();
   return resData;
+}
+
+async function imageLoader({ request, params }) {
+  let imageUrl;
+  const imgToken = getAuthToken();
+  const id = params.id;
+  try {
+    const response = await fetch(`/residents/img/${id}`, {
+      headers: {
+        Authorization: "Bearer " + imgToken,
+      },
+    });
+    if (response.ok) {
+      const blob = await response.blob();
+      const url = URL.createObjectURL(blob);
+      imageUrl = url;
+      return imageUrl;
+    } else {
+      console.error("Error fetching image:", response.status);
+    }
+  } catch (error) {
+    console.error("Error fetching image:", error);
+  }
 }
 
 export async function action({ request, params }) {
