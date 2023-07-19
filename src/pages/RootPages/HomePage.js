@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Features from "../../components/HomePageComps/Features";
 import Testimonials from "../../components/HomePageComps/Testimonials";
-import mockup from "../../components/assets/images/mockup.jpg";
+import CaregivingFam from "../../components/assets/images/CaregivingFamily.jpeg";
 
 function HomePage() {
   return (
@@ -17,7 +17,7 @@ function HomePage() {
                 <div className="relative h-64 sm:h-80 lg:h-full">
                   <img
                     alt="House"
-                    src={mockup}
+                    src={CaregivingFam}
                     className="absolute inset-0 h-full w-full object-cover"
                   />
                 </div>

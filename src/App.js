@@ -199,7 +199,7 @@ const router = createBrowserRouter([
         action: logoutAction,
       },
       {
-        path: "team",
+        path: "staff",
         id: "users",
         element: (
           <Suspense fallback={<p>Loading...</p>}>
