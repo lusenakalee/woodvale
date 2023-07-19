@@ -23,7 +23,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { HashLink } from "react-router-hash-link";
 
-function ResidentDetails({ resident }) {
+function ResidentDetails({ resident, image }) {
   const [open, setOpen] = useState(true);
 
   // modal
@@ -86,29 +86,6 @@ function ResidentDetails({ resident }) {
   }
   const [imageUrl, setImageUrl] = useState("");
 
-  useEffect(() => {
-    const fetchImage = async () => {
-      try {
-        const response = await fetch(`/residents/img/${resident.id}`, {
-          headers: {
-            Authorization: "Bearer " + imgToken,
-          },
-        });
-
-        if (response.ok) {
-          const blob = await response.blob();
-          const url = URL.createObjectURL(blob);
-          setImageUrl(url);
-        } else {
-          console.error("Error fetching image:", response.status);
-        }
-      } catch (error) {
-        console.error("Error fetching image:", error);
-      }
-    };
-
-    fetchImage();
-  }, [resident]);
   return (
     <>
       <React.Fragment>
@@ -116,10 +93,10 @@ function ResidentDetails({ resident }) {
           <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
             <div className="px-4 sm:px-0 flex  justify-between">
               <div className="flex gap-x-4">
-                {imageUrl && (
+                {image && (
                   <img
                     className="h-12 w-12 flex-none rounded-full bg-gray-50"
-                    src={imageUrl}
+                    src={image}
                     alt="Profile"
                   />
                 )}

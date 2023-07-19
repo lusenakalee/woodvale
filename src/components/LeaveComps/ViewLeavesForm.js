@@ -1,8 +1,10 @@
 import { useSubmit } from "react-router-dom";
 import React, { useState } from "react";
 import {
+  CheckCircleIcon,
   InformationCircleIcon,
   PrinterIcon,
+  XCircleIcon,
 } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
 import {
@@ -19,6 +21,7 @@ import {
   SelectItem,
   MultiSelect,
   MultiSelectItem,
+  Button,
 } from "@tremor/react";
 
 function ViewLeavesForm({ leaves }) {
@@ -61,6 +64,8 @@ function ViewLeavesForm({ leaves }) {
             <TableHeaderCell className="text-right">
               Person responsible
             </TableHeaderCell>
+            <TableHeaderCell className="text-right">Approve</TableHeaderCell>
+            <TableHeaderCell className="text-right">Reject</TableHeaderCell>
           </TableRow>
         </TableHead>
         <TableBody>
