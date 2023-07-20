@@ -1,12 +1,14 @@
-import React from "react";
 import { Form, json, redirect, useActionData, useNavigation } from "react-router-dom";
 import cg from '../../components/assets/images/cg.jpeg'
+import React, { useRef } from 'react';
 
-function SignIn() {
-  const navigation = useNavigation();
-  const data = useActionData();
-  const  isSubmitting = navigation.state === "submitting"
-
+  
+  function SignIn() {
+    const navigation = useNavigation();
+    const data = useActionData();
+    const  isSubmitting = navigation.state === "submitting"
+    
+ 
 
 
   return (
