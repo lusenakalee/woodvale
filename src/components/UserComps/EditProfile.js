@@ -51,7 +51,7 @@ function EditProfile({ method, user, title }) {
     formData.append("file", file);
 
     try {
-      const response = await fetch(`/${user.id}/upload`, {
+      const response = await fetch(`https://homes-test.onrender.com/${user.id}/upload`, {
         method: "POST",
         headers: {
           Authorization: "Bearer " + bearerToken,
@@ -74,7 +74,7 @@ function EditProfile({ method, user, title }) {
   useEffect(() => {
     const fetchImage = async () => {
       try {
-        const response = await fetch(`/upload/${user.id}`, {
+        const response = await fetch(`https://homes-test.onrender.com/upload/${user.id}`, {
           headers: {
             Authorization: "Bearer " + imgToken,
           },
@@ -164,8 +164,11 @@ function EditProfile({ method, user, title }) {
                       {Object.values(data.errors).map((err) => (
                         <li key={err}>{err}</li>
                       ))}
+
                     </ul>
                   )}
+                  {data && data.message && <p>{data.message}</p>}
+
                 </p>
                 {imageUrl && (
                   <img

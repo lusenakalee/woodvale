@@ -27,7 +27,7 @@ export default function Nav({ userData }) {
   useEffect(() => {
     const fetchImage = async () => {
       try {
-        const response = await fetch(`/upload/${userData.id}`, {
+        const response = await fetch(`https://homes-test.onrender.com/upload/${userData.id}`, {
           headers: {
             Authorization: "Bearer " + imgToken,
           },

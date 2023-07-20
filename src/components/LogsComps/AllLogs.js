@@ -26,6 +26,8 @@ import {
 } from "@tremor/react";
 
 function AllLogs({ logs }) {
+  const {resident} = useRouteLoaderData("resident-detail");
+
   const routeLoaderData = useRouteLoaderData("root");
   const { healthData } = routeLoaderData;
 
@@ -43,7 +45,8 @@ function AllLogs({ logs }) {
   <div  className="py-4">
           <Card >
             <div>
-            <Title > {"  "}Blood pressure, Heart Rate, and Weight Comparison</Title>
+              <div className="font-bold text-lg">{resident.first_name}{"  "}{resident.last_name} Vitals records</div>
+            <Title >  {"  "}Blood pressure, Heart Rate, and Weight Comparison</Title>
             </div>
             <LineChart
               className="mt-6"

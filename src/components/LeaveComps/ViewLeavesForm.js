@@ -70,7 +70,7 @@ function ViewLeavesForm({ leaves }) {
           {leaves.map((item) => (
             <TableRow key={item.id}>
               <Link to={`./${item.id}`}>
-                <TableCell>{item.leave_date}</TableCell>
+                <TableCell className="hover:underline hover:text-indigo-600">{item.leave_date}</TableCell>
               </Link>
               <TableCell className="text-right">{item.duration}</TableCell>
               <TableCell className="text-right">

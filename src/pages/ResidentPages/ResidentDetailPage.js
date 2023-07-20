@@ -41,7 +41,7 @@ async function imageLoader(residentId) {
   const imgToken = getAuthToken();
   const id = residentId;
   try {
-    const response = await fetch(`/residents/img/${id}`, {
+    const response = await fetch(`https://homes-test.onrender.com/residents/img/${id}`, {
       headers: {
         Authorization: "Bearer " + imgToken,
       },

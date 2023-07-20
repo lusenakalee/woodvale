@@ -23,6 +23,8 @@ function UserItem({ user }) {
           ))}
         </ul>
       )}
+                  {data && data.message && <p>{data.message}</p>}
+
       <div className="">
         <h3 className="text-base font-semibold leading-7 text-gray-900">
           User Information
