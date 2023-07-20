@@ -93,7 +93,7 @@ function EditProfile({ method, user, title }) {
     };
 
     fetchImage();
-  }, []);
+  }, [user]);
 
   return (
     <React.Fragment>

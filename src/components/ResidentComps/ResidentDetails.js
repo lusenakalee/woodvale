@@ -57,7 +57,7 @@ function ResidentDetails({ resident, image }) {
 
     try {
       const response = await fetch(
-        `https://homes-test.onrender.com/residents/${resident.id}/upload`,
+        `/residents/${resident.id}/upload`,
         {
           method: "POST",
           headers: {
