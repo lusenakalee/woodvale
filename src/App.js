@@ -101,6 +101,14 @@ const ProfilePage = lazy(() => import("./pages/UserPages/ProfilePage"));
 
 const ProfileEditPage = lazy(() => import("./pages/UserPages/EditProfilePage"));
 
+const LeaveApprovePage = lazy(() =>
+  import("./pages/LeavePages/LeaveApprovePage")
+);
+
+const LeaveRejectPage = lazy(() =>
+  import("./pages/LeavePages/LeaveRejectPage")
+);
+
 const ActivitiesPage = lazy(() =>
   import("./pages/ActivityPages/ActivityMainPages/ActivitiesPage")
 );
@@ -516,9 +524,9 @@ const router = createBrowserRouter([
                           </Suspense>
                         ),
                         action: (meta) =>
-                        import("./pages/LeavePages/LeaveDetailPage").then(
-                          (module) => module.action(meta)
-                        )
+                          import("./pages/LeavePages/LeaveDetailPage").then(
+                            (module) => module.action(meta)
+                          ),
                       },
                       {
                         path: "edit",
@@ -528,9 +536,33 @@ const router = createBrowserRouter([
                           </Suspense>
                         ),
                         action: (meta) =>
-                        import("./components/LeaveComps/NewLeaveForm").then(
-                          (module) => module.action(meta)
-                        )
+                          import("./components/LeaveComps/NewLeaveForm").then(
+                            (module) => module.action(meta)
+                          ),
+                      },
+                      {
+                        path: "approve",
+                        element: (
+                          <Suspense fallback={<p>Loading...</p>}>
+                            <LeaveApprovePage />
+                          </Suspense>
+                        ),
+                        action: (meta) =>
+                          import("./pages/LeavePages/LeaveApprovePage").then(
+                            (module) => module.leaveApproveAction(meta)
+                          ),
+                      },
+                      {
+                        path: "reject",
+                        element: (
+                          <Suspense fallback={<p>Loading...</p>}>
+                            <LeaveRejectPage />
+                          </Suspense>
+                        ),
+                        action: (meta) =>
+                          import("./pages/LeavePages/LeaveRejectPage").then(
+                            (module) => module.leaveRejectAction(meta)
+                          ),
                       },
                     ],
                   },

@@ -15,6 +15,8 @@ function LeaveDetail({ leave }) {
     <React.Fragment>
         {leave.id}
       <Link to="./edit">Edit</Link>
+      <Link to="./approve">Approve</Link>
+      <Link to="./reject">Reject</Link>
       <button onClick={startDeleteHandler}>Delete</button>
     </React.Fragment>
   );

@@ -64,8 +64,6 @@ function ViewLeavesForm({ leaves }) {
             <TableHeaderCell className="text-right">
               Person responsible
             </TableHeaderCell>
-            <TableHeaderCell className="text-right">Approve</TableHeaderCell>
-            <TableHeaderCell className="text-right">Reject</TableHeaderCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -76,7 +74,7 @@ function ViewLeavesForm({ leaves }) {
               </Link>
               <TableCell className="text-right">{item.duration}</TableCell>
               <TableCell className="text-right">
-                {item.approved === true ? "Approved" : "Not Approved"}
+                {item.approval_status}
               </TableCell>
               <TableCell className="text-right">
                 {item.person_responsible}

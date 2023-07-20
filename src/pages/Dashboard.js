@@ -97,8 +97,8 @@ export default function Dashboard() {
                       alignItems="baseline"
                       className="space-x-1"
                     >
-                      <Metric>{dailyRecords.residents_with_records}</Metric>
-                      <Text>/{totalResidents.count} residents</Text>
+                      <Metric>{dailyRecords ? dailyRecords.residents_with_records: ""}</Metric>
+                      <Text>/{totalResidents ? totalResidents.count: ""} residents</Text>
                     </Flex>
                     <CategoryBar
                       values={[10, 25, 45, 20]}
