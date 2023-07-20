@@ -42,3 +42,4 @@ export async function loader({ request }) {
   console.log(resData)
   return resData;
 }
+

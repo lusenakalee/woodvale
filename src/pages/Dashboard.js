@@ -96,8 +96,8 @@ export default function Dashboard() {
                       alignItems="baseline"
                       className="space-x-1"
                     >
-                      <Metric>{dailyRecords.residents_with_records}</Metric>
-                      <Text>/{totalResidents.count} residents</Text>
+                      <Metric>{dailyRecords ? dailyRecords.residents_with_records: ""}</Metric>
+                      <Text>/{totalResidents ? totalResidents.count: ""} residents</Text>
                     </Flex>
                     <CategoryBar
                       values={[10, 25, 45, 20]}
@@ -116,12 +116,14 @@ export default function Dashboard() {
                   </Card>
 
                   <Grid numItemsSm={2} className="mt-4 gap-4">
-                    <Card>
+                    <Link to='/login/residents'>
+                    <Card className="hover:bg-gray-50">
                       <Metric className="mt-2 truncate">
                         {totalResidents.count}
                       </Metric>
-                      <Text>Total residents</Text>
+                      <Text>Number of residents</Text>
                     </Card>
+                    </Link>
                     <Card>
                       <Metric className="mt-2 truncate">
                         {totalIncidents.incidents}
@@ -134,12 +136,7 @@ export default function Dashboard() {
                       </Metric>
                       <Text>Residents on leave</Text>
                     </Card>
-                    <Card>
-                      <Metric className="mt-2 truncate">
-                        {activities.not_approved_count}
-                      </Metric>
-                      <Text>Activities Pending Approval</Text>
-                    </Card>
+                   
                   </Grid>
                 </Card>
               </div>

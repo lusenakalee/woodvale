@@ -21,9 +21,8 @@ import {
   UserCircleIcon,
   PencilSquareIcon,
 } from "@heroicons/react/24/outline";
-import { HashLink } from "react-router-hash-link";
 
-function ResidentDetails({ resident }) {
+function ResidentDetails({ resident, image }) {
   const [open, setOpen] = useState(true);
 
   // modal
@@ -57,13 +56,16 @@ function ResidentDetails({ resident }) {
     formData.append("file", file);
 
     try {
-      const response = await fetch(`/residents/${resident.id}/upload`, {
-        method: "POST",
-        headers: {
-          Authorization: "Bearer " + bearerToken,
-        },
-        body: formData,
-      });
+      const response = await fetch(
+        `https://homes-test.onrender.com/residents/${resident.id}/upload`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: "Bearer " + bearerToken,
+          },
+          body: formData,
+        }
+      );
       if (response.status === 400) {
         window.alert("Only Image attachment are allowed!!");
       }
@@ -86,44 +88,21 @@ function ResidentDetails({ resident }) {
   }
   const [imageUrl, setImageUrl] = useState("");
 
-  useEffect(() => {
-    const fetchImage = async () => {
-      try {
-        const response = await fetch(`/residents/img/${resident.id}`, {
-          headers: {
-            Authorization: "Bearer " + imgToken,
-          },
-        });
-
-        if (response.ok) {
-          const blob = await response.blob();
-          const url = URL.createObjectURL(blob);
-          setImageUrl(url);
-        } else {
-          console.error("Error fetching image:", response.status);
-        }
-      } catch (error) {
-        console.error("Error fetching image:", error);
-      }
-    };
-
-    fetchImage();
-  }, [resident]);
   return (
     <>
       <React.Fragment>
-        <main>
+        <main >
           <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
             <div className="px-4 sm:px-0 flex  justify-between">
               <div className="flex gap-x-4">
-                {imageUrl && (
+                {image && (
                   <img
-                  className="h-24 rounded-lg"
-                    src={imageUrl}
+                    className="h-12 w-12 flex-none rounded-full bg-gray-50"
+                    src={image}
                     alt="Profile"
                   />
                 )}
-                <div className="min-w-0 flex-auto">
+                <div className="min-w-0 flex-auto pr-10">
                   <p className="text-sm font-semibold leading-6 text-gray-900">
                     {resident.first_name}'s Information
                   </p>
@@ -131,95 +110,6 @@ function ResidentDetails({ resident }) {
                     {" "}
                     General details and Information.
                   </p>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-4 gap-4 ">
-                <Link to="./logs">
-                  <div>
-                    <button
-                      type="button"
-                      className="inline-flex opacity-80 items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                    >
-                      <ClipboardDocumentIcon
-                        className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"
-                        aria-hidden="true"
-                      />
-                      View Logs
-                    </button>
-                  </div>
-                </Link>
-                <div>
-                  <Link to="./new-log">
-                    <button
-                      type="button"
-                      className="inline-flex  opacity-80 items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                    >
-                      <PlusIcon
-                        className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"
-                        aria-hidden="true"
-                      />
-                      Add Logs
-                    </button>
-                  </Link>
-                </div>
-                <div>
-                  <Link to="./care-plan">
-                    <button
-                      type="button"
-                      className="inline-flex  opacity-80 items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                    >
-                      <ClipboardDocumentListIcon
-                        className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"
-                        aria-hidden="true"
-                      />
-                      Care Plan
-                    </button>
-                  </Link>
-                </div>
-                <div>
-                  <Link to="./med-recs">
-                    <button
-                      type="button"
-                      className="inline-flex  opacity-80 items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                    >
-                      <ClipboardDocumentListIcon
-                        className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"
-                        aria-hidden="true"
-                      />
-                      Medical Records
-                    </button>
-                  </Link>
-                </div>
-                <div>
-                  <Link to="./incident">
-                    <button
-                      type="button"
-                      className="inline-flex  opacity-80 items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                    >
-                      <LifebuoyIcon
-                        className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"
-                        aria-hidden="true"
-                      />
-                      Incident Report
-                    </button>
-                  </Link>
-                </div>
-                <div>
-                  <Link to="./leaves">
-                    <button
-                      type="button"
-                      className="inline-flex  opacity-80 items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                    >
-                      <ArrowRightOnRectangleIcon
-                        className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"
-                        aria-hidden="true"
-                      />
-                      Leave application
-                    </button>
-                  </Link>
-                </div>
-                <div>
                   <button
                     type="button"
                     onClick={handleOpenModal}
@@ -229,57 +119,146 @@ function ResidentDetails({ resident }) {
                       className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"
                       aria-hidden="true"
                     />
-                    Upload Patient Picture
+                    Upload Picture
                   </button>
-                </div>
-
-                {isOpen && (
-                  <div className="fixed inset-0 flex items-center justify-center z-50">
-                    <div className="fixed inset-0 bg-black opacity-50"></div>
-                    <div className="relative z-10 bg-white rounded-md w-96">
-                      <form onSubmit={handleSubmit}>
-                        <div className="p-6">
-                          <h1 className="text-lg font-bold">
-                            Profile Pic Upload
-                          </h1>
-                          <div className="mt-4">
-                            <label
-                              htmlFor="formFileSm"
-                              className="block font-semibold"
-                            >
-                              Upload Patient Image
-                            </label>
-                            <input
-                              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
-                              id="formFileSm"
-                              type="file"
-                              name="file"
-                              onChange={handleFileChange}
-                            />
+                  {isOpen && (
+                    <div className="fixed inset-0 flex items-center justify-center z-50">
+                      <div className="fixed inset-0 bg-black opacity-50"></div>
+                      <div className="relative z-10 bg-white rounded-md w-96">
+                        <form onSubmit={handleSubmit}>
+                          <div className="p-6">
+                            <h1 className="text-lg font-bold">
+                              Profile Pic Upload
+                            </h1>
+                            <div className="mt-4">
+                              <label
+                                htmlFor="formFileSm"
+                                className="block font-semibold"
+                              >
+                                Upload Patient Image
+                              </label>
+                              <input
+                                className="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
+                                id="formFileSm"
+                                type="file"
+                                name="file"
+                                onChange={handleFileChange}
+                              />
+                            </div>
                           </div>
-                        </div>
-                        <div className="px-6 py-4 bg-gray-100 flex items-center justify-end gap-x-4">
-                          <button
-                            type="button"
-                            onClick={handleCloseModal}
-                            className="text-sm font-semibold text-gray-900"
-                          >
-                            Close
-                          </button>
-                          <button
-                            type="submit"
-                            className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600"
-                          >
-                            Save changes
-                          </button>
-                        </div>
-                      </form>
+                          <div className="px-6 py-4 bg-gray-100 flex items-center justify-end gap-x-4">
+                            <button
+                              type="button"
+                              onClick={handleCloseModal}
+                              className="text-sm font-semibold text-gray-900"
+                            >
+                              Close
+                            </button>
+                            <button
+                              type="submit"
+                              className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600"
+                            >
+                              Save changes
+                            </button>
+                          </div>
+                        </form>
+                      </div>
                     </div>
+                  )}
+                </div>
+              </div>
+              <div>
+                <div className="flex space-x-4 ">
+                  <Link to="./logs">
+                    <div>
+                      <button
+                        type="button"
+                        className="inline-flex opacity-80 items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                      >
+                        <ClipboardDocumentIcon
+                          className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"
+                          aria-hidden="true"
+                        />
+                        History
+                      </button>
+                    </div>
+                  </Link>
+                  <div>
+                    <Link to="./new-log">
+                      <button
+                        type="button"
+                        className="inline-flex  opacity-80 items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                      >
+                        <PlusIcon
+                          className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"
+                          aria-hidden="true"
+                        />
+                        Vital assessment
+                      </button>
+                    </Link>
                   </div>
-                )}
+                  <div>
+                    <Link to="./care-plan">
+                      <button
+                        type="button"
+                        className="inline-flex  opacity-80 items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                      >
+                        <ClipboardDocumentListIcon
+                          className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"
+                          aria-hidden="true"
+                        />
+                        Care Plan
+                      </button>
+                    </Link>
+                  </div>
+                  <div>
+                    <Link to="./med-recs">
+                      <button
+                        type="button"
+                        className="inline-flex  opacity-80 items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                      >
+                        <ClipboardDocumentListIcon
+                          className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"
+                          aria-hidden="true"
+                        />
+                        Medical Records
+                      </button>
+                    </Link>
+                  </div>
+                  <div>
+                    <Link to="./incident">
+                      <button
+                        type="button"
+                        className="inline-flex  opacity-80 items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                      >
+                        <LifebuoyIcon
+                          className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"
+                          aria-hidden="true"
+                        />
+                        Incident Report
+                      </button>
+                    </Link>
+                  </div>
+                </div>
+                <div className="pt-4">
+                  <div>
+                    <Link to="./leaves">
+                      <button
+                        type="button"
+                        className="inline-flex  opacity-80 items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                      >
+                        <ArrowRightOnRectangleIcon
+                          className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"
+                          aria-hidden="true"
+                        />
+                        Leave application
+                      </button>
+                    </Link>
+                  </div>
+                </div>
               </div>
             </div>
-            <div className="mt-6 border-t border-gray-100">
+            <div className="mt-6 border-t border-gray-50">
               <dl className="divide-y divide-gray-100">
                 <div className="px-4 py-3 sm:grid sm:grid-cols-3 hover:bg-white sm:gap-4 sm:px-0">
                   <dt className="text-sm font-medium leading-6 text-gray-900">
@@ -312,8 +291,8 @@ function ResidentDetails({ resident }) {
                   </dt>
                   <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
                     {" "}
-                    Age: {" "} {" "} {" "} {" "}{resident.age}years {" "} {" "}<br/>  {" "} {" "} {" "} {" "} {" "}{"  "}D.O.B:{" "}
-                    {" "} {" "}{resident.date_of_birth}{" "}
+                    Age: {resident.age}years <br /> {"  "}D.O.B:{" "}
+                    {resident.date_of_birth}{" "}
                   </dd>
                 </div>
                 <div className="px-4 py-3 sm:grid sm:grid-cols-3 hover:bg-white sm:gap-4 sm:px-0">
@@ -416,7 +395,8 @@ function ResidentDetails({ resident }) {
                           </div>
                         </div>
                         <div className="ml-4 flex-shrink-0">
-                          <Link to="#"
+                          <Link
+                            to="#"
                             className="font-medium text-indigo-600 hover:text-indigo-500"
                           >
                             Download
@@ -424,26 +404,23 @@ function ResidentDetails({ resident }) {
                         </div>
                       </li>
                       <li className="flex items-center justify-between py-4 pl-4 pr-5 text-sm leading-6">
-                        <div className="flex w-0 flex-1 items-center">
-                          <PaperClipIcon
-                            className="h-5 w-5 flex-shrink-0 text-gray-400"
-                            aria-hidden="true"
-                          />
-                          <div className="ml-4 flex min-w-0 flex-1 gap-2">
-                            <span className="truncate font-medium">
-                              medications.pdf
-                            </span>
-                            <span className="flex-shrink-0 text-gray-400">
-                              4.5mb
-                            </span>
+                     
+                      
+                        <div>
+                          <div>
+                            <Link to="./attachment">
+                              <button
+                                type="button"
+                                className="inline-flex  opacity-80 items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                              >
+                                <PaperClipIcon
+                                  className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"
+                                  aria-hidden="true"
+                                />
+                                Attachments
+                              </button>
+                            </Link>
                           </div>
-                        </div>
-                        <div className="ml-4 flex-shrink-0">
-                          <Link to="#"
-                            className="font-medium text-indigo-600 hover:text-indigo-500"
-                          >
-                            Download
-                          </Link>
                         </div>
                       </li>
                     </ul>

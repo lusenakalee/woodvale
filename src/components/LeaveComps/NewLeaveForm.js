@@ -20,6 +20,14 @@ function NewLeaveForm({ method, leave }) {
 
   return (
     <React.Fragment>
+      {data && data.errors && (
+        <ul>
+          {Object.values(data.errors).map((err) => (
+            <li key={err}>{err}</li>
+          ))}
+        </ul>
+      )}
+      {data && data.message && <p>{data.message}</p>}
       <Form method={method}>
         <div className="sm:col-span-3">
           <label
@@ -33,7 +41,7 @@ function NewLeaveForm({ method, leave }) {
               type="date"
               name="leave_date"
               id="leave_date"
-              defaultValue={leave ? leave.leave_date: ""}
+              defaultValue={leave ? leave.leave_date : ""}
               className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
             />
           </div>
@@ -51,7 +59,7 @@ function NewLeaveForm({ method, leave }) {
               type="date"
               name="return_date"
               id="return_date"
-              defaultValue={leave ? leave.return_date: ""}
+              defaultValue={leave ? leave.return_date : ""}
               className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
             />
           </div>
@@ -66,7 +74,7 @@ function NewLeaveForm({ method, leave }) {
               type="text"
               name="person_responsible"
               id="person_responsible"
-              defaultValue={leave ? leave.person_responsible: ""}
+              defaultValue={leave ? leave.person_responsible : ""}
               className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
             />
           </div>
@@ -81,7 +89,7 @@ function NewLeaveForm({ method, leave }) {
               type="text"
               name="relationship"
               id="relationship"
-              defaultValue={leave ? leave.relationship: ""}
+              defaultValue={leave ? leave.relationship : ""}
               className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
             />
           </div>
@@ -95,7 +103,7 @@ function NewLeaveForm({ method, leave }) {
             <input
               name="contact"
               id="contact"
-              defaultValue={leave ? leave.contact: ""}
+              defaultValue={leave ? leave.contact : ""}
               required
               className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
             />
@@ -113,7 +121,7 @@ function NewLeaveForm({ method, leave }) {
               required
               rows={3}
               className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-              defaultValue={leave ? leave.reason: ""}
+              defaultValue={leave ? leave.reason : ""}
             />
           </div>
           <p className="mt-3 text-sm leading-6 text-gray-600">
@@ -148,7 +156,7 @@ export async function action({ request, params }) {
   const data = await request.formData();
   const token = getAuthToken();
   const id = params.id;
-  const incidentData = {
+  const leaveData = {
     leave_date: data.get("leave_date"),
     return_date: data.get("return_date"),
     person_responsible: data.get("person_responsible"),
@@ -156,6 +164,14 @@ export async function action({ request, params }) {
     contact: data.get("contact"),
     reason: data.get("reason"),
     resident_id: id,
+  };
+  const leaveUpdateData = {
+    leave_date: data.get("leave_date"),
+    return_date: data.get("return_date"),
+    person_responsible: data.get("person_responsible"),
+    relationship: data.get("relationship"),
+    contact: data.get("contact"),
+    reason: data.get("reason"),
   };
   let url = "/leave-records";
   if (method === "POST") {
@@ -166,13 +182,32 @@ export async function action({ request, params }) {
         Authorization: "Bearer " + token,
         "Access-Control-Allow-Origin": "*",
       },
-      body: JSON.stringify(incidentData),
+      body: JSON.stringify(leaveData),
     });
     if (response.status === 400) {
       return response;
     }
     if (!response.ok) {
-      throw json({ message: "Failed to save the incident" }, { status: 500 });
+      throw json({ message: "Failed to save the leave" }, { status: 500 });
+    }
+    return redirect(`/login/residents/${id}/leaves`);
+  } else {
+    const leaveId = params.leaveId;
+    url = `/leave-records/${leaveId}`;
+    const response = await fetch(url, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+        "Access-Control-Allow-Origin": "*",
+      },
+      body: JSON.stringify(leaveUpdateData),
+    });
+    if (response.status === 400) {
+      return response;
+    }
+    if (!response.ok) {
+      throw json({ message: "Failed to update the leave" }, { status: 500 });
     }
     return redirect(`/login/residents/${id}/leaves`);
   }

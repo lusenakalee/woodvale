@@ -27,6 +27,7 @@ function CarePlanForm({ carePlan, method, title }) {
           ))}
         </ul>
       )}
+      {data && data.message && <p>{data.message}</p>}
       <Form method={method}>
         <div className="space-y-12">
           <div className="border-b border-gray-900/10 pb-12">

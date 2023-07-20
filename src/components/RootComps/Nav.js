@@ -13,7 +13,7 @@ const user = {
 };
 const navigation = [
   { name: "Dashboard", to: "/login/home", current: true },
-  { name: "Team", to: "./team", current: false },
+  { name: "Staff", to: "./staff", current: false },
   { name: "Residents", to: "./residents", current: false },
 ];
 
