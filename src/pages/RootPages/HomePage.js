@@ -52,12 +52,13 @@ function HomePage() {
                       </div>
                       <div>
                         <Link
-                          to="mailto:kindredsolutions254@gmail.com?subject=Requesting%20access%20to%20view%20the%20system"
+                          to="/demo"
                           className="mt-8 inline-block rounded border border-indigo-600 bg-indigo-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-indigo-600 focus:outline-none focus:ring active:text-indigo-500"
                         >
                           Request Demo
                         </Link>
                       </div>
+
                     </div>
                   </div>
                 </div>

@@ -138,6 +138,9 @@ const ActivityEditPage = lazy(() =>
 
 const LogDetailPage = lazy(() => import("./pages/LogsPages/LogDetailsPage"));
 
+const RequestDemoPage = lazy(() => import("./pages/RootPages/RequestDemoPage"));
+
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -151,6 +154,16 @@ const router = createBrowserRouter([
     action: signUpAction,
   },
   {
+    path: "/demo",
+    element: (
+      <Suspense fallback={<p>Loading...</p>}>
+        <RequestDemoPage />
+      </Suspense>
+    ),
+
+  },
+
+  {
     path: "/login",
     id: "root",
     loader: (meta) =>
@@ -162,6 +175,7 @@ const router = createBrowserRouter([
       </Suspense>
     ),
     children: [
+
       {
         index: true,
         element: <SignIn />,
