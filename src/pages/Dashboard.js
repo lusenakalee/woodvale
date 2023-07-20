@@ -19,6 +19,7 @@ import {
   TabGroup,
   Title,
   TabList,
+  Icon,
 } from "@tremor/react";
 import Updates from "../components/DashboardComps/Updates";
 import {
@@ -26,6 +27,7 @@ import {
   ArrowRightIcon,
   ChartPieIcon,
   QueueListIcon,
+  InformationCircleIcon,
 } from "@heroicons/react/24/outline";
 
 export default function Dashboard() {
@@ -67,6 +69,13 @@ export default function Dashboard() {
         </header>
         <main>
           <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+            <div className="flex ">
+              <Icon
+                icon={InformationCircleIcon}
+                variant="simple"
+                tooltip="customizable quick links to access other parts of the system"
+              />
+            </div>
             <div className="flex pl-10 space-x-6">
               <Link to="/login/residents/new">
                 <button
@@ -82,7 +91,17 @@ export default function Dashboard() {
               </Link>
             </div>
 
+
+            <div className="flex justify-center ">
+              <Icon
+                icon={InformationCircleIcon}
+                variant="simple"
+                tooltip="Brief comprehensive dashboard analytics and reports"
+              />
+            </div>
+
             <div class="grid grid-cols-2 gap-2 py-4">
+              
               <div>
                 <Card className="max-w-lg mx-auto">
                   <Card>
@@ -96,8 +115,14 @@ export default function Dashboard() {
                       alignItems="baseline"
                       className="space-x-1"
                     >
-                      <Metric>{dailyRecords ? dailyRecords.residents_with_records: ""}</Metric>
-                      <Text>/{totalResidents ? totalResidents.count: ""} residents</Text>
+                      <Metric>
+                        {dailyRecords
+                          ? dailyRecords.residents_with_records
+                          : ""}
+                      </Metric>
+                      <Text>
+                        /{totalResidents ? totalResidents.count : ""} residents
+                      </Text>
                     </Flex>
                     <CategoryBar
                       values={[10, 25, 45, 20]}
@@ -116,13 +141,13 @@ export default function Dashboard() {
                   </Card>
 
                   <Grid numItemsSm={2} className="mt-4 gap-4">
-                    <Link to='/login/residents'>
-                    <Card className="hover:bg-gray-50">
-                      <Metric className="mt-2 truncate">
-                        {totalResidents.count}
-                      </Metric>
-                      <Text>Number of residents</Text>
-                    </Card>
+                    <Link to="/login/residents">
+                      <Card className="hover:bg-gray-50">
+                        <Metric className="mt-2 truncate">
+                          {totalResidents.count}
+                        </Metric>
+                        <Text>Number of residents</Text>
+                      </Card>
                     </Link>
                     <Card>
                       <Metric className="mt-2 truncate">
@@ -136,7 +161,6 @@ export default function Dashboard() {
                       </Metric>
                       <Text>Residents on leave</Text>
                     </Card>
-                   
                   </Grid>
                 </Card>
               </div>
@@ -198,11 +222,16 @@ export default function Dashboard() {
                 </Card>
               </div>
             </div>
-            <div className="flex pt-5">
-              <div></div>
-              <div className="px-5 grid-cols-4 grid gap-4"></div>
+            <div className="pt-5">
+              <div className="flex justify-center">
+                <Icon
+                  icon={InformationCircleIcon}
+                  variant="simple"
+                  tooltip="Live customizable updates such as resident incident reports and new residents"
+                />
+              </div>
+              <Updates />
             </div>
-            <Updates />
           </div>
         </main>
       </div>

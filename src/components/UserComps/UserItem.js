@@ -23,7 +23,7 @@ function UserItem({ user }) {
           ))}
         </ul>
       )}
-                  {data && data.message && <p>{data.message}</p>}
+      {data && data.message && <p>{data.message}</p>}
 
       <div className="">
         <h3 className="text-base font-semibold leading-7 text-gray-900">
@@ -47,7 +47,7 @@ function UserItem({ user }) {
           Username
         </dt>
         <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-          {user.username} 
+          {user.username}
         </dd>
       </div>
       <div className="px-4 py-3 sm:grid sm:grid-cols-3 hover:bg-white sm:gap-4 sm:px-0">
@@ -55,27 +55,27 @@ function UserItem({ user }) {
           User type
         </dt>
         <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-          {user.is_admin=== true ? "Admin": "Care Giver"} 
+          {user.is_admin === true ? "Admin" : "Care Giver"}
         </dd>
       </div>
       {token && (
         <div className=" px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-        <dt className="text-sm font-medium text-gray-500">
-          <button
-            onClick={startDeleteHandler}
-            className="px-4 py-2 text-sm font-medium text-gray-900 bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          >
-            Delete
-          </button>
-        </dt>
-        <dd>
-          <Link to={`./edit`}>
-            <button className="px-4 py-2 text-sm font-medium text-gray-900 bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
-              Edit
+          <dt className="text-sm font-medium text-gray-500">
+            <button
+              onClick={startDeleteHandler}
+              className="px-4 py-2 text-sm font-medium text-gray-900 bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+              Delete
             </button>
-          </Link>
-        </dd>
-      </div>
+          </dt>
+          <dd>
+            <Link to={`./edit`}>
+              <button className="px-4 py-2 text-sm font-medium text-gray-900 bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                Edit
+              </button>
+            </Link>
+          </dd>
+        </div>
       )}
     </React.Fragment>
   );

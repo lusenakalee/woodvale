@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import Features from "../../components/HomePageComps/Features";
 import Testimonials from "../../components/HomePageComps/Testimonials";
 import CaregivingFam from "../../components/assets/images/CaregivingFamily.jpeg";
+import { Icon } from "@tremor/react";
+import { InformationCircleIcon } from "@heroicons/react/24/outline";
 
 function HomePage() {
   return (
@@ -41,7 +43,15 @@ function HomePage() {
                       highest quality of life for your residents.
                     </p>
 
+
                     <div className="flex space-x-4">
+                    <div className="flex  ">
+              <Icon
+                icon={InformationCircleIcon}
+                variant="simple"
+                tooltip="Login with the credentials sent to you via email"
+              />
+            </div>
                       <div>
                         <Link
                           to="/login"

@@ -86,15 +86,7 @@ function ShowUserProfile({ user }) {
         </dd>
       </div>
 
-      <div className=" px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-        <dd>
-          <Link to={`./edit`}>
-            <button className="px-4 py-2 text-sm font-medium text-gray-900 bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
-              Edit
-            </button>
-          </Link>
-        </dd>
-      </div>
+   
     </React.Fragment>
   );
 }
