@@ -20,6 +20,14 @@ function NewIncidentForm({ method, incident }) {
 
   return (
     <React.Fragment>
+      {data && data.errors && (
+        <ul>
+          {Object.values(data.errors).map((err) => (
+            <li key={err}>{err}</li>
+          ))}
+        </ul>
+      )}
+      {data && data.message && <p>{data.message}</p>}
       <Form method={method}>
         <div className="sm:col-span-3">
           <label className="block text-sm font-medium leading-6 text-gray-900">

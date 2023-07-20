@@ -22,7 +22,7 @@ import {
   PencilSquareIcon,
 } from "@heroicons/react/24/outline";
 
-function ResidentDetails({ resident }) {
+function ResidentDetails({ resident, image }) {
   const [open, setOpen] = useState(true);
 
   // modal
@@ -88,32 +88,6 @@ function ResidentDetails({ resident }) {
   }
   const [imageUrl, setImageUrl] = useState("");
 
-  useEffect(() => {
-    const fetchImage = async () => {
-      try {
-        const response = await fetch(
-          `https://homes-test.onrender.com/residents/img/${resident.id}`,
-          {
-            headers: {
-              Authorization: "Bearer " + imgToken,
-            },
-          }
-        );
-
-        if (response.ok) {
-          const blob = await response.blob();
-          const url = URL.createObjectURL(blob);
-          setImageUrl(url);
-        } else {
-          console.error("Error fetching image:", response.status);
-        }
-      } catch (error) {
-        console.error("Error fetching image:", error);
-      }
-    };
-
-    fetchImage();
-  }, [resident]);
   return (
     <>
       <React.Fragment>
@@ -121,10 +95,10 @@ function ResidentDetails({ resident }) {
           <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
             <div className="px-4 sm:px-0 flex  justify-between">
               <div className="flex gap-x-4">
-                {imageUrl && (
+                {image && (
                   <img
-                    className="h-24 rounded-lg"
-                    src={imageUrl}
+                    className="h-12 w-12 flex-none rounded-full bg-gray-50"
+                    src={image}
                     alt="Profile"
                   />
                 )}
@@ -193,96 +167,118 @@ function ResidentDetails({ resident }) {
                   )}
                 </div>
               </div>
-              <div>
-                <div>
-                  <div className="flex space-x-4 ">
-                    <div>
-                      <Link to="./logs">
-                        <button
-                          type="button"
-                          className="inline-flex  opacity-80 items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                        >
-                          <ClipboardDocumentIcon
-                            className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"
-                            aria-hidden="true"
-                          />
-                          History
-                        </button>
-                      </Link>
-                    </div>
-                    <div>
-                      <Link to="./new-log">
-                        <button
-                          type="button"
-                          className="inline-flex  opacity-80 items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                        >
-                          <PlusIcon
-                            className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"
-                            aria-hidden="true"
-                          />
-                          Vitals Assesment
-                        </button>
-                      </Link>
-                    </div>
-                    <div>
-                      <Link to="./care-plan">
-                        <button
-                          type="button"
-                          className="inline-flex  opacity-80 items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                        >
-                          <ClipboardDocumentListIcon
-                            className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"
-                            aria-hidden="true"
-                          />
-                          Care Plan
-                        </button>
-                      </Link>
-                    </div>
-                    <div>
-                      <Link to="./med-recs">
-                        <button
-                          type="button"
-                          className="inline-flex  opacity-80 items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                        >
-                          <ClipboardDocumentListIcon
-                            className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"
-                            aria-hidden="true"
-                          />
-                          Medical Records
-                        </button>
-                      </Link>
-                    </div>
-                    <div>
-                      <Link to="./incident">
-                        <button
-                          type="button"
-                          className="inline-flex  opacity-80 items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                        >
-                          <LifebuoyIcon
-                            className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"
-                            aria-hidden="true"
-                          />
-                          Incident Report
-                        </button>
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-                <div className="pt-4">
+
+              <div className="grid grid-cols-4 gap-4 ">
+                <Link to="./logs">
                   <div>
-                    <Link to="./leaves">
-                      <button
-                        type="button"
-                        className="inline-flex  opacity-80 items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                      >
-                        <ArrowRightOnRectangleIcon
-                          className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"
-                          aria-hidden="true"
-                        />
-                        Leave application
-                      </button>
-                    </Link>
+                    <button
+                      type="button"
+                      className="inline-flex opacity-80 items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                    >
+                      <ClipboardDocumentIcon
+                        className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"
+                        aria-hidden="true"
+                      />
+                      View Logs
+                    </button>
                   </div>
+                </Link>
+                <div>
+                  <Link to="./new-log">
+                    <button
+                      type="button"
+                      className="inline-flex  opacity-80 items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                    >
+                      <PlusIcon
+                        className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"
+                        aria-hidden="true"
+                      />
+                      Add Logs
+                    </button>
+                  </Link>
+                </div>
+                <div>
+                  <Link to="./care-plan">
+                    <button
+                      type="button"
+                      className="inline-flex  opacity-80 items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                    >
+                      <ClipboardDocumentListIcon
+                        className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"
+                        aria-hidden="true"
+                      />
+                      Care Plan
+                    </button>
+                  </Link>
+                </div>
+                <div>
+                  <Link to="./med-recs">
+                    <button
+                      type="button"
+                      className="inline-flex  opacity-80 items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                    >
+                      <ClipboardDocumentListIcon
+                        className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"
+                        aria-hidden="true"
+                      />
+                      Medical Records
+                    </button>
+                  </Link>
+                </div>
+                <div>
+                  <Link to="./incident">
+                    <button
+                      type="button"
+                      className="inline-flex  opacity-80 items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                    >
+                      <LifebuoyIcon
+                        className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"
+                        aria-hidden="true"
+                      />
+                      Incident Report
+                    </button>
+                  </Link>
+                </div>
+                <div>
+                  <Link to="./attachment">
+                    <button
+                      type="button"
+                      className="inline-flex  opacity-80 items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                    >
+                      <LifebuoyIcon
+                        className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"
+                        aria-hidden="true"
+                      />
+                      Attachments
+                    </button>
+                  </Link>
+                </div>
+                <div>
+                  <Link to="./leaves">
+                    <button
+                      type="button"
+                      className="inline-flex  opacity-80 items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                    >
+                      <ArrowRightOnRectangleIcon
+                        className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"
+                        aria-hidden="true"
+                      />
+                      Leave application
+                    </button>
+                  </Link>
+                </div>
+                <div>
+                  <button
+                    type="button"
+                    onClick={handleOpenModal}
+                    className="inline-flex opacity-80 items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                  >
+                    <UserCircleIcon
+                      className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"
+                      aria-hidden="true"
+                    />
+                    Upload Patient Picture
+                  </button>
                 </div>
               </div>
             </div>

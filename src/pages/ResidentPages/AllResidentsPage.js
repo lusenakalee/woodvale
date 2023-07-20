@@ -1,7 +1,7 @@
-import React, { Suspense } from "react";
+import React from "react";
 import ResidentList from "../../components/ResidentComps/ResidentList";
 import { getAuthToken } from "../../util/Auth";
-import { Await, defer, json, useRouteLoaderData } from "react-router-dom";
+import { json, useRouteLoaderData } from "react-router-dom";
 
 function AllResidentsPage() {
   const residentsList = useRouteLoaderData("all-residents");
@@ -35,3 +35,4 @@ export async function loader() {
     return resData;
   }
 }
+

@@ -159,7 +159,6 @@ async function activitiesLoader() {
   return resData;
 }
 
-
 async function dailyRecordsLoader() {
   let url = "https://homes-test.onrender.com/dashboard/daily-records";
   const token = getAuthToken();
@@ -187,7 +186,6 @@ async function dailyRecordsLoader() {
   return resData;
 }
 
-
 async function lastLoginLoader() {
   let url = "https://homes-test.onrender.com/dashboard/last-login";
   const token = getAuthToken();
@@ -214,7 +212,6 @@ async function lastLoginLoader() {
   const resData = await response.json();
   return resData;
 }
-
 
 async function healthDataLoader() {
   let url = "https://homes-test.onrender.com/dashboard/residents/health_data";
@@ -244,14 +241,6 @@ async function healthDataLoader() {
   return resData;
 }
 
-
-
-
-
-
-
-
-
 export function checkToken() {
   const token = getAuthToken();
   if (!token) {
@@ -269,6 +258,6 @@ export async function tokenLoader() {
     dailyRecords: await dailyRecordsLoader(),
     lastLogin: await lastLoginLoader(),
     totalIncidents: await totalIncidentsLoader(),
-    healthData : await healthDataLoader(),
+    healthData: await healthDataLoader(),
   });
 }

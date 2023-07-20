@@ -3,6 +3,7 @@ import {
   Form,
   json,
   redirect,
+  useActionData,
   useNavigate,
   useNavigation,
 } from "react-router-dom";
@@ -12,7 +13,7 @@ function UserForm({ method, user, title }) {
   const navigate = useNavigate();
   const navigation = useNavigation();
   const [selectedOption, setSelectedOption] = useState(null);
-
+  const data = useActionData();
   const handleOptionChange = (e) => {
     setSelectedOption(e.target.value);
   };
@@ -30,7 +31,14 @@ function UserForm({ method, user, title }) {
             <p className="mt-1 text-sm leading-6 text-gray-600">
               Kindly fill in correct details
             </p>
-
+            {data && data.errors && (
+              <ul>
+                {Object.values(data.errors).map((err) => (
+                  <li key={err}>{err}</li>
+                ))}
+              </ul>
+            )}
+            {data && data.message && <p>{data.message}</p>}
             <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
               <div className="sm:col-span-3">
                 <label
@@ -129,7 +137,7 @@ function UserForm({ method, user, title }) {
               </div>
             </div>
             <div className="mt-10 space-y-10 space-x-5">
-              <fieldset  className="mt-10 space-y-10 space-x-5">
+              <fieldset className="mt-10 space-y-10 space-x-5">
                 <legend className="text-sm font-semibold leading-6 text-gray-900">
                   Is the user you are adding an Admin?
                 </legend>
@@ -191,25 +199,50 @@ export async function action({ request, params }) {
     last_name: data.get("last_name"),
     is_admin: data.get("is-admin"), //boolean field should be a dropdown of true or false
   };
-  const response = await fetch("https://homes-test.onrender.com/user", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "*",
-      Authorization: "Bearer " + token,
-    },
-    body: JSON.stringify(signupData),
-  });
-  if (response.status === 409) {
-    return response;
-  }
+  if (method === "POST") {
+    const response = await fetch("/user", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        Authorization: "Bearer " + token,
+      },
+      body: JSON.stringify(signupData),
+    });
+    if (response.status === 409) {
+      return response;
+    }
 
-  if (response.status === 417) {
-    return response;
-  }
-  if (!response.ok) {
-    throw json({ message: "Could not register user" }, { status: 500 });
-  }
+    if (response.status === 417) {
+      return response;
+    }
+    if (!response.ok) {
+      throw json({ message: "Could not register user" }, { status: 500 });
+    }
 
-  return redirect("/login/team");
+    return redirect("/login/team");
+  } else {
+    const id = params.id;
+    const response = await fetch("/user/" + id, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        Authorization: "Bearer " + token,
+      },
+      body: JSON.stringify(signupData),
+    });
+    if (response.status === 409) {
+      return response;
+    }
+
+    if (response.status === 417) {
+      return response;
+    }
+    if (!response.ok) {
+      throw json({ message: "Could not update user" }, { status: 500 });
+    }
+
+    return redirect("/login/team");
+  }
 }

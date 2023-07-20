@@ -27,6 +27,7 @@ function MedicalRecordForm({ record, method, title }) {
           ))}
         </ul>
       )}
+      {data && data.message && <p>{data.message}</p>}
       <Form method={method}>
         <div className="col-span-full">
           <label
