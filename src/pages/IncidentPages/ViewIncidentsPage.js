@@ -15,7 +15,7 @@ function ViewIncidentsPage() {
 export default ViewIncidentsPage;
 export async function loader({ request, params }) {
   const id = params.id;
-  let url = "https://homes-test.onrender.com/incident-reports/" + id +"/incidents";
+  let url = "https://woodvale-test-2.onrender.com/incident-reports/" + id +"/incidents";
   const token = getAuthToken();
 
   const response = await fetch(url, {

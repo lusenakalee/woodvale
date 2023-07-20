@@ -119,7 +119,7 @@ export async function action({ request, params }) {
     description: data.get("description"),
     event_date: data.get("event_date"),
   };
-  let url = "https://homes-test.onrender.com/activity";
+  let url = "https://woodvale-test-2.onrender.com/activity";
   if (method === "POST") {
     const response = await fetch(url, {
       method: method,

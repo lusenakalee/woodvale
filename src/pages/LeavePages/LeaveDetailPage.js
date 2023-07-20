@@ -14,7 +14,7 @@ function LeaveDetailPage() {
 
 export default LeaveDetailPage;
 export async function loader({ request, params }) {
-  let url = "https://homes-test.onrender.com/leave-records/leave/";
+  let url = "https://woodvale-test-2.onrender.com/leave-records/leave/";
   const token = getAuthToken();
   const id = params.leaveId;
   const response = await fetch(url + id, {
@@ -44,7 +44,7 @@ export async function action({ request, params }) {
 
   const id = params.leaveId;
   const Id = params.id;
-  const response = await fetch("https://homes-test.onrender.com/leave-records/" + id, {
+  const response = await fetch("https://woodvale-test-2.onrender.com/leave-records/" + id, {
     method: request.method,
     headers: {
       Authorization: "Bearer " + token,

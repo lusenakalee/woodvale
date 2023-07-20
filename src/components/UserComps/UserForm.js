@@ -200,7 +200,7 @@ export async function action({ request, params }) {
     is_admin: data.get("is-admin"), //boolean field should be a dropdown of true or false
   };
   if (method === "POST") {
-    const response = await fetch("https://homes-test.onrender.com/user", {
+    const response = await fetch("https://woodvale-test-2.onrender.com/user", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -223,7 +223,7 @@ export async function action({ request, params }) {
     return redirect("/login/team");
   } else {
     const id = params.id;
-    const response = await fetch("https://homes-test.onrender.com/user/" + id, {
+    const response = await fetch("https://woodvale-test-2.onrender.com/user/" + id, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

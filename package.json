@@ -49,5 +49,5 @@
     "@tailwindcss/forms": "^0.5.3",
     "tailwindcss": "^3.3.2"
   },
-  "proxy": "https://homes-test.onrender.com"
+  "proxy": "https://woodvale-test-2.onrender.com"
 }

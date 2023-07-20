@@ -201,7 +201,7 @@ export async function action({ request, params }) {
     instructions: data.get("instructions"),
     resident_id: id,
   };
-  let url = "https://homes-test.onrender.com/care-plan";
+  let url = "https://woodvale-test-2.onrender.com/care-plan";
   if (method === "POST") {
     const response = await fetch(url, {
       method: method,
