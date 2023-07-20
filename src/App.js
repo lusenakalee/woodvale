@@ -11,6 +11,10 @@ import { activitiesLoader } from "./pages/ActivityPages/ActivityMainPages/Activi
 
 const ResidentRoot = lazy(() => import("./pages/ResidentPages/ResidentsRoot"));
 
+const AttachmentRoot = lazy(() =>
+  import("./pages/AttachmentPages/AttachmentRoot")
+);
+
 const ActivityRoot = lazy(() =>
   import("./pages/ActivityPages/ActivityMainPages/MainActivityRoot")
 );
@@ -89,6 +93,10 @@ const ResidentDetailPage = lazy(() =>
   import("./pages/ResidentPages/ResidentDetailPage")
 );
 
+const AllAttAchmentsPage = lazy(() =>
+  import("./pages/AttachmentPages/AllAttachmentsPage")
+);
+
 const RootLayout = lazy(() => import("./pages/RootPages/RootLayout"));
 
 const AllLogsPage = lazy(() => import("./pages/LogsPages/AllLogsPage"));
@@ -127,6 +135,11 @@ const NewCarePlanPage = lazy(() =>
 const EditCarePlanPage = lazy(() =>
   import("./pages/CarePlanPages/EditCarePlanPage")
 );
+
+const NewAttachmentPage = lazy(() =>
+  import("./pages/AttachmentPages/NewAttachmentPage")
+);
+
 
 const ActivityDetailPage = lazy(() =>
   import("./pages/ActivityPages/ActivityMainPages/ActivityDetailPage")
@@ -618,6 +631,37 @@ const router = createBrowserRouter([
                         "./pages/MedicalRecordsPages/EditMedicalRecordPage"
                       ).then((module) => module.action(meta)),
                   },
+                ],
+              },
+              {
+                path: "attachment",
+                element: (
+                  <Suspense fallback={<p>Loading...</p>}>
+                    <AttachmentRoot />
+                  </Suspense>
+                ),
+                id: "attachments",
+                loader: (meta) =>
+                  import("./pages/AttachmentPages/AllAttachmentsPage").then(
+                    (module) => module.loader(meta)
+                  ),
+                children: [
+                  ({
+                    index: true,
+                    element: (
+                      <Suspense fallback={<p>Loading...</p>}>
+                        <AllAttAchmentsPage />
+                      </Suspense>
+                    ),
+                  },
+                  {
+                    path: "new",
+                    element: (
+                      <Suspense fallback={<p>Loading...</p>}>
+                        <NewAttachmentPage />
+                      </Suspense>
+                    ),
+                  }),
                 ],
               },
               {
