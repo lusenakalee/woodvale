@@ -25,7 +25,7 @@ export function userTokenLoader() {
 }
 
 async function currentUserLoader() {
-  let url = "/current_user";
+  let url = "https://homes-test.onrender.com/current_user";
   const token = getAuthToken();
   const response = await fetch(url, {
     method: "get",
@@ -52,7 +52,7 @@ async function currentUserLoader() {
 }
 
 async function totalResidentsLoader() {
-  let url = "/dashboard/residents";
+  let url = "https://homes-test.onrender.com/dashboard/residents";
   const token = getAuthToken();
   const response = await fetch(url, {
     method: "get",
@@ -79,7 +79,7 @@ async function totalResidentsLoader() {
 }
 
 async function leavesLoader() {
-  let url = "/dashboard/leaves";
+  let url = "https://homes-test.onrender.com/dashboard/leaves";
   const token = getAuthToken();
   const response = await fetch(url, {
     method: "get",
@@ -106,7 +106,7 @@ async function leavesLoader() {
 }
 
 async function totalIncidentsLoader() {
-  let url = "/dashboard/incidents";
+  let url = "https://homes-test.onrender.com/dashboard/incidents";
   const token = getAuthToken();
   const response = await fetch(url, {
     method: "get",
@@ -133,7 +133,7 @@ async function totalIncidentsLoader() {
 }
 
 async function activitiesLoader() {
-  let url = "/dashboard/activities";
+  let url = "https://homes-test.onrender.com/dashboard/activities";
   const token = getAuthToken();
   const response = await fetch(url, {
     method: "get",
@@ -160,7 +160,7 @@ async function activitiesLoader() {
 }
 
 async function dailyRecordsLoader() {
-  let url = "/dashboard/daily-records";
+  let url = "https://homes-test.onrender.com/dashboard/daily-records";
   const token = getAuthToken();
   const response = await fetch(url, {
     method: "get",
@@ -187,7 +187,7 @@ async function dailyRecordsLoader() {
 }
 
 async function lastLoginLoader() {
-  let url = "/dashboard/last-login";
+  let url = "https://homes-test.onrender.com/dashboard/last-login";
   const token = getAuthToken();
   const response = await fetch(url, {
     method: "get",
@@ -214,7 +214,7 @@ async function lastLoginLoader() {
 }
 
 async function healthDataLoader() {
-  let url = "/dashboard/residents/health_data";
+  let url = "https://homes-test.onrender.com/dashboard/residents/health_data";
   const token = getAuthToken();
   const response = await fetch(url, {
     method: "get",

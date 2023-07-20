@@ -173,7 +173,7 @@ export async function action({ request, params }) {
     contact: data.get("contact"),
     reason: data.get("reason"),
   };
-  let url = "/leave-records";
+  let url = "https://homes-test.onrender.com/leave-records";
   if (method === "POST") {
     const response = await fetch(url, {
       method: method,

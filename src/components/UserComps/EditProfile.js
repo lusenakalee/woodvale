@@ -308,7 +308,7 @@ export async function action({ request, params }) {
     first_name: data.get("first_name"),
     last_name: data.get("last_name"),
   };
-  const response = await fetch("/user/" + id, {
+  const response = await fetch("https://homes-test.onrender.com/user/" + id, {
     method: method,
     headers: {
       "Content-Type": "application/json",
