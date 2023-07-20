@@ -40,9 +40,11 @@ function AllLogs({ logs }) {
   return (
     <React.Fragment>
 
-  <div className="py-4">
-          <Card>
-            <Title>Blood pressure, Heart Rate, and Weight Comparison</Title>
+  <div  className="py-4">
+          <Card >
+            <div>
+            <Title > {"  "}Blood pressure, Heart Rate, and Weight Comparison</Title>
+            </div>
             <LineChart
               className="mt-6"
               data={chartData}
@@ -50,7 +52,7 @@ function AllLogs({ logs }) {
               categories={["Heart Rate", "Blood Pressure", "Weight"]}
               colors={["emerald", "gray", "indigo"]}
               yAxisWidth={40}
-            />
+              />
           </Card>
         </div>
       <div>
@@ -121,9 +123,9 @@ function AllLogs({ logs }) {
         </TableHead>
         <TableBody>
           {logs.map((log) => (
-            <TableRow key={log.id}>
+            <TableRow key={log.id} className="hover:bg-white">
               <Link to={`./${log.id}`}>
-                <TableCell>{log.creation_date}</TableCell>
+                <TableCell className="w-auto hover:text-indigo-600 hover:underline">{log.creation_date}</TableCell>
               </Link>
               <TableCell className="text-right">{log.blood_pressure}</TableCell>
               <TableCell className="text-right">{log.heart_rate}</TableCell>

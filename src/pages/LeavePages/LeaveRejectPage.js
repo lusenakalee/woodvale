@@ -16,8 +16,8 @@ function LeaveRejectPage() {
   function cancelHandler() {
     navigate("..");
   }
-  const navigation = useNavigation()
-  const isSubmitting = navigation.state ==="submitting"
+  const navigation = useNavigation();
+  const isSubmitting = navigation.state === "submitting";
   return (
     <React.Fragment>
       <Modal>
@@ -31,10 +31,24 @@ function LeaveRejectPage() {
         {data && data.message && <p>{data.message}</p>}
         <Form method="post">
           <p>Are you sure you want to Reject this leave</p>
-          <button type="submit"disabled={isSubmitting}>{isSubmitting ? "Rejecting": "Yes"}</button>
-          <button type="button" onClick={cancelHandler}>
-            No
-          </button>
+          <div className="mt-6 flex items-center justify-end gap-x-6">
+            <button
+              type="button"
+              onClick={cancelHandler}
+              className="text-sm font-semibold leading-6 text-gray-900"
+            >
+              No
+            </button>
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            >
+               {isSubmitting ? "Rejecting" : "Yes"}
+            </button>
+          </div>
+         
+        
         </Form>
       </Modal>
     </React.Fragment>
@@ -51,8 +65,8 @@ export async function leaveRejectAction({ request, params }) {
   const residentId = params.id;
 
   const rejectData = {
-    reject_comment: data.get('reject'),
-  }
+    reject_comment: data.get("reject"),
+  };
   const response = await fetch(url + id, {
     method: "post",
     headers: {

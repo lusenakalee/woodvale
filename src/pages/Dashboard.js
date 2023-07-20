@@ -80,7 +80,6 @@ export default function Dashboard() {
                   Add Resident
                 </button>
               </Link>
-              
             </div>
 
             <div class="grid grid-cols-2 gap-2 py-4">
@@ -117,12 +116,14 @@ export default function Dashboard() {
                   </Card>
 
                   <Grid numItemsSm={2} className="mt-4 gap-4">
-                    <Card>
+                    <Link to='/login/residents'>
+                    <Card className="hover:bg-gray-50">
                       <Metric className="mt-2 truncate">
                         {totalResidents.count}
                       </Metric>
-                      <Text>Total residents</Text>
+                      <Text>Number of residents</Text>
                     </Card>
+                    </Link>
                     <Card>
                       <Metric className="mt-2 truncate">
                         {totalIncidents.incidents}
@@ -135,12 +136,7 @@ export default function Dashboard() {
                       </Metric>
                       <Text>Residents on leave</Text>
                     </Card>
-                    <Card>
-                      <Metric className="mt-2 truncate">
-                        {activities.not_approved_count}
-                      </Metric>
-                      <Text>Activities Pending Approval</Text>
-                    </Card>
+                   
                   </Grid>
                 </Card>
               </div>

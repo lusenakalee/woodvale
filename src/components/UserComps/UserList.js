@@ -37,11 +37,11 @@ function UserList({ users }) {
     <React.Fragment>
       <div>
         <Flex className="space-x-0.5" justifyContent="start" alignItems="center">
-          <Title>Team</Title>
+          <Title>Staff</Title>
           <Icon
             icon={InformationCircleIcon}
             variant="simple"
-            tooltip="Shows general employee information"
+            tooltip="Shows general staff information"
           />
           <Title></Title>
         </Flex>
@@ -84,10 +84,10 @@ function UserList({ users }) {
 
         <TableBody>
           {filteredUsers.map((item) => (
-            <TableRow key={item.id}>
-              <Link to={`./${item.id}`}>
-                <TableCell>{item.first_name}</TableCell>
-              </Link>
+            <TableRow key={item.id} className="hover:bg-white">
+             <TableCell className="w-auto hover:text-indigo-600 hover:underline">
+                <Link to={`./${item.id}`}>{item.first_name}</Link>
+              </TableCell>
               <TableCell className="text-right">{item.last_name}</TableCell>
               <TableCell className="text-right">{item.username}</TableCell>
               <TableCell className="text-right">

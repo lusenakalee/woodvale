@@ -19,7 +19,7 @@ function UserNav() {
                     className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"
                     aria-hidden="true"
                   />
-                  All Users
+                  All Staff
                 </button>
               </NavLink>
               <NavLink to="./new">
@@ -31,7 +31,7 @@ function UserNav() {
                     className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"
                     aria-hidden="true"
                   />
-                  New User
+                  New Staff Member
                 </button>
               </NavLink>
             </div>
