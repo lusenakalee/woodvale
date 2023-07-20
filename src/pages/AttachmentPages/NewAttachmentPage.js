@@ -83,7 +83,7 @@ function NewAttachmentPage() {
           />
           <input
             type="text"
-            name="desc"
+            name="description"
             placeholder="Description"
             required
             value={description}
