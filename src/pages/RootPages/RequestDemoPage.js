@@ -110,7 +110,7 @@ function RequestDemoPage() {
             onClick={cancelHandler}
             className="text-sm font-semibold leading-6 text-gray-900"
           >
-            No
+            Cancel
           </button>
           <button
             type="submit"
