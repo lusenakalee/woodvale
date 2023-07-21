@@ -140,7 +140,6 @@ const NewAttachmentPage = lazy(() =>
   import("./pages/AttachmentPages/NewAttachmentPage")
 );
 
-
 const ActivityDetailPage = lazy(() =>
   import("./pages/ActivityPages/ActivityMainPages/ActivityDetailPage")
 );
@@ -152,7 +151,6 @@ const ActivityEditPage = lazy(() =>
 const LogDetailPage = lazy(() => import("./pages/LogsPages/LogDetailsPage"));
 
 const RequestDemoPage = lazy(() => import("./pages/RootPages/RequestDemoPage"));
-
 
 const router = createBrowserRouter([
   {
@@ -173,7 +171,6 @@ const router = createBrowserRouter([
         <RequestDemoPage />
       </Suspense>
     ),
-
   },
 
   {
@@ -188,7 +185,6 @@ const router = createBrowserRouter([
       </Suspense>
     ),
     children: [
-
       {
         index: true,
         element: <SignIn />,
@@ -656,9 +652,9 @@ const router = createBrowserRouter([
                 ),
                 id: "attachments",
                 loader: (meta) =>
-                  import("./pages/AttachmentPages/AllAttachmentsPage").then(
-                    (module) => module.loader(meta)
-                  ),
+                  import(
+                    "./pages/AttachmentPages/AllAttachmentsPage"
+                  ).then((module) => module.loader(meta)),
                 children: [
                   ({
                     index: true,
