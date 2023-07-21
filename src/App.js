@@ -152,6 +152,14 @@ const LogDetailPage = lazy(() => import("./pages/LogsPages/LogDetailsPage"));
 
 const RequestDemoPage = lazy(() => import("./pages/RootPages/RequestDemoPage"));
 
+const ResidentReturnPage = lazy(() =>
+  import("./pages/LeavePages/ReturnResidentPage")
+);
+
+const CancelReturnPage = lazy(() =>
+  import("./pages/LeavePages/CancelReturnResidentPage")
+);
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -587,6 +595,30 @@ const router = createBrowserRouter([
                             (module) => module.leaveRejectAction(meta)
                           ),
                       },
+                      {
+                        path: "reverse",
+                        element: (
+                          <Suspense fallback={<p>Loading...</p>}>
+                            <CancelReturnPage />
+                          </Suspense>
+                        ),
+                        action: (meta) =>
+                          import(
+                            "./pages/LeavePages/CancelReturnResidentPage"
+                          ).then((module) => module.action(meta)),
+                      },
+                      {
+                        path: "return",
+                        element: (
+                          <Suspense fallback={<p>Loading...</p>}>
+                            <ResidentReturnPage />
+                          </Suspense>
+                        ),
+                        action:(meta) =>
+                        import(
+                          "./pages/LeavePages/ReturnResidentPage"
+                        ).then((module) => module.action(meta)),
+                      },
                     ],
                   },
                   ,
@@ -652,9 +684,9 @@ const router = createBrowserRouter([
                 ),
                 id: "attachments",
                 loader: (meta) =>
-                  import(
-                    "./pages/AttachmentPages/AllAttachmentsPage"
-                  ).then((module) => module.loader(meta)),
+                  import("./pages/AttachmentPages/AllAttachmentsPage").then(
+                    (module) => module.loader(meta)
+                  ),
                 children: [
                   ({
                     index: true,
