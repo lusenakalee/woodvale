@@ -23,7 +23,7 @@ function ReturnResidentPage() {
         )}
         {data && data.message && <p>{data.message}</p>}
         <Form method="post">
-          <p>Are you sure you want to return this resident</p>
+          <p>Are you sure you want to return this resident?</p>
           <div className="mt-6 flex items-center justify-end gap-x-6">
             <button
               type="button"

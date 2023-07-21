@@ -23,7 +23,7 @@ function CancelReturnResidentPage() {
     )}
     {data && data.message && <p>{data.message}</p>}
       <Form method="post">
-        <p>Are you sure you want to approve this leave</p>
+        <p>Are you sure you want to cancel this resident's return?</p>
         <div className="mt-6 flex items-center justify-end gap-x-6">
           <button
             type="button"
