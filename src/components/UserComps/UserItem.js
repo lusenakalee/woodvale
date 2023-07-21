@@ -3,7 +3,7 @@ import { Link, useActionData } from "react-router-dom";
 import { useRouteLoaderData, useSubmit } from "react-router-dom";
 
 function UserItem({ user }) {
-  const token = useRouteLoaderData("root");
+  const {token} = useRouteLoaderData("root");
   const submit = useSubmit();
 
   function startDeleteHandler() {

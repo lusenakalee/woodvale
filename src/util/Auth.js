@@ -20,7 +20,7 @@ export function getAuthToken() {
   return token;
 }
 
-export function userTokenLoader() {
+export async function userTokenLoader() {
   return getAuthToken();
 }
 
@@ -250,7 +250,7 @@ export function checkToken() {
 
 export async function tokenLoader() {
   return defer({
-    root: userTokenLoader(),
+    token: await userTokenLoader(),
     user: await currentUserLoader(),
     totalResidents: await totalResidentsLoader(),
     leaves: await leavesLoader(),

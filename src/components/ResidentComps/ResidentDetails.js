@@ -37,7 +37,7 @@ function ResidentDetails({ resident, image }) {
 
   const cancelButtonRef = useRef(null);
 
-  const token = useRouteLoaderData("root");
+  const {token} = useRouteLoaderData("root");
   const submit = useSubmit();
   const [file, setFile] = useState(null);
   const navigate = useNavigate();
