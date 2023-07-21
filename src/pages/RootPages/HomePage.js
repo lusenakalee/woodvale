@@ -43,15 +43,14 @@ function HomePage() {
                       highest quality of life for your residents.
                     </p>
 
-
                     <div className="flex space-x-4">
-                    <div className="flex  ">
-              <Icon
-                icon={InformationCircleIcon}
-                variant="simple"
-                tooltip="Login with the credentials sent to you via email"
-              />
-            </div>
+                      <div className="flex  ">
+                        <Icon
+                          icon={InformationCircleIcon}
+                          variant="simple"
+                          tooltip="Login with the credentials sent to you via email"
+                        />
+                      </div>
                       <div>
                         <Link
                           to="/login"
@@ -68,7 +67,6 @@ function HomePage() {
                           Request Demo
                         </Link>
                       </div>
-
                     </div>
                   </div>
                 </div>

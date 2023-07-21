@@ -94,7 +94,7 @@ export default function Nav({ userData }) {
                           <span className="sr-only">Open user menu</span>
                           <img
                             className="h-8 w-8 rounded-full"
-                            src={imageUrl}
+                            src={abstractUser}
                             alt="../../components/assets/images/abstractUser.png"
                           />
                         </Menu.Button>

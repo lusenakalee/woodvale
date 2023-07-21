@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link, useActionData } from "react-router-dom";
 import { getAuthToken } from "../../util/Auth";
+import abstractUser from "../../components/assets/images/abstractUser.png"
+
 
 function ShowUserProfile({ user }) {
   const imgToken = getAuthToken();
@@ -46,7 +48,7 @@ function ShowUserProfile({ user }) {
         {imageUrl && (
           <img
             className="h-12 w-12 flex-none rounded-full bg-gray-50"
-            src={imageUrl}
+            src={abstractUser}
             alt="Profile"
           />
         )}
