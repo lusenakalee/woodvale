@@ -140,7 +140,6 @@ const NewAttachmentPage = lazy(() =>
   import("./pages/AttachmentPages/NewAttachmentPage")
 );
 
-
 const ActivityDetailPage = lazy(() =>
   import("./pages/ActivityPages/ActivityMainPages/ActivityDetailPage")
 );
@@ -153,6 +152,13 @@ const LogDetailPage = lazy(() => import("./pages/LogsPages/LogDetailsPage"));
 
 const RequestDemoPage = lazy(() => import("./pages/RootPages/RequestDemoPage"));
 
+const ResidentReturnPage = lazy(() =>
+  import("./pages/LeavePages/ReturnResidentPage")
+);
+
+const CancelReturnPage = lazy(() =>
+  import("./pages/LeavePages/CancelReturnResidentPage")
+);
 
 const router = createBrowserRouter([
   {
@@ -173,7 +179,6 @@ const router = createBrowserRouter([
         <RequestDemoPage />
       </Suspense>
     ),
-
   },
 
   {
@@ -188,7 +193,6 @@ const router = createBrowserRouter([
       </Suspense>
     ),
     children: [
-
       {
         index: true,
         element: <SignIn />,
@@ -590,6 +594,30 @@ const router = createBrowserRouter([
                           import("./pages/LeavePages/LeaveRejectPage").then(
                             (module) => module.leaveRejectAction(meta)
                           ),
+                      },
+                      {
+                        path: "reverse",
+                        element: (
+                          <Suspense fallback={<p>Loading...</p>}>
+                            <CancelReturnPage />
+                          </Suspense>
+                        ),
+                        action: (meta) =>
+                          import(
+                            "./pages/LeavePages/CancelReturnResidentPage"
+                          ).then((module) => module.action(meta)),
+                      },
+                      {
+                        path: "return",
+                        element: (
+                          <Suspense fallback={<p>Loading...</p>}>
+                            <ResidentReturnPage />
+                          </Suspense>
+                        ),
+                        action:(meta) =>
+                        import(
+                          "./pages/LeavePages/ReturnResidentPage"
+                        ).then((module) => module.action(meta)),
                       },
                     ],
                   },

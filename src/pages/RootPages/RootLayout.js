@@ -3,7 +3,7 @@ import Nav from "../../components/RootComps/Nav";
 import { Await, Outlet, useRouteLoaderData } from "react-router-dom";
 
 function RootLayout() {
-  const token = useRouteLoaderData("root");
+  const {token} = useRouteLoaderData("root");
   const { user } = useRouteLoaderData("root");
   return (
     <React.Fragment>

@@ -1,10 +1,6 @@
 import React, { useState } from "react";
 import Modal from "../../components/UIComps/ModalComp";
 import {
-  Form,
-  json,
-  redirect,
-  useActionData,
   useNavigate,
   useNavigation,
   useRouteLoaderData,
@@ -22,6 +18,7 @@ function NewAttachmentPage() {
   const handleFileChange = (event) => {
     setFile(event.target.files[0]);
   };
+
   const handleDescriptionChange = (event) => {
     setDescription(event.target.value);
   };
@@ -46,18 +43,17 @@ function NewAttachmentPage() {
         },
         body: formData,
       });
-      if (response.status === 400) {
-        window.alert("Only PDF or Image attachments are allowed!!");
-      }
+
       if (response.ok) {
-        const confirmed = window.confirm(
-          "File uploaded successfully"
-        );
+        const confirmed = window.confirm("File uploaded successfully");
         if (confirmed) {
           navigate("..");
         }
+      } else if (response.status === 400) {
+        const data = await response.json();
+        window.alert(data.message); // Show the error message from the backend
       } else {
-        window.alert("failed to upload");
+        window.alert("Failed to upload");
       }
     } catch (error) {
       window.alert("Network error", error);
@@ -86,7 +82,6 @@ function NewAttachmentPage() {
             name="description"
             placeholder="Description"
             required
-            value={description}
             onChange={handleDescriptionChange}
           />
           <br />

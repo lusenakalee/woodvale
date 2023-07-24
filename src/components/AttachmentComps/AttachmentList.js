@@ -30,20 +30,9 @@ function AttachmentList({ attachments }) {
       return redirect(`/login/residents/${resident_id}/attachment`);
     }
   }
-  return (<React.Fragment>
-          {attachments.map((item) => (
-            <TableRow key={item.id}>
-              <Link to={`./${item.id}`}>
-                <TableCell>{item.description}</TableCell>
-              </Link>
-              <TableCell className="text-right">
-                {item.upload_date}
-              </TableCell>
-              <TableCell className="text-right">
-                <button onClick={() => startDeleteHandler(item.resident_id, item.id)}>Delete</button>
-              </TableCell>
-            </TableRow>
-          ))}
+  return (
+  <React.Fragment>
+    {attachments.map((attachment)=>(attachment.upload_date))}
   </React.Fragment>);
 }
 

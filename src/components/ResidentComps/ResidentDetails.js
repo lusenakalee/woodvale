@@ -37,7 +37,7 @@ function ResidentDetails({ resident, image }) {
 
   const cancelButtonRef = useRef(null);
 
-  const token = useRouteLoaderData("root");
+  const {token} = useRouteLoaderData("root");
   const submit = useSubmit();
   const [file, setFile] = useState(null);
   const navigate = useNavigate();
@@ -57,7 +57,7 @@ function ResidentDetails({ resident, image }) {
 
     try {
       const response = await fetch(
-        `https://homes-test.onrender.com/residents/${resident.id}/upload`,
+        `/residents/${resident.id}/upload`,
         {
           method: "POST",
           headers: {

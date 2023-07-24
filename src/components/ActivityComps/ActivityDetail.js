@@ -4,7 +4,7 @@ import { json, redirect, useActionData, useRouteLoaderData, useSubmit } from "re
 import { Link } from "react-router-dom";
 
 function ActivityDetail({ activity }) {
-  const token = useRouteLoaderData("root");
+  const {token} = useRouteLoaderData("root");
   const submit = useSubmit();
   function startDeleteHandler() {
     const proceed = window.confirm("Are you sure?");

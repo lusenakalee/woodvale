@@ -66,6 +66,34 @@ function LeaveDetail({ leave }) {
               </button>
             </Link>
           </span>
+          <span className="sm:ml-3">
+            <Link to="./return">
+              <button
+                type="button"
+                className="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              >
+                <CheckIcon
+                  className="-ml-0.5 mr-1.5 h-5 w-5"
+                  aria-hidden="true"
+                />
+                Returned
+              </button>
+            </Link>
+          </span>
+          <span className="sm:ml-3">
+            <Link to="./reverse">
+              <button
+                type="button"
+                className="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              >
+                <CheckIcon
+                  className="-ml-0.5 mr-1.5 h-5 w-5"
+                  aria-hidden="true"
+                />
+                Cancel Return
+              </button>
+            </Link>
+          </span>
         </div>
       </div>
      
@@ -124,6 +152,12 @@ function LeaveDetail({ leave }) {
             <dt className="text-sm font-medium leading-6 text-gray-900">Reason</dt>
             <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
              {leave.reason}
+            </dd>
+          </div>
+          <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <dt className="text-sm font-medium leading-6 text-gray-900">Return Status</dt>
+            <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+             {leave.returned === true ? "Returned" : "Not Returned"}
             </dd>
           </div>
         </dl>
