@@ -76,9 +76,9 @@ function UserList({ users }) {
         <TableHead>
           <TableRow>
             <TableHeaderCell>First Name</TableHeaderCell>
-            <TableHeaderCell className="text-right">Last Name</TableHeaderCell>
-            <TableHeaderCell className="text-right">Username</TableHeaderCell>
-            <TableHeaderCell className="text-right">User Type</TableHeaderCell>
+            <TableHeaderCell className="text-left">Last Name</TableHeaderCell>
+            <TableHeaderCell className="text-left">Username</TableHeaderCell>
+            <TableHeaderCell className="text-left">User Type</TableHeaderCell>
           </TableRow>
         </TableHead>
 
@@ -88,9 +88,9 @@ function UserList({ users }) {
              <TableCell className="w-auto hover:text-indigo-600 hover:underline">
                 <Link to={`./${item.id}`}>{item.first_name}</Link>
               </TableCell>
-              <TableCell className="text-right">{item.last_name}</TableCell>
-              <TableCell className="text-right">{item.username}</TableCell>
-              <TableCell className="text-right">
+              <TableCell className="text-left">{item.last_name}</TableCell>
+              <TableCell className="text-left">{item.username}</TableCell>
+              <TableCell className="text-left">
                 {item.is_admin === true ? "Admin" : "User"}
               </TableCell>
             </TableRow>

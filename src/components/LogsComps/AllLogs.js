@@ -118,10 +118,10 @@ function AllLogs({ logs }) {
         <TableHead>
           <TableRow>
             <TableHeaderCell>Creation Date</TableHeaderCell>
-            <TableHeaderCell className="text-right">B.P</TableHeaderCell>
-            <TableHeaderCell className="text-right">Heart Rate</TableHeaderCell>
-            <TableHeaderCell className="text-right">Weight</TableHeaderCell>
-            <TableHeaderCell className="text-right">Voiding</TableHeaderCell>
+            <TableHeaderCell className="text-left">B.P</TableHeaderCell>
+            <TableHeaderCell className="text-left">Heart Rate</TableHeaderCell>
+            <TableHeaderCell className="text-left">Weight</TableHeaderCell>
+            <TableHeaderCell className="text-left">Voiding</TableHeaderCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -130,10 +130,10 @@ function AllLogs({ logs }) {
               <Link to={`./${log.id}`}>
                 <TableCell className="w-auto hover:text-indigo-600 hover:underline">{log.creation_date}</TableCell>
               </Link>
-              <TableCell className="text-right">{log.blood_pressure}</TableCell>
-              <TableCell className="text-right">{log.heart_rate}</TableCell>
-              <TableCell className="text-right">{log.weight}</TableCell>
-              <TableCell className="text-right">{log.voiding}</TableCell>
+              <TableCell className="text-left">{log.blood_pressure}</TableCell>
+              <TableCell className="text-left">{log.heart_rate}</TableCell>
+              <TableCell className="text-left">{log.weight}</TableCell>
+              <TableCell className="text-left">{log.voiding}</TableCell>
             </TableRow>
           ))}
         </TableBody>

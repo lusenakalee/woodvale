@@ -144,15 +144,15 @@ function ActivitiesList({ activities }) {
         <TableHead>
           <TableRow>
             <TableHeaderCell>Event Date</TableHeaderCell>
-            <TableHeaderCell className="text-right">Event Name</TableHeaderCell>
-            <TableHeaderCell className="text-right">
+            <TableHeaderCell className="text-left">Event Name</TableHeaderCell>
+            <TableHeaderCell className="text-left">
               Approval status
             </TableHeaderCell>
-            <TableHeaderCell className="text-right">
+            <TableHeaderCell className="text-left">
               Description
             </TableHeaderCell>
-            <TableHeaderCell className="text-right">Approve</TableHeaderCell>
-            <TableHeaderCell className="text-right">Reject</TableHeaderCell>
+            <TableHeaderCell className="text-left">Approve</TableHeaderCell>
+            <TableHeaderCell className="text-left">Reject</TableHeaderCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -161,12 +161,12 @@ function ActivitiesList({ activities }) {
               <Link to={`./${item.id}`}>
                 <TableCell>{item.event_date}</TableCell>
               </Link>
-              <TableCell className="text-right">{item.name}</TableCell>
-              <TableCell className="text-right">
+              <TableCell className="text-left">{item.name}</TableCell>
+              <TableCell className="text-left">
                 {item.approved === true ? "Approved" : "Not Approved"}
               </TableCell>
-              <TableCell className="text-right">{item.description}</TableCell>
-              <TableCell className="text-right">
+              <TableCell className="text-left">{item.description}</TableCell>
+              <TableCell className="text-left">
                 <Button
                   type="button"
                   onClick={() => handleApprove({ id: item.id })}
@@ -215,7 +215,7 @@ function ActivitiesList({ activities }) {
                   </div>
                 )}
               </TableCell>
-              <TableCell className="text-right">
+              <TableCell className="text-left">
                 <Button
                   type="button"
                   onClick={() => handleReject({ id: item.id })}

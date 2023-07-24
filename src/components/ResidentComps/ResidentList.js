@@ -80,15 +80,15 @@ export default function ResidentList({ residentsList }) {
       <Table className="mt-6 table w-full">
         <TableHead>
           <TableRow>
-            <TableHeaderCell className="w-auto">First Name</TableHeaderCell>
-            <TableHeaderCell className="w-auto text-right">
+            <TableHeaderCell className="">First Name</TableHeaderCell>
+            <TableHeaderCell className=" text-left">
               Last Name
             </TableHeaderCell>
-            <TableHeaderCell className="w-auto text-right">Age</TableHeaderCell>
-            <TableHeaderCell className="w-auto text-right">
+            <TableHeaderCell className=" text-left">Age</TableHeaderCell>
+            <TableHeaderCell className=" text-left">
               Date Registered
             </TableHeaderCell>
-            <TableHeaderCell className="w-auto text-right">
+            <TableHeaderCell className=" text-left">
               Gender
             </TableHeaderCell>
           </TableRow>
@@ -96,17 +96,17 @@ export default function ResidentList({ residentsList }) {
         <TableBody>
           {filteredResidents.map((item) => (
             <TableRow key={item.id} className="hover:bg-white">
-              <TableCell className="w-auto hover:text-indigo-600 hover:underline">
+              <TableCell className=" hover:text-indigo-600 hover:underline">
                 <Link to={`./${item.id}`}>{item.first_name}</Link>
               </TableCell>
-              <TableCell className="w-auto text-right">
+              <TableCell className=" text-left">
                 {item.last_name}
               </TableCell>
-              <TableCell className="w-auto text-right">{item.age}</TableCell>
-              <TableCell className="w-auto text-right">
+              <TableCell className=" text-left">{item.age}</TableCell>
+              <TableCell className=" text-left">
                 {item.date_registered}
               </TableCell>
-              <TableCell className="w-auto text-right">{item.gender}</TableCell>
+              <TableCell className=" text-left">{item.gender}</TableCell>
             </TableRow>
           ))}
         </TableBody>
