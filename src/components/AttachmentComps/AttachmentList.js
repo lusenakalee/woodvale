@@ -10,7 +10,7 @@ function AttachmentList({ attachments }) {
     const token = getAuthToken();
     if (proceed) {
       const response = await fetch(
-        `/resident/upload/${resident_id}/${id}`,
+        `https://homes-test.onrender.com/resident/upload/${resident_id}/${id}`,
         {
           method: "DELETE",
           headers: {
