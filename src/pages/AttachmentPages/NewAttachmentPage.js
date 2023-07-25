@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Modal from "../../components/UIComps/ModalComp";
 import {
   useNavigate,
-  useNavigation,
   useRouteLoaderData,
 } from "react-router-dom";
 import { getAuthToken } from "../../util/Auth";

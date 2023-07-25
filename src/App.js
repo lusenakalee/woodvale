@@ -148,6 +148,18 @@ const ActivityEditPage = lazy(() =>
   import("./pages/ActivityPages/ActivityMainPages/ActivityEditPage")
 );
 
+const ApprovedLeavesPage = lazy(()=>import("./pages/LeavePages/ApprovedLeavesPage"))
+
+const IncidentsViewPage = lazy(()=>import("./pages/IncidentPages/AllIncidentsPage"))
+
+const OverdueLeavesPage = lazy(()=>import("./pages/LeavePages/OverdueLeavesPage"))
+
+const PendingReturnPage = lazy(()=>import("./pages/LeavePages/PendingReturnPage"))
+
+const RejectedLeavesPage = lazy(()=>import("./pages/LeavePages/RejectedLeavesPage"))
+
+const PendingApprovalLeavesPage = lazy(()=>import("./pages/LeavePages/PendingApprovalLeavesPage"))
+
 const LogDetailPage = lazy(() => import("./pages/LogsPages/LogDetailsPage"));
 
 const RequestDemoPage = lazy(() => import("./pages/RootPages/RequestDemoPage"));
@@ -197,6 +209,78 @@ const router = createBrowserRouter([
         index: true,
         element: <SignIn />,
         action: loginAction,
+      },
+      {
+        path: "approved-leaves",
+        element: (
+          <Suspense fallback={<p>Loading...</p>}>
+            <ApprovedLeavesPage/>
+          </Suspense>
+        ),
+        loader: (meta) =>
+        import("./pages/LeavePages/LeaveApprovePage").then((module) =>
+          module.loader(meta)
+        )
+      },
+      {
+        path: "rejected-leaves",
+        element: (
+          <Suspense fallback={<p>Loading...</p>}>
+            <RejectedLeavesPage />
+          </Suspense>
+        ),
+        loader: (meta) =>
+        import("./pages/LeavePages/LeaveRejectPage").then((module) =>
+          module.loader(meta)
+        )
+      },
+      {
+        path: "overdue-leaves",
+        element: (
+          <Suspense fallback={<p>Loading...</p>}>
+            <OverdueLeavesPage />
+          </Suspense>
+        ),
+        loader: (meta) =>
+        import("./pages/LeavePages/OverdueLeavesPage").then((module) =>
+          module.loader(meta)
+        )
+      },
+      {
+        path: "pending-approval",
+        element: (
+          <Suspense fallback={<p>Loading...</p>}>
+            <PendingApprovalLeavesPage />
+          </Suspense>
+        ),
+        loader: (meta) =>
+        import("./pages/LeavePages/PendingApprovalLeavesPage").then((module) =>
+          module.loader(meta)
+        )
+      },
+      {
+        path: "pending-return",
+        element: (
+          <Suspense fallback={<p>Loading...</p>}>
+            <PendingReturnPage />
+          </Suspense>
+        ),
+        loader: (meta) =>
+        import("./pages/LeavePages/PendingApprovalLeavesPage").then((module) =>
+          module.loader(meta)
+        )
+      },
+      {
+        path: "incidents-today",
+        element: (
+          <Suspense fallback={<p>Loading...</p>}>
+            <IncidentsViewPage/>
+          </Suspense>
+        ),
+        loader: (meta) =>
+        import("./pages/IncidentPages/AllIncidentsPage").then((module) =>
+          module.loader(meta)
+        )
       },
       {
         path: "profile",

@@ -416,7 +416,7 @@ export async function action({ request, params }) {
     }
     return redirect(`/login/residents/${id}/logs`);
   }else{
-    url = `/daily-records/${id}`
+    url = `/daily-records/${logId}`
     const response = await fetch(url, {
       method: "PATCH",
       headers: {
