@@ -13,7 +13,7 @@ const user = {
 };
 const navigation = [
   { name: "Dashboard", to: "/login/home", current: true },
-  { name: "Team", to: "./team", current: false },
+  { name: "Staff", to: "./staff", current: false },
   { name: "Residents", to: "./residents", current: false },
 ];
 
@@ -46,7 +46,7 @@ export default function Nav({ userData }) {
     };
 
     fetchImage();
-  }, []);
+  }, [userData]);
   return (
     <>
       <Disclosure as="nav" className="bg-gray-800">
@@ -58,7 +58,7 @@ export default function Nav({ userData }) {
                   <div className="hidden md:block">
                     <div className="ml-10 flex items-baseline space-x-4">
                       {navigation.map((item) =>
-                        item.name === "Team" && userData &&!userData.is_admin ? null : (
+                        item.name === "Staff" && userData &&!userData.is_admin ? null : (
                           <Link
                             key={item.name}
                             to={item.to}

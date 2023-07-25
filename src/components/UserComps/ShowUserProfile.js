@@ -50,7 +50,7 @@ function ShowUserProfile({ user }) {
     };
 
     fetchImage();
-  }, []);
+  }, [user]);
 
   return (
     <React.Fragment>

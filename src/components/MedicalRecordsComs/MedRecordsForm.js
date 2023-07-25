@@ -29,7 +29,14 @@ function MedicalRecordForm({ record, method, title }) {
 
   return (
     <React.Fragment>
-   <ToastContainer/>
+      {data && data.errors && (
+        <ul>
+          {Object.values(data.errors).map((err) => (
+            <li key={err}>{err}</li>
+          ))}
+        </ul>
+      )}
+      {data && data.message && <p>{data.message}</p>}
       <Form method={method}>
         <div className="col-span-full">
           <label

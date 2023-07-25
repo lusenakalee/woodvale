@@ -1,19 +1,23 @@
-import React, { useState } from "react";
+import React from "react";
 import ResidentDetails from "../../components/ResidentComps/ResidentDetails";
-import { json, redirect, useRouteLoaderData } from "react-router-dom";
+import { defer, json, redirect, useRouteLoaderData } from "react-router-dom";
 import { getAuthToken } from "../../util/Auth";
 
 function ResidentDetailPage() {
-  const resident = useRouteLoaderData("resident-detail");
+  const { resident, image } = useRouteLoaderData("resident-detail");
 
-  return <ResidentDetails resident={resident} />;
+  return (
+    <React.Fragment>
+      <ResidentDetails resident={resident} image={image} />
+    </React.Fragment>
+  );
 }
 
 export default ResidentDetailPage;
-export async function loader({ request, params }) {
+export async function residentLoader(residentId) {
   let url = "/residents/";
   const token = getAuthToken();
-  const id = params.id;
+  const id = residentId;
   const response = await fetch(url + id, {
     method: "get",
     headers: {
@@ -32,10 +36,10 @@ export async function loader({ request, params }) {
   return resData;
 }
 
-async function imageLoader({ request, params }) {
+async function imageLoader(residentId) {
   let imageUrl;
   const imgToken = getAuthToken();
-  const id = params.id;
+  const id = residentId;
   try {
     const response = await fetch(`/residents/img/${id}`, {
       headers: {
@@ -77,4 +81,12 @@ export async function action({ request, params }) {
     );
   }
   return redirect("/login/residents");
+}
+
+export async function loader({ request, params }) {
+  const residentId = params.id
+  return defer({
+    resident: await residentLoader(residentId),
+    image: await imageLoader(residentId),
+  });
 }

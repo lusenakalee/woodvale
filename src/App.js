@@ -11,6 +11,10 @@ import { activitiesLoader } from "./pages/ActivityPages/ActivityMainPages/Activi
 
 const ResidentRoot = lazy(() => import("./pages/ResidentPages/ResidentsRoot"));
 
+const AttachmentRoot = lazy(() =>
+  import("./pages/AttachmentPages/AttachmentRoot")
+);
+
 const ActivityRoot = lazy(() =>
   import("./pages/ActivityPages/ActivityMainPages/MainActivityRoot")
 );
@@ -89,6 +93,10 @@ const ResidentDetailPage = lazy(() =>
   import("./pages/ResidentPages/ResidentDetailPage")
 );
 
+const AllAttAchmentsPage = lazy(() =>
+  import("./pages/AttachmentPages/AllAttachmentsPage")
+);
+
 const RootLayout = lazy(() => import("./pages/RootPages/RootLayout"));
 
 const AllLogsPage = lazy(() => import("./pages/LogsPages/AllLogsPage"));
@@ -100,6 +108,14 @@ const EditLogsPage = lazy(() => import("./pages/LogsPages/EditLogsPage"));
 const ProfilePage = lazy(() => import("./pages/UserPages/ProfilePage"));
 
 const ProfileEditPage = lazy(() => import("./pages/UserPages/EditProfilePage"));
+
+const LeaveApprovePage = lazy(() =>
+  import("./pages/LeavePages/LeaveApprovePage")
+);
+
+const LeaveRejectPage = lazy(() =>
+  import("./pages/LeavePages/LeaveRejectPage")
+);
 
 const ActivitiesPage = lazy(() =>
   import("./pages/ActivityPages/ActivityMainPages/ActivitiesPage")
@@ -120,6 +136,10 @@ const EditCarePlanPage = lazy(() =>
   import("./pages/CarePlanPages/EditCarePlanPage")
 );
 
+const NewAttachmentPage = lazy(() =>
+  import("./pages/AttachmentPages/NewAttachmentPage")
+);
+
 const ActivityDetailPage = lazy(() =>
   import("./pages/ActivityPages/ActivityMainPages/ActivityDetailPage")
 );
@@ -129,6 +149,16 @@ const ActivityEditPage = lazy(() =>
 );
 
 const LogDetailPage = lazy(() => import("./pages/LogsPages/LogDetailsPage"));
+
+const RequestDemoPage = lazy(() => import("./pages/RootPages/RequestDemoPage"));
+
+const ResidentReturnPage = lazy(() =>
+  import("./pages/LeavePages/ReturnResidentPage")
+);
+
+const CancelReturnPage = lazy(() =>
+  import("./pages/LeavePages/CancelReturnResidentPage")
+);
 
 const router = createBrowserRouter([
   {
@@ -142,6 +172,15 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     action: signUpAction,
   },
+  {
+    path: "/demo",
+    element: (
+      <Suspense fallback={<p>Loading...</p>}>
+        <RequestDemoPage />
+      </Suspense>
+    ),
+  },
+
   {
     path: "/login",
     id: "root",
@@ -199,7 +238,7 @@ const router = createBrowserRouter([
         action: logoutAction,
       },
       {
-        path: "team",
+        path: "staff",
         id: "users",
         element: (
           <Suspense fallback={<p>Loading...</p>}>
@@ -516,9 +555,9 @@ const router = createBrowserRouter([
                           </Suspense>
                         ),
                         action: (meta) =>
-                        import("./pages/LeavePages/LeaveDetailPage").then(
-                          (module) => module.action(meta)
-                        )
+                          import("./pages/LeavePages/LeaveDetailPage").then(
+                            (module) => module.action(meta)
+                          ),
                       },
                       {
                         path: "edit",
@@ -528,9 +567,57 @@ const router = createBrowserRouter([
                           </Suspense>
                         ),
                         action: (meta) =>
-                        import("./components/LeaveComps/NewLeaveForm").then(
-                          (module) => module.action(meta)
-                        )
+                          import("./components/LeaveComps/NewLeaveForm").then(
+                            (module) => module.action(meta)
+                          ),
+                      },
+                      {
+                        path: "approve",
+                        element: (
+                          <Suspense fallback={<p>Loading...</p>}>
+                            <LeaveApprovePage />
+                          </Suspense>
+                        ),
+                        action: (meta) =>
+                          import("./pages/LeavePages/LeaveApprovePage").then(
+                            (module) => module.leaveApproveAction(meta)
+                          ),
+                      },
+                      {
+                        path: "reject",
+                        element: (
+                          <Suspense fallback={<p>Loading...</p>}>
+                            <LeaveRejectPage />
+                          </Suspense>
+                        ),
+                        action: (meta) =>
+                          import("./pages/LeavePages/LeaveRejectPage").then(
+                            (module) => module.leaveRejectAction(meta)
+                          ),
+                      },
+                      {
+                        path: "reverse",
+                        element: (
+                          <Suspense fallback={<p>Loading...</p>}>
+                            <CancelReturnPage />
+                          </Suspense>
+                        ),
+                        action: (meta) =>
+                          import(
+                            "./pages/LeavePages/CancelReturnResidentPage"
+                          ).then((module) => module.action(meta)),
+                      },
+                      {
+                        path: "return",
+                        element: (
+                          <Suspense fallback={<p>Loading...</p>}>
+                            <ResidentReturnPage />
+                          </Suspense>
+                        ),
+                        action:(meta) =>
+                        import(
+                          "./pages/LeavePages/ReturnResidentPage"
+                        ).then((module) => module.action(meta)),
                       },
                     ],
                   },
@@ -586,6 +673,37 @@ const router = createBrowserRouter([
                         "./pages/MedicalRecordsPages/EditMedicalRecordPage"
                       ).then((module) => module.action(meta)),
                   },
+                ],
+              },
+              {
+                path: "attachment",
+                element: (
+                  <Suspense fallback={<p>Loading...</p>}>
+                    <AttachmentRoot />
+                  </Suspense>
+                ),
+                id: "attachments",
+                loader: (meta) =>
+                  import("./pages/AttachmentPages/AllAttachmentsPage").then(
+                    (module) => module.loader(meta)
+                  ),
+                children: [
+                  ({
+                    index: true,
+                    element: (
+                      <Suspense fallback={<p>Loading...</p>}>
+                        <AllAttAchmentsPage />
+                      </Suspense>
+                    ),
+                  },
+                  {
+                    path: "new",
+                    element: (
+                      <Suspense fallback={<p>Loading...</p>}>
+                        <NewAttachmentPage />
+                      </Suspense>
+                    ),
+                  }),
                 ],
               },
               {

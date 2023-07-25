@@ -9,21 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 function ActivityDetail({ activity }) {
-
-
-
-  if (data && data.errors) {
-    Object.values(data.errors).forEach((err) => {
-      toast.error(err);
-    });
-  }
-
-
-
-
-
-
-  const token = useRouteLoaderData("root");
+  const {token} = useRouteLoaderData("root");
   const submit = useSubmit();
   function startDeleteHandler() {
     const proceed = window.confirm("Are you sure?");
