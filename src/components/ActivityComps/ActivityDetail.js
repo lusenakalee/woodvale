@@ -2,8 +2,27 @@ import React from "react";
 import { getAuthToken } from "../../util/Auth";
 import { json, redirect, useActionData, useRouteLoaderData, useSubmit } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
+
 
 function ActivityDetail({ activity }) {
+
+
+
+  if (data && data.errors) {
+    Object.values(data.errors).forEach((err) => {
+      toast.error(err);
+    });
+  }
+
+
+
+
+
+
   const token = useRouteLoaderData("root");
   const submit = useSubmit();
   function startDeleteHandler() {
@@ -16,13 +35,7 @@ function ActivityDetail({ activity }) {
   const data = useActionData();
   return (
     <React.Fragment>
-      {data && data.errors && (
-        <ul>
-          {Object.values(data.errors).map((err) => (
-            <li key={err}>{err}</li>
-          ))}
-        </ul>
-      )}
+    <ToastContainer/>
 
       <div className="px-4 py-3 sm:grid sm:grid-cols-3 hover:bg-white sm:gap-4 sm:px-0">
         <dt className="text-sm font-medium leading-6 text-gray-900">

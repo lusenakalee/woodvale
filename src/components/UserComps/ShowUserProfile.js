@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Link, useActionData } from "react-router-dom";
 import { getAuthToken } from "../../util/Auth";
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
+
 
 function ShowUserProfile({ user }) {
   const imgToken = getAuthToken();
@@ -8,6 +13,20 @@ function ShowUserProfile({ user }) {
   const data = useActionData();
 
   const [imageUrl, setImageUrl] = useState("");
+
+
+
+  if (data && data.errors) {
+    Object.values(data.errors).forEach((err) => {
+      toast.error(err);
+    });
+  }
+
+
+
+
+
+
 
   useEffect(() => {
     const fetchImage = async () => {
@@ -35,13 +54,7 @@ function ShowUserProfile({ user }) {
 
   return (
     <React.Fragment>
-      {data && data.errors && (
-        <ul>
-          {Object.values(data.errors).map((err) => (
-            <li key={err}>{err}</li>
-          ))}
-        </ul>
-      )}
+    <ToastContainer />
       <div className="flex gap-x-4">
         {imageUrl && (
           <img

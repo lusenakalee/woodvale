@@ -8,6 +8,8 @@ import {
   useNavigate,
   useNavigation,
 } from "react-router-dom";
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function MedicalRecordForm({ record, method, title }) {
   const navigate = useNavigate();
@@ -18,15 +20,16 @@ function MedicalRecordForm({ record, method, title }) {
     navigate("..");
   }
 
+  if (data && data.errors) {
+    Object.values(data.errors).forEach((err) => {
+      toast.error(err);
+    });
+  }
+
+
   return (
     <React.Fragment>
-      {data && data.errors && (
-        <ul>
-          {Object.values(data.errors).map((err) => (
-            <li key={err}>{err}</li>
-          ))}
-        </ul>
-      )}
+   <ToastContainer/>
       <Form method={method}>
         <div className="col-span-full">
           <label
