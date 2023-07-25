@@ -375,12 +375,9 @@ function ResidentDetails({ resident, image }) {
                     Attachments
                   </dt>
                   <dd className="mt-2 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                    <ul
-                      role="list"
-                      className="divide-y divide-gray-100 rounded-md border border-gray-200"
-                    >
+              
                      
-                      <li className="flex items-center justify-between py-4 pl-4 pr-5 text-sm leading-6">
+                      <li className="flex items-center justify-between py-4 pr-5 text-sm leading-6">
                      
                       
                         <div>
@@ -400,7 +397,6 @@ function ResidentDetails({ resident, image }) {
                           </div>
                         </div>
                       </li>
-                    </ul>
                   </dd>
                 </div>
               </dl>

@@ -5,23 +5,44 @@ import { Form, Link } from "react-router-dom";
 import { getAuthToken } from "../../util/Auth";
 import abstractUser from "../../components/assets/images/abstractUser.png"
 
-const user = {
-  name: "Tom Cook",
-  email: "tom@example.com",
-  imageUrl:
-    "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-};
-const navigation = [
-  { name: "Dashboard", to: "/login/home", current: true },
-  { name: "Staff", to: "./staff", current: false },
-  { name: "Residents", to: "./residents", current: false },
-];
+
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
+
+
+
+
+
+
 export default function Nav({ userData }) {
+
+
+  const user = {
+    name: "Tom Cook",
+    email: "tom@example.com",
+    imageUrl:
+      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+  };
+  const [navigation, setNavigation] = useState([
+    { name: "Dashboard", to: "/login/home", current: true },
+    { name: "Staff", to: "./staff", current: false },
+    { name: "Residents", to: "./residents", current: false },
+  ]);
+  const handleItemClick = (index) => {
+    const updatedNavigation = navigation.map((item, i) => ({
+      ...item,
+      current: i === index,
+    }));
+    setNavigation(updatedNavigation);
+  };
+
+
+
+
+
   const [imageUrl, setImageUrl] = useState("");
   const imgToken = getAuthToken();
   useEffect(() => {
@@ -56,25 +77,26 @@ export default function Nav({ userData }) {
               <div className="flex h-16 items-center justify-between">
                 <div className="flex items-center">
                   <div className="hidden md:block">
-                    <div className="ml-10 flex items-baseline space-x-4">
-                      {navigation.map((item) =>
-                        item.name === "Staff" && userData &&!userData.is_admin ? null : (
-                          <Link
-                            key={item.name}
-                            to={item.to}
-                            className={classNames(
-                              item.current
-                                ? "bg-gray-900 text-white"
-                                : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                              "rounded-md px-3 py-2 text-sm font-medium"
-                            )}
-                            aria-current={item.current ? "page" : undefined}
-                          >
-                            {item.name}
-                          </Link>
-                        )
-                      )}
-                    </div>
+                  <div className="ml-10 flex items-baseline space-x-4">
+  {navigation.map((item, index) =>
+    item.name === "Staff" && userData && !userData.is_admin ? null : (
+      <Link
+        key={item.name}
+        to={item.to}
+        className={classNames(
+          item.current
+            ? "bg-gray-900 text-white"
+            : "text-gray-300 hover:bg-gray-700 hover:text-white",
+          "rounded-md px-3 py-2 text-sm font-medium"
+        )}
+        aria-current={item.current ? "page" : undefined}
+        onClick={() => handleItemClick(index)} // <-- Add onclick event here
+      >
+        {item.name}
+      </Link>
+    )
+  )}
+</div>
                   </div>
                 </div>
                 <div className="hidden md:block">
