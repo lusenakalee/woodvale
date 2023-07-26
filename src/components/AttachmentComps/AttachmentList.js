@@ -38,13 +38,16 @@ function AttachmentList({ attachments }) {
     const proceed = window.confirm("Are you sure?");
     const token = getAuthToken();
     if (proceed) {
-      const response = await fetch(`/resident/upload/${resident_id}/${id}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + token,
-        },
-      });
+      const response = await fetch(
+        `https://homes-test.onrender.com/resident/upload/${resident_id}/${id}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
       if (response.ok) {
         setAttachmentList((prevAttachments) =>
           prevAttachments.filter((attachment) => attachment.id !== id)
@@ -65,11 +68,14 @@ function AttachmentList({ attachments }) {
   // Step 2: Function to handle download action
   const downloadHandler = (resident_id, id, description) => {
     const token = getAuthToken();
-    fetch(`/resident/upload/${resident_id}/${id}`, {
-      headers: {
-        Authorization: "Bearer " + token,
-      },
-    })
+    fetch(
+      `https://homes-test.onrender.com/resident/upload/${resident_id}/${id}`,
+      {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      }
+    )
       .then((response) => {
         if (response.ok) {
           return response.blob();
@@ -136,7 +142,6 @@ function AttachmentList({ attachments }) {
                   }
                   className="flex space-x-1 cursor-pointer hover:text-indigo-600 hover:underline"
                 >
-                  {/* Step 3: Download link */}
                   <ArrowDownTrayIcon className="h-4 " />
                   <Text>Download {attachment.description}</Text>
                 </div>
