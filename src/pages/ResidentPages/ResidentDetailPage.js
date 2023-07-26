@@ -29,7 +29,7 @@ export async function residentLoader(residentId) {
     return response;
   }
   if (!response.ok) {
-    throw json({ message: "Wrong Url" }, { status: 500 });
+    throw json({ message: "Server error" }, { status: 500 });
   }
 
   const resData = await response.json();
