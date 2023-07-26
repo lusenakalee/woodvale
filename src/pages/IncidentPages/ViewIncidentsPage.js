@@ -7,6 +7,7 @@ function ViewIncidentsPage() {
   const incidents = useRouteLoaderData("incidents");
   return (
     <React.Fragment>
+
       <ViewIncidents incidents={incidents} />
     </React.Fragment>
   );
