@@ -75,12 +75,7 @@ export default function ResidentList({ residentsList }) {
             />
           ))}
         </MultiSelect>
-        <Select className="max-w-full sm:max-w-xs" defaultValue="all">
-          <SelectItem value="all">All</SelectItem>
-          <SelectItem value="first_name">First Name</SelectItem>
-          <SelectItem value="last_name">Last Name</SelectItem>
-          <SelectItem value="age">Age</SelectItem>
-        </Select>
+
         <button
           type="button"
           onClick={handleExportCSV}

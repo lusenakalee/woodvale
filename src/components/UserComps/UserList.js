@@ -21,7 +21,6 @@ import {
 } from "@tremor/react";
 import Papa from "papaparse";
 
-
 function UserList({ users }) {
   const [selectedNames, setSelectedNames] = useState([]);
 
@@ -42,7 +41,6 @@ function UserList({ users }) {
     link.click();
     document.body.removeChild(link);
   };
-
 
   return (
     <React.Fragment>
@@ -73,13 +71,8 @@ function UserList({ users }) {
             </MultiSelectItem>
           ))}
         </MultiSelect>
-        <Select className="max-w-full sm:max-w-xs" defaultValue="all">
-          <SelectItem value="all">All</SelectItem>
-          <SelectItem value="first_name">First Name</SelectItem>
-          <SelectItem value="last_name">Last Name</SelectItem>
-          <SelectItem value="username">Username</SelectItem>
-        </Select>
-            <button
+
+        <button
           type="button"
           onClick={handleExportCSV}
           className="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
