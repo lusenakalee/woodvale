@@ -107,10 +107,10 @@ function AttachmentList({ attachments }) {
                   <Text>Download {attachment.description}</Text>
                 </div>
               </TableCell>
-              <Flex>
+              <div className="flex space-x-2 hover:underline hover:text-indigo-600 cursor-pointer">
                 <TrashIcon className="h-4 " />
                 <Text>Delete {attachment.description}</Text>
-              </Flex>
+              </div>
               <TableCell></TableCell>
             </TableRow>
           ))}

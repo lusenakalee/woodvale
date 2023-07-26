@@ -93,7 +93,7 @@ const ResidentDetailPage = lazy(() =>
   import("./pages/ResidentPages/ResidentDetailPage")
 );
 
-const AllAttAchmentsPage = lazy(() =>
+const AllAttachmentsPage = lazy(() =>
   import("./pages/AttachmentPages/AllAttachmentsPage")
 );
 
@@ -776,9 +776,10 @@ const router = createBrowserRouter([
                     index: true,
                     element: (
                       <Suspense fallback={<p>Loading...</p>}>
-                        <AllAttAchmentsPage />
+                        <AllAttachmentsPage />
                       </Suspense>
                     ),
+                   
                   },
                   {
                     path: "new",
