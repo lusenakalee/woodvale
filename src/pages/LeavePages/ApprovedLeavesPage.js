@@ -18,7 +18,7 @@ function ApprovedLeavesPage() {
 export default ApprovedLeavesPage;
 
 export async function loader() {
-  let url = "https://homes-test.onrender.com/leave-records/approved";
+  let url = "/leave-records/approved";
   const token = getAuthToken();
 
   const response = await fetch(url, {

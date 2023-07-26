@@ -58,7 +58,7 @@ function LeaveRejectPage() {
 export default LeaveRejectPage;
 
 export async function leaveRejectAction({ request, params }) {
-  let url = "https://homes-test.onrender.com/leave-records/disapprove/";
+  let url = "/leave-records/disapprove/";
   const token = getAuthToken();
   const data = await request.formData();
   const id = params.leaveId;

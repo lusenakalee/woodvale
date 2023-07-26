@@ -16,7 +16,7 @@ export default AllLogsPage
 
 export async function loader({ request, params }) {
     const id = params.id;
-    let url = "https://homes-test.onrender.com/daily-records/" + id ;
+    let url = "/daily-records/" + id ;
     const token = getAuthToken();
   
     const response = await fetch(url, {

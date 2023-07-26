@@ -36,7 +36,7 @@ function NewAttachmentPage() {
     formData.append("description", description);
 
     try {
-      const response = await fetch(`https://homes-test.onrender.com/resident/upload/${resident.id}`, {
+      const response = await fetch(`/resident/upload/${resident.id}`, {
         method: "POST",
         headers: {
           Authorization: "Bearer " + token,

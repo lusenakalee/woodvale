@@ -17,7 +17,7 @@ export default LogDetailsPage;
 export async function loader({ request, params }) {
   const token = getAuthToken();
   const id = params.logID;
-  const response = await fetch(`https://homes-test.onrender.com/daily-records/${id}/record`, {
+  const response = await fetch(`/daily-records/${id}/record`, {
     method: "get",
     headers: {
       Authorization: "Bearer " + token,

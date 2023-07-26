@@ -14,7 +14,7 @@ export default AllAttachmentsPage
 
 export async function loader({ request, params }) {
     const id = params.id;
-    let url = "https://homes-test.onrender.com/resident/upload/" + id;
+    let url = "/resident/upload/" + id;
     const token = getAuthToken();
 
     const response = await fetch(url, {

@@ -16,7 +16,7 @@ function PendingReturnPage() {
 export default PendingReturnPage
 
 export async function loader({ request, params }) {
-    let url = "https://homes-test.onrender.com/leave-records/pending-return";
+    let url = "/leave-records/pending-return";
     const token = getAuthToken();
   
     const response = await fetch(url, {

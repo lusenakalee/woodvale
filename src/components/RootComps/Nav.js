@@ -3,17 +3,7 @@ import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Form, Link } from "react-router-dom";
 import { getAuthToken } from "../../util/Auth";
-<<<<<<< HEAD
-import abstractUser from "../../components/assets/images/abstractUser.png"
-
-const navigation = [
-  { name: "Dashboard", to: "/login/home", current: true },
-  { name: "Staff", to: "./staff", current: false },
-  { name: "Residents", to: "./residents", current: false },
-];
-=======
 import abstractUser from "../../components/assets/images/abstractUser.png";
->>>>>>> 201bb4878402b1acaf31eb8ad29ca1d11eb34ced
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -45,7 +35,7 @@ export default function Nav({ userData }) {
     const fetchImage = async () => {
       try {
         const response = await fetch(
-          `https://homes-test.onrender.com/upload/${userData.id}`,
+          `/upload/${userData.id}`,
           {
             headers: {
               Authorization: "Bearer " + imgToken,

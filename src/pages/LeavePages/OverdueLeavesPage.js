@@ -18,7 +18,7 @@ function OverdueLeavesPage() {
 export default OverdueLeavesPage
 
 export async function loader({ request, params }) {
-    let url = "https://homes-test.onrender.com/leave-records/overdue";
+    let url = "/leave-records/overdue";
     const token = getAuthToken();
   
     const response = await fetch(url, {

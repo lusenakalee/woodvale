@@ -19,7 +19,7 @@ function ProfilePage() {
 export default ProfilePage;
 
 export async function loader({ request }) {
-  let url = "https://homes-test.onrender.com/current_user";
+  let url = "/current_user";
   const token = getAuthToken();
   const response = await fetch(url, {
     method: "get",  

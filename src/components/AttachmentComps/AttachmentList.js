@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { json, redirect, useSubmit } from "react-router-dom";
 import { getAuthToken } from "../../util/Auth";
 import {
@@ -29,20 +29,27 @@ import {
 import { Link } from "react-router-dom";
 
 function AttachmentList({ attachments }) {
+  const [attachmentList, setAttachmentList] = useState(attachments);
+
+  useEffect(() => {
+    setAttachmentList(attachments);
+  }, [attachments]);
   async function startDeleteHandler(resident_id, id) {
     const proceed = window.confirm("Are you sure?");
     const token = getAuthToken();
     if (proceed) {
-      const response = await fetch(
-        `https://homes-test.onrender.com/resident/upload/${resident_id}/${id}`,
-        {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + token,
-          },
-        }
-      );
+      const response = await fetch(`/resident/upload/${resident_id}/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+      });
+      if (response.ok) {
+        setAttachmentList((prevAttachments) =>
+          prevAttachments.filter((attachment) => attachment.id !== id)
+        );
+      }
       if (!response.ok) {
         throw json(
           { message: "Could not delete attachment." },
@@ -56,26 +63,47 @@ function AttachmentList({ attachments }) {
   }
 
   // Step 2: Function to handle download action
-  function handleDownloadClick(path) {
-    // You can create a hidden anchor element and trigger a click on it to initiate the download
-    const downloadLink = document.createElement("a");
-    downloadLink.href = path;
-    downloadLink.target = "_blank"; // Opens the link in a new tab
-    downloadLink.download = path.substring(path.lastIndexOf("/") + 1); // Set the desired file name
-    downloadLink.click();
-  }
+  const downloadHandler = (resident_id, id, description) => {
+    const token = getAuthToken();
+    fetch(`/resident/upload/${resident_id}/${id}`, {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response.blob();
+        }
+        if (response.status === 404) {
+          window.alert("This attachment is blank");
+        }
+      })
+      .then((blob) => {
+        const url = window.URL.createObjectURL(
+          new Blob([blob], { type: "application/pdf" })
+        );
+        const link = document.createElement("a");
+        link.href = url;
+        link.setAttribute("download", `attachment_${description}`);
+        document.body.appendChild(link);
+        link.click();
+        link.parentNode.removeChild(link);
+      })
+      .catch((error) => {
+        console.error("Error downloading attachment:", error.message);
+      });
+  };
 
   const ATTACHMENTS_PER_PAGE = 10; // Set the number of residents to display per page
   const [currentPage, setCurrentPage] = useState(1); // Current page number
-    // Calculate pagination
-    const totalAttachments = attachments.length;
-    const totalPages = Math.ceil(totalAttachments / ATTACHMENTS_PER_PAGE);
-  
-    // Get the slice of residents to display based on the current page
-    const startIndex = (currentPage - 1) * ATTACHMENTS_PER_PAGE;
-    const endIndex = startIndex + ATTACHMENTS_PER_PAGE;
-    const residentsToShow = attachments.slice(startIndex, endIndex);
+  // Calculate pagination
+  const totalAttachments = attachments.length;
+  const totalPages = Math.ceil(totalAttachments / ATTACHMENTS_PER_PAGE);
 
+  // Get the slice of residents to display based on the current page
+  const startIndex = (currentPage - 1) * ATTACHMENTS_PER_PAGE;
+  const endIndex = startIndex + ATTACHMENTS_PER_PAGE;
+  const residentsToShow = attachments.slice(startIndex, endIndex);
 
   return (
     <React.Fragment>
@@ -99,7 +127,13 @@ function AttachmentList({ attachments }) {
               </TableCell>
               <TableCell className=" text-left">
                 <div
-                  onClick={() => handleDownloadClick(attachment.path)}
+                  onClick={() =>
+                    downloadHandler(
+                      attachment.resident_id,
+                      attachment.id,
+                      attachment.description
+                    )
+                  }
                   className="flex space-x-1 cursor-pointer hover:text-indigo-600 hover:underline"
                 >
                   {/* Step 3: Download link */}
@@ -107,7 +141,12 @@ function AttachmentList({ attachments }) {
                   <Text>Download {attachment.description}</Text>
                 </div>
               </TableCell>
-              <div className="flex space-x-2 hover:underline hover:text-indigo-600 cursor-pointer">
+              <div
+                onClick={() =>
+                  startDeleteHandler(attachment.resident_id, attachment.id)
+                }
+                className="flex space-x-2 hover:underline hover:text-indigo-600 cursor-pointer"
+              >
                 <TrashIcon className="h-4 " />
                 <Text>Delete {attachment.description}</Text>
               </div>
@@ -116,7 +155,6 @@ function AttachmentList({ attachments }) {
           ))}
         </TableBody>
       </Table>
-
 
       {/* Pagination */}
       <ol className="flex justify-center gap-1 text-xs font-medium mt-4">
@@ -186,9 +224,6 @@ function AttachmentList({ attachments }) {
           </li>
         )}
       </ol>
-
-
-
     </React.Fragment>
   );
 }
