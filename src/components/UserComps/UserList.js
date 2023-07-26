@@ -19,6 +19,8 @@ import {
   MultiSelect,
   MultiSelectItem,
 } from "@tremor/react";
+import Papa from "papaparse";
+
 
 function UserList({ users }) {
   const [selectedNames, setSelectedNames] = useState([]);
@@ -27,6 +29,20 @@ function UserList({ users }) {
     selectedNames.includes(user.first_name) || selectedNames.length === 0;
 
   const filteredUsers = users.filter(isUserSelected);
+
+  const handleExportCSV = () => {
+    const csvData = Papa.unparse(filteredUsers);
+    const blob = new Blob([csvData], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.setAttribute("href", url);
+    link.setAttribute("download", "users.csv");
+    link.style.visibility = "hidden";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
 
   return (
     <React.Fragment>
@@ -63,8 +79,9 @@ function UserList({ users }) {
           <SelectItem value="last_name">Last Name</SelectItem>
           <SelectItem value="username">Username</SelectItem>
         </Select>
-        <button
+            <button
           type="button"
+          onClick={handleExportCSV}
           className="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
         >
           <PrinterIcon
