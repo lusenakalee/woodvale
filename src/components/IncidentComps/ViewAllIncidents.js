@@ -1,10 +1,8 @@
+import React from "react";
 import { useSubmit } from "react-router-dom";
-import React, { useState } from "react";
 import {
-  CheckCircleIcon,
   InformationCircleIcon,
   PrinterIcon,
-  XCircleIcon,
 } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
 import {
@@ -21,10 +19,9 @@ import {
   SelectItem,
   MultiSelect,
   MultiSelectItem,
-  Button,
 } from "@tremor/react";
 
-function ViewLeavesForm({ leaves, title }) {
+function ViewAllIncidents({ incidents }) {
   const submit = useSubmit();
   function startDeleteHandler() {
     const proceed = window.confirm("Are you sure?");
@@ -33,7 +30,6 @@ function ViewLeavesForm({ leaves, title }) {
       submit(null, { method: "delete" });
     }
   }
-
   return (
     <React.Fragment>
       <div>
@@ -42,49 +38,52 @@ function ViewLeavesForm({ leaves, title }) {
           justifyContent="start"
           alignItems="center"
         >
-          <Title>Leave Applications</Title>
+          <Title>Incidents</Title>
           <Icon
             icon={InformationCircleIcon}
             variant="simple"
-            tooltip="Shows applied leaves"
+            tooltip="Shows incidents"
           />
         </Flex>
       </div>
-
       <Table className="mt-6">
         <TableHead>
           <TableRow>
-            <TableHeaderCell>Leave Date</TableHeaderCell>
-            <TableHeaderCell className="text-left">
-              Duration(Days)
+            <TableHeaderCell>Resident Name</TableHeaderCell>
+            <TableHeaderCell>Incident Date</TableHeaderCell>
+            <TableHeaderCell className="text-right">
+              Person Reporting
             </TableHeaderCell>
-            <TableHeaderCell className="text-left">
-              Approval Status
+            <TableHeaderCell className="text-right">
+              Person notified
             </TableHeaderCell>
-            <TableHeaderCell className="text-left">
-              Person responsible
-            </TableHeaderCell>
+            <TableHeaderCell className="text-right">location</TableHeaderCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {leaves.map((item) => (
+          {incidents.map((item) => (
             <TableRow key={item.id}>
-              <Link to={`./${item.id}`}>
-                <TableCell className="hover:underline hover:text-indigo-600">{item.leave_date}</TableCell>
+              <Link to={`/login/resident/${item.resident.id}`}>
+                <TableCell>{item.resident.first_name} {item.resident.last_name}</TableCell>
               </Link>
-              <TableCell className="text-left">{item.duration}</TableCell>
-              <TableCell className="text-left">
-                {item.approval_status}
+              <TableCell className="text-right">
+                {item.incident_date}
               </TableCell>
-              <TableCell className="text-left">
-                {item.person_responsible}
+              <TableCell className="text-right">
+                {item.person_reporting}
               </TableCell>
+              <TableCell className="text-right">
+                {item.person_notified}
+              </TableCell>
+              <TableCell className="text-right">{item.location}</TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
+
+      
     </React.Fragment>
   );
 }
 
-export default ViewLeavesForm;
+export default ViewAllIncidents;

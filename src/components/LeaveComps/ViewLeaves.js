@@ -1,5 +1,4 @@
-import { useSubmit } from "react-router-dom";
-import React, { useState } from "react";
+import React from "react";
 import {
   CheckCircleIcon,
   InformationCircleIcon,
@@ -17,23 +16,9 @@ import {
   TableBody,
   Title,
   Flex,
-  Select,
-  SelectItem,
-  MultiSelect,
-  MultiSelectItem,
-  Button,
 } from "@tremor/react";
 
-function ViewLeavesForm({ leaves, title }) {
-  const submit = useSubmit();
-  function startDeleteHandler() {
-    const proceed = window.confirm("Are you sure?");
-
-    if (proceed) {
-      submit(null, { method: "delete" });
-    }
-  }
-
+function ViewLeaves({ leaves, title }) {
   return (
     <React.Fragment>
       <div>
@@ -42,7 +27,7 @@ function ViewLeavesForm({ leaves, title }) {
           justifyContent="start"
           alignItems="center"
         >
-          <Title>Leave Applications</Title>
+          <Title>{title}</Title>
           <Icon
             icon={InformationCircleIcon}
             variant="simple"
@@ -54,14 +39,16 @@ function ViewLeavesForm({ leaves, title }) {
       <Table className="mt-6">
         <TableHead>
           <TableRow>
+            <TableHeaderCell>Resident Name</TableHeaderCell>
             <TableHeaderCell>Leave Date</TableHeaderCell>
-            <TableHeaderCell className="text-left">
+            <TableHeaderCell>Return Date</TableHeaderCell>
+            <TableHeaderCell className="text-right">
               Duration(Days)
             </TableHeaderCell>
-            <TableHeaderCell className="text-left">
+            <TableHeaderCell className="text-right">
               Approval Status
             </TableHeaderCell>
-            <TableHeaderCell className="text-left">
+            <TableHeaderCell className="text-right">
               Person responsible
             </TableHeaderCell>
           </TableRow>
@@ -69,14 +56,18 @@ function ViewLeavesForm({ leaves, title }) {
         <TableBody>
           {leaves.map((item) => (
             <TableRow key={item.id}>
-              <Link to={`./${item.id}`}>
-                <TableCell className="hover:underline hover:text-indigo-600">{item.leave_date}</TableCell>
+              <Link to={`/login/resident/${item.resident.id}`}>
+                <TableCell>
+                  {item.resident.first_name} {item.resident.last_name}
+                </TableCell>
               </Link>
-              <TableCell className="text-left">{item.duration}</TableCell>
-              <TableCell className="text-left">
+              <TableCell>{item.leave_date}</TableCell>
+              <TableCell>{item.return_date}</TableCell>
+              <TableCell className="text-right">{item.duration}</TableCell>
+              <TableCell className="text-right">
                 {item.approval_status}
               </TableCell>
-              <TableCell className="text-left">
+              <TableCell className="text-right">
                 {item.person_responsible}
               </TableCell>
             </TableRow>
@@ -87,4 +78,4 @@ function ViewLeavesForm({ leaves, title }) {
   );
 }
 
-export default ViewLeavesForm;
+export default ViewLeaves;

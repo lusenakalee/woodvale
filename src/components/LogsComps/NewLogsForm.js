@@ -360,6 +360,7 @@ export async function action({ request, params }) {
   const method = request.method;
   const data = await request.formData();
   const token = getAuthToken();
+  const logId = params.logID;
   const id = params.id;
   const logData = {
     bowel_movement: data.get("bowel_movement"),
@@ -379,7 +380,24 @@ export async function action({ request, params }) {
     shower: data.get("shower"),
     resident_id: id,
   };
-  let url = "https://homes-test.onrender.com/daily-records";
+  const logUpdateData = {
+    bowel_movement: data.get("bowel_movement"),
+    behavior: data.get("behavior"),
+    voiding: data.get("voiding"),
+    continence_type: data.get("continent"),
+    incontinence_type: data.get("incontinent"),
+    catheter_output: data.get("catheter"),
+    heart_rate: data.get("heart_rate"),
+    blood_pressure: data.get("blood_pressure"),
+    locomotion: data.get("locomotion"),
+    pain_description: data.get("pain_description"),
+    weight: data.get("weight"),
+    pain_noted: data.get("pain_noted"),
+    mood: data.get("mood"),
+    walk_location: data.get("walk"),
+    shower: data.get("shower"),
+  };
+  let url = "/daily-records";
   if (method === "POST") {
     const response = await fetch(url, {
       method: method,
@@ -394,7 +412,25 @@ export async function action({ request, params }) {
       return response;
     }
     if (!response.ok) {
-      throw json({ message: "Failed to save the daily log." }, { status: 500 });
+      throw json({ message: "Failed to save the daily vitals." }, { status: 500 });
+    }
+    return redirect(`/login/residents/${id}/logs`);
+  }else{
+    url = `/daily-records/${logId}`
+    const response = await fetch(url, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+        "Access-Control-Allow-Origin": "*",
+      },
+      body: JSON.stringify(logUpdateData),
+    });
+    if (response.status === 400) {
+      return response;
+    }
+    if (!response.ok) {
+      throw json({ message: "Failed to update the daily vitals." }, { status: 500 });
     }
     return redirect(`/login/residents/${id}/logs`);
   }

@@ -206,6 +206,7 @@ export async function action({ request, params }) {
   const data = await request.formData();
   const token = getAuthToken();
   const id = params.id;
+  const incidentId = params.incidentId;
   const incidentData = {
     incident_date: data.get("incident_date"),
     description: data.get("description"),
@@ -217,7 +218,17 @@ export async function action({ request, params }) {
     antecedent: data.get("antecedent"),
     resident_id: id,
   };
-  let url = "https://homes-test.onrender.com/incident-reports";
+  const incidentUpdateData = {
+    incident_date: data.get("incident_date"),
+    description: data.get("description"),
+    actions_taken: data.get("actions_taken"),
+    location: data.get("location"),
+    person_reporting: data.get("person_reporting"),
+    person_notified: data.get("person_notified"),
+    witnesses: data.get("witnesses"),
+    antecedent: data.get("antecedent"),
+  }
+  let url = "/incident-reports";
   if (method === "POST") {
     const response = await fetch(url, {
       method: method,
@@ -233,6 +244,24 @@ export async function action({ request, params }) {
     }
     if (!response.ok) {
       throw json({ message: "Failed to save the incident" }, { status: 500 });
+    }
+    return redirect(`/login/residents/${id}/incident`);
+  }else{
+    url = `/incident-reports/${incidentId}`;
+    const response = await fetch(url, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+        "Access-Control-Allow-Origin": "*",
+      },
+      body: JSON.stringify(incidentUpdateData),
+    });
+    if (response.status === 400) {
+      return response;
+    }
+    if (!response.ok) {
+      throw json({ message: "Failed to update the incident" }, { status: 500 });
     }
     return redirect(`/login/residents/${id}/incident`);
   }
