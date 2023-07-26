@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLoaderData } from "react-router-dom";
 import {
   PlusCircleIcon,
   HomeIcon,
@@ -8,6 +8,7 @@ import {
 } from "@heroicons/react/24/outline";
 
 function MedRecordsNav() {
+  const medRecords = useLoaderData();
   return (
     <React.Fragment>
       <header className="">
@@ -41,6 +42,8 @@ function MedRecordsNav() {
               </button>
             </NavLink>
 
+            {Object.keys(medRecords).length === 0 ? (
+
             <NavLink to="./new">
               <button
                 type="button"
@@ -53,6 +56,7 @@ function MedRecordsNav() {
                 Add Medical Records
               </button>
             </NavLink>
+            ) : null}
           </div>
         </div>
       </header>

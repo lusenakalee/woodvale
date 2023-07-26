@@ -32,6 +32,7 @@ export async function loader() {
     throw json({ message: "Cant get residents" }, { status: 500 });
   } else {
     const resData = await response.json();
+    console.log(resData);
     return resData;
   }
 }

@@ -38,6 +38,7 @@ export default function Dashboard() {
     leaves,
     activities,
     dailyRecords,
+    usersCount,
   } = routeLoaderData;
 
   const leavesChart = [
@@ -154,11 +155,26 @@ export default function Dashboard() {
                     <Link to="/login/pending-return">
                       <Card className="hover:bg-gray-50">
                         <Metric className="mt-2 truncate">
-                          {leaves.pending_return}
+                          {leaves.pending_return + leaves.overdue_leaves }
                         </Metric>
                         <Text>Residents on leave</Text>
                       </Card>
                     </Link>
+
+                    {user && user.is_admin === true ? (
+                      <Link to="/login/staff">
+                        <Card className="hover:bg-gray-50">
+                          <Metric className="mt-2 truncate">
+                            {usersCount.admin_count + usersCount.user_count}{" "}
+                            Staff
+                          </Metric>
+                          <Text>
+                            {usersCount.admin_count} Admins and{" "}
+                            {usersCount.user_count}Care Givers
+                          </Text>
+                        </Card>
+                      </Link>
+                    ) : null}
                   </Grid>
                 </Card>
               </div>
@@ -209,7 +225,9 @@ export default function Dashboard() {
                         {leavesChart.map((item) => (
                           <ListItem key={item.name}>
                             <Link to={item.path}>
-                              <Text className="hover:text-indigo-600 hover:underline">{item.name}</Text>
+                              <Text className="hover:text-indigo-600 hover:underline">
+                                {item.name}
+                              </Text>
                             </Link>
                             <Flex justifyContent="end" className="space-x-2">
                               <Text> {item.value}</Text>
@@ -226,10 +244,13 @@ export default function Dashboard() {
               <div></div>
               <div className="px-5 grid-cols-4 grid gap-4"></div>
             </div>
-            <Updates />
+            <Updates  />
           </div>
         </main>
       </div>
     </>
   );
 }
+
+
+
