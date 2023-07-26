@@ -31,7 +31,7 @@ function ShowUserProfile({ user }) {
   useEffect(() => {
     const fetchImage = async () => {
       try {
-        const response = await fetch(`/upload/${user.id}`, {
+        const response = await fetch(`https://homes-test.onrender.com/upload/${user.id}`, {
           headers: {
             Authorization: "Bearer " + imgToken,
           },

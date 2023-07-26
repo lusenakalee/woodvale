@@ -15,7 +15,7 @@ function ResidentDetailPage() {
 
 export default ResidentDetailPage;
 export async function residentLoader(residentId) {
-  let url = "/residents/";
+  let url = "https://homes-test.onrender.com/residents/";
   const token = getAuthToken();
   const id = residentId;
   const response = await fetch(url + id, {
@@ -41,7 +41,7 @@ async function imageLoader(residentId) {
   const imgToken = getAuthToken();
   const id = residentId;
   try {
-    const response = await fetch(`/residents/img/${id}`, {
+    const response = await fetch(`https://homes-test.onrender.com/residents/img/${id}`, {
       headers: {
         Authorization: "Bearer " + imgToken,
       },
@@ -63,7 +63,7 @@ export async function action({ request, params }) {
   const token = getAuthToken();
 
   const id = params.id;
-  const response = await fetch("/residents/" + id, {
+  const response = await fetch("https://homes-test.onrender.com/residents/" + id, {
     method: request.method,
     headers: {
       Authorization: "Bearer " + token,

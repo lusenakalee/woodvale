@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useRouteLoaderData } from "react-router-dom";
 import {
   ChevronLeftIcon,
@@ -24,10 +24,40 @@ import {
   Card,
   LineChart,
 } from "@tremor/react";
+import Papa from "papaparse";
 
 function AllLogs({ logs }) {
+  const { resident } = useRouteLoaderData("resident-detail");
+  const [selectedLogDate, setSelectedLogDate] = useState([]);
+
+  const isLogSelected = (log) =>
+    selectedLogDate.includes(log.creation_date) ||
+    selectedLogDate.length === 0;
+
+  const filteredLogs = logs.filter(isLogSelected);
+
+
+
+
+
+
+
+
   const routeLoaderData = useRouteLoaderData("root");
   const { healthData } = routeLoaderData;
+
+  const handleExportCSV = () => {
+    const csvData = Papa.unparse(filteredLogs);
+    const blob = new Blob([csvData], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.setAttribute("href", url);
+    link.setAttribute("download", "logs.csv");
+    link.style.visibility = "hidden";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   // Prepare the chart data
   const chartData = logs.map((log) => ({
@@ -39,22 +69,29 @@ function AllLogs({ logs }) {
 
   return (
     <React.Fragment>
-
-  <div  className="py-4">
-          <Card >
-            <div>
-            <Title > {"  "}Blood pressure, Heart Rate, and Weight Comparison</Title>
+      <div className="py-4">
+        <Card>
+          <div>
+            <div className="font-bold text-lg">
+              {resident.first_name}
+              {"  "}
+              {resident.last_name} Vitals records
             </div>
-            <LineChart
-              className="mt-6"
-              data={chartData}
-              index="date"
-              categories={["Heart Rate", "Blood Pressure", "Weight"]}
-              colors={["emerald", "gray", "indigo"]}
-              yAxisWidth={40}
-              />
-          </Card>
-        </div>
+            <Title>
+              {" "}
+              {"  "}Blood pressure, Heart Rate, and Weight Comparison
+            </Title>
+          </div>
+          <LineChart
+            className="mt-6"
+            data={chartData}
+            index="date"
+            categories={["Heart Rate", "Blood Pressure", "Weight"]}
+            colors={["emerald", "gray", "indigo"]}
+            yAxisWidth={40}
+          />
+        </Card>
+      </div>
       <div>
         <Flex
           className="space-x-0.5"
@@ -72,6 +109,8 @@ function AllLogs({ logs }) {
       <div className="flex space-x-2">
         <MultiSelect
           className="max-w-full sm:max-w-xs"
+          onValueChange={setSelectedLogDate}
+
           placeholder="Search date..."
         >
           {logs.map((item) => (
@@ -83,10 +122,7 @@ function AllLogs({ logs }) {
             </MultiSelectItem>
           ))}
         </MultiSelect>
-        <Select className="max-w-full sm:max-w-xs" defaultValue="all">
-          <SelectItem value="all">All </SelectItem>
-          <SelectItem value="creation_date">creation date</SelectItem>
-        </Select>
+
         <Link to="..">
           <button
             type="button"
@@ -101,6 +137,7 @@ function AllLogs({ logs }) {
         </Link>
         <button
           type="button"
+          onClick={handleExportCSV}
           className="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
         >
           <PrinterIcon
@@ -111,26 +148,28 @@ function AllLogs({ logs }) {
         </button>
       </div>
 
-      <Table className="mt-6">
+      <Table className="mt-6 pb-24">
         <TableHead>
           <TableRow>
             <TableHeaderCell>Creation Date</TableHeaderCell>
-            <TableHeaderCell className="text-right">B.P</TableHeaderCell>
-            <TableHeaderCell className="text-right">Heart Rate</TableHeaderCell>
-            <TableHeaderCell className="text-right">Weight</TableHeaderCell>
-            <TableHeaderCell className="text-right">Voiding</TableHeaderCell>
+            <TableHeaderCell className="text-left">B.P</TableHeaderCell>
+            <TableHeaderCell className="text-left">Heart Rate</TableHeaderCell>
+            <TableHeaderCell className="text-left">Weight</TableHeaderCell>
+            <TableHeaderCell className="text-left">Voiding</TableHeaderCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {logs.map((log) => (
+          {filteredLogs.map((log) => (
             <TableRow key={log.id} className="hover:bg-white">
               <Link to={`./${log.id}`}>
-                <TableCell className="w-auto hover:text-indigo-600 hover:underline">{log.creation_date}</TableCell>
+                <TableCell className="w-auto hover:text-indigo-600 hover:underline">
+                  {log.creation_date}
+                </TableCell>
               </Link>
-              <TableCell className="text-right">{log.blood_pressure}</TableCell>
-              <TableCell className="text-right">{log.heart_rate}</TableCell>
-              <TableCell className="text-right">{log.weight}</TableCell>
-              <TableCell className="text-right">{log.voiding}</TableCell>
+              <TableCell className="text-left">{log.blood_pressure}</TableCell>
+              <TableCell className="text-left">{log.heart_rate}</TableCell>
+              <TableCell className="text-left">{log.weight}</TableCell>
+              <TableCell className="text-left">{log.voiding}</TableCell>
             </TableRow>
           ))}
         </TableBody>

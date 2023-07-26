@@ -1,17 +1,15 @@
-import React from "react";
 import { Form, json, redirect, useActionData, useNavigation } from "react-router-dom";
 import cg from '../../components/assets/images/cg.jpeg'
+import React, { useRef } from 'react';
 
-function SignIn() {
-  const navigation = useNavigation();
-  const data = useActionData();
-  const isSubmitting = navigation.state === "submitting";
+  
+  function SignIn() {
+    const navigation = useNavigation();
+    const data = useActionData();
+    const  isSubmitting = navigation.state === "submitting"
+    
+ 
 
-  if (data && data.errors) {
-    Object.values(data.errors).forEach((err) => {
-      toast.error(err);
-    });
-  }
 
   return (
     <div>
@@ -98,7 +96,7 @@ export async function loginAction({ request, params }) {
     username: data.get("username"),
     password: data.get("password"),
   };
-  const response = await fetch("/login", {
+  const response = await fetch("https://homes-test.onrender.com/login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

@@ -49,7 +49,7 @@ function LeaveApprovePage() {
 export default LeaveApprovePage;
 
 export async function leaveApproveAction({ request, params }) {
-  let url = "/leave-records/approve/";
+  let url = "https://homes-test.onrender.com/leave-records/approve/";
   const token = getAuthToken();
   const id = params.leaveId;
   const data = await request.formData();

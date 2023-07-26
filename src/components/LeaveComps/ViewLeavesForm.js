@@ -24,7 +24,7 @@ import {
   Button,
 } from "@tremor/react";
 
-function ViewLeavesForm({ leaves }) {
+function ViewLeavesForm({ leaves, title }) {
   const submit = useSubmit();
   function startDeleteHandler() {
     const proceed = window.confirm("Are you sure?");
@@ -55,13 +55,13 @@ function ViewLeavesForm({ leaves }) {
         <TableHead>
           <TableRow>
             <TableHeaderCell>Leave Date</TableHeaderCell>
-            <TableHeaderCell className="text-right">
+            <TableHeaderCell className="text-left">
               Duration(Days)
             </TableHeaderCell>
-            <TableHeaderCell className="text-right">
+            <TableHeaderCell className="text-left">
               Approval Status
             </TableHeaderCell>
-            <TableHeaderCell className="text-right">
+            <TableHeaderCell className="text-left">
               Person responsible
             </TableHeaderCell>
           </TableRow>
@@ -70,13 +70,13 @@ function ViewLeavesForm({ leaves }) {
           {leaves.map((item) => (
             <TableRow key={item.id}>
               <Link to={`./${item.id}`}>
-                <TableCell>{item.leave_date}</TableCell>
+                <TableCell className="hover:underline hover:text-indigo-600">{item.leave_date}</TableCell>
               </Link>
-              <TableCell className="text-right">{item.duration}</TableCell>
-              <TableCell className="text-right">
+              <TableCell className="text-left">{item.duration}</TableCell>
+              <TableCell className="text-left">
                 {item.approval_status}
               </TableCell>
-              <TableCell className="text-right">
+              <TableCell className="text-left">
                 {item.person_responsible}
               </TableCell>
             </TableRow>

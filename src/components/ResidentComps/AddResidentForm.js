@@ -386,7 +386,7 @@ export async function residentAction({ request, params }) {
     contact_email: data.get("email"),
     contact_phone_no: data.get("phone-no"),
   };
-  let url = "/residents";
+  let url = "https://homes-test.onrender.com/residents";
   if (method === "POST") {
     const response = await fetch(url, {
       method: method,

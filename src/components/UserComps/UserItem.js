@@ -25,7 +25,15 @@ function UserItem({ user }) {
   const data = useActionData();
   return (
     <React.Fragment>
-    <ToastContainer />
+      {data && data.errors && (
+        <ul>
+          {Object.values(data.errors).map((err) => (
+            <li key={err}>{err}</li>
+          ))}
+        </ul>
+      )}
+                  {data && data.message && <p>{data.message}</p>}
+
       <div className="">
         <h3 className="text-base font-semibold leading-7 text-gray-900">
           User Information

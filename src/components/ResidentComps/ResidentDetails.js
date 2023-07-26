@@ -57,7 +57,7 @@ function ResidentDetails({ resident, image }) {
 
     try {
       const response = await fetch(
-        `/residents/${resident.id}/upload`,
+        `https://homes-test.onrender.com/residents/${resident.id}/upload`,
         {
           method: "POST",
           headers: {
@@ -97,8 +97,8 @@ function ResidentDetails({ resident, image }) {
               <div className="flex gap-x-4">
                 {image && (
                   <img
-                    className="h-12 w-12 flex-none rounded-full bg-gray-50"
-                    src={image}
+                  className="h-24 rounded-lg"
+                  src={image}
                     alt="Profile"
                   />
                 )}
@@ -375,35 +375,9 @@ function ResidentDetails({ resident, image }) {
                     Attachments
                   </dt>
                   <dd className="mt-2 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                    <ul
-                      role="list"
-                      className="divide-y divide-gray-100 rounded-md border border-gray-200"
-                    >
-                      <li className="flex items-center justify-between py-4 pl-4 pr-5 text-sm leading-6">
-                        <div className="flex w-0 flex-1 items-center">
-                          <PaperClipIcon
-                            className="h-5 w-5 flex-shrink-0 text-gray-400"
-                            aria-hidden="true"
-                          />
-                          <div className="ml-4 flex min-w-0 flex-1 gap-2">
-                            <span className="truncate font-medium">
-                              Physician_letter.pdf
-                            </span>
-                            <span className="flex-shrink-0 text-gray-400">
-                              2.4mb
-                            </span>
-                          </div>
-                        </div>
-                        <div className="ml-4 flex-shrink-0">
-                          <Link
-                            to="#"
-                            className="font-medium text-indigo-600 hover:text-indigo-500"
-                          >
-                            Download
-                          </Link>
-                        </div>
-                      </li>
-                      <li className="flex items-center justify-between py-4 pl-4 pr-5 text-sm leading-6">
+              
+                     
+                      <li className="flex items-center justify-between py-4 pr-5 text-sm leading-6">
                      
                       
                         <div>
@@ -423,7 +397,6 @@ function ResidentDetails({ resident, image }) {
                           </div>
                         </div>
                       </li>
-                    </ul>
                   </dd>
                 </div>
               </dl>

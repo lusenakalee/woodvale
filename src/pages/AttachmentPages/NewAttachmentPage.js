@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Modal from "../../components/UIComps/ModalComp";
 import {
   useNavigate,
-  useNavigation,
   useRouteLoaderData,
 } from "react-router-dom";
 import { getAuthToken } from "../../util/Auth";
@@ -10,9 +9,9 @@ import { getAuthToken } from "../../util/Auth";
 function NewAttachmentPage() {
   const { resident } = useRouteLoaderData("resident-detail");
   const navigate = useNavigate();
-  const navigation = useNavigation();
+
   const [description, setDescription] = useState("");
-  const isSubmitting = navigation.state === "submitting";
+  const [submitting, setIsSubmitting] = useState(false);
   const [file, setFile] = useState(null);
 
   const handleFileChange = (event) => {
@@ -30,13 +29,14 @@ function NewAttachmentPage() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const token = getAuthToken();
+    setIsSubmitting(false)
 
     const formData = new FormData();
     formData.append("file", file);
     formData.append("description", description);
 
     try {
-      const response = await fetch(`/resident/upload/${resident.id}`, {
+      const response = await fetch(`https://homes-test.onrender.com/resident/upload/${resident.id}`, {
         method: "POST",
         headers: {
           Authorization: "Bearer " + token,
@@ -47,6 +47,7 @@ function NewAttachmentPage() {
       if (response.ok) {
         const confirmed = window.confirm("File uploaded successfully");
         if (confirmed) {
+          setIsSubmitting(true)
           navigate("..");
         }
       } else if (response.status === 400) {
@@ -89,9 +90,9 @@ function NewAttachmentPage() {
             <button
               className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               type="submit"
-              disabled={isSubmitting}
+              disabled={submitting}
             >
-              {isSubmitting ? "Submitting" : "Submit"}
+              {submitting? "Submitting" : "Submit"}
             </button>
             <button
               onClick={cancelHandler}

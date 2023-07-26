@@ -50,28 +50,29 @@ function ViewIncidents({ incidents }) {
         <TableHead>
           <TableRow>
             <TableHeaderCell>Incident Date</TableHeaderCell>
-            <TableHeaderCell className="text-right">
+            <TableHeaderCell className="text-left">
               Person Reporting
             </TableHeaderCell>
-            <TableHeaderCell className="text-right">
+            <TableHeaderCell className="text-left">
               Person notified
             </TableHeaderCell>
-            <TableHeaderCell className="text-right">location</TableHeaderCell>
+            <TableHeaderCell className="text-left">location</TableHeaderCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {incidents.map((item) => (
             <TableRow key={item.id}>
-              <Link to={`./${item.id}`}>
+                            <Link to={`/login/residents/${item.resident_id}/incident/${item.id}`}>
+
                 <TableCell>{item.incident_date}</TableCell>
               </Link>
-              <TableCell className="text-right">
+              <TableCell className="text-left">
                 {item.person_reporting}
               </TableCell>
-              <TableCell className="text-right">
+              <TableCell className="text-left">
                 {item.person_notified}
               </TableCell>
-              <TableCell className="text-right">{item.location}</TableCell>
+              <TableCell className="text-left">{item.location}</TableCell>
             </TableRow>
           ))}
         </TableBody>

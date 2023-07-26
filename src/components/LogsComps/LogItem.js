@@ -1,5 +1,7 @@
+import { ChevronLeftIcon } from "@heroicons/react/24/outline";
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import { Link, useRouteLoaderData } from "react-router-dom";
 import { useSubmit } from "react-router-dom";
 
 function LogItem({ log }) {
@@ -13,10 +15,22 @@ function LogItem({ log }) {
   }
   return (
     <React.Fragment>
+      <div className="flex justify-end">
+      <NavLink to="..">
+        <button
+          type="button"
+          className="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+        >
+          <ChevronLeftIcon
+            className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"
+            aria-hidden="true"
+          />
+          Back
+        </button>
+      </NavLink>
+      </div>
       <div className="px-4 py-3 sm:grid sm:grid-cols-3 hover:bg-white sm:gap-4 sm:px-0">
-        <dt className="text-sm font-medium leading-6 text-gray-900">
-          Weight
-        </dt>
+        <dt className="text-sm font-medium leading-6 text-gray-900">Weight</dt>
         <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
           {log.weight}
         </dd>
@@ -100,9 +114,7 @@ function LogItem({ log }) {
         </dd>
       </div>
       <div className="px-4 py-3 sm:grid sm:grid-cols-3 hover:bg-white sm:gap-4 sm:px-0">
-        <dt className="text-sm font-medium leading-6 text-gray-900">
-          Voiding
-        </dt>
+        <dt className="text-sm font-medium leading-6 text-gray-900">Voiding</dt>
         <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
           {log.voiding}
         </dd>
@@ -117,22 +129,22 @@ function LogItem({ log }) {
       </div>
 
       <div className=" px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-              <dt className="text-sm font-medium text-gray-500">
-                <button
-                  onClick={startDeleteHandler}
-                  className="px-4 py-2 text-sm font-medium text-gray-900 bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                >
-                  Delete
-                </button>
-              </dt>
-              <dd>
-                <Link to={`./edit`}>
-                  <button className="px-4 py-2 text-sm font-medium text-gray-900 bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    Edit
-                  </button>
-                </Link>
-              </dd>
-            </div>
+        <dt className="text-sm font-medium text-gray-500">
+          <button
+            onClick={startDeleteHandler}
+            className="px-4 py-2 text-sm font-medium text-gray-900 bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            Delete
+          </button>
+        </dt>
+        <dd>
+          <Link to={`./edit`}>
+            <button className="px-4 py-2 text-sm font-medium text-gray-900 bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+              Edit
+            </button>
+          </Link>
+        </dd>
+      </div>
     </React.Fragment>
   );
 }

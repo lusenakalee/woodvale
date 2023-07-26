@@ -6,7 +6,7 @@ export async function logoutAction({ request, params }) {
   const prompt = window.confirm("Are you sure you want to logout...");
 
   if (prompt) {
-    const response = await fetch("/logout", {
+    const response = await fetch("https://homes-test.onrender.com/logout", {
       method: "delete",
       headers: {
         Authorization: "Bearer " + token,
