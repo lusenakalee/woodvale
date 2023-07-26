@@ -2,6 +2,11 @@ import React from "react";
 import { getAuthToken } from "../../util/Auth";
 import { json, redirect, useActionData, useRouteLoaderData, useSubmit } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
+
 
 function ActivityDetail({ activity }) {
   const {token} = useRouteLoaderData("root");
@@ -16,13 +21,7 @@ function ActivityDetail({ activity }) {
   const data = useActionData();
   return (
     <React.Fragment>
-      {data && data.errors && (
-        <ul>
-          {Object.values(data.errors).map((err) => (
-            <li key={err}>{err}</li>
-          ))}
-        </ul>
-      )}
+    <ToastContainer/>
 
       <div className="px-4 py-3 sm:grid sm:grid-cols-3 hover:bg-white sm:gap-4 sm:px-0">
         <dt className="text-sm font-medium leading-6 text-gray-900">
@@ -78,7 +77,7 @@ function ActivityDetail({ activity }) {
 export default ActivityDetail;
 
 export async function loader({ request, params }) {
-  let url = "/activity/";
+  let url = "https://homes-test.onrender.com/activity/";
   const token = getAuthToken();
   const id = params.id;
   const response = await fetch(url + id, {
@@ -95,7 +94,7 @@ export async function loader({ request, params }) {
     return response;
   }
   if (!response.ok) {
-    throw json({ message: "Wrong Url" }, { status: 500 });
+    throw json({ message: "Server error" }, { status: 500 });
   }
 
   const resData = await response.json();
@@ -106,7 +105,7 @@ export async function action({ request, params }) {
   const token = getAuthToken();
 
   const id = params.id;
-  const response = await fetch("/activity/" + id, {
+  const response = await fetch("https://homes-test.onrender.com/activity/" + id, {
     method: request.method,
     headers: {
       Authorization: "Bearer " + token,

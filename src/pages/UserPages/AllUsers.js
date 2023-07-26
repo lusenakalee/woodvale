@@ -17,7 +17,7 @@ export default AllUsers;
 export async function loader() {
   const token = getAuthToken();
 
-  const response = await fetch("/user", {
+  const response = await fetch("https://homes-test.onrender.com/user", {
     method: "GET",
     headers: {
       Authorization: "Bearer " + token,

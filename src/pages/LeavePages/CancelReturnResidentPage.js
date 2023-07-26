@@ -49,7 +49,7 @@ function CancelReturnResidentPage() {
 export default CancelReturnResidentPage
 
 export async function action({ request, params }) {
-    let url = "/leave-records/cancel/";
+    let url = "https://homes-test.onrender.com/leave-records/cancel/";
     const token = getAuthToken();
     const id = params.leaveId;
     const residentId = params.id;

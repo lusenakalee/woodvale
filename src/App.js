@@ -93,7 +93,7 @@ const ResidentDetailPage = lazy(() =>
   import("./pages/ResidentPages/ResidentDetailPage")
 );
 
-const AllAttAchmentsPage = lazy(() =>
+const AllAttachmentsPage = lazy(() =>
   import("./pages/AttachmentPages/AllAttachmentsPage")
 );
 
@@ -217,9 +217,9 @@ const router = createBrowserRouter([
             <ApprovedLeavesPage/>
           </Suspense>
         ),
-        loader: (meta) =>
-        import("./pages/LeavePages/LeaveApprovePage").then((module) =>
-          module.loader(meta)
+        loader: () =>
+        import("./pages/LeavePages/ApprovedLeavesPage").then((module) =>
+          module.loader()
         )
       },
       {
@@ -230,7 +230,7 @@ const router = createBrowserRouter([
           </Suspense>
         ),
         loader: (meta) =>
-        import("./pages/LeavePages/LeaveRejectPage").then((module) =>
+        import("./pages/LeavePages/RejectedLeavesPage").then((module) =>
           module.loader(meta)
         )
       },
@@ -776,9 +776,10 @@ const router = createBrowserRouter([
                     index: true,
                     element: (
                       <Suspense fallback={<p>Loading...</p>}>
-                        <AllAttAchmentsPage />
+                        <AllAttachmentsPage />
                       </Suspense>
                     ),
+                   
                   },
                   {
                     path: "new",

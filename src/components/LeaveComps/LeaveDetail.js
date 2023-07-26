@@ -4,6 +4,8 @@ import {
   PencilIcon,
   TrashIcon,
   XCircleIcon,
+  ArrowUturnDownIcon,
+  XMarkIcon
 } from "@heroicons/react/24/outline";
 import React from "react";
 import { Link } from "react-router-dom";
@@ -70,10 +72,10 @@ function LeaveDetail({ leave }) {
             <Link to="./return">
               <button
                 type="button"
-                className="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                className="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
               >
-                <CheckIcon
-                  className="-ml-0.5 mr-1.5 h-5 w-5"
+                <ArrowUturnDownIcon
+                  className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"
                   aria-hidden="true"
                 />
                 Returned
@@ -84,10 +86,10 @@ function LeaveDetail({ leave }) {
             <Link to="./reverse">
               <button
                 type="button"
-                className="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                className="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
               >
-                <CheckIcon
-                  className="-ml-0.5 mr-1.5 h-5 w-5"
+                <XMarkIcon
+                  className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"
                   aria-hidden="true"
                 />
                 Cancel Return
@@ -128,7 +130,7 @@ function LeaveDetail({ leave }) {
               Leave Approval status
             </dt>
             <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-              {leave.approved === true ? "Approved" : "Not Approved"}
+              {leave.approval_status}
             </dd>
           </div>
           <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">

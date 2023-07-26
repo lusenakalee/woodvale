@@ -7,6 +7,7 @@ function ViewIncidentsPage() {
   const incidents = useRouteLoaderData("incidents");
   return (
     <React.Fragment>
+
       <ViewIncidents incidents={incidents} />
     </React.Fragment>
   );
@@ -15,7 +16,7 @@ function ViewIncidentsPage() {
 export default ViewIncidentsPage;
 export async function loader({ request, params }) {
   const id = params.id;
-  let url = "/incident-reports/" + id +"/incidents";
+  let url = "https://homes-test.onrender.com/incident-reports/" + id +"/incidents";
   const token = getAuthToken();
 
   const response = await fetch(url, {
@@ -32,7 +33,7 @@ export async function loader({ request, params }) {
     return response;
   }
   if (!response.ok) {
-    throw json({ message: "Wrong Url" }, { status: 500 });
+    throw json({ message: "Server error" }, { status: 500 });
   }
 
   const resData = await response.json();

@@ -15,7 +15,7 @@ function UserDetailPage() {
 export default UserDetailPage
 
 export async function loader({ request, params }) {
-  let url = "/user/";
+  let url = "https://homes-test.onrender.com/user/";
   const token = getAuthToken();
   const id = params.id;
   const response = await fetch(url + id, {
@@ -32,7 +32,7 @@ export async function loader({ request, params }) {
     return response;
   }
   if (!response.ok) {
-    throw json({ message: "Wrong Url" }, { status: 500 });
+    throw json({ message: "Server error" }, { status: 500 });
   }
 
   const resData = await response.json();
@@ -44,7 +44,7 @@ export async function action({ request, params }) {
   const token = getAuthToken();
 
   const id = params.id;
-  const response = await fetch("/user/" + id, {
+  const response = await fetch("https://homes-test.onrender.com/user/" + id, {
     method: request.method,
     headers: {
       Authorization: "Bearer " + token,

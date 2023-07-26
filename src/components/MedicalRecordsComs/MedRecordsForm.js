@@ -8,6 +8,8 @@ import {
   useNavigate,
   useNavigation,
 } from "react-router-dom";
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function MedicalRecordForm({ record, method, title }) {
   const navigate = useNavigate();
@@ -17,6 +19,13 @@ function MedicalRecordForm({ record, method, title }) {
   function cancelHandler() {
     navigate("..");
   }
+
+  if (data && data.errors) {
+    Object.values(data.errors).forEach((err) => {
+      toast.error(err);
+    });
+  }
+
 
   return (
     <React.Fragment>
@@ -196,7 +205,7 @@ export async function action({ request, params }) {
     immunization_records: data.get("immunization_records"),
     physician_contact: data.get("physician_contact"),
   };
-  let url = "/medical-records";
+  let url = "https://homes-test.onrender.com/medical-records";
   if (method === "POST") {
     const response = await fetch(url, {
       method: method,

@@ -14,7 +14,7 @@ export default ViewCarePlanPage
 
 export async function loader({ request, params }) {
     const id = params.id;
-    let url = "/care-plan/" + id + "/plan";
+    let url = "https://homes-test.onrender.com/care-plan/" + id + "/plan";
     const token = getAuthToken();
 
     const response = await fetch(url, {
@@ -31,10 +31,11 @@ export async function loader({ request, params }) {
         return response;
       }
     if (!response.ok) {
-      throw json({ message: "Wrong Url" }, { status: 500 });
+      throw json({ message: "Server error" }, { status: 500 });
     }
   
     const resData = await response.json();
+    console.log(resData);
     return resData;
   }
 
@@ -42,7 +43,7 @@ export async function loader({ request, params }) {
     const token = getAuthToken();
   
     const id = params.id;
-    const response = await fetch("/care-plan/" + id, {
+    const response = await fetch("https://homes-test.onrender.com/care-plan/" + id, {
       method: request.method,
       headers: {
         Authorization: "Bearer " + token,

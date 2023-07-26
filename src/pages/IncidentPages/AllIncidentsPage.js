@@ -6,14 +6,17 @@ import { getAuthToken } from '../../util/Auth'
 function AllIncidentsPage() {
     const incidents = useLoaderData()
   return (
+    <main>
+    <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
     <ViewAllIncidents incidents={incidents} />
+    </div></main>
   )
 }
 
 export default AllIncidentsPage
 
 export async function loader({ request, params }) {
-    let url = "/incident-reports";
+    let url = "https://homes-test.onrender.com/incident-reports";
     const token = getAuthToken();
   
     const response = await fetch(url, {
@@ -34,5 +37,6 @@ export async function loader({ request, params }) {
     }
   
     const resData = await response.json();
+    console.log(resData);
     return resData;
   }

@@ -21,7 +21,7 @@ export default AllResidentsPage;
 export async function loader() {
   const token = getAuthToken();
 
-  const response = await fetch("/residents", {
+  const response = await fetch("https://homes-test.onrender.com/residents", {
     method: "GET",
     headers: {
       Authorization: "Bearer " + token,
@@ -32,6 +32,7 @@ export async function loader() {
     throw json({ message: "Cant get residents" }, { status: 500 });
   } else {
     const resData = await response.json();
+    console.log(resData);
     return resData;
   }
 }

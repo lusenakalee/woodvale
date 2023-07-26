@@ -37,7 +37,7 @@ function LeaveApprovePage() {
               disabled={isSubmitting}
               className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
-               {isSubmitting ? "Rejecting" : "Yes"}
+               {isSubmitting ? "Approving" : "Yes"}
             </button>
           </div>
         </Form>
@@ -49,7 +49,7 @@ function LeaveApprovePage() {
 export default LeaveApprovePage;
 
 export async function leaveApproveAction({ request, params }) {
-  let url = "/leave-records/approve/";
+  let url = "https://homes-test.onrender.com/leave-records/approve/";
   const token = getAuthToken();
   const id = params.leaveId;
   const data = await request.formData();

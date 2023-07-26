@@ -38,20 +38,34 @@ export default function Dashboard() {
     leaves,
     activities,
     dailyRecords,
+    usersCount,
   } = routeLoaderData;
 
   const leavesChart = [
     {
       name: "Pending Approval",
       value: leaves.pending_approval_leaves,
+      path: "/login/pending-approval",
     },
     {
       name: "Approved leaves",
       value: leaves.approved_leaves,
+      path: "/login/approved-leaves",
     },
     {
       name: "Pending Return ",
       value: leaves.pending_return,
+      path: "/login/pending-return",
+    },
+    {
+      name: "Overdue Leaves ",
+      value: leaves.overdue_leaves,
+      path: "/login/overdue-leaves",
+    },
+    {
+      name: "Rejected Leaves ",
+      value: leaves.rejected_leaves,
+      path: "/login/rejected-leaves",
     },
   ];
 
@@ -96,8 +110,14 @@ export default function Dashboard() {
                       alignItems="baseline"
                       className="space-x-1"
                     >
-                      <Metric>{dailyRecords ? dailyRecords.residents_with_records: ""}</Metric>
-                      <Text>/{totalResidents ? totalResidents.count: ""} residents</Text>
+                      <Metric>
+                        {dailyRecords
+                          ? dailyRecords.residents_with_records
+                          : ""}
+                      </Metric>
+                      <Text>
+                        /{totalResidents ? totalResidents.count : ""} residents
+                      </Text>
                     </Flex>
                     <CategoryBar
                       values={[10, 25, 45, 20]}
@@ -116,27 +136,45 @@ export default function Dashboard() {
                   </Card>
 
                   <Grid numItemsSm={2} className="mt-4 gap-4">
-                    <Link to='/login/residents'>
-                    <Card className="hover:bg-gray-50">
-                      <Metric className="mt-2 truncate">
-                        {totalResidents.count}
-                      </Metric>
-                      <Text>Number of residents</Text>
-                    </Card>
+                    <Link to="/login/residents">
+                      <Card className="hover:bg-gray-50">
+                        <Metric className="mt-2 truncate">
+                          {totalResidents.count}
+                        </Metric>
+                        <Text>Number of residents</Text>
+                      </Card>
                     </Link>
-                    <Card>
-                      <Metric className="mt-2 truncate">
-                        {totalIncidents.incidents}
-                      </Metric>
-                      <Text>Total incidents</Text>
-                    </Card>
-                    <Card>
-                      <Metric className="mt-2 truncate">
-                        {leaves.pending_return}
-                      </Metric>
-                      <Text>Residents on leave</Text>
-                    </Card>
-                   
+                    <Link to="/login/incidents-today">
+                      <Card className="hover:bg-gray-50">
+                        <Metric className="mt-2 truncate">
+                          {totalIncidents.incidents}
+                        </Metric>
+                        <Text>Total incidents</Text>
+                      </Card>
+                    </Link>
+                    <Link to="/login/pending-return">
+                      <Card className="hover:bg-gray-50">
+                        <Metric className="mt-2 truncate">
+                          {leaves.pending_return + leaves.overdue_leaves }
+                        </Metric>
+                        <Text>Residents on leave</Text>
+                      </Card>
+                    </Link>
+
+                    {user && user.is_admin === true ? (
+                      <Link to="/login/staff">
+                        <Card className="hover:bg-gray-50">
+                          <Metric className="mt-2 truncate">
+                            {usersCount.admin_count + usersCount.user_count}{" "}
+                            Staff
+                          </Metric>
+                          <Text>
+                            {usersCount.admin_count} Admins and{" "}
+                            {usersCount.user_count}Care Givers
+                          </Text>
+                        </Card>
+                      </Link>
+                    ) : null}
                   </Grid>
                 </Card>
               </div>
@@ -186,7 +224,11 @@ export default function Dashboard() {
                       <List className="mt-4">
                         {leavesChart.map((item) => (
                           <ListItem key={item.name}>
-                            <Text>{item.name}</Text>
+                            <Link to={item.path}>
+                              <Text className="hover:text-indigo-600 hover:underline">
+                                {item.name}
+                              </Text>
+                            </Link>
                             <Flex justifyContent="end" className="space-x-2">
                               <Text> {item.value}</Text>
                             </Flex>
@@ -202,10 +244,13 @@ export default function Dashboard() {
               <div></div>
               <div className="px-5 grid-cols-4 grid gap-4"></div>
             </div>
-            <Updates />
+            <Updates  />
           </div>
         </main>
       </div>
     </>
   );
 }
+
+
+

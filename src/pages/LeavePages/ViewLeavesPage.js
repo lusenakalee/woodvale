@@ -14,7 +14,7 @@ export default ViewLeavesPage
 
 export async function loader({ request, params }) {
     const id = params.id;
-    let url = "/leave-records/" + id ;
+    let url = "https://homes-test.onrender.com/leave-records/" + id ;
     const token = getAuthToken();
 
     const response = await fetch(url, {
@@ -31,7 +31,7 @@ export async function loader({ request, params }) {
         return response;
       }
     if (!response.ok) {
-      throw json({ message: "Wrong Url" }, { status: 500 });
+      throw json({ message: "Server error" }, { status: 500 });
     }
   
     const resData = await response.json();

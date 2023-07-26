@@ -397,7 +397,7 @@ export async function action({ request, params }) {
     walk_location: data.get("walk"),
     shower: data.get("shower"),
   };
-  let url = "/daily-records";
+  let url = "https://homes-test.onrender.com/daily-records";
   if (method === "POST") {
     const response = await fetch(url, {
       method: method,

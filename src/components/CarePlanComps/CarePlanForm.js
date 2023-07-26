@@ -8,6 +8,10 @@ import {
   useNavigate,
   useNavigation,
 } from "react-router-dom";
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 
 function CarePlanForm({ carePlan, method, title }) {
   const navigate = useNavigate();
@@ -17,6 +21,14 @@ function CarePlanForm({ carePlan, method, title }) {
   function cancelHandler() {
     navigate("..");
   }
+
+
+  if (data && data.errors) {
+    Object.values(data.errors).forEach((err) => {
+      toast.error(err);
+    });
+  }
+
 
   return (
     <React.Fragment>
@@ -201,7 +213,7 @@ export async function action({ request, params }) {
     instructions: data.get("instructions"),
     resident_id: id,
   };
-  let url = "/care-plan";
+  let url = "https://homes-test.onrender.com/care-plan";
   if (method === "POST") {
     const response = await fetch(url, {
       method: method,

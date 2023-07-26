@@ -16,7 +16,7 @@ export default AllLogsPage
 
 export async function loader({ request, params }) {
     const id = params.id;
-    let url = "/daily-records/" + id ;
+    let url = "https://homes-test.onrender.com/daily-records/" + id ;
     const token = getAuthToken();
   
     const response = await fetch(url, {
@@ -33,7 +33,7 @@ export async function loader({ request, params }) {
       return response;
     }
     if (!response.ok) {
-      throw json({ message: "Wrong Url" }, { status: 500 });
+      throw json({ message: "Server error" }, { status: 500 });
     }
   
     const resData = await response.json();

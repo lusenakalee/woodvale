@@ -228,7 +228,7 @@ export async function action({ request, params }) {
     witnesses: data.get("witnesses"),
     antecedent: data.get("antecedent"),
   }
-  let url = "/incident-reports";
+  let url = "https://homes-test.onrender.com/incident-reports";
   if (method === "POST") {
     const response = await fetch(url, {
       method: method,

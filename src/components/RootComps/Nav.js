@@ -3,6 +3,7 @@ import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Form, Link } from "react-router-dom";
 import { getAuthToken } from "../../util/Auth";
+<<<<<<< HEAD
 import abstractUser from "../../components/assets/images/abstractUser.png"
 
 const navigation = [
@@ -10,22 +11,47 @@ const navigation = [
   { name: "Staff", to: "./staff", current: false },
   { name: "Residents", to: "./residents", current: false },
 ];
+=======
+import abstractUser from "../../components/assets/images/abstractUser.png";
+>>>>>>> 201bb4878402b1acaf31eb8ad29ca1d11eb34ced
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 export default function Nav({ userData }) {
+  const user = {
+    name: "Tom Cook",
+    email: "tom@example.com",
+    imageUrl:
+      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+  };
+  const [navigation, setNavigation] = useState([
+    { name: "Dashboard", to: "/login/home", current: true },
+    { name: "Staff", to: "./staff", current: false },
+    { name: "Residents", to: "./residents", current: false },
+  ]);
+  const handleItemClick = (index) => {
+    const updatedNavigation = navigation.map((item, i) => ({
+      ...item,
+      current: i === index,
+    }));
+    setNavigation(updatedNavigation);
+  };
+
   const [imageUrl, setImageUrl] = useState("");
   const imgToken = getAuthToken();
   useEffect(() => {
     const fetchImage = async () => {
       try {
-        const response = await fetch(`/upload/${userData.id}`, {
-          headers: {
-            Authorization: "Bearer " + imgToken,
-          },
-        });
+        const response = await fetch(
+          `https://homes-test.onrender.com/upload/${userData.id}`,
+          {
+            headers: {
+              Authorization: "Bearer " + imgToken,
+            },
+          }
+        );
 
         if (response.ok) {
           const blob = await response.blob();
@@ -51,8 +77,10 @@ export default function Nav({ userData }) {
                 <div className="flex items-center">
                   <div className="hidden md:block">
                     <div className="ml-10 flex items-baseline space-x-4">
-                      {navigation.map((item) =>
-                        item.name === "Staff" && userData &&!userData.is_admin ? null : (
+                      {navigation.map((item, index) =>
+                        item.name === "Staff" &&
+                        userData &&
+                        !userData.is_admin ? null : (
                           <Link
                             key={item.name}
                             to={item.to}
@@ -63,6 +91,7 @@ export default function Nav({ userData }) {
                               "rounded-md px-3 py-2 text-sm font-medium"
                             )}
                             aria-current={item.current ? "page" : undefined}
+                            onClick={() => handleItemClick(index)} // <-- Add onclick event here
                           >
                             {item.name}
                           </Link>
@@ -73,13 +102,7 @@ export default function Nav({ userData }) {
                 </div>
                 <div className="hidden md:block">
                   <div className="ml-4 flex items-center md:ml-6">
-                    <button
-                      type="button"
-                      className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                    >
-                      <span className="sr-only">View notifications</span>
-                      <BellIcon className="h-6 w-6" aria-hidden="true" />
-                    </button>
+                  
 
                     {/* Profile dropdown */}
                     <Menu as="div" className="relative ml-3">
@@ -140,7 +163,7 @@ export default function Nav({ userData }) {
             <Disclosure.Panel className="md:hidden">
               <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3">
                 {navigation.map((item) => (
-                    <Link
+                  <Link
                     key={item.name}
                     to={item.to}
                     className={classNames(
@@ -164,16 +187,12 @@ export default function Nav({ userData }) {
                       {userData && userData.username ? userData.username : ""}
                     </div>
                     <div className="text-sm font-medium leading-none text-gray-400">
-                    {userData && userData.first_name ? userData.first_name: ""}
+                      {userData && userData.first_name
+                        ? userData.first_name
+                        : ""}
                     </div>
                   </div>
-                  <button
-                    type="button"
-                    className="ml-auto flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                  >
-                    <span className="sr-only">View notifications</span>
-                    <BellIcon className="h-6 w-6" aria-hidden="true" />
-                  </button>
+               
                 </div>
               </div>
             </Disclosure.Panel>
