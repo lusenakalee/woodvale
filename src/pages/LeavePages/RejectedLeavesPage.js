@@ -18,7 +18,7 @@ function RejectedLeavesPage() {
 export default RejectedLeavesPage
 
 export async function loader({ request, params }) {
-    let url = "/leave-records/rejected";
+    let url = "https://homes-test.onrender.com/leave-records/rejected";
     const token = getAuthToken();
   
     const response = await fetch(url, {

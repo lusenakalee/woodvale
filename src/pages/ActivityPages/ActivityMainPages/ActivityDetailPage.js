@@ -13,7 +13,7 @@ function ActivityDetailPage() {
 export default ActivityDetailPage
 
 export async function loader({ request, params }) {
-    let url = "/activity/";
+    let url = "https://homes-test.onrender.com/activity/";
     const token = getAuthToken();
     const id = params.id;
     const response = await fetch(url + id, {

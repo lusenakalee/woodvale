@@ -16,7 +16,7 @@ function AllIncidentsPage() {
 export default AllIncidentsPage
 
 export async function loader({ request, params }) {
-    let url = "/incident-reports";
+    let url = "https://homes-test.onrender.com/incident-reports";
     const token = getAuthToken();
   
     const response = await fetch(url, {

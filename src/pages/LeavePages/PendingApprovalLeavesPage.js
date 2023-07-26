@@ -17,7 +17,7 @@ function PendingApprovalLeavesPage() {
 export default PendingApprovalLeavesPage
 
 export async function loader({ request, params }) {
-    let url = "/leave-records/pending-approval";
+    let url = "https://homes-test.onrender.com/leave-records/pending-approval";
     const token = getAuthToken();
   
     const response = await fetch(url, {

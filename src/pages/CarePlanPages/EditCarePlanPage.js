@@ -33,7 +33,7 @@ export async function action({ request, params }) {
     activity_schedule: data.get("activity"),
     instructions: data.get("instructions"),
   };
-  let url = "/care-plan/"+id;
+  let url = "https://homes-test.onrender.com/care-plan/"+id;
   if (method === "PATCH") {
     const response = await fetch(url, {
       method: "PATCH",
