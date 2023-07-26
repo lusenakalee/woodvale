@@ -6,14 +6,17 @@ import { getAuthToken } from '../../util/Auth'
 function PendingReturnPage() {
     const leaves = useLoaderData()
   return (
+    <main>
+    <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
     <ViewLeaves leaves={leaves} title="Pending return" />
+    </div></main>
   )
 }
 
 export default PendingReturnPage
 
 export async function loader({ request, params }) {
-    let url = "/leave-records/pending-return";
+    let url = "https://homes-test.onrender.com/leave-records/pending-return";
     const token = getAuthToken();
   
     const response = await fetch(url, {

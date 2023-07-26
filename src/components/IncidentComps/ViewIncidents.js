@@ -62,7 +62,8 @@ function ViewIncidents({ incidents }) {
         <TableBody>
           {incidents.map((item) => (
             <TableRow key={item.id}>
-              <Link to={`./${item.id}`}>
+                            <Link to={`/login/residents/${item.resident_id}/incident/${item.id}`}>
+
                 <TableCell>{item.incident_date}</TableCell>
               </Link>
               <TableCell className="text-left">

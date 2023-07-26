@@ -7,7 +7,10 @@ function OverdueLeavesPage() {
     const leaves = useLoaderData()
   return (
     <React.Fragment>
+          <main>
+    <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
         <ViewLeaves leaves={leaves} title="Overdue Leaves" />
+        </div></main>
     </React.Fragment>
   )
 }
@@ -15,7 +18,7 @@ function OverdueLeavesPage() {
 export default OverdueLeavesPage
 
 export async function loader({ request, params }) {
-    let url = "/leave-records/overdue";
+    let url = "https://homes-test.onrender.com/leave-records/overdue";
     const token = getAuthToken();
   
     const response = await fetch(url, {

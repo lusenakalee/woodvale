@@ -210,6 +210,7 @@ async function lastLoginLoader() {
   }
 
   const resData = await response.json();
+  console.log(resData)
   return resData;
 }
 

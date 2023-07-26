@@ -7,14 +7,17 @@ function PendingApprovalLeavesPage() {
     const leaves = useLoaderData()
   return (
     <React.Fragment>
+          <main>
+    <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
         <ViewLeaves  leaves={leaves} title="Pending Approval" />
+        </div></main>
     </React.Fragment >)
 }
 
 export default PendingApprovalLeavesPage
 
 export async function loader({ request, params }) {
-    let url = "/leave-records/pending-approval";
+    let url = "https://homes-test.onrender.com/leave-records/pending-approval";
     const token = getAuthToken();
   
     const response = await fetch(url, {

@@ -7,15 +7,18 @@ function ApprovedLeavesPage() {
   const leaves = useLoaderData();
   return (
     <React.Fragment>
+          <main>
+    <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
       <ViewLeaves title="Approved Leaves" leaves={leaves} />
+      </div></main>
     </React.Fragment>
   );
 }
 
 export default ApprovedLeavesPage;
 
-export async function loader({ request, params }) {
-  let url = "/leave-records/approved";
+export async function loader() {
+  let url = "https://homes-test.onrender.com/leave-records/approved";
   const token = getAuthToken();
 
   const response = await fetch(url, {

@@ -56,7 +56,7 @@ function ViewLeaves({ leaves, title }) {
         <TableBody>
           {leaves.map((item) => (
             <TableRow key={item.id}>
-              <Link to={`/login/resident/${item.resident.id}`}>
+              <Link to={`/login/residents/${item.resident_id}/leaves/${item.id}`}>
                 <TableCell>
                   {item.resident.first_name} {item.resident.last_name}
                 </TableCell>

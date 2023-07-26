@@ -5,6 +5,7 @@ import {
   InformationCircleIcon,
   PrinterIcon,
   ArrowDownTrayIcon,
+  TrashIcon,
 } from "@heroicons/react/24/outline";
 
 import {
@@ -72,6 +73,7 @@ function AttachmentList({ attachments }) {
             <TableHeaderCell className="">Upload Date</TableHeaderCell>
             <TableHeaderCell className=" text-left">Attachment</TableHeaderCell>
             <TableHeaderCell className=" text-left">Download</TableHeaderCell>
+            <TableHeaderCell className=" text-left">Delete</TableHeaderCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -90,9 +92,14 @@ function AttachmentList({ attachments }) {
                 >
                   {/* Step 3: Download link */}
                   <ArrowDownTrayIcon className="h-4 " />
-                  <Text>Download {" "}{attachment.description}</Text>
+                  <Text>Download {attachment.description}</Text>
                 </div>
               </TableCell>
+              <Flex>
+                <TrashIcon className="h-4 " />
+                <Text>Delete {attachment.description}</Text>
+              </Flex>
+              <TableCell></TableCell>
             </TableRow>
           ))}
         </TableBody>
