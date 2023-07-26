@@ -20,6 +20,8 @@ import {
   MultiSelect,
   MultiSelectItem,
 } from "@tremor/react";
+import Papa from "papaparse";
+
 
 export default function ResidentList({ residentsList }) {
   const [selectedResidentNames, setSelectedResidentNames] = useState([]);
@@ -29,6 +31,19 @@ export default function ResidentList({ residentsList }) {
     selectedResidentNames.length === 0;
 
   const filteredResidents = residentsList.filter(isResidentSelected);
+
+  const handleExportCSV = () => {
+    const csvData = Papa.unparse(filteredResidents);
+    const blob = new Blob([csvData], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.setAttribute("href", url);
+    link.setAttribute("download", "residents.csv");
+    link.style.visibility = "hidden";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   return (
     <>
@@ -68,6 +83,7 @@ export default function ResidentList({ residentsList }) {
         </Select>
         <button
           type="button"
+          onClick={handleExportCSV}
           className="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
         >
           <PrinterIcon
@@ -81,16 +97,12 @@ export default function ResidentList({ residentsList }) {
         <TableHead>
           <TableRow>
             <TableHeaderCell className="">First Name</TableHeaderCell>
-            <TableHeaderCell className=" text-left">
-              Last Name
-            </TableHeaderCell>
+            <TableHeaderCell className=" text-left">Last Name</TableHeaderCell>
             <TableHeaderCell className=" text-left">Age</TableHeaderCell>
             <TableHeaderCell className=" text-left">
               Date Registered
             </TableHeaderCell>
-            <TableHeaderCell className=" text-left">
-              Gender
-            </TableHeaderCell>
+            <TableHeaderCell className=" text-left">Gender</TableHeaderCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -99,9 +111,7 @@ export default function ResidentList({ residentsList }) {
               <TableCell className=" hover:text-indigo-600 hover:underline">
                 <Link to={`./${item.id}`}>{item.first_name}</Link>
               </TableCell>
-              <TableCell className=" text-left">
-                {item.last_name}
-              </TableCell>
+              <TableCell className=" text-left">{item.last_name}</TableCell>
               <TableCell className=" text-left">{item.age}</TableCell>
               <TableCell className=" text-left">
                 {item.date_registered}
