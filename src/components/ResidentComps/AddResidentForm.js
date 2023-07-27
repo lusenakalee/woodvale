@@ -300,6 +300,27 @@ export default function ResidentForm({ resident, title, method }) {
               </div>
             </div>
 
+            <div className="sm:col-span-4">
+              <label
+                htmlFor="phone"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
+                Relationship to resident
+              </label>
+              <div className="mt-2">
+                <input
+                  id="contact-number"
+                  name="relationship"
+                  type="text"
+                  required
+                  defaultValue={
+                    resident ? resident.relationship_1 : " "
+                  }
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+
             <div className="sm:col-span-3">
               <label
                 htmlFor="contact"
@@ -342,6 +363,26 @@ export default function ResidentForm({ resident, title, method }) {
               </div>
             </div>
 
+            <div className="sm:col-span-4">
+              <label
+                htmlFor="phone"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
+                Relationship to resident
+              </label>
+              <div className="mt-2">
+                <input
+                  id="contact-number"
+                  name="relationship2"
+                  type="text"
+                  defaultValue={
+                    resident ? resident.relationship_2 : " "
+                  }
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+
             <div className="flex justify-between sm:col-span-4">
               <button
                 onClick={cancelHandler}
@@ -377,6 +418,8 @@ export async function residentAction({ request, params }) {
     gender: data.get("gender"),
     emergency_contact_name: data.get("contact"),
     emergency_contact_number: data.get("contact-number"),
+    relationship_1: data.get("relationship"),
+    relationship_2: data.get("relationship2"),
     emergency_contact_name_2: data.get("contact-2"),
     emergency_contact_number_2: data.get("contact-number-2"),
     address: data.get("address"),
