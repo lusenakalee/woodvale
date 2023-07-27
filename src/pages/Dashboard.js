@@ -43,9 +43,14 @@ export default function Dashboard() {
 
   const leavesChart = [
     {
-      name: "Pending Approval",
+      name: "Pending Leave Approval",
       value: leaves.pending_approval_leaves,
       path: "/login/pending-approval",
+    },
+    {
+      name: "Pending Return Approval",
+      value: leaves.pending_approval_return,
+      path: "/login/pending-return",
     },
     {
       name: "Approved leaves",
@@ -155,7 +160,7 @@ export default function Dashboard() {
                     <Link to="/login/pending-return">
                       <Card className="hover:bg-gray-50">
                         <Metric className="mt-2 truncate">
-                          {leaves.pending_return + leaves.overdue_leaves }
+                          {leaves.on_leave }
                         </Metric>
                         <Text>Residents on leave</Text>
                       </Card>

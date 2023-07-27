@@ -64,6 +64,9 @@ function ViewLeavesForm({ leaves, title }) {
             <TableHeaderCell className="text-left">
               Person responsible
             </TableHeaderCell>
+            <TableHeaderCell className="text-left">
+             Contact
+            </TableHeaderCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -78,6 +81,9 @@ function ViewLeavesForm({ leaves, title }) {
               </TableCell>
               <TableCell className="text-left">
                 {item.person_responsible}
+              </TableCell>
+              <TableCell className="text-left">
+                {item.contact}
               </TableCell>
             </TableRow>
           ))}

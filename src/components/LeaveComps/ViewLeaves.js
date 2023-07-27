@@ -62,14 +62,15 @@ function ViewLeaves({ leaves, title }) {
             <TableHeaderCell>Resident Name</TableHeaderCell>
             <TableHeaderCell>Leave Date</TableHeaderCell>
             <TableHeaderCell>Return Date</TableHeaderCell>
-            <TableHeaderCell className="text-right">
-              Duration(Days)
-            </TableHeaderCell>
+          
             <TableHeaderCell className="text-right">
               Approval Status
             </TableHeaderCell>
             <TableHeaderCell className="text-right">
               Person responsible
+            </TableHeaderCell>
+            <TableHeaderCell className="text-right">
+             Contact 
             </TableHeaderCell>
           </TableRow>
         </TableHead>
@@ -83,13 +84,14 @@ function ViewLeaves({ leaves, title }) {
               </Link>
               <TableCell>{item.leave_date}</TableCell>
               <TableCell>{item.return_date}</TableCell>
-              <TableCell className="text-right">{item.duration}</TableCell>
+             
               <TableCell className="text-right">
                 {item.approval_status}
               </TableCell>
               <TableCell className="text-right">
                 {item.person_responsible}
               </TableCell>
+              <TableCell className="text-right" >{item.contact}</TableCell>
             </TableRow>
           ))}
         </TableBody>

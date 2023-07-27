@@ -49,7 +49,7 @@ function LeaveDetail({ leave }) {
                   className="-ml-0.5 mr-1.5 h-5 w-5 "
                   aria-hidden="true"
                 />
-                Reject
+               {leave.returned === true ? "Reject Leave" : "Reject"}
               </button>
             </Link>
           </span>
@@ -64,7 +64,7 @@ function LeaveDetail({ leave }) {
                   className="-ml-0.5 mr-1.5 h-5 w-5"
                   aria-hidden="true"
                 />
-                Approve
+              {leave.returned === true ? "Approve Leave" : "Approve"}
               </button>
             </Link>
           </span>
@@ -127,7 +127,7 @@ function LeaveDetail({ leave }) {
           </div>
           <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
             <dt className="text-sm font-medium leading-6 text-gray-900">
-              Leave Approval status
+            {leave.returned === true ? "Return Approval status" : "Leave Approval status"}
             </dt>
             <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
               {leave.approval_status}
