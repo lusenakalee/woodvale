@@ -59,6 +59,7 @@ function SignUp() {
                   <input
                     type="text"
                     id="FirstName"
+                    required
                     name="first_name"
                     className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
                   />
@@ -75,6 +76,7 @@ function SignUp() {
                   <input
                     type="text"
                     id="LastName"
+                    required
                     name="last_name"
                     className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
                   />
@@ -91,7 +93,25 @@ function SignUp() {
                   <input
                     type="email"
                     id="Email"
+                    required
                     name="username"
+                    className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+                  />
+                </div>
+
+                <div className="col-span-6">
+                  <label
+                    htmlFor="home-name"
+                    className="block text-sm font-medium text-gray-700"
+                  >
+                    Home Name
+                  </label>
+
+                  <input
+                    type="text"
+                    id="home-name"
+                    required
+                    name="home-name"
                     className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
                   />
                 </div>
@@ -108,6 +128,7 @@ function SignUp() {
                     type="password"
                     id="Password"
                     name="password1"
+                    required
                     className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
                   />
                 </div>
@@ -124,6 +145,7 @@ function SignUp() {
                     type="password"
                     id="PasswordConfirmation"
                     name="password2"
+                    required
                     className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
                   />
                 </div>
@@ -155,6 +177,7 @@ export async function signUpAction({ request }) {
     username: data.get("username"),
     password1: data.get("password1"),
     password2: data.get("password2"),
+    home_name: data.get("home-name"),
     first_name: data.get("first_name"),
     last_name: data.get("last_name"),
     is_admin: true,

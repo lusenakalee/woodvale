@@ -197,6 +197,7 @@ export async function action({ request, params }) {
     password2: data.get("password2"),
     first_name: data.get("first_name"),
     last_name: data.get("last_name"),
+    home_name: "",
     is_admin: data.get("is-admin"), //boolean field should be a dropdown of true or false
   };
   if (method === "POST") {
