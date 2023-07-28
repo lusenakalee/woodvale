@@ -102,7 +102,7 @@ async function leavesLoader() {
   }
 
   const resData = await response.json();
-  console.log(resData)
+  
   return resData;
 }
 
@@ -212,7 +212,7 @@ async function usersCountLoader() {
   }
 
   const resData = await response.json();
-  console.log(resData);
+  ;
   return resData;
 }
 
@@ -245,7 +245,7 @@ async function lastLoginLoader() {
   }
 
   const resData = await response.json();
-  console.log(resData)
+  
   return resData;
 }
 
@@ -273,7 +273,7 @@ async function healthDataLoader() {
   }
 
   const resData = await response.json();
-  console.log(resData);
+  ;
   return resData;
 }
 
@@ -301,7 +301,7 @@ export async function residentsLoader() {
     throw json({ message: "Cant get residents" }, { status: 500 });
   } else {
     const resData = await response.json();
-    console.log(resData);
+    ;
     return resData;
   }
 }

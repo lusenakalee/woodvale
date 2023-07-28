@@ -49,7 +49,7 @@ function LeaveDetail({ leave }) {
                   className="-ml-0.5 mr-1.5 h-5 w-5 "
                   aria-hidden="true"
                 />
-               {leave.returned === true ? "Reject Leave" : "Reject"}
+               {leave.returned === true ? "Reject Return" : "Reject Leave"}
               </button>
             </Link>
           </span>
@@ -64,7 +64,7 @@ function LeaveDetail({ leave }) {
                   className="-ml-0.5 mr-1.5 h-5 w-5"
                   aria-hidden="true"
                 />
-              {leave.returned === true ? "Approve Leave" : "Approve"}
+              {leave.returned === true ? "Approve Return" : "Approve Leave"}
               </button>
             </Link>
           </span>

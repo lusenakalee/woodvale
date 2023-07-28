@@ -39,7 +39,7 @@ export async function loader({ request }) {
   }
 
   const resData = await response.json();
-  console.log(resData)
+  
   return resData;
 }
 
