@@ -163,6 +163,33 @@ function UserForm({ method, user, title }) {
                 </label>
               </fieldset>
             </div>
+            <div className="mt-10 space-y-10 space-x-5">
+              <fieldset className="mt-10 space-y-10 space-x-5">
+                <legend className="text-sm font-semibold leading-6 text-gray-900">
+                  Deactivate this user
+                </legend>
+                <label>
+                  <input
+                    type="radio"
+                    name="is-active"
+                    value="true"
+                    checked={selectedOption === "true"}
+                    onChange={handleOptionChange}
+                  />
+                  True
+                </label>
+                <label>
+                  <input
+                    type="radio"
+                    name="is-active"
+                    value="false"
+                    checked={selectedOption === "false"}
+                    onChange={handleOptionChange}
+                  />
+                  False
+                </label>
+              </fieldset>
+            </div>
           </div>
 
           <div className="flex justify-between sm:col-span-4">
@@ -198,6 +225,7 @@ export async function action({ request, params }) {
     first_name: data.get("first_name"),
     last_name: data.get("last_name"),
     home_name: "",
+    is_active: data.get("is_active"),
     is_admin: data.get("is-admin"), //boolean field should be a dropdown of true or false
   };
   if (method === "POST") {

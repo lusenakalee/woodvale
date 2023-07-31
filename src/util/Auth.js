@@ -102,7 +102,6 @@ async function leavesLoader() {
   }
 
   const resData = await response.json();
-  console.log(resData)
   return resData;
 }
 
@@ -187,7 +186,6 @@ async function dailyRecordsLoader() {
   return resData;
 }
 
-
 async function usersCountLoader() {
   let url = "/dashboard/users";
   const token = getAuthToken();
@@ -212,14 +210,8 @@ async function usersCountLoader() {
   }
 
   const resData = await response.json();
-  console.log(resData);
   return resData;
 }
-
-
-
-
-
 
 async function lastLoginLoader() {
   let url = "/dashboard/last-login";
@@ -245,7 +237,6 @@ async function lastLoginLoader() {
   }
 
   const resData = await response.json();
-  console.log(resData)
   return resData;
 }
 
@@ -273,7 +264,6 @@ async function healthDataLoader() {
   }
 
   const resData = await response.json();
-  console.log(resData);
   return resData;
 }
 
@@ -294,14 +284,13 @@ export async function residentsLoader() {
       "Access-Control-Allow-Origin": "*",
     },
   });
-  if(response.status === 401){
-    return
+  if (response.status === 401) {
+    return;
   }
   if (!response.ok) {
     throw json({ message: "Cant get residents" }, { status: 500 });
   } else {
     const resData = await response.json();
-    console.log(resData);
     return resData;
   }
 }
