@@ -48,7 +48,7 @@ function ShowUserProfile({ user }) {
         {imageUrl && (
           <img
             className="h-12 w-12 flex-none rounded-full bg-gray-50"
-            src={abstractUser}
+            src=""
             alt="Profile"
           />
         )}
