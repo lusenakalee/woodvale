@@ -8,6 +8,8 @@ import {
   useNavigate,
   useNavigation,
 } from "react-router-dom";
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function MedicalRecordForm({ record, method, title }) {
   const navigate = useNavigate();
@@ -17,6 +19,13 @@ function MedicalRecordForm({ record, method, title }) {
   function cancelHandler() {
     navigate("..");
   }
+
+  if (data && data.errors) {
+    Object.values(data.errors).forEach((err) => {
+      toast.error(err);
+    });
+  }
+
 
   return (
     <React.Fragment>
@@ -188,7 +197,15 @@ export async function action({ request, params }) {
     physician_contact: data.get("physician_contact"),
     resident_id: id,
   };
-  let url = "https://woodvale-test-2.onrender.com/medical-records";
+  const recordUpdateData = {
+    condition: data.get("condition"),
+    allergies: data.get("allergies"),
+    medications: data.get("medication"),
+    feeding_method: data.get("feeding_method"),
+    immunization_records: data.get("immunization_records"),
+    physician_contact: data.get("physician_contact"),
+  };
+  let url = "https://homes-test.onrender.com/medical-records";
   if (method === "POST") {
     const response = await fetch(url, {
       method: method,
@@ -198,6 +215,27 @@ export async function action({ request, params }) {
         "Access-Control-Allow-Origin": "*",
       },
       body: JSON.stringify(recordData),
+    });
+    if (response.status === 400) {
+      return response;
+    }
+    if (!response.ok) {
+      throw json(
+        { message: "Failed to save the medical record." },
+        { status: 500 }
+      );
+    }
+    return redirect(`/login/residents/${id}/med-recs`);
+  }else{
+    url = `/medical-records/${id}`;
+    const response = await fetch(url, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+        "Access-Control-Allow-Origin": "*",
+      },
+      body: JSON.stringify(recordUpdateData),
     });
     if (response.status === 400) {
       return response;

@@ -10,6 +10,9 @@ import {
 import { getAuthToken } from "../../util/Auth";
 import { UserCircleIcon } from "@heroicons/react/24/outline";
 import abstractUser from "../../components/assets/images/abstractUser.png";
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 let id;
 function EditProfile({ method, user, title }) {
@@ -19,6 +22,12 @@ function EditProfile({ method, user, title }) {
   const data = useActionData();
   const [imageUrl, setImageUrl] = useState("");
   const imgToken = getAuthToken();
+
+  if (data && data.errors) {
+    Object.values(data.errors).forEach((err) => {
+      toast.error(err);
+    });
+  }
 
   //modal
   const [isOpen, setIsOpen] = useState(false);
@@ -93,11 +102,12 @@ function EditProfile({ method, user, title }) {
     };
 
     fetchImage();
-  }, []);
+  }, [user]);
 
   return (
     <React.Fragment>
       <main>
+      <ToastContainer />
         <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
           <div>
             <button
@@ -145,9 +155,10 @@ function EditProfile({ method, user, title }) {
                     </button>
                     <button
                       type="submit"
+                      disabled={isSubmitting}
                       className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600"
                     >
-                      Upload
+                      {isSubmitting ? "Uploading..." : "Save"}
                     </button>
                   </div>
                 </form>
@@ -275,6 +286,7 @@ function EditProfile({ method, user, title }) {
                   </div>
                 </div>
               </div>
+              {data && data.message && <p>{data.message}</p>}
 
               <div className="flex justify-between sm:col-span-4">
                 <button

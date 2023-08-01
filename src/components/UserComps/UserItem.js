@@ -1,10 +1,19 @@
 import React from "react";
 import { Link, useActionData } from "react-router-dom";
 import { useRouteLoaderData, useSubmit } from "react-router-dom";
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function UserItem({ user }) {
-  const token = useRouteLoaderData("root");
+  const {token} = useRouteLoaderData("root");
   const submit = useSubmit();
+
+
+  if (data && data.errors) {
+    Object.values(data.errors).forEach((err) => {
+      toast.error(err);
+    });
+  }
 
   function startDeleteHandler() {
     const proceed = window.confirm("Are you sure?");

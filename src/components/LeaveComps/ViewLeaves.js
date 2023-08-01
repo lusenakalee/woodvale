@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { useSubmit } from "react-router-dom";
 import {
+  CheckCircleIcon,
   InformationCircleIcon,
   PrinterIcon,
+  XCircleIcon,
 } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
 import {
@@ -15,34 +16,24 @@ import {
   TableBody,
   Title,
   Flex,
-  Select,
-  SelectItem,
-  MultiSelect,
-  MultiSelectItem,
 } from "@tremor/react";
 
-function ViewIncidents({ incidents }) {
-  const submit = useSubmit();
-  function startDeleteHandler() {
-    const proceed = window.confirm("Are you sure?");
-
-    if (proceed) {
-      submit(null, { method: "delete" });
-    }
-  }
+function ViewLeaves({ leaves, title }) {
 
 
-    // Calculate pagination
-    const [currentPage, setCurrentPage] = useState(1); // Current page number
 
-    const INCIDENTS_PER_PAGE = 10; // Set the number of residents to display per page
-    const totalIncidents = incidents.length;
-    const totalPages = Math.ceil(totalIncidents/ INCIDENTS_PER_PAGE);
-  
-    // Get the slice of residents to display based on the current page
-    const startIndex = (currentPage - 1) * INCIDENTS_PER_PAGE;
-    const endIndex = startIndex + INCIDENTS_PER_PAGE;
-    const incidentsToShow = incidents.slice(startIndex, endIndex);
+      // Calculate pagination
+      const [currentPage, setCurrentPage] = useState(1); // Current page number
+
+      const LEAVES_PER_PAGE = 10; // Set the number of residents to display per page
+      const totalLeaves = leaves.length;
+      const totalPages = Math.ceil(totalLeaves/ LEAVES_PER_PAGE);
+    
+      // Get the slice of residents to display based on the current page
+      const startIndex = (currentPage - 1) * LEAVES_PER_PAGE;
+      const endIndex = startIndex + LEAVES_PER_PAGE;
+      const leavesToShow = leaves.slice(startIndex, endIndex);
+
 
 
 
@@ -56,55 +47,58 @@ function ViewIncidents({ incidents }) {
           justifyContent="start"
           alignItems="center"
         >
-          <Title>Incidents</Title>
+          <Title>{title}</Title>
           <Icon
             icon={InformationCircleIcon}
             variant="simple"
-            tooltip="Shows incidents"
+            tooltip="Shows applied leaves"
           />
         </Flex>
       </div>
+
       <Table className="mt-6">
         <TableHead>
           <TableRow>
-            <TableHeaderCell>Incident Date</TableHeaderCell>
-            <TableHeaderCell className="text-left">
-              Person Reporting
+            <TableHeaderCell>Resident Name</TableHeaderCell>
+            <TableHeaderCell>Leave Date</TableHeaderCell>
+            <TableHeaderCell>Return Date</TableHeaderCell>
+          
+            <TableHeaderCell className="text-right">
+              Approval Status
             </TableHeaderCell>
-            <TableHeaderCell className="text-left">
-              Person notified
+            <TableHeaderCell className="text-right">
+              Person responsible
             </TableHeaderCell>
-            <TableHeaderCell className="text-left">location</TableHeaderCell>
+            <TableHeaderCell className="text-right">
+             Contact 
+            </TableHeaderCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {incidentsToShow.map((item) => (
+          {leavesToShow.map((item) => (
             <TableRow key={item.id}>
-              <Link
-               
-                to={`./${item.id}`}
-              >
-                <TableCell className="hover:underline hover:text-indigo-600">
-                  {item.incident_date}
+              <Link to={`/login/residents/${item.resident_id}/leaves/${item.id}`}>
+                <TableCell>
+                  {item.resident.first_name} {item.resident.last_name}
                 </TableCell>
               </Link>
-              <TableCell className="text-left">
-                {item.person_reporting}
+              <TableCell>{item.leave_date}</TableCell>
+              <TableCell>{item.return_date}</TableCell>
+             
+              <TableCell className="text-right">
+                {item.approval_status}
               </TableCell>
-              <TableCell className="text-left">
-                {item.person_notified}
+              <TableCell className="text-right">
+                {item.person_responsible}
               </TableCell>
-              <TableCell className="text-left">{item.location}</TableCell>
+              <TableCell className="text-right" >{item.contact}</TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
 
-
-
-
-       {/* Pagination */}
-       <ol className="flex justify-center gap-1 text-xs font-medium mt-4">
+        {/* Pagination */}
+        <ol className="flex justify-center gap-1 text-xs font-medium mt-4">
         {currentPage > 1 && (
           <li>
             <a
@@ -175,8 +169,12 @@ function ViewIncidents({ incidents }) {
 
 
 
+
+
+
+
     </React.Fragment>
   );
 }
 
-export default ViewIncidents;
+export default ViewLeaves;

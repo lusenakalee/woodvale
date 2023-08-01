@@ -1,10 +1,15 @@
-import { ChevronLeftIcon } from "@heroicons/react/24/outline";
+import {
+  ChevronLeftIcon,
+  InformationCircleIcon,
+  PrinterIcon,
+} from "@heroicons/react/24/outline";
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { Link, useRouteLoaderData } from "react-router-dom";
 import { useSubmit } from "react-router-dom";
 
-function LogItem({ log }) {
+
+function LogItem({ log  }) {
   const submit = useSubmit();
   function startDeleteHandler() {
     const proceed = window.confirm("Are you sure?");
@@ -13,6 +18,15 @@ function LogItem({ log }) {
       submit(null, { method: "delete" });
     }
   }
+
+
+  const handleExportCSV = () => {
+    // Open print dialog
+    window.print();
+  };
+
+
+
   return (
     <React.Fragment>
       <div className="flex justify-end">
@@ -28,6 +42,25 @@ function LogItem({ log }) {
           Back
         </button>
       </NavLink>
+      <div className="px-4">
+      <button
+          type="button"
+          onClick={handleExportCSV}
+     
+          className="inline-flex  items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+        >
+          <PrinterIcon
+            className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"
+            aria-hidden="true"
+          />
+         Print
+        </button>
+        </div>
+
+
+
+
+
       </div>
       <div className="px-4 py-3 sm:grid sm:grid-cols-3 hover:bg-white sm:gap-4 sm:px-0">
         <dt className="text-sm font-medium leading-6 text-gray-900">Weight</dt>

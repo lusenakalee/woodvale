@@ -1,12 +1,7 @@
 import React, { useState } from "react";
 import Modal from "../../components/UIComps/ModalComp";
 import {
-  Form,
-  json,
-  redirect,
-  useActionData,
   useNavigate,
-  useNavigation,
   useRouteLoaderData,
 } from "react-router-dom";
 import { getAuthToken } from "../../util/Auth";
@@ -14,14 +9,15 @@ import { getAuthToken } from "../../util/Auth";
 function NewAttachmentPage() {
   const { resident } = useRouteLoaderData("resident-detail");
   const navigate = useNavigate();
-  const navigation = useNavigation();
+
   const [description, setDescription] = useState("");
-  const isSubmitting = navigation.state === "submitting";
+  const [submitting, setIsSubmitting] = useState(false);
   const [file, setFile] = useState(null);
 
   const handleFileChange = (event) => {
     setFile(event.target.files[0]);
   };
+
   const handleDescriptionChange = (event) => {
     setDescription(event.target.value);
   };
@@ -33,6 +29,7 @@ function NewAttachmentPage() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const token = getAuthToken();
+    setIsSubmitting(false)
 
     const formData = new FormData();
     formData.append("file", file);
@@ -46,18 +43,18 @@ function NewAttachmentPage() {
         },
         body: formData,
       });
-      if (response.status === 400) {
-        window.alert("Only PDF or Image attachments are allowed!!");
-      }
+
       if (response.ok) {
-        const confirmed = window.confirm(
-          "File uploaded successfully"
-        );
+        const confirmed = window.confirm("File uploaded successfully");
         if (confirmed) {
+          setIsSubmitting(true)
           navigate("..");
         }
+      } else if (response.status === 400) {
+        const data = await response.json();
+        window.alert(data.message); // Show the error message from the backend
       } else {
-        window.alert("failed to upload");
+        window.alert("Failed to upload");
       }
     } catch (error) {
       window.alert("Network error", error);
@@ -86,7 +83,6 @@ function NewAttachmentPage() {
             name="description"
             placeholder="Description"
             required
-            value={description}
             onChange={handleDescriptionChange}
           />
           <br />
@@ -94,9 +90,9 @@ function NewAttachmentPage() {
             <button
               className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               type="submit"
-              disabled={isSubmitting}
+              disabled={submitting}
             >
-              {isSubmitting ? "Submitting" : "Submit"}
+              {submitting? "Submitting" : "Submit"}
             </button>
             <button
               onClick={cancelHandler}

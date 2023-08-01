@@ -20,7 +20,7 @@ export function getAuthToken() {
   return token;
 }
 
-export function userTokenLoader() {
+export async function userTokenLoader() {
   return getAuthToken();
 }
 
@@ -186,6 +186,33 @@ async function dailyRecordsLoader() {
   return resData;
 }
 
+async function usersCountLoader() {
+  let url = "https://homes-test.onrender.com/dashboard/users";
+  const token = getAuthToken();
+  const response = await fetch(url, {
+    method: "get",
+    headers: {
+      Authorization: "Bearer " + token,
+      "Access-Control-Allow-Origin": "*",
+    },
+  });
+  if (response.status === 401) {
+    return;
+  }
+  if (response.status === 400) {
+    return response;
+  }
+  if (response.status === 404) {
+    return response;
+  }
+  if (!response.ok) {
+    throw json({ message: "Server Error" }, { status: 500 });
+  }
+
+  const resData = await response.json();
+  return resData;
+}
+
 async function lastLoginLoader() {
   let url = "https://woodvale-test-2.onrender.com/dashboard/last-login";
   const token = getAuthToken();
@@ -237,7 +264,6 @@ async function healthDataLoader() {
   }
 
   const resData = await response.json();
-  console.log(resData);
   return resData;
 }
 
@@ -248,9 +274,30 @@ export function checkToken() {
   }
 }
 
+export async function residentsLoader() {
+  const token = getAuthToken();
+
+  const response = await fetch("https://homes-test.onrender.com/residents", {
+    method: "GET",
+    headers: {
+      Authorization: "Bearer " + token,
+      "Access-Control-Allow-Origin": "*",
+    },
+  });
+  if (response.status === 401) {
+    return;
+  }
+  if (!response.ok) {
+    throw json({ message: "Cant get residents" }, { status: 500 });
+  } else {
+    const resData = await response.json();
+    return resData;
+  }
+}
+
 export async function tokenLoader() {
   return defer({
-    root: userTokenLoader(),
+    token: await userTokenLoader(),
     user: await currentUserLoader(),
     totalResidents: await totalResidentsLoader(),
     leaves: await leavesLoader(),
@@ -259,5 +306,7 @@ export async function tokenLoader() {
     lastLogin: await lastLoginLoader(),
     totalIncidents: await totalIncidentsLoader(),
     healthData: await healthDataLoader(),
+    usersCount: await usersCountLoader(),
+    residents: await residentsLoader(),
   });
 }

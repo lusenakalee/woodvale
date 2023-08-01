@@ -4,6 +4,8 @@ import {
   PencilIcon,
   TrashIcon,
   XCircleIcon,
+  ArrowUturnDownIcon,
+  XMarkIcon
 } from "@heroicons/react/24/outline";
 import React from "react";
 import { Link } from "react-router-dom";
@@ -47,7 +49,7 @@ function LeaveDetail({ leave }) {
                   className="-ml-0.5 mr-1.5 h-5 w-5 "
                   aria-hidden="true"
                 />
-                Reject
+               {leave.returned === true ? "Reject Return" : "Reject Leave"}
               </button>
             </Link>
           </span>
@@ -62,7 +64,35 @@ function LeaveDetail({ leave }) {
                   className="-ml-0.5 mr-1.5 h-5 w-5"
                   aria-hidden="true"
                 />
-                Approve
+              {leave.returned === true ? "Approve Return" : "Approve Leave"}
+              </button>
+            </Link>
+          </span>
+          <span className="sm:ml-3">
+            <Link to="./return">
+              <button
+                type="button"
+                className="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+              >
+                <ArrowUturnDownIcon
+                  className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"
+                  aria-hidden="true"
+                />
+                Returned
+              </button>
+            </Link>
+          </span>
+          <span className="sm:ml-3">
+            <Link to="./reverse">
+              <button
+                type="button"
+                className="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+              >
+                <XMarkIcon
+                  className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"
+                  aria-hidden="true"
+                />
+                Cancel Return
               </button>
             </Link>
           </span>
@@ -97,7 +127,7 @@ function LeaveDetail({ leave }) {
           </div>
           <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
             <dt className="text-sm font-medium leading-6 text-gray-900">
-              Leave Approval status
+            {leave.returned === true ? "Return Approval status" : "Leave Approval status"}
             </dt>
             <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
               {leave.approval_status}
@@ -124,6 +154,12 @@ function LeaveDetail({ leave }) {
             <dt className="text-sm font-medium leading-6 text-gray-900">Reason</dt>
             <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
              {leave.reason}
+            </dd>
+          </div>
+          <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <dt className="text-sm font-medium leading-6 text-gray-900">Return Status</dt>
+            <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+             {leave.returned === true ? "Returned" : "Not Returned"}
             </dd>
           </div>
         </dl>

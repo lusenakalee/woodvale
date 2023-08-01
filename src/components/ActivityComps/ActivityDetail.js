@@ -2,9 +2,14 @@ import React from "react";
 import { getAuthToken } from "../../util/Auth";
 import { json, redirect, useActionData, useRouteLoaderData, useSubmit } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
+
 
 function ActivityDetail({ activity }) {
-  const token = useRouteLoaderData("root");
+  const {token} = useRouteLoaderData("root");
   const submit = useSubmit();
   function startDeleteHandler() {
     const proceed = window.confirm("Are you sure?");
@@ -16,13 +21,7 @@ function ActivityDetail({ activity }) {
   const data = useActionData();
   return (
     <React.Fragment>
-      {data && data.errors && (
-        <ul>
-          {Object.values(data.errors).map((err) => (
-            <li key={err}>{err}</li>
-          ))}
-        </ul>
-      )}
+    <ToastContainer/>
 
       <div className="px-4 py-3 sm:grid sm:grid-cols-3 hover:bg-white sm:gap-4 sm:px-0">
         <dt className="text-sm font-medium leading-6 text-gray-900">
@@ -95,7 +94,7 @@ export async function loader({ request, params }) {
     return response;
   }
   if (!response.ok) {
-    throw json({ message: "Wrong Url" }, { status: 500 });
+    throw json({ message: "Server error" }, { status: 500 });
   }
 
   const resData = await response.json();

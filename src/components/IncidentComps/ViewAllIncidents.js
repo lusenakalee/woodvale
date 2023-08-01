@@ -21,7 +21,7 @@ import {
   MultiSelectItem,
 } from "@tremor/react";
 
-function ViewIncidents({ incidents }) {
+function ViewAllIncidents({ incidents }) {
   const submit = useSubmit();
   function startDeleteHandler() {
     const proceed = window.confirm("Are you sure?");
@@ -32,18 +32,17 @@ function ViewIncidents({ incidents }) {
   }
 
 
-    // Calculate pagination
-    const [currentPage, setCurrentPage] = useState(1); // Current page number
+      // Calculate pagination
+      const [currentPage, setCurrentPage] = useState(1); // Current page number
 
-    const INCIDENTS_PER_PAGE = 10; // Set the number of residents to display per page
-    const totalIncidents = incidents.length;
-    const totalPages = Math.ceil(totalIncidents/ INCIDENTS_PER_PAGE);
-  
-    // Get the slice of residents to display based on the current page
-    const startIndex = (currentPage - 1) * INCIDENTS_PER_PAGE;
-    const endIndex = startIndex + INCIDENTS_PER_PAGE;
-    const incidentsToShow = incidents.slice(startIndex, endIndex);
-
+      const INCIDENTS_PER_PAGE = 10; // Set the number of residents to display per page
+      const totalIncidents = incidents.length;
+      const totalPages = Math.ceil(totalIncidents/ INCIDENTS_PER_PAGE);
+    
+      // Get the slice of residents to display based on the current page
+      const startIndex = (currentPage - 1) * INCIDENTS_PER_PAGE;
+      const endIndex = startIndex + INCIDENTS_PER_PAGE;
+      const incidentsToShow = incidents.slice(startIndex, endIndex);
 
 
 
@@ -67,40 +66,37 @@ function ViewIncidents({ incidents }) {
       <Table className="mt-6">
         <TableHead>
           <TableRow>
+            <TableHeaderCell>Resident Name</TableHeaderCell>
             <TableHeaderCell>Incident Date</TableHeaderCell>
-            <TableHeaderCell className="text-left">
+            <TableHeaderCell className="text-right">
               Person Reporting
             </TableHeaderCell>
-            <TableHeaderCell className="text-left">
+            <TableHeaderCell className="text-right">
               Person notified
             </TableHeaderCell>
-            <TableHeaderCell className="text-left">location</TableHeaderCell>
+            <TableHeaderCell className="text-right">location</TableHeaderCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {incidentsToShow.map((item) => (
             <TableRow key={item.id}>
-              <Link
-               
-                to={`./${item.id}`}
-              >
-                <TableCell className="hover:underline hover:text-indigo-600">
-                  {item.incident_date}
-                </TableCell>
+              <Link to={`/login/residents/${item.resident_id}/incident/${item.id}`}>
+                <TableCell>{item.resident.first_name} {item.resident.last_name}</TableCell>
               </Link>
-              <TableCell className="text-left">
+              <TableCell className="text-right">
+                {item.incident_date}
+              </TableCell>
+              <TableCell className="text-right">
                 {item.person_reporting}
               </TableCell>
-              <TableCell className="text-left">
+              <TableCell className="text-right">
                 {item.person_notified}
               </TableCell>
-              <TableCell className="text-left">{item.location}</TableCell>
+              <TableCell className="text-right">{item.location}</TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
-
-
 
 
        {/* Pagination */}
@@ -172,11 +168,9 @@ function ViewIncidents({ incidents }) {
         )}
       </ol>
 
-
-
-
+      
     </React.Fragment>
   );
 }
 
-export default ViewIncidents;
+export default ViewAllIncidents;

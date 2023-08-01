@@ -1,22 +1,23 @@
 import React from 'react'
-import { getAuthToken } from '../../util/Auth';
-import { json, useLoaderData, useRouteLoaderData } from 'react-router-dom';
-import AllLogs from '../../components/LogsComps/AllLogs';
+import ViewLeaves from '../../components/LeaveComps/ViewLeaves'
+import { json, useLoaderData } from 'react-router-dom'
+import { getAuthToken } from '../../util/Auth'
 
-function AllLogsPage() {
-    const logs = useRouteLoaderData("logs")
+function PendingApprovalLeavesPage() {
+    const leaves = useLoaderData()
   return (
     <React.Fragment>
-        <AllLogs logs={logs}/>
-    </React.Fragment>
-  )
+          <main>
+    <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+        <ViewLeaves  leaves={leaves} title="Pending Approval" />
+        </div></main>
+    </React.Fragment >)
 }
 
-export default AllLogsPage
+export default PendingApprovalLeavesPage
 
 export async function loader({ request, params }) {
-    const id = params.id;
-    let url = "https://woodvale-test-2.onrender.com/daily-records/" + id ;
+    let url = "https://homes-test.onrender.com/leave-records/pending-approval";
     const token = getAuthToken();
   
     const response = await fetch(url, {
@@ -37,6 +38,5 @@ export async function loader({ request, params }) {
     }
   
     const resData = await response.json();
-    ;
     return resData;
   }

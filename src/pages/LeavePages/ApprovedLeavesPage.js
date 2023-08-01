@@ -1,22 +1,24 @@
 import React from "react";
-import { json, useRouteLoaderData } from "react-router-dom";
-import ViewIncidents from "../../components/IncidentComps/ViewIncidents";
+import { json, useLoaderData } from "react-router-dom";
 import { getAuthToken } from "../../util/Auth";
+import ViewLeaves from "../../components/LeaveComps/ViewLeaves";
 
-function ViewIncidentsPage() {
-  const incidents = useRouteLoaderData("incidents");
+function ApprovedLeavesPage() {
+  const leaves = useLoaderData();
   return (
     <React.Fragment>
-
-      <ViewIncidents incidents={incidents} />
+          <main>
+    <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+      <ViewLeaves title="Approved Leaves" leaves={leaves} />
+      </div></main>
     </React.Fragment>
   );
 }
 
-export default ViewIncidentsPage;
-export async function loader({ request, params }) {
-  const id = params.id;
-  let url = "https://woodvale-test-2.onrender.com/incident-reports/" + id +"/incidents";
+export default ApprovedLeavesPage;
+
+export async function loader() {
+  let url = "https://homes-test.onrender.com/leave-records/approved";
   const token = getAuthToken();
 
   const response = await fetch(url, {

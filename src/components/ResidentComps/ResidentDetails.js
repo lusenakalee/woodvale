@@ -37,7 +37,7 @@ function ResidentDetails({ resident, image }) {
 
   const cancelButtonRef = useRef(null);
 
-  const token = useRouteLoaderData("root");
+  const {token} = useRouteLoaderData("root");
   const submit = useSubmit();
   const [file, setFile] = useState(null);
   const navigate = useNavigate();
@@ -57,7 +57,7 @@ function ResidentDetails({ resident, image }) {
 
     try {
       const response = await fetch(
-        `https://woodvale-test-2.onrender.com/residents/${resident.id}/upload`,
+        `/residents/${resident.id}/upload`,
         {
           method: "POST",
           headers: {
@@ -156,9 +156,10 @@ function ResidentDetails({ resident, image }) {
                             </button>
                             <button
                               type="submit"
+                              disabled={isSubmitting}
                               className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600"
                             >
-                              Save changes
+                              {isSubmitting ? "Uploading..." : "Save"}
                             </button>
                           </div>
                         </form>
@@ -375,12 +376,9 @@ function ResidentDetails({ resident, image }) {
                     Attachments
                   </dt>
                   <dd className="mt-2 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                    <ul
-                      role="list"
-                      className="divide-y divide-gray-100 rounded-md border border-gray-200"
-                    >
+              
                      
-                      <li className="flex items-center justify-between py-4 pl-4 pr-5 text-sm leading-6">
+                      <li className="flex items-center justify-between py-4 pr-5 text-sm leading-6">
                      
                       
                         <div>
@@ -400,7 +398,6 @@ function ResidentDetails({ resident, image }) {
                           </div>
                         </div>
                       </li>
-                    </ul>
                   </dd>
                 </div>
               </dl>

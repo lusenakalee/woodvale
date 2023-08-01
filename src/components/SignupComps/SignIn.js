@@ -1,6 +1,7 @@
 import { Form, json, redirect, useActionData, useNavigation } from "react-router-dom";
 import cg from '../../components/assets/images/cg.jpeg'
 import React, { useRef } from 'react';
+import { ToastContainer, toast } from "react-toastify";
 
   
   function SignIn() {
@@ -13,6 +14,7 @@ import React, { useRef } from 'react';
 
   return (
     <div>
+      <ToastContainer />
       <section className="bg-white">
         <div className="lg:grid lg:min-h-screen lg:grid-cols-12">
           <aside className="relative block h-16 lg:order-last lg:col-span-5 lg:h-full xl:col-span-6">
@@ -35,13 +37,6 @@ import React, { useRef } from 'react';
                 delivery, allowing you to focus on what truly matters -
                 enriching the lives of your clients.
               </p>
-              {data && data.errors && (
-                <ul>
-                  {Object.values(data.errors).map((err) => (
-                    <li key={err}>{err}</li>
-                  ))}
-                </ul>
-              )}
               {data && data.message && <p>{data.message}</p>}
               <Form method="post" className="mt-8 grid grid-cols-6 gap-6">
                 <div className="col-span-6 sm:col-span-3">
@@ -110,13 +105,17 @@ export async function loginAction({ request, params }) {
     },
     body: JSON.stringify(loginData),
   });
+
   if (response.status === 401) {
+    toast.error("Invalid credentials");
     return response;
   }
   if (response.status === 400) {
+    toast.error("Bad request");
     return response;
   }
   if (!response) {
+    toast.error("Could not authenticate user");
     return json({ message: "Could not authenticate user" }, { status: 500 });
   }
 

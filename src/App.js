@@ -93,7 +93,7 @@ const ResidentDetailPage = lazy(() =>
   import("./pages/ResidentPages/ResidentDetailPage")
 );
 
-const AllAttAchmentsPage = lazy(() =>
+const AllAttachmentsPage = lazy(() =>
   import("./pages/AttachmentPages/AllAttachmentsPage")
 );
 
@@ -140,7 +140,6 @@ const NewAttachmentPage = lazy(() =>
   import("./pages/AttachmentPages/NewAttachmentPage")
 );
 
-
 const ActivityDetailPage = lazy(() =>
   import("./pages/ActivityPages/ActivityMainPages/ActivityDetailPage")
 );
@@ -149,10 +148,29 @@ const ActivityEditPage = lazy(() =>
   import("./pages/ActivityPages/ActivityMainPages/ActivityEditPage")
 );
 
+const ApprovedLeavesPage = lazy(()=>import("./pages/LeavePages/ApprovedLeavesPage"))
+
+const IncidentsViewPage = lazy(()=>import("./pages/IncidentPages/AllIncidentsPage"))
+
+const OverdueLeavesPage = lazy(()=>import("./pages/LeavePages/OverdueLeavesPage"))
+
+const PendingReturnPage = lazy(()=>import("./pages/LeavePages/PendingReturnPage"))
+
+const RejectedLeavesPage = lazy(()=>import("./pages/LeavePages/RejectedLeavesPage"))
+
+const PendingApprovalLeavesPage = lazy(()=>import("./pages/LeavePages/PendingApprovalLeavesPage"))
+
 const LogDetailPage = lazy(() => import("./pages/LogsPages/LogDetailsPage"));
 
 const RequestDemoPage = lazy(() => import("./pages/RootPages/RequestDemoPage"));
 
+const ResidentReturnPage = lazy(() =>
+  import("./pages/LeavePages/ReturnResidentPage")
+);
+
+const CancelReturnPage = lazy(() =>
+  import("./pages/LeavePages/CancelReturnResidentPage")
+);
 
 const router = createBrowserRouter([
   {
@@ -173,7 +191,6 @@ const router = createBrowserRouter([
         <RequestDemoPage />
       </Suspense>
     ),
-
   },
 
   {
@@ -188,11 +205,82 @@ const router = createBrowserRouter([
       </Suspense>
     ),
     children: [
-
       {
         index: true,
         element: <SignIn />,
         action: loginAction,
+      },
+      {
+        path: "approved-leaves",
+        element: (
+          <Suspense fallback={<p>Loading...</p>}>
+            <ApprovedLeavesPage/>
+          </Suspense>
+        ),
+        loader: () =>
+        import("./pages/LeavePages/ApprovedLeavesPage").then((module) =>
+          module.loader()
+        )
+      },
+      {
+        path: "rejected-leaves",
+        element: (
+          <Suspense fallback={<p>Loading...</p>}>
+            <RejectedLeavesPage />
+          </Suspense>
+        ),
+        loader: (meta) =>
+        import("./pages/LeavePages/RejectedLeavesPage").then((module) =>
+          module.loader(meta)
+        )
+      },
+      {
+        path: "overdue-leaves",
+        element: (
+          <Suspense fallback={<p>Loading...</p>}>
+            <OverdueLeavesPage />
+          </Suspense>
+        ),
+        loader: (meta) =>
+        import("./pages/LeavePages/OverdueLeavesPage").then((module) =>
+          module.loader(meta)
+        )
+      },
+      {
+        path: "pending-approval",
+        element: (
+          <Suspense fallback={<p>Loading...</p>}>
+            <PendingApprovalLeavesPage />
+          </Suspense>
+        ),
+        loader: (meta) =>
+        import("./pages/LeavePages/PendingApprovalLeavesPage").then((module) =>
+          module.loader(meta)
+        )
+      },
+      {
+        path: "pending-return",
+        element: (
+          <Suspense fallback={<p>Loading...</p>}>
+            <PendingReturnPage />
+          </Suspense>
+        ),
+        loader: (meta) =>
+        import("./pages/LeavePages/PendingApprovalLeavesPage").then((module) =>
+          module.loader(meta)
+        )
+      },
+      {
+        path: "incidents-today",
+        element: (
+          <Suspense fallback={<p>Loading...</p>}>
+            <IncidentsViewPage/>
+          </Suspense>
+        ),
+        loader: (meta) =>
+        import("./pages/IncidentPages/AllIncidentsPage").then((module) =>
+          module.loader(meta)
+        )
       },
       {
         path: "profile",
@@ -591,6 +679,30 @@ const router = createBrowserRouter([
                             (module) => module.leaveRejectAction(meta)
                           ),
                       },
+                      {
+                        path: "reverse",
+                        element: (
+                          <Suspense fallback={<p>Loading...</p>}>
+                            <CancelReturnPage />
+                          </Suspense>
+                        ),
+                        action: (meta) =>
+                          import(
+                            "./pages/LeavePages/CancelReturnResidentPage"
+                          ).then((module) => module.action(meta)),
+                      },
+                      {
+                        path: "return",
+                        element: (
+                          <Suspense fallback={<p>Loading...</p>}>
+                            <ResidentReturnPage />
+                          </Suspense>
+                        ),
+                        action:(meta) =>
+                        import(
+                          "./pages/LeavePages/ReturnResidentPage"
+                        ).then((module) => module.action(meta)),
+                      },
                     ],
                   },
                   ,
@@ -664,9 +776,10 @@ const router = createBrowserRouter([
                     index: true,
                     element: (
                       <Suspense fallback={<p>Loading...</p>}>
-                        <AllAttAchmentsPage />
+                        <AllAttachmentsPage />
                       </Suspense>
                     ),
+                   
                   },
                   {
                     path: "new",
