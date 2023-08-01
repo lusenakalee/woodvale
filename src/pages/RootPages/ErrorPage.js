@@ -1,8 +1,12 @@
 import React, { Suspense } from "react";
-import { useRouteError, isRouteErrorResponse, Link, Await } from "react-router-dom";
-import {  useRouteLoaderData } from "react-router-dom";
+import {
+  useRouteError,
+  isRouteErrorResponse,
+  Link,
+  Await,
+} from "react-router-dom";
+import { useRouteLoaderData } from "react-router-dom";
 import Nav from "../../components/RootComps/Nav";
-
 
 function ErrorPage() {
   const error = useRouteError();
@@ -30,23 +34,23 @@ function ErrorPage() {
     status = 400;
   }
 
-  const  {token} = useRouteLoaderData("root");
+  const { token } = useRouteLoaderData("root");
   const { user } = useRouteLoaderData("root");
 
   return (
     <React.Fragment>
       <div>
-      <Suspense fallback={<p style={{ textAlign: "center" }}>Loading....</p>}>
-        <Await resolve={user}>
-          {(loadedUser) => token && <Nav userData={loadedUser} />}
-        </Await>
-      </Suspense>
+        <Suspense fallback={<p style={{ textAlign: "center" }}>Loading....</p>}>
+          <Await resolve={user}>
+            {(loadedUser) => token && <Nav userData={loadedUser} />}
+          </Await>
+        </Suspense>
 
         <main className="grid min-h-full place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8">
           <div className="text-center">
             <p className="text-base font-semibold text-indigo-600">{status}</p>
             <h1 className="mt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl">
-             {message}
+              {message}
             </h1>
             <p className="mt-6 text-base leading-7 text-gray-600"> {title}</p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
