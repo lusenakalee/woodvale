@@ -9,11 +9,7 @@ function UserItem({ user }) {
   const submit = useSubmit();
 
 
-  if (data && data.errors) {
-    Object.values(data.errors).forEach((err) => {
-      toast.error(err);
-    });
-  }
+
 
   function startDeleteHandler() {
     const proceed = window.confirm("Are you sure?");

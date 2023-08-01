@@ -184,21 +184,20 @@ export default function Dashboard() {
                         <Text>Residents on leave</Text>
                       </Card>
                     </Link>
-
                     {user && user.is_admin === true ? (
-                      <Link to="/login/staff">
-                        <Card className="hover:bg-gray-50">
-                          <Metric className="mt-2 truncate">
-                            {usersCount.admin_count + usersCount.user_count}{" "}
-                            Staff
-                          </Metric>
-                          <Text>
-                            {usersCount.admin_count} Admins and{" "}
-                            {usersCount.user_count}Care Givers
-                          </Text>
-                        </Card>
-                      </Link>
-                    ) : null}
+  <Link to="/login/staff">
+    <Card className="hover:bg-gray-50">
+      <Metric className="mt-2 truncate">
+        {usersCount?.admin_count + usersCount?.user_count} Staff
+      </Metric>
+      <Text>
+        {usersCount?.admin_count} Admins and {usersCount?.user_count} Care Givers
+      </Text>
+    </Card>
+  </Link>
+) : null}
+
+                
                   </Grid>
                 </Card>
               </div>
@@ -274,7 +273,7 @@ export default function Dashboard() {
               </div>
               <Updates />
             </div>
-            <Updates  />
+            <Updates />
           </div>
         </main>
       </div>

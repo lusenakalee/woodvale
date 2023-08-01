@@ -13,11 +13,12 @@ function Updates() {
   // Format the date as you desire
   const formattedDate = `${year}-${month}-${day}`;
   console.log(formattedDate); // Output: "2023-07-26"
-
-  // Filter residents registered today
-  const residentsRegisteredToday = residents.filter(
-    (resident) => resident.date_registered === formattedDate
-  );
+  
+  // Check if residents is defined and an array before filtering
+  const residentsRegisteredToday =
+    residents && Array.isArray(residents)
+      ? residents.filter((resident) => resident.date_registered === formattedDate)
+      : [];
 
   return (
     <div>
