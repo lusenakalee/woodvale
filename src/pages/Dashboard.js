@@ -110,7 +110,6 @@ export default function Dashboard() {
               </Link>
             </div>
 
-
             <div className="flex justify-center ">
               <Icon
                 icon={InformationCircleIcon}
@@ -120,7 +119,6 @@ export default function Dashboard() {
             </div>
 
             <div class="grid grid-cols-2 gap-2 py-4">
-              
               <div>
                 <Card className="max-w-lg mx-auto">
                   <Card>
@@ -179,25 +177,25 @@ export default function Dashboard() {
                     <Link to="/login/pending-return">
                       <Card className="hover:bg-gray-50">
                         <Metric className="mt-2 truncate">
-                          {leaves.on_leave }
+                          {leaves.on_leave}
                         </Metric>
                         <Text>Residents on leave</Text>
                       </Card>
                     </Link>
                     {user && user.is_admin === true ? (
-  <Link to="/login/staff">
-    <Card className="hover:bg-gray-50">
-      <Metric className="mt-2 truncate">
-        {usersCount?.admin_count + usersCount?.user_count} Staff
-      </Metric>
-      <Text>
-        {usersCount?.admin_count} Admins and {usersCount?.user_count} Care Givers
-      </Text>
-    </Card>
-  </Link>
-) : null}
-
-                
+                      <Link to="/login/staff">
+                        <Card className="hover:bg-gray-50">
+                          <Metric className="mt-2 truncate">
+                            {usersCount?.admin_count + usersCount?.user_count}{" "}
+                            Staff
+                          </Metric>
+                          <Text>
+                            {usersCount?.admin_count} Admins and{" "}
+                            {usersCount?.user_count} Care Givers
+                          </Text>
+                        </Card>
+                      </Link>
+                    ) : null}
                   </Grid>
                 </Card>
               </div>
@@ -280,6 +278,3 @@ export default function Dashboard() {
     </>
   );
 }
-
-
-
